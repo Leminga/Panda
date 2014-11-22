@@ -15,7 +15,7 @@ import play.db.ebean.Model.Finder;
 import play.libs.Json;
 
 @Entity
-public class Volunteer {
+public class Volunteer extends Human {
 
 	@Required
 	@Id
@@ -25,6 +25,12 @@ public class Volunteer {
 	private String name;
 	@Required
 	private String password;
+	@Required
+	private List <Phone>phone;
+	@Required
+	private List <Address>address;
+	@Required
+	private List <Contact>contact;
 
 	public Volunteer(String _username, String _password) {
 		//Volunteer v = Json.fromJson(Json.parse(j), Volunteer.class);
