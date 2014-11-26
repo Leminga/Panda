@@ -23,7 +23,7 @@ public class Human {
 	@Required
 	private boolean sex;
 	@Required
-	public List <Nationality>nationality;
+	public List <Integer>nationality;
 	@Required
 	public Date dateOfBirth;
 	public List <Degree>degree;
@@ -45,12 +45,8 @@ public class Human {
 	public void setSex(boolean sex) {
 		this.sex = sex;
 	}
-	public List<Nationality> getNationality() {
-		return nationality;
-	}
-	public void setNationality(List<Nationality> nationality) {
-		this.nationality = nationality;
-	}
+	
+	
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}

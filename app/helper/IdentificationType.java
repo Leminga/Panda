@@ -1,6 +1,7 @@
 package helper;
 
 public enum IdentificationType {
-	passport
+	passport,
+	drivinglicense
 	
 }

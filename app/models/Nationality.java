@@ -18,23 +18,39 @@ import play.libs.Json;
 public class Nationality {
 	@Id
 	@Required
-	private String countryCode;
+	@GeneratedValue
+	private Long ID;
 	@Required
-	private String countryName;
+	private String countryCode;
+	private String countryNameDE;
+	private String countryNameEN;
 	@Required
 	private int countryCallingCode;
 	
+	
+	public Long getID() {
+		return ID;
+	}
+	public void setID(Long iD) {
+		ID = iD;
+	}
 	public String getCountryCode() {
 		return countryCode;
 	}
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	public String getCountryName() {
-		return countryName;
+	public String getCountryNameDE() {
+		return countryNameDE;
 	}
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
+	public void setCountryNameDE(String countryNameDE) {
+		this.countryNameDE = countryNameDE;
+	}
+	public String getCountryNameEN() {
+		return countryNameEN;
+	}
+	public void setCountryNameEN(String countryNameEN) {
+		this.countryNameEN = countryNameEN;
 	}
 	public int getCountryCallingCode() {
 		return countryCallingCode;
@@ -42,6 +58,7 @@ public class Nationality {
 	public void setCountryCallingCode(int countryCallingCode) {
 		this.countryCallingCode = countryCallingCode;
 	}
+	
 	
 	
 	

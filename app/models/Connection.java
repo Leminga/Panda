@@ -15,43 +15,34 @@ import play.db.ebean.Model;
 import play.libs.Json;
 
 @Entity
-public class Degree {
+public class Connection {
 	
 	@Id
 	@Required
 	@GeneratedValue
 	private Long ID;
-	@Required
-	private String degreeDE;
-	@Required
-	private String degreeEN;
-	
+	private String connectionTypeDE;
+	private String connectionTypeEN;
 	
 	public Long getID() {
 		return ID;
 	}
-
 	public void setID(Long iD) {
 		ID = iD;
 	}
-
-	public String getDegreeDE() {
-		return degreeDE;
+	public String getConnectionTypeDE() {
+		return connectionTypeDE;
 	}
-
-	public void setDegreeDE(String degreeDE) {
-		this.degreeDE = degreeDE;
+	public void setConnectionTypeDE(String connectionTypeDE) {
+		this.connectionTypeDE = connectionTypeDE;
 	}
-
-	public String getDegreeEN() {
-		return degreeEN;
+	public String getConnectionTypeEN() {
+		return connectionTypeEN;
 	}
-
-	public void setDegreeEN(String degreeEN) {
-		this.degreeEN = degreeEN;
+	public void setConnectionTypeEN(String connectionTypeEN) {
+		this.connectionTypeEN = connectionTypeEN;
 	}
 	
 	
 	
-
 }

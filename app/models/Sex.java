@@ -15,42 +15,33 @@ import play.db.ebean.Model;
 import play.libs.Json;
 
 @Entity
-public class Degree {
+public class Sex {
 	
 	@Id
 	@Required
 	@GeneratedValue
-	private Long ID;
-	@Required
-	private String degreeDE;
-	@Required
-	private String degreeEN;
+	private Long Id;
+	private String sexDE;
+	private String sexEN;
 	
-	
-	public Long getID() {
-		return ID;
+	public Long getId() {
+		return Id;
 	}
-
-	public void setID(Long iD) {
-		ID = iD;
+	public void setId(Long id) {
+		Id = id;
 	}
-
-	public String getDegreeDE() {
-		return degreeDE;
+	public String getSexDE() {
+		return sexDE;
 	}
-
-	public void setDegreeDE(String degreeDE) {
-		this.degreeDE = degreeDE;
+	public void setSexDE(String sexDE) {
+		this.sexDE = sexDE;
 	}
-
-	public String getDegreeEN() {
-		return degreeEN;
+	public String getSexEN() {
+		return sexEN;
 	}
-
-	public void setDegreeEN(String degreeEN) {
-		this.degreeEN = degreeEN;
+	public void setSexEN(String sexEN) {
+		this.sexEN = sexEN;
 	}
-	
 	
 	
 

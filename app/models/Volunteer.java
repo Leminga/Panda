@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import net.sf.ehcache.util.PreferTCCLObjectInputStream;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
 import play.libs.Json;
+
 
 @Entity
 public class Volunteer extends Human {
@@ -26,11 +28,28 @@ public class Volunteer extends Human {
 	@Required
 	private String password;
 	@Required
-	private List <Phone>phone;
+	private List <Phone>phones;
 	@Required
-	private List <Address>address;
+	private List <Address>addresses;
 	@Required
-	private List <Contact>contact;
+	private List <Contact>contacts;
+	@Required
+	private List <Identification>identifications;
+	@Required
+	private List <EmergencyContact>emergencyContact;
+	@Required
+	private Sizes sizes;
+	@Required
+	private Educationlevel highestEducationlevel;
+	@Required
+	private PreferredCommunicationLanguage preferredCommunicationLanguage;
+	@Required
+	private List<Languages> languages;
+	@Required
+	private List<ItKnowledge> itKnowledges;
+	private long idTextBoxes;
+	private long idEventComment;
+	
 
 	public Volunteer(String _username, String _password) {
 		//Volunteer v = Json.fromJson(Json.parse(j), Volunteer.class);

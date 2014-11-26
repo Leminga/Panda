@@ -24,6 +24,7 @@ public class Address {
 	private String city;
 	@Required
 	private Nationality country;
+	
 	public String getStreet() {
 		return street;
 	}

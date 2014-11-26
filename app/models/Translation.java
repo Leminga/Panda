@@ -1,9 +1,5 @@
 package models;
 
-import play.db.ebean.Model.Finder;
-import helper.ConnectionTypeDE;
-import helper.ConnectionTypeEN;
-
 import java.util.Date;
 import java.util.List;
 
@@ -13,15 +9,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import net.sf.ehcache.util.PreferTCCLObjectInputStream;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.libs.Json;
+import play.db.ebean.Model.Finder;
+import play.libs.Json; 
 
 @Entity
-public class Contact{
+public class Translation {
 	
+	@Id
 	@Required
-	private ConnectionTypeDE connectionTypeDE;
+	@GeneratedValue
+	private long id;
 	@Required
-	private ConnectionTypeEN connectionTypeEN;
+	private String german;
+	@Required
+	private String english;
+
 }

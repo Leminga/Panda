@@ -1,9 +1,6 @@
 package models;
 
 import play.db.ebean.Model.Finder;
-import helper.ConnectionTypeDE;
-import helper.ConnectionTypeEN;
-
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +15,13 @@ import play.db.ebean.Model;
 import play.libs.Json;
 
 @Entity
-public class Contact{
+public class Educationlevel {
 	
+	@Id
 	@Required
-	private ConnectionTypeDE connectionTypeDE;
+	@GeneratedValue
+	private Long ID;
 	@Required
-	private ConnectionTypeEN connectionTypeEN;
+	private String education;
+
 }

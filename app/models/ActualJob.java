@@ -1,9 +1,8 @@
 package models;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import play.db.ebean.Model.Finder;
-import helper.ConnectionTypeDE;
-import helper.ConnectionTypeEN;
-
 import java.util.Date;
 import java.util.List;
 
@@ -17,11 +16,16 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
 
-@Entity
-public class Contact{
+import play.data.validation.Constraints.Required;
+
+public class ActualJob {
 	
+	@Id
 	@Required
-	private ConnectionTypeDE connectionTypeDE;
+	@GeneratedValue
+	private long id;
 	@Required
-	private ConnectionTypeEN connectionTypeEN;
+	private String actualJobEN;
+	@Required
+	private String actualJobDE;
 }

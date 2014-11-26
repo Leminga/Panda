@@ -1,9 +1,5 @@
 package models;
 
-import play.db.ebean.Model.Finder;
-import helper.ConnectionTypeDE;
-import helper.ConnectionTypeEN;
-
 import java.util.Date;
 import java.util.List;
 
@@ -13,15 +9,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import net.sf.ehcache.util.PreferTCCLObjectInputStream;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
+import play.db.ebean.Model.Finder;
 import play.libs.Json;
 
-@Entity
-public class Contact{
-	
+
+public class EventComment {
 	@Required
-	private ConnectionTypeDE connectionTypeDE;
-	@Required
-	private ConnectionTypeEN connectionTypeEN;
+	@Id
+	@GeneratedValue
+	private long id;
+	private String comment;
+
 }

@@ -1,6 +1,6 @@
 package helper;
 
-public enum ConnectionType {
+public enum ConnectionTypeDE {
 	
 	Private,
 	Business
