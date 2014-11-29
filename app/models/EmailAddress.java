@@ -1,5 +1,6 @@
 package models;
 
+import play.db.ebean.Model.Finder;
 import java.util.Date;
 import java.util.List;
 
@@ -9,19 +10,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import net.sf.ehcache.util.PreferTCCLObjectInputStream;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.db.ebean.Model.Finder;
 import play.libs.Json;
 
+public class EmailAddress {
+	
+	 @Required
+	 private String address;
 
-public class EventComment {
-	@Required
-	@Id
-	@GeneratedValue
-	private long id;
-	@Required
-	private String comment;
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	 
+	 
 
 }

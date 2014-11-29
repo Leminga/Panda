@@ -36,7 +36,7 @@ public class Volunteer extends Human {
 	@Required
 	private List <Identification>identifications;
 	@Required
-	private List <EmergencyContact>emergencyContact;
+	private List <EmergencyContact>emergencyContacts;
 	@Required
 	private Sizes sizes;
 	@Required
@@ -49,6 +49,14 @@ public class Volunteer extends Human {
 	private List<ItKnowledge> itKnowledges;
 	private long idTextBoxes;
 	private long idEventComment;
+	@Required
+	private EmailAddress emailAddress;
+	@Required
+	private List <Event>events;
+	@Required
+	private List <Availability>availability;
+	@Required
+	private List <Organization>organizations;
 	
 
 	public Volunteer(String _username, String _password) {

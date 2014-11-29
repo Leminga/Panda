@@ -27,6 +27,7 @@ public class Human {
 	@Required
 	public Date dateOfBirth;
 	public List <Degree>degree;
+	
 	public String getSurname() {
 		return surname;
 	}
