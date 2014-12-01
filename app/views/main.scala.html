@@ -23,10 +23,10 @@
     <div>
         <form ng-submit="registerCtrl.register()" method="post" action="registerSuccess.html">
             Prename:<br>
-            <input type="text" name="prename" ng-model="registerCtrl.user.prename" required="">
+            <input type=""  pattern="[a-zA-Z ]+" name="prename" ng-model="registerCtrl.user.prename" required="">
             <br>
             Surname:<br>
-            <input type="text" name="surname" ng-model="registerCtrl.user.surname" required="">
+            <input type="text" pattern="[a-zA-Z ]+" name="surname" ng-model="registerCtrl.user.surname" required="">
             <br>
             E-Mail:
             <br>
