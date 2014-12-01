@@ -1,5 +1,5 @@
-angular.module('Register', [])
-    .controller('RegisterCtrl', ['RegisterService', 'GetRegistrationService', '$log', function (RegisterService, GetRegisterService) {
+angular.module('Register', ['Login'])
+    .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService', function (RegisterService, GetRegisterService) {
         var self = this;
         var promise = 0;
         self.receivedRegistrationData = {};
@@ -15,14 +15,5 @@ angular.module('Register', [])
                 self.receivedRegistrationData = response.data;
             });
 
-        }
-        /*
-         self.register = function () {
-         self.receivedRegistrationData = user;
-         };
-
-         self.getRegistration = function () {
-         console.log(JSON.stringify(self.receivedRegistrationData));
-         };
-         */
+        };
     }]);
