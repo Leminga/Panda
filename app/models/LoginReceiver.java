@@ -1,8 +1,9 @@
 package models;
 
+import helper.GroupType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
 
 import play.db.ebean.Model.Finder;
 
@@ -14,36 +15,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
-
 import play.data.validation.Constraints.Required;
 
+import java.util.Date;
+
 @Entity
-public class ActualJob {
+public class LoginReceiver extends Human {
 	
-	@Id
 	@Required
-	@GeneratedValue
-	private long id;
-	@ManyToOne
-	private long actualJobTid;
+	private String email;
+	@Required
+	private GroupType GroupT;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public GroupType getGroupT() {
+		return GroupT;
+	}
+
+	public void setGroupT(GroupType groupT) {
+		GroupT = groupT;
+	}
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public long getActualJobTid() {
-		return actualJobTid;
-	}
-	public void setActualJobTid(long actualJobTid) {
-		this.actualJobTid = actualJobTid;
-	}
 	
-	
+
 }

@@ -4,10 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import play.data.validation.Constraints.Required;
 
 @Entity
 public class Human {
+	
+	@Id
+	@Required
+	@GeneratedValue
+	private long id;
 	@Required
 	private String surname;
 	@Required
@@ -19,6 +27,7 @@ public class Human {
 	@Required
 	public Date dateOfBirth;
 	public List <Degree>degree;
+	
 	public String getSurname() {
 		return surname;
 	}

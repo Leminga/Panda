@@ -3,6 +3,8 @@ package models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import play.data.validation.Constraints.Required;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 public class PreferredCommunicationLanguage {
 	
@@ -10,10 +12,8 @@ public class PreferredCommunicationLanguage {
 	@Required
 	@GeneratedValue
 	private long id;
-	@Required
-	private String preferredCommunicationLanguageDE;
-	@Required
-	private String PreferredCommunicationLanguageEN;
+	@ManyToOne
+	private long preferredCommunicationLanguageTId;
 	
 	public long getId() {
 		return id;
@@ -21,20 +21,14 @@ public class PreferredCommunicationLanguage {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getPreverredCommunicationLanguageDE() {
-		return preferredCommunicationLanguageDE;
+	public long getPreferredCommunicationLanguageTId() {
+		return preferredCommunicationLanguageTId;
 	}
-	public void setPreferredCommunicationLanguageDE(
-			String preferredCommunicationLanguageDE) {
-		this.preferredCommunicationLanguageDE = preferredCommunicationLanguageDE;
+	public void setPreferredCommunicationLanguageTId(
+			long preferredCommunicationLanguageTId) {
+		this.preferredCommunicationLanguageTId = preferredCommunicationLanguageTId;
 	}
-	public String getPreferredCommunicationLanguageEN() {
-		return PreferredCommunicationLanguageEN;
-	}
-	public void setPreferredCommunicationLanguageEN(
-			String preverredCommunicationLanguageEN) {
-		PreferredCommunicationLanguageEN = preverredCommunicationLanguageEN;
-	}
+	
 	
 
 }

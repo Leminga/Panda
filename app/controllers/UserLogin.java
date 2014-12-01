@@ -2,6 +2,12 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.persistence.Id;
+
+import models.EventDataVolunteer;
+
 import org.apache.commons.mail.EmailException;
 import mailer.mail;
 import models.Volunteer;
@@ -15,9 +21,9 @@ public class UserLogin extends Controller {
 
 	@BodyParser.Of(BodyParser.Json.class)
 	public static Result save() throws EmailException {
-		JsonNode body = request().body().asJson();		  
+		JsonNode body = request().body().asJson();
 		Volunteer v = new Volunteer(body.get("name").toString(),body.get("password").toString());		
-		Ebean.save(v);		
+		Ebean.save(v);
 		 
 		//List<Volunteer> vs = new ArrayList<Volunteer>();
 		//Volunteer  v1 = new Volunteer(session().get("username"),session().get("password"));
@@ -36,8 +42,8 @@ public class UserLogin extends Controller {
 
 	public static Result load() {
 		
-		List<Volunteer> vl = new ArrayList<Volunteer>();
-		vl = Volunteer.find.all();
+		List<EventDataVolunteer> vl = new ArrayList<EventDataVolunteer>();
+		vl = EventDataVolunteer.find.all();
 		return ok(Json.toJson(vl));
 		
 		//Volunteer  v1 = new Volunteer(session().get("name"),session().get("password"));

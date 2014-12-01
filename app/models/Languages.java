@@ -3,6 +3,8 @@ package models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import play.data.validation.Constraints.Required;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 public class Languages {
 
@@ -10,10 +12,8 @@ public class Languages {
 	@Required
 	@GeneratedValue
 	private long id;
-	@Id
-	private String languageDe;
-	@Id
-	private String languageEn;
+	@ManyToOne
+	private long languageTId;
 	
 	public long getId() {
 		return id;
@@ -21,17 +21,12 @@ public class Languages {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getLanguageDe() {
-		return languageDe;
+	public long getLanguageDe() {
+		return languageTId;
 	}
-	public void setLanguageDe(String languageDe) {
-		this.languageDe = languageDe;
+	public void setLanguageDe(long languageTId) {
+		this.languageTId = languageTId;
 	}
-	public String getLanguageEn() {
-		return languageEn;
-	}
-	public void setLanguageEn(String languageEn) {
-		this.languageEn = languageEn;
-	}
+	
 	
 }
