@@ -35,10 +35,10 @@ public class ActualJob {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getActualJobTid() {
+	public long getActualJobTid() {
 		return actualJobTid;
 	}
-	public void setActualJobTid(String actualJobTid) {
+	public void setActualJobTid(long actualJobTid) {
 		this.actualJobTid = actualJobTid;
 	}
 	
