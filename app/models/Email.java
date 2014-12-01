@@ -17,6 +17,8 @@ import play.libs.Json;
 import play.data.validation.Constraints.Required;
 
 import java.util.Date;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Email {
@@ -31,7 +33,7 @@ public class Email {
 	private String content;
 	@Required
 	private byte[] attachement;
-	@Required
+	@ManyToOne
 	private long emailTId;
 	
 	public long getId() {

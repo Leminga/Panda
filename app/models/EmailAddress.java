@@ -17,14 +17,14 @@ import play.libs.Json;
 public class EmailAddress {
 	
 	 @Required
-	 private String address;
+	 private String emailAddress;
 
-	public String getAddress() {
-		return address;
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 	 
 	 

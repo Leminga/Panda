@@ -9,17 +9,17 @@ import javax.persistence.ManyToMany;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class ItKnowledge {
 	
 	@Id
 	@Required
 	@GeneratedValue
 	private long id;
-	@Required
-	private String itKnowledgeDE;
-	@Required
-	private String itKnowledgeEN;
+	@ManyToOne
+	private long itKnowledgeTId;
 	
 	
 	public long getId() {
@@ -28,17 +28,13 @@ public class ItKnowledge {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getItKnowledgeDE() {
-		return itKnowledgeDE;
+	public long getItKnowledgeTId() {
+		return itKnowledgeTId;
 	}
-	public void setItKnowledgeDE(String itKnowledgeDE) {
-		this.itKnowledgeDE = itKnowledgeDE;
+	public void setItKnowledgeTId(long itKnowledgeTId) {
+		this.itKnowledgeTId = itKnowledgeTId;
 	}
-	public String getItKnowledgeEN() {
-		return itKnowledgeEN;
-	}
-	public void setItKnowledgeEN(String itKnowledgeEN) {
-		this.itKnowledgeEN = itKnowledgeEN;
-	}
+	
+	
 	
 }

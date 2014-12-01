@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class EmergencyRelation {
@@ -20,29 +22,25 @@ public class EmergencyRelation {
 	@Id
 	@Required
 	@GeneratedValue
-	private Long ID;
-	@Required
-	private String emergencyRelationDE;
-	@Required
-	private String emergencyRelationEN;
-	public Long getID() {
-		return ID;
+	private long id;
+	@ManyToOne
+	private long emergencyRelationTId;
+	
+	public Long getId() {
+		return id;
 	}
-	public void setID(Long iD) {
-		ID = iD;
+	public void setId(long id) {
+		this.id = id;
 	}
-	public String getEmergencyRelationDE() {
-		return emergencyRelationDE;
+	public long getEmergencyRelationTId() {
+		return emergencyRelationTId;
 	}
-	public void setEmergencyRelationDE(String emergencyRelationDE) {
-		this.emergencyRelationDE = emergencyRelationDE;
+	public void setEmergencyRelationTId(long emergencyRelationTId) {
+		this.emergencyRelationTId = emergencyRelationTId;
 	}
-	public String getEmergencyRelationEN() {
-		return emergencyRelationEN;
-	}
-	public void setEmergencyRelationEN(String emergencyRelationEN) {
-		this.emergencyRelationEN = emergencyRelationEN;
-	}
+	
+	
+	
 	
 	
 

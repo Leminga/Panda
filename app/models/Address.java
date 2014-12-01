@@ -16,9 +16,11 @@ import play.libs.Json;
 
 public class Address {
 	
+	@Required
 	private String street;
 	@Required
 	private String housenumber;
+	@Required
 	private String zip;
 	@Required
 	private String city;

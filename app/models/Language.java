@@ -11,6 +11,7 @@ import play.db.ebean.Model;
 import play.libs.Json;
 
 import play.data.validation.Constraints.Required;
+import javax.persistence.ManyToOne;
 
 public class Language {
 
@@ -18,8 +19,8 @@ public class Language {
 	@Required
 	@GeneratedValue
 	private long id;
-	@Required
-	private long languageId;
+	@ManyToOne
+	private long languageTId;
 	@Required 
 	private int[] levels;
 	
@@ -29,11 +30,11 @@ public class Language {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getLanguageId() {
-		return languageId;
+	public long getLanguageTId() {
+		return languageTId;
 	}
-	public void setLanguageId(long languageId) {
-		this.languageId = languageId;
+	public void setLanguageTId(long languageTId) {
+		this.languageTId = languageTId;
 	}
 	public int[] getLevels() {
 		return levels;

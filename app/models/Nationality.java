@@ -13,26 +13,28 @@ import javax.persistence.ManyToMany;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 
 public class Nationality {
 	@Id
 	@Required
 	@GeneratedValue
-	private Long ID;
+	private long id;
 	@Required
 	private String countryCode;
-	private String countryNameDE;
-	private String countryNameEN;
+	@ManyToOne
+	private long countryNameTId;
 	@Required
 	private int countryCallingCode;
 	
 	
-	public Long getID() {
-		return ID;
+	public long getId() {
+		return id;
 	}
-	public void setID(Long iD) {
-		ID = iD;
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getCountryCode() {
 		return countryCode;
@@ -40,17 +42,11 @@ public class Nationality {
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	public String getCountryNameDE() {
-		return countryNameDE;
+	public long getCountryNameTId() {
+		return countryNameTId;
 	}
-	public void setCountryNameDE(String countryNameDE) {
-		this.countryNameDE = countryNameDE;
-	}
-	public String getCountryNameEN() {
-		return countryNameEN;
-	}
-	public void setCountryNameEN(String countryNameEN) {
-		this.countryNameEN = countryNameEN;
+	public void setCountryNameTId(long countryNameTId) {
+		this.countryNameTId = countryNameTId;
 	}
 	public int getCountryCallingCode() {
 		return countryCallingCode;

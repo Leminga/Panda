@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.persistence.Id;
 
-import models.Volunteer;
+import models.EventDataVolunteer;
 
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -29,7 +29,7 @@ public class UserLogin extends Controller {
 	@BodyParser.Of(BodyParser.Json.class)
 	public static Result save() {
 		JsonNode body = request().body().asJson();		  
-		Volunteer v = new Volunteer(body.get("name").toString(),body.get("password").toString());		
+		EventDataVolunteer v = new EventDataVolunteer(body.get("name").toString(),body.get("password").toString());		
 		Ebean.save(v);
 		
 		 
@@ -48,8 +48,8 @@ public class UserLogin extends Controller {
 
 	public static Result load() {
 		
-		List<Volunteer> vl = new ArrayList<Volunteer>();
-		vl = Volunteer.find.all();
+		List<EventDataVolunteer> vl = new ArrayList<EventDataVolunteer>();
+		vl = EventDataVolunteer.find.all();
 		return ok(Json.toJson(vl));
 		
 		//Volunteer  v1 = new Volunteer(session().get("name"),session().get("password"));

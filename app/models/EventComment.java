@@ -15,7 +15,7 @@ import play.db.ebean.Model;
 import play.db.ebean.Model.Finder;
 import play.libs.Json;
 
-
+@Entity
 public class EventComment {
 	@Required
 	@Id
@@ -23,5 +23,20 @@ public class EventComment {
 	private long id;
 	@Required
 	private String comment;
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
+	
 
 }

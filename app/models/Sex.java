@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Sex {
@@ -20,28 +22,26 @@ public class Sex {
 	@Id
 	@Required
 	@GeneratedValue
-	private Long Id;
-	private String sexDE;
-	private String sexEN;
+	private long id;
+	@ManyToOne
+	private long sexTId;
 	
-	public Long getId() {
-		return Id;
+	public long getId() {
+		return id;
 	}
-	public void setId(Long id) {
-		Id = id;
+	public void setId(long id) {
+		this.id = id;
 	}
-	public String getSexDE() {
-		return sexDE;
+	public long getSexTId() {
+		return sexTId;
 	}
-	public void setSexDE(String sexDE) {
-		this.sexDE = sexDE;
+	public void setSexTId(long sexTId) {
+		this.sexTId = sexTId;
 	}
-	public String getSexEN() {
-		return sexEN;
-	}
-	public void setSexEN(String sexEN) {
-		this.sexEN = sexEN;
-	}
+	
+	
+	
+	
 	
 	
 
