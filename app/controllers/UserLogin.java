@@ -1,37 +1,23 @@
 package controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.persistence.Id;
-
+import org.apache.commons.mail.EmailException;
+import mailer.mail;
 import models.Volunteer;
-
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.databind.JsonNode;
-
-
-
-
-
-import jdk.nashorn.internal.ir.ObjectNode;
-import play.*;
-import play.db.ebean.Model.Finder;
 import play.libs.Json;
 import play.mvc.*;
-import play.mvc.Http.RequestBody;
 
 
 public class UserLogin extends Controller {
 
 	@BodyParser.Of(BodyParser.Json.class)
-	public static Result save() {
+	public static Result save() throws EmailException {
 		JsonNode body = request().body().asJson();		  
 		Volunteer v = new Volunteer(body.get("name").toString(),body.get("password").toString());		
-		Ebean.save(v);
-		
+		Ebean.save(v);		
 		 
 		//List<Volunteer> vs = new ArrayList<Volunteer>();
 		//Volunteer  v1 = new Volunteer(session().get("username"),session().get("password"));
@@ -43,6 +29,8 @@ public class UserLogin extends Controller {
 		//v2.setPassword("2365");
 		//vs.add(v2);
 		//Ebean.save(v1);
+		
+		mail.sendMail();
 		return ok("2ez");
 	}
 
