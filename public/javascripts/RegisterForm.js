@@ -1,4 +1,4 @@
-angular.module('Register', ['Login'])
+angular.module('Register', [])
     .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService', function (RegisterService, GetRegisterService) {
         var self = this;
         var promise = 0;
