@@ -4,6 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
+import play.libs.Json;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Faculty {
@@ -12,10 +17,8 @@ public class Faculty {
 	@Required
 	@GeneratedValue
 	private long id;	
-	@Required
-	private String facultyDE;
-	@Required
-	private String facultyEN;
+	@ManyToOne
+	private long facultyTId;
 	
 	public long getId() {
 		return id;
@@ -23,16 +26,11 @@ public class Faculty {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getFacultyDE() {
-		return facultyDE;
+	public long getFacultyTId() {
+		return facultyTId;
 	}
-	public void setFacultyDE(String facultyDE) {
-		this.facultyDE = facultyDE;
+	public void setFacultyTId(long facultyTId) {
+		this.facultyTId = facultyTId;
 	}
-	public String getFacultyEN() {
-		return facultyEN;
-	}
-	public void setFacultyEN(String facultyEN) {
-		this.facultyEN = facultyEN;
-	}
+	
 }

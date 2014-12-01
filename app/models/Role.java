@@ -1,11 +1,6 @@
 package models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-
 import play.db.ebean.Model.Finder;
-
 import java.util.Date;
 import java.util.List;
 
@@ -14,23 +9,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
-
-import play.data.validation.Constraints.Required;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class ActualJob {
-	
+public class Role {
+
 	@Id
 	@Required
 	@GeneratedValue
 	private long id;
 	@ManyToOne
-	private long actualJobTid;
+	private long roleTId;
+	@Required
+	private boolean visibleFor;
 	
 	public long getId() {
 		return id;
@@ -38,11 +34,17 @@ public class ActualJob {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getActualJobTid() {
-		return actualJobTid;
+	public long getRoleTId() {
+		return roleTId;
 	}
-	public void setActualJobTid(long actualJobTid) {
-		this.actualJobTid = actualJobTid;
+	public void setRoleTId(long roleTId) {
+		this.roleTId = roleTId;
+	}
+	public boolean isVisibleFor() {
+		return visibleFor;
+	}
+	public void setVisibleFor(boolean visibleFor) {
+		this.visibleFor = visibleFor;
 	}
 	
 	

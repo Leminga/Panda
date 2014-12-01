@@ -24,6 +24,13 @@ create table degree (
   constraint pk_degree primary key (id))
 ;
 
+create table education_institute (
+  id                        bigint auto_increment not null,
+  education_institute_tid   bigint,
+  education_institute       varchar(255),
+  constraint pk_education_institute primary key (id))
+;
+
 create table educationlevel (
   id                        bigint auto_increment not null,
   education                 varchar(255),
@@ -100,6 +107,8 @@ drop table connection;
 drop table contact;
 
 drop table degree;
+
+drop table education_institute;
 
 drop table educationlevel;
 

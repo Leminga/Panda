@@ -4,6 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
+import play.libs.Json;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Connection {
@@ -11,28 +16,23 @@ public class Connection {
 	@Id
 	@Required
 	@GeneratedValue
-	private Long ID;
-	private String connectionTypeDE;
-	private String connectionTypeEN;
+	private Long id;
+	@ManyToOne
+	private String connectionTypeTId;
 	
-	public Long getID() {
-		return ID;
+	public Long getId() {
+		return id;
 	}
-	public void setID(Long iD) {
-		ID = iD;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public String getConnectionTypeDE() {
-		return connectionTypeDE;
+	public String getConnectionTypeTId() {
+		return connectionTypeTId;
 	}
-	public void setConnectionTypeDE(String connectionTypeDE) {
-		this.connectionTypeDE = connectionTypeDE;
+	public void setConnectionTypeTId(String connectionTypeTId) {
+		this.connectionTypeTId = connectionTypeTId;
 	}
-	public String getConnectionTypeEN() {
-		return connectionTypeEN;
-	}
-	public void setConnectionTypeEN(String connectionTypeEN) {
-		this.connectionTypeEN = connectionTypeEN;
-	}
+	
 	
 	
 	

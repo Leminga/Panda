@@ -1,11 +1,6 @@
 package models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
-
 import play.db.ebean.Model.Finder;
-
 import java.util.Date;
 import java.util.List;
 
@@ -14,23 +9,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
-
-import play.data.validation.Constraints.Required;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class ActualJob {
-	
+public class Sport {
+
 	@Id
 	@Required
 	@GeneratedValue
 	private long id;
 	@ManyToOne
-	private long actualJobTid;
+	private long sportTId;
 	
 	public long getId() {
 		return id;
@@ -38,12 +32,13 @@ public class ActualJob {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getActualJobTid() {
-		return actualJobTid;
+	public long getSportTId() {
+		return sportTId;
 	}
-	public void setActualJobTid(long actualJobTid) {
-		this.actualJobTid = actualJobTid;
+	public void setSportTId(long sportTId) {
+		this.sportTId = sportTId;
 	}
+	
 	
 	
 }
