@@ -1,0 +1,22 @@
+<configuration scan="true">
+  
+  <!-- The logger appender -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%date{yyyy-MM-dd HH:mm:ss.S} %-5level [%logger{15}] %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <!-- The standard log level of the root looger -->
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+  </root>
+  
+  <!-- The log levels of various packages and classes -->
+  <logger name="controllers" level="DEBUG"/>
+  <logger name="helper" level="DEBUG"/>
+  <logger name="mailer" level="DEBUG"/>
+  <logger name="models" level="DEBUG"/>
+  <logger name="notifiers" level="DEBUG"/>
+  
+</configuration>
