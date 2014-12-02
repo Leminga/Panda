@@ -1,29 +1,17 @@
 <html ng-app="Panda" >
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.js"></script>
+    <script src="/assets/javascripts/grunt/Project_Panda.js"></script>
 
-    <!-- Scripts for Server-->
-    <script src="/assets/javascripts/Panda.js"></script>
-    <script src="/assets/javascripts/RegisterForm.js"></script>
-    <script src="/assets/javascripts/RegisterService.js"></script>
-    <script src="/assets/javascripts/GetRegistrationService.js"></script>
-    <script src="/assets/javascripts/LoginForm.js"></script>
-    <script src="/assets/javascripts/LoginService.js"></script>
-
-
-    <!-- Scripts for local test via WebStorm
-    <script src="/Project_Panda/Panda/public/javascripts/RegisterForm.js"></script>
-    <script src="/Project_Panda/Panda/public/javascripts/RegisterService.js"></script>
-    <script src="/Project_Panda/Panda/public/javascripts/GetLoginDataService.js"></script>
-    -->
 </head >
 
-<body>
+<body ng-view="">
 <h1>REGISTRATIONFORM</h1>
 
 <div>
     <div ng-controller="RegisterFormCtrl as registerCtrl">
-        <form ng-submit="registerCtrl.register()" method="post" action="registerSuccess.html">
+        <form ng-submit="registerCtrl.register()" method="post" action="\register">
             Prename:<br>
             <input type="text"  pattern="[a-zA-Z ]+" name="prename" ng-model="registerCtrl.user.prename" required="">
             <br>
@@ -45,7 +33,7 @@
 </div>
 
 <div ng-controller="LoginFormCtrl as loginCtrl">
-    <form ng-submit="loginCtrl.sendLogin()">
+    <form ng-submit="loginCtrl.sendLogin()" method="post" action="\login">
         Name:<br>
         <input type="text" name="name" ng-model="loginCtrl.user.username" required=""/>
         <br>
@@ -55,7 +43,7 @@
         <button type="submit">Login</button>
     </form>
 </div>
-
+Click <a href="forgottenPassword.html">here</a> if you have forgotten your credentials.
 <br>
 <br>
 <br>
