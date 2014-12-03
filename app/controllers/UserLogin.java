@@ -37,7 +37,7 @@ public class UserLogin extends Controller {
 		//Ebean.save(v1);
 		
 		//mail.sendMail();
-		return ok(2ez);
+		return ok("2ez");
 	}
 
 	public static Result load() {
