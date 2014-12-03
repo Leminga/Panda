@@ -23,6 +23,11 @@ to eclipsify your project, in order to import it
 to the Eclipse IDE.
 
   [Panda] $ eclipse
+  
+In case you would like to have some javadoc in
+Eclipse as well use
+
+  [Panda] $ eclipse with-source=true
 
 Finaly, you can import the Panda project to the
 Eclipse IDE as a general existing project.
