@@ -1,2 +1,2 @@
-angular.module('Panda',['Register','Login','ForgottenPassword']);
+angular.module('Panda',['Register','Login','ForgottenPassword','RouteProvider']);
 

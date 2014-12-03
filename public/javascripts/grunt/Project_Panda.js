@@ -1,15 +1,18 @@
-angular.module('Panda',['Register','Login','ForgottenPassword']);
+angular.module('Panda',['Register','Login','ForgottenPassword','RouteProvider']);
 
 
 angular.module('RouteProvider', ['ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
+            .when('/', {
+                templateUrl: 'assets/views/index.html'
+            })
             .when('/forgottenPassword', {
-                templateUrl: '/forgottenPassword.html',
-                controller: 'ForgottenPasswordCtrl'
+                templateUrl: 'assets/views/forgottenPassword.html'
+
             })
             .otherwise({
-                redirectTo:'/'
+                redirectTo: '/'
             })
     }]);
 
@@ -19,7 +22,15 @@ angular.module('ForgottenPassword', [])
 
         self.sendForgottenPasswordRequest = function () {
             ForgottenPasswordService.forgottenPassword(self.email);
-        };
+            /*
+             .success(function () {
+             self.status = "Request was sent successfully. You should receive an E-Mail within 10 minutes"
+
+             }).error(function (error) {
+             self.status = "There was an error." + error.message;
+             })
+             */
+        }
     }]);
 angular.module('Register', [])
     .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService', function (RegisterService, GetRegisterService) {
@@ -41,12 +52,20 @@ angular.module('Register', [])
         };
     }]);
 
-angular.module('Login',[])
+angular.module('Login', [])
     .controller('LoginFormCtrl', ['LoginService', function (LoginService) {
-    var self = this;
+        var self = this;
 
-        self.sendLogin = function() {
+        self.sendLogin = function () {
             LoginService.login(self.user);
+            /*.
+             success(function () {
+             self.status = "Login successful"
+
+             }).error(function (error) {
+             self.status = "There was an error." + error.message;
+             });
+             */
         };
 
     }]);

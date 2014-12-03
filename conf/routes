@@ -3,9 +3,11 @@
 # ~~~~
 
 # Home page
+POST    /login						 controllers.UserLogin.save()
 # GET   /                           controllers.Application.index()
-# POST	/login						controllers.UserLogin.save()
 # GET     /LoginData                  controllers.UserLogin.load()
+
+
 
 
 # Map static resources from the /public folder to the /assets URL path

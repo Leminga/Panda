@@ -21,9 +21,9 @@ public class UserLogin extends Controller {
 
 	@BodyParser.Of(BodyParser.Json.class)
 	public static Result save() throws EmailException {
-		JsonNode body = request().body().asJson();
-		Volunteer v = new Volunteer(body.get("name").toString(),body.get("password").toString());		
-		Ebean.save(v);
+		//JsonNode body = request().body().asJson();
+		//Volunteer v = new Volunteer(body.get("username").toString(),body.get("user.password").toString());
+		//Ebean.save(v);
 		 
 		//List<Volunteer> vs = new ArrayList<Volunteer>();
 		//Volunteer  v1 = new Volunteer(session().get("username"),session().get("password"));
@@ -36,8 +36,8 @@ public class UserLogin extends Controller {
 		//vs.add(v2);
 		//Ebean.save(v1);
 		
-		mail.sendMail();
-		return ok("2ez");
+		//mail.sendMail();
+		return ok(2ez);
 	}
 
 	public static Result load() {

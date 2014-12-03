@@ -11,7 +11,7 @@
 
 <div>
     <div ng-controller="RegisterFormCtrl as registerCtrl">
-        <form ng-submit="registerCtrl.register()" method="post" action="\register">
+        <form ng-submit="registerCtrl.register()" action="/register">
             Prename:<br>
             <input type="text"  pattern="[a-zA-Z ]+" name="prename" ng-model="registerCtrl.user.prename" required="">
             <br>
@@ -33,7 +33,7 @@
 </div>
 
 <div ng-controller="LoginFormCtrl as loginCtrl">
-    <form ng-submit="loginCtrl.sendLogin()" method="post" action="\login">
+    <form ng-submit="loginCtrl.sendLogin()" action="/login" method="post">
         Name:<br>
         <input type="text" name="name" ng-model="loginCtrl.user.username" required=""/>
         <br>
@@ -43,7 +43,7 @@
         <button type="submit">Login</button>
     </form>
 </div>
-Click <a href="forgottenPassword.html">here</a> if you have forgotten your credentials.
+Click <a href="#/forgottenPassword">here</a> if you have forgotten your credentials.
 <br>
 <br>
 <br>
