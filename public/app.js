@@ -27,27 +27,19 @@ angular.module('Panda')
     }]);
 
 angular.module('Panda')
-    .controller('LoginFormCtrl', ['LoginService','$window', function (LoginService,$window) {
+    .controller('LoginFormCtrl', ['LoginService', '$window','$location', function (LoginService, $window, $location) {
         var self = this;
-        var token = undefined;
 
         self.sendLogin = function () {
-            LoginService.login(self.user).then(function(response){
-                console.log(response);
-                $window.sessionStorage.setItem("token");
-            });
+            LoginService.login(self.user).then(
+                function (response) { // success function
+                    $window.sessionStorage.setItem("token", response.data.authToken);
+                    console.log($window.sessionStorage.getItem("token"));
+                    $location.path('/overview')
+                }, function (response) {  // error function
+                    console.log("Not authorized");
+                });
         };
-
-        /*.
-         success(function (ö) {
-         self.status = "Login successful"
-
-         }).error(function (error) {
-         self.status = "There was an error." + error.message;
-         });
-         */
-
-
     }]);
 
 angular.module('Panda')
@@ -60,11 +52,14 @@ angular.module('Panda')
 
     }]);
 angular.module('Panda')
-.factory('InterceptorService', ['$q','$window', function($q,$window) {
+.factory('InterceptorService', ['$q','$window','$location', function($q,$window,$location) {
     return {
         request: function(config) {
             console.log('Request made with ', config);
             config.headers['X-AUTH-TOKEN'] = $window.sessionStorage.getItem("token");
+            if(config.headers['X-AUTH-TOKEN'] === null ){
+                $location.path("/");
+            }
             return config;
             // If an error, or not allowed, or my custom condition
             // return $q.reject('Not allowed');
@@ -110,12 +105,27 @@ angular.module('Panda')
             })
             .when('/forgottenPassword', {
                 templateUrl: 'assets/views/forgottenPassword.html',
-                controller:'RegisterFormCtrl as registerCtrl'
+                controller: 'ForgottenPasswordCtrl as forgottenPassword'
+            })
+            .when('/register', {
+                templateUrl: 'assets/views/register.html',
+                controller: 'RegisterFormCtrl as registerCtrl'
+            })
+            .when('/overview', {
+
+                templateUrl: 'assets/views/overview.html',
+                controller: 'OverviewFormCtrl as overviewCtrl'
             })
             .otherwise({
                 redirectTo: '/'
             })
     }]);
+
+angular.module('Panda')
+    .controller('OverviewCtrl', ['', function () {
+
+    }]);
+
 
 angular.module('Panda')
     .factory('GetRegistrationService', ['$http', function ($http) {

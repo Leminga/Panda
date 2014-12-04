@@ -26,7 +26,7 @@ public class Finder {
 	 * singleton pattern.
 	 */
 	private Finder() {
-		User user1 = new User("michael.bredel@fh-kufstein.ac.at", "password", "Michael Bredel");
+		User user1 = new User("test@test.com", "test", "Michael Bredel");
 		users.put(user1.getEmailAddress(), user1);
 		User user2 = new User("demo@fh-kufstein.ac.at", "password", "Demo User");
 		users.put(user2.getEmailAddress(), user2);

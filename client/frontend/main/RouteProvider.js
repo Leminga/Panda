@@ -7,7 +7,16 @@ angular.module('Panda')
             })
             .when('/forgottenPassword', {
                 templateUrl: 'assets/views/forgottenPassword.html',
-                controller:'RegisterFormCtrl as registerCtrl'
+                controller: 'ForgottenPasswordCtrl as forgottenPassword'
+            })
+            .when('/register', {
+                templateUrl: 'assets/views/register.html',
+                controller: 'RegisterFormCtrl as registerCtrl'
+            })
+            .when('/overview', {
+
+                templateUrl: 'assets/views/overview.html',
+                controller: 'OverviewFormCtrl as overviewCtrl'
             })
             .otherwise({
                 redirectTo: '/'

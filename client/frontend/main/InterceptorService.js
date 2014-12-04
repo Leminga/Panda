@@ -1,9 +1,12 @@
 angular.module('Panda')
-.factory('InterceptorService', ['$q','$window', function($q,$window) {
+.factory('InterceptorService', ['$q','$window','$location', function($q,$window,$location) {
     return {
         request: function(config) {
             console.log('Request made with ', config);
             config.headers['X-AUTH-TOKEN'] = $window.sessionStorage.getItem("token");
+            if(config.headers['X-AUTH-TOKEN'] === null ){
+                $location.path("/");
+            }
             return config;
             // If an error, or not allowed, or my custom condition
             // return $q.reject('Not allowed');
