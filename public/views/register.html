@@ -1,0 +1,22 @@
+<h1>REGISTRATIONFORM</h1>
+<div>
+    <div>
+        <form ng-submit="registerCtrl.register()" action="/register">
+            Prename:<br>
+            <input type="text"  pattern="[a-zA-Z ]+" name="prename" ng-model="registerCtrl.user.prename" required="">
+            <br>
+            Surname:<br>
+            <input type="text" pattern="[a-zA-Z ]+" name="surname" ng-model="registerCtrl.user.surname" required="">
+            <br>
+            E-Mail:
+            <br>
+            <input type="email" name="email" ng-model="registerCtrl.user.email" required="">
+            <br>
+            Password:
+            <br>
+            <input type="password" name="password" ng-model="registerCtrl.user.password" required="">
+            <br><br>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
