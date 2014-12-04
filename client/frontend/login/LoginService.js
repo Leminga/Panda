@@ -1,4 +1,4 @@
-angular.module("Register")
+angular.module('Panda')
     .factory('LoginService', ['$http', function ($http){
         return{
             login:function(user){

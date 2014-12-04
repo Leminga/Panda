@@ -1,4 +1,4 @@
-angular.module('ForgottenPassword', [])
+angular.module('Panda')
     .controller('ForgottenPasswordCtrl', ['ForgottenPasswordService', function (ForgottenPasswordService) {
         var self = this;
 

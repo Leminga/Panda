@@ -1,4 +1,4 @@
-angular.module('ForgottenPassword')
+angular.module('Panda')
     .factory('ForgottenPasswordService', ['$http', function ($http) {
         return {
             forgottenPassword: function (email) {

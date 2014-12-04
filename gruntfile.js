@@ -8,24 +8,42 @@ module.exports = function (grunt) {
                 separator: "\n" //add a new line after each file
             },
             dist: {
-                src: ['public/javascripts/Panda.js',
-                    'public/javascripts/RouteProvider.js',
-                    'public/javascripts/ForgottenPassword.js',
-                    'public/javascripts/RegisterForm.js',
-                    'public/javascripts/LoginForm.js',
-                    'public/javascripts/*.js'],
-                dest: 'public/javascripts/grunt/<%= pkg.name %>.js'
+                src: ['client/app.js', 'client/**/*.js'],
+                dest: 'public/app.js'
 
             }
         },
         watch: {
             scripts: {
-                files: ['public/javascripts/*.js'],
-                tasks: ['dev-watch'],
+                files: ['client/**/*'],
+                tasks: ['build'],
                 options: {
                     interrupt: true
                 }
             }
+        },
+        copy: {
+            views: {
+                files: [
+                    {expand: true, flatten: true, src: ['client/**/*.html','!client/**/index.html'], dest: 'public/views/'}
+                ]
+            },
+            stylesheets:{
+                files:[
+                    {expand: true, flatten: true, src: ['client/**/*.css'], dest: 'public/stylesheets/'}
+                ]
+            },
+            images:{
+                files:[
+                    {expand: true, flatten: true, src: ['client/**/images/*'], dest: 'public/images/'}
+                ]
+            },
+            index:{
+              files:[
+                  {expand: true, flatten: true, src: ['client/**/index.html'], dest: 'public/'}
+              ]
+            }
+
         }
     });
 
@@ -33,9 +51,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-concat-in-order');
-    grunt.registerTask('dev-watch', ['concat:dist']);
-
-    grunt.registerTask('build', ['concat','watch']);
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.registerTask('dev-watch', ['watch']);
+    grunt.registerTask('build', ['concat', 'copy']);
 
 
 };

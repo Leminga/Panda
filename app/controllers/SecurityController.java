@@ -61,7 +61,7 @@ public class SecurityController extends Controller {
      * @return <b>Result</b> A resulting JSON object containing the authentication token or null.
      */
     public static Result login() {
-    	// 
+    	//
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
 
     	// Check the form itself for errors.
@@ -77,7 +77,7 @@ public class SecurityController extends Controller {
         User user = User.findByEmailAddressAndPassword(login.email, login.password);
         
         if (user == null) {
-        	Logger.debug("Unautherzided login attempt.");
+        	Logger.debug("Unauthorized login attempt.");
             return Results.unauthorized();
         } else {
             String authToken = user.createToken();

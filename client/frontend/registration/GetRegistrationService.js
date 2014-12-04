@@ -1,4 +1,4 @@
-angular.module('Register')
+angular.module('Panda')
     .factory('GetRegistrationService', ['$http', function ($http) {
         return {
             getRegistration:function(){
