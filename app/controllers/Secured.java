@@ -58,11 +58,9 @@ public class Secured extends Security.Authenticator {
      * (non-Javadoc)
      * @see play.mvc.Security.Authenticator#onUnauthorized(play.mvc.Http.Context)
      */
-
-    /* Change by Schmalzbauer Lukas - Creates an error, therefore commented out (probably because route doesn't exist yet?)
     @Override
     public Result onUnauthorized(Context ctx) {
         return redirect(routes.SecurityController.login());
+    	//return null;
     }
-    */
 }
