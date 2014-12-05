@@ -1,7 +1,10 @@
+// The LoginFormController handles the login and authentication of the user.
 angular.module('Panda')
     .controller('LoginFormCtrl', ['LoginService', '$window','$location', function (LoginService, $window, $location) {
         var self = this;
 
+        // This sends the Login to the controller, where it is being checked, whether the user exists or not.
+        // If the user does not exist, then he receives an Error Message (TBD)
         self.sendLogin = function () {
             LoginService.login(self.user).then(
                 function (response) { // success function

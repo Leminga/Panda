@@ -1,7 +1,7 @@
 angular.module('Panda')
     .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService', function (RegisterService, GetRegisterService) {
         var self = this;
-        var promise = 0;
+
         self.receivedRegistrationData = {};
 
 

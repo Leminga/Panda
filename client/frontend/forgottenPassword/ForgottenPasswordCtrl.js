@@ -1,16 +1,11 @@
+// This controller is used for the forgotten Password webpage. It handles the request to the controller, which checks
+// whether the user exists or not and then handles the password reset.
 angular.module('Panda')
     .controller('ForgottenPasswordCtrl', ['ForgottenPasswordService', function (ForgottenPasswordService) {
         var self = this;
 
+        // Sends the request to the controller for a password recovery
         self.sendForgottenPasswordRequest = function () {
             ForgottenPasswordService.forgottenPassword(self.email);
-            /*
-             .success(function () {
-             self.status = "Request was sent successfully. You should receive an E-Mail within 10 minutes"
-
-             }).error(function (error) {
-             self.status = "There was an error." + error.message;
-             })
-             */
         }
     }]);

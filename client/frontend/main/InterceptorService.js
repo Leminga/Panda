@@ -1,12 +1,12 @@
+// The InterceptorService reacts to any of the mentioned http-methods (request, requestError..)
 angular.module('Panda')
 .factory('InterceptorService', ['$q','$window','$location', function($q,$window,$location) {
     return {
         request: function(config) {
+
             console.log('Request made with ', config);
+            // At every request, the Token is being added to the Header for authentication purposes
             config.headers['X-AUTH-TOKEN'] = $window.sessionStorage.getItem("token");
-            if(config.headers['X-AUTH-TOKEN'] === null ){
-                $location.path("/");
-            }
             return config;
             // If an error, or not allowed, or my custom condition
             // return $q.reject('Not allowed');
@@ -40,6 +40,8 @@ angular.module('Panda')
         }
     };
 }])
+    // The InterceptorService is being added to this .config module, which results it being used right away from the
+    // build-up of the webpage.
     .config(['$httpProvider', function($httpProvider) {
-        $httpProvider.interceptors.push('InterceptorService');
-    }]);
+    $httpProvider.interceptors.push('InterceptorService');
+}]);
