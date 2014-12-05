@@ -21,6 +21,8 @@ import play.data.validation.Constraints.Required;
 
 import java.util.Date;
 
+// TODO: This is exactly the same as CityRepresentativeGuest!
+
 @Entity
 public class CityGuest extends Human{
 	

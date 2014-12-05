@@ -21,6 +21,8 @@ import play.data.validation.Constraints.Required;
 
 import java.util.Date;
 
+// TODO: Why don't derive from CityRepresentative?
+
 @Entity
 public class CityRepresentativeGuest extends Human{
 	
