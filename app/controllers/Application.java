@@ -11,7 +11,7 @@ public class Application extends Controller {
 
     	//Ok(Json.toJson(names)).as(JSON)
         //return ok(index.render(".ady"));
-        return ok("test");
+        return ok("Hello World");
     }
 
 }
