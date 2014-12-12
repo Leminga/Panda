@@ -1,56 +1,71 @@
 package models;
 
-import javax.persistence.GeneratedValue;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-import play.data.validation.Constraints.Required;
-import play.db.ebean.Model;
-import play.libs.Json;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import play.data.validation.Constraints.Required;
 
-
+/**
+ * The nationality and all related information.
+ * 
+ * @author Michael Bredel <michael.bredel@fh-kufstein.ac.at>
+ */
+@Entity
 public class Nationality {
+	/** The unique country code. */
 	@Id
 	@Required
-	@GeneratedValue
-	private long id;
-	@Required
 	private String countryCode;
+	/** The id in the translation table. */
 	@ManyToOne
 	private long countryNameTId;
+	/** The country calling code for the teleophone system. */
 	@Required
-	private int countryCallingCode;
+	private String countryCallingCode;
 	
-	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
+	/**
+	 * Getter for the unique country code.
+	 * 
+	 * @return <b>String</b>The unique country code.
+	 */
 	public String getCountryCode() {
 		return countryCode;
 	}
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
-	}
+
+	/**
+	 * Getter for the id in the translation table.
+	 * 
+	 * @return <b>long</b>The id in the translation table.
+	 */
 	public long getCountryNameTId() {
 		return countryNameTId;
 	}
+	
+	/**
+	 * Setter for the id in the translation table.
+	 * 
+	 * @param countryNameTId The id in the translation table.
+	 */
 	public void setCountryNameTId(long countryNameTId) {
 		this.countryNameTId = countryNameTId;
 	}
-	public int getCountryCallingCode() {
+	
+	/**
+	 * Getter for the country calling code.
+	 * 
+	 * @return <b>String</b>The country calling code.
+	 */
+	public String getCountryCallingCode() {
 		return countryCallingCode;
 	}
-	public void setCountryCallingCode(int countryCallingCode) {
+	
+	/**
+	 * Setter for the country calling code.
+	 * 
+	 * @param countryCallingCode The country calling code.
+	 */
+	public void setCountryCallingCode(String countryCallingCode) {
 		this.countryCallingCode = countryCallingCode;
 	}
-	
-	
-	
-	
-	
-
 }
