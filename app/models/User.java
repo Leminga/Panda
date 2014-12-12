@@ -98,6 +98,11 @@ public class User extends Model {
 	    //return find.where().eq("emailAddress", emailAddress.toLowerCase()).eq("shaPassword", getSha512(password)).findUnique();
 		return find.find(emailAddress, password);
 	}
+	
+	
+	public static User findUserByEmailAddress(String emailAddress) {
+		return find.find(emailAddress);
+	}
 
 	/**
 	 * The default constructor.

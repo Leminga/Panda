@@ -63,6 +63,16 @@ public class Finder {
 	}
 	
 	/**
+	 * Searches the virtual database for a given user.
+	 * 
+	 * @param The email address that identifies the user.
+	 * @return <b>User</b> The user and all its data.
+	 */
+	public User findByEmail(String emailAddress) {
+		return Finder.users.get(emailAddress);
+	}
+	
+	/**
 	 * Searches the virtual database for a given user. Returns the
 	 * user object, if a valid authentication token was found.
 	 * 
@@ -76,5 +86,14 @@ public class Finder {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Adds a new user to the temporary database.
+	 * 
+	 * @param user The user that is added to the temporary database.
+	 */
+	public void addUser(User user) {
+		Finder.users.put(user.getEmailAddress(), user);
 	}
 }

@@ -61,7 +61,7 @@ public class SecurityController extends Controller {
      * @return <b>Result</b> A resulting JSON object containing the authentication token or null.
      */
     public static Result login() {
-    	//
+    	// The login form.
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
 
     	// Check the form itself for errors.
@@ -103,19 +103,65 @@ public class SecurityController extends Controller {
     }
     
     /**
+     * 
+     * @return <b>Result</b> A resulting JSON object containing the authentication token or null.
+     */
+    public static Result registerNewUser() {
+    	// The login form.
+    	Form<Register> registerForm = Form.form(Register.class).bindFromRequest();
+    	
+    	// Check the form itself for errors.
+        if (registerForm.hasErrors()) {
+            return Results.badRequest(registerForm.errorsAsJson());
+        }
+        
+        // Get the login information from the login form.
+        Register register = registerForm.get();
+        
+        // Find the user in the database. Return null if the
+        // user was not found.
+        User user = User.findUserByEmailAddress(register.email);
+        
+        if (user == null) {
+        	Logger.info("New user to register. " + register.email);
+        	user = new User(register.email, register.password, register.name + " " + register.surname);
+        	String authToken = user.createToken();
+            ObjectNode authTokenJson = Json.newObject();
+            authTokenJson.put(AUTH_TOKEN, authToken);
+            response().setCookie(AUTH_TOKEN, authToken);
+            return Results.ok("user registration ok");
+        } else {
+        	Logger.info("User already exists in database.");
+        	return Results.ok("user exist alread");
+        }
+    }
+    
+    /**
      * Maps the login form fields to a
      * login object.
      * 
      * @author Michel Bredel <michael.bredel@fh-kufstein.ac.at>
      */
     public static class Login {
-
+    	/** The email address of the user. */
         @Constraints.Required
         @Constraints.Email
         public String email;
-
+        /** The password (as a MD5-Hash) of the user. */
         @Constraints.Required
         public String password;
-
+    }
+    
+    /**
+     * Maps the register form fields to a
+     * register object.
+     * 
+     * @author Michel Bredel <michael.bredel@fh-kufstein.ac.at>
+     */
+    public static class Register extends Login {
+    	/** The name of the user. */
+    	public String name;
+    	/** The surname of the user. */
+    	public String surname;
     }
 }
