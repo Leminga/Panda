@@ -12,7 +12,7 @@ angular.module('Panda')
                     console.log($window.sessionStorage.getItem("token"));
                     $location.path('/overview')
                 }, function (response) {  // error function
-                    console.log("Not authorized");
+                    $window.alert("Wrong credentials");
                 });
         };
     }]);
