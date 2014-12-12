@@ -16,56 +16,79 @@ public class Nationality {
 	/** The unique country code. */
 	@Id
 	@Required
-	private String countryCode;
-	/** The id in the translation table. */
-	@ManyToOne
-	private long countryNameTId;
-	/** The country calling code for the teleophone system. */
+	private int countryId;
 	@Required
-	private String countryCallingCode;
+	private String iso2;
+	@Required
+	private String shortName;
+	@Required
+	private String longName;
+	@Required
+	private String iso3;
+	@Required
+	private String numcode;
+	@Required
+	private String unMember;
+	@Required
+	private String callingCode;
+	@Required
+	private String cctld;
 	
-	/**
-	 * Getter for the unique country code.
-	 * 
-	 * @return <b>String</b>The unique country code.
-	 */
-	public String getCountryCode() {
-		return countryCode;
+	public int getCountryId() {
+		return countryId;
 	}
-
-	/**
-	 * Getter for the id in the translation table.
-	 * 
-	 * @return <b>long</b>The id in the translation table.
-	 */
-	public long getCountryNameTId() {
-		return countryNameTId;
+	public void setCountryId(int countryId) {
+		this.countryId = countryId;
+	}
+	public String getIso2() {
+		return iso2;
+	}
+	public void setIso2(String iso2) {
+		this.iso2 = iso2;
+	}
+	public String getShortName() {
+		return shortName;
+	}
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+	public String getLongName() {
+		return longName;
+	}
+	public void setLongName(String longName) {
+		this.longName = longName;
+	}
+	public String getIso3() {
+		return iso3;
+	}
+	public void setIso3(String iso3) {
+		this.iso3 = iso3;
+	}
+	public String getNumcode() {
+		return numcode;
+	}
+	public void setNumcode(String numcode) {
+		this.numcode = numcode;
+	}
+	public String getUnMember() {
+		return unMember;
+	}
+	public void setUnMember(String unMember) {
+		this.unMember = unMember;
+	}
+	public String getCallingCode() {
+		return callingCode;
+	}
+	public void setCallingCode(String callingCode) {
+		this.callingCode = callingCode;
+	}
+	public String getCctld() {
+		return cctld;
+	}
+	public void setCctld(String cctld) {
+		this.cctld = cctld;
 	}
 	
-	/**
-	 * Setter for the id in the translation table.
-	 * 
-	 * @param countryNameTId The id in the translation table.
-	 */
-	public void setCountryNameTId(long countryNameTId) {
-		this.countryNameTId = countryNameTId;
-	}
 	
-	/**
-	 * Getter for the country calling code.
-	 * 
-	 * @return <b>String</b>The country calling code.
-	 */
-	public String getCountryCallingCode() {
-		return countryCallingCode;
-	}
 	
-	/**
-	 * Setter for the country calling code.
-	 * 
-	 * @param countryCallingCode The country calling code.
-	 */
-	public void setCountryCallingCode(String countryCallingCode) {
-		this.countryCallingCode = countryCallingCode;
-	}
 }

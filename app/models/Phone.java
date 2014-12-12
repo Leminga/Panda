@@ -47,7 +47,7 @@ public class Phone {
 	/** The country calling code, e.g. 0049 for Germany. */
 	// TODO: Why not only store the country calling code, but the nationality?
 	@Required
-	private Nationality countryCallingCode;
+	private Nationality callingCode;
 	
 	/** The phone type, ie. home, work, mobile. */
 	private PhoneType phoneType;
@@ -76,11 +76,11 @@ public class Phone {
 	 * @return
 	 */
 	public Nationality getCountryCallingCode() {
-		return countryCallingCode;
+		return callingCode;
 	}
 	
 	public void setCountryCallingCode(Nationality countryCallingCode) {
-		this.countryCallingCode = countryCallingCode;
+		this.callingCode = countryCallingCode;
 	}
 	
 	public PhoneType getPhoneType() {
@@ -105,7 +105,7 @@ public class Phone {
 		/* Just a local string builder. */
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("(" + this.countryCallingCode.getCountryCallingCode() + ") ");
+		sb.append("(" + this.callingCode.getCallingCode() + ") ");
 		sb.append(this.phoneNumber);
 		
 		return sb.toString();

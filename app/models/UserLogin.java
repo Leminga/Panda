@@ -109,9 +109,10 @@ public class UserLogin {
 	}
 	/*public static UserLogin findByPassword(String password) {
 	    // todo: verify this query is correct.  Does it need an "and" statement?
-	    return find.where().eq(("password", getMD5(password)).findUnique();
+	    return find.where().eq(("MD5password", getMD5(password)).findUnique();
 	}
 	*/
+	
 	/*public String createToken() {
         this.authToken = UUID.randomUUID().toString();
         Ebean.save(); // Update the user entry in the database.
