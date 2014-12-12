@@ -1,19 +1,89 @@
 0 info it worked if it ends with ok
 1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
-1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js' ]
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'grunt-copy-contrib' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.33
 4 verbose node symlink C:\Program Files\nodejs\\node.exe
-5 error Error: ENOENT, stat 'C:\Users\lukas.schmalzbauer\AppData\Roaming\npm'
-6 error If you need help, you may report this *entire* log,
-6 error including the npm and node versions, at:
-6 error     <http://github.com/npm/npm/issues>
-7 error System Windows_NT 6.1.7601
-8 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js"
-9 error cwd C:\Users\lukas.schmalzbauer\WebstormProjects\Project_Panda\Panda
-10 error node -v v0.10.33
-11 error npm -v 1.4.28
-12 error path C:\Users\lukas.schmalzbauer\AppData\Roaming\npm
-13 error code ENOENT
-14 error errno 34
-15 verbose exit [ 34, true ]
+5 warn package.json Project_Panda@0.1.0 No repository field.
+6 verbose readDependencies using package.json deps
+7 verbose cache add [ 'grunt-copy-contrib', null ]
+8 verbose cache add name=undefined spec="grunt-copy-contrib" args=["grunt-copy-contrib",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'grunt-copy-contrib',
+9 verbose parsed url   path: 'grunt-copy-contrib',
+9 verbose parsed url   href: 'grunt-copy-contrib' }
+10 silly lockFile 224387a8-grunt-copy-contrib grunt-copy-contrib
+11 verbose lock grunt-copy-contrib C:\Users\lukas.schmalzbauer\AppData\Roaming\npm-cache\224387a8-grunt-copy-contrib.lock
+12 silly lockFile 224387a8-grunt-copy-contrib grunt-copy-contrib
+13 silly lockFile 224387a8-grunt-copy-contrib grunt-copy-contrib
+14 verbose addNamed [ 'grunt-copy-contrib', '' ]
+15 verbose addNamed [ null, '*' ]
+16 silly lockFile 27b5fc87-grunt-copy-contrib grunt-copy-contrib@
+17 verbose lock grunt-copy-contrib@ C:\Users\lukas.schmalzbauer\AppData\Roaming\npm-cache\27b5fc87-grunt-copy-contrib.lock
+18 silly addNameRange { name: 'grunt-copy-contrib', range: '*', hasData: false }
+19 verbose request where is /grunt-copy-contrib
+20 verbose request registry https://registry.npmjs.org/
+21 verbose request id dbc15873be999313
+22 verbose url raw /grunt-copy-contrib
+23 verbose url resolving [ 'https://registry.npmjs.org/', './grunt-copy-contrib' ]
+24 verbose url resolved https://registry.npmjs.org/grunt-copy-contrib
+25 verbose request where is https://registry.npmjs.org/grunt-copy-contrib
+26 info trying registry request attempt 1 at 13:21:39
+27 http GET https://registry.npmjs.org/grunt-copy-contrib
+28 http 404 https://registry.npmjs.org/grunt-copy-contrib
+29 verbose headers { date: 'Fri, 12 Dec 2014 12:20:45 GMT',
+29 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+29 verbose headers   'content-type': 'application/json',
+29 verbose headers   'cache-control': 'max-age=0',
+29 verbose headers   'content-length': '52',
+29 verbose headers   'accept-ranges': 'bytes',
+29 verbose headers   via: '1.1 varnish',
+29 verbose headers   age: '0',
+29 verbose headers   'x-served-by': 'cache-fra1246-FRA',
+29 verbose headers   'x-cache': 'MISS',
+29 verbose headers   'x-cache-hits': '0',
+29 verbose headers   'x-timer': 'S1418386845.851237,VS0,VE116',
+29 verbose headers   'keep-alive': 'timeout=10, max=50',
+29 verbose headers   connection: 'Keep-Alive' }
+30 silly registry.get cb [ 404,
+30 silly registry.get   { date: 'Fri, 12 Dec 2014 12:20:45 GMT',
+30 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R14B04)',
+30 silly registry.get     'content-type': 'application/json',
+30 silly registry.get     'cache-control': 'max-age=0',
+30 silly registry.get     'content-length': '52',
+30 silly registry.get     'accept-ranges': 'bytes',
+30 silly registry.get     via: '1.1 varnish',
+30 silly registry.get     age: '0',
+30 silly registry.get     'x-served-by': 'cache-fra1246-FRA',
+30 silly registry.get     'x-cache': 'MISS',
+30 silly registry.get     'x-cache-hits': '0',
+30 silly registry.get     'x-timer': 'S1418386845.851237,VS0,VE116',
+30 silly registry.get     'keep-alive': 'timeout=10, max=50',
+30 silly registry.get     connection: 'Keep-Alive' } ]
+31 silly lockFile 27b5fc87-grunt-copy-contrib grunt-copy-contrib@
+32 silly lockFile 27b5fc87-grunt-copy-contrib grunt-copy-contrib@
+33 error 404 404 Not Found: grunt-copy-contrib
+33 error 404
+33 error 404 'grunt-copy-contrib' is not in the npm registry.
+33 error 404 You should bug the author to publish it
+33 error 404 It was specified as a dependency of 'Project_Panda'
+33 error 404
+33 error 404 Note that you can also install from a
+33 error 404 tarball, folder, or http url, or git url.
+34 error System Windows_NT 6.1.7601
+35 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "grunt-copy-contrib"
+36 error cwd C:\Users\lukas.schmalzbauer\WebstormProjects\Project_Panda_SVN_2
+37 error node -v v0.10.33
+38 error npm -v 1.4.28
+39 error code E404
+40 verbose exit [ 1, true ]

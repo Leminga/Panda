@@ -13,6 +13,7 @@ angular.module('Panda')
                     $location.path('/overview')
                 }, function (response) {  // error function
                     $window.alert("Wrong credentials");
+                    console.log("Test");
                 });
         };
     }]);
