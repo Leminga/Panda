@@ -17,7 +17,7 @@ public class IRegistration implements Observer {
 //	public void removeListener(InvalidationListener arg0) {
 //		// TODO Auto-generated method stub
 //
-	}
+//	}
 
 //	@Override
 //	public void update(java.util.Observable arg0, Object arg1) {
