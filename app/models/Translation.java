@@ -25,5 +25,26 @@ public class Translation {
 	private String german;
 	@Required
 	private String english;
+	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getGerman() {
+		return german;
+	}
+	public void setGerman(String german) {
+		this.german = german;
+	}
+	public String getEnglish() {
+		return english;
+	}
+	public void setEnglish(String english) {
+		this.english = english;
+	}
+	
+	
 
 }

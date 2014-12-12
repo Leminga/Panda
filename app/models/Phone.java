@@ -1,5 +1,7 @@
 package models;
 
+import javax.persistence.Entity;
+
 import play.data.validation.Constraints.Required;
 
 /**
@@ -8,6 +10,7 @@ import play.data.validation.Constraints.Required;
  * 
  * @author Michael Bredel <michael.bredel@fh-kufstein.ac.at>
  */
+@Entity
 public class Phone {
 	
 	/**

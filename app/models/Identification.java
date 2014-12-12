@@ -2,10 +2,12 @@ package models;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
 import helper.IdentificationType;
 import play.data.validation.Constraints.Required;
 
-
+@Entity
 public class Identification {
 	
 	@Required

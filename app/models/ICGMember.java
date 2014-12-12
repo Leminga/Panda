@@ -26,10 +26,6 @@ public class ICGMember extends Human{
 	
 	
 	@Required
-	private String name;
-	@Required
-	private String password;
-	@Required
 	private List <Address>addresses;
 	@Required
 	private List <Phone>phones;
@@ -82,18 +78,6 @@ public class ICGMember extends Human{
 	}
 	public void setEvents(List<Event> events) {
 		this.events = events;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	public List<Organization> getOrganizations() {
 		return organizations;

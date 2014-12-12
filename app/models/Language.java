@@ -1,10 +1,14 @@
 package models;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
 import play.data.validation.Constraints.Required;
+
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Language {
 
 	@Id

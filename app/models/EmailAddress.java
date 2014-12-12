@@ -14,6 +14,7 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
 
+@Entity
 public class EmailAddress {
 	
 	 @Required

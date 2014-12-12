@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Connection {
+public class Connectiontype {
 	
 	@Id
 	@Required
