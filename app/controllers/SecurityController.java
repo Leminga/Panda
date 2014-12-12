@@ -84,7 +84,7 @@ public class SecurityController extends Controller {
             ObjectNode authTokenJson = Json.newObject();
             authTokenJson.put(AUTH_TOKEN, authToken);
             response().setCookie(AUTH_TOKEN, authToken);
-            Logger.debug("Autherzided login attempt. User " + user.fullName + " logged in successfully.");
+            Logger.debug("Authorized login attempt. User " + user.fullName + " logged in successfully.");
             return Results.ok(authTokenJson);
         }
     }
