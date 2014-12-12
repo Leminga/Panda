@@ -48,6 +48,9 @@ public class UserLogin {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastLogin;
 	private String authToken;
+	@Constraints.Required
+	@Constraints.MaxLength(32)
+	private String MD5password;
 	
 	public String getUsername() {
 		return username;
@@ -73,7 +76,24 @@ public class UserLogin {
 	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
 	}
-	
+	public String getAuthToken() {
+		return authToken;
+	}
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
+	}
+	public String getMD5password() {
+		return MD5password;
+	}
+	public void setMD5password(String mD5password) {
+		MD5password = mD5password;
+	}
+	public static Finder<Long, UserLogin> getFind() {
+		return find;
+	}
+	public static void setFind(Finder<Long, UserLogin> find) {
+		UserLogin.find = find;
+	}
 	public UserLogin(String username, String password) {
 		super();
 		this.username = username;
@@ -96,7 +116,8 @@ public class UserLogin {
 	}
 	public static UserLogin findByName(String username) {
 		// Check if any username is provided at all.
-	    if (username == null) {
+	    if (username == null) 
+	    {
 	        return null;
 	    }
 	
@@ -107,22 +128,24 @@ public class UserLogin {
 	        return null;
 	    }
 	}
-	/*public static UserLogin findByPassword(String password) {
+	public  UserLogin findByPassword(String password) {
 	    // todo: verify this query is correct.  Does it need an "and" statement?
-	    return find.where().eq(("MD5password", getMD5(password)).findUnique();
+	    return find.where().eq(("MD5password"), getMD5password()).findUnique();
 	}
-	*/
 	
-	/*public String createToken() {
-        this.authToken = UUID.randomUUID().toString();
-        Ebean.save(); // Update the user entry in the database.
-    }
-    */
-	/*public boolean registerUser(String name, String password)
+    public boolean registerUser(String username, String password) throws UserAlreadyExistsException
 	{
-		if
+		if (findByName(username) == null)
+		{
+			UserLogin user = new UserLogin(username, password);
+			Ebean.save(user);
+			return true;
+		}
+		else 
+		{
+			throw new UserAlreadyExistsException();
+		}
 	}
 	
-	*/
 	
 }
