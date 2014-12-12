@@ -39,7 +39,6 @@ angular.module('Panda')
                     $location.path('/overview')
                 }, function (response) {  // error function
                     $window.alert("Wrong credentials");
-                    console.log("Test");
                 });
         };
     }]);
@@ -163,7 +162,6 @@ angular.module('Panda')
 angular.module('Panda')
     .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService', function (RegisterService, GetRegisterService) {
         var self = this;
-
         self.receivedRegistrationData = {};
 
 
@@ -179,7 +177,6 @@ angular.module('Panda')
 
         };
     }]);
-
 angular.module('Panda')
     .factory('RegisterService', ['$http', function ($http) {
         return {

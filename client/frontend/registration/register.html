@@ -1,21 +1,19 @@
 <h1>REGISTRATIONFORM</h1>
 <div>
     <div>
-        <form ng-submit="registerCtrl.register()">
-            Prename:<br>
-            <input type="text"  pattern="[a-zA-Z ]+" name="prename" ng-model="registerCtrl.user.prename" required="">
-            <br>
-            Surname:<br>
+        <form name="form" ng-submit="registerCtrl.register()">
+            <div>Prename:</div>
+            <input type="text" pattern="[a-zA-Z ]+" name="prename" ng-model="registerCtrl.user.prename" required="">
+
+            <div>Surname:</div>
             <input type="text" pattern="[a-zA-Z ]+" name="surname" ng-model="registerCtrl.user.surname" required="">
-            <br>
-            E-Mail:
-            <br>
+
+            <div>E-Mail:</div>
             <input type="email" name="email" ng-model="registerCtrl.user.email" required="">
-            <br>
-            Password:
-            <br>
-            <input type="password" name="password" ng-model="registerCtrl.user.password" required="">
-            <br><br>
+
+            <div>Password:</div>
+            <input type="password" id="password" pattern=".{6,}" name="password" ng-model="registerCtrl.user.password"
+                   title="6 characters minimum" required="">
             <button type="submit">Register</button>
         </form>
     </div>

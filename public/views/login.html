@@ -1,12 +1,11 @@
 <div>
     <h1>LOGIN</h1>
-
     <form ng-submit="loginCtrl.sendLogin()" method="post">
         Name:<br>
         <input type="text" name="name" ng-model="loginCtrl.user.email" required=""/>
         <br>
         Password:<br>
-        <input type="text" name="password" ng-model="loginCtrl.user.password" required="">
+        <input type="password" name="password" ng-model="loginCtrl.user.password" required="">
         <br><br>
         <button type="submit">Login</button>
     </form>
