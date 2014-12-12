@@ -1,8 +1,9 @@
 package models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 import play.data.validation.Constraints.Required;
 
@@ -16,6 +17,7 @@ public class Nationality {
 	/** The unique country code. */
 	@Id
 	@Required
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy="nationality")
 	private int countryId;
 	@Required
 	private String iso2;
