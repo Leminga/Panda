@@ -160,13 +160,20 @@ angular.module('Panda')
         };
     }]);
 angular.module('Panda')
-    .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService', function (RegisterService, GetRegisterService) {
+    .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService','$window','$location', function (RegisterService, GetRegisterService) {
         var self = this;
         self.receivedRegistrationData = {};
 
 
         self.register = function () {
-            RegisterService.register(self.user);
+            self.user.password = md5(self.user.password);
+            RegisterService.register(self.user).then(function(response){
+                    $location.path("/");
+                    $window.alert(response.ok);
+            },function(response){
+                    $window.alert(response.ok);
+                }
+            );
         };
 
 
