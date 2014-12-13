@@ -6,11 +6,11 @@ import java.util.Map;
 
 import javax.persistence.Id;
 
-import models.EventDataVolunteer;
+import models.humans.EventDataVolunteer;
 
 import org.apache.commons.mail.EmailException;
 import mailer.mail;
-import models.Volunteer;
+import models.humans.Volunteer;
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.databind.JsonNode;
 import play.libs.Json;
