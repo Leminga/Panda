@@ -1,15 +1,13 @@
 package models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import play.data.validation.Constraints.Required;
-
-import play.db.ebean.Model;
-import play.libs.Json;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import play.data.validation.Constraints.Required;
 
 @Entity
 public class Degree {
@@ -17,6 +15,7 @@ public class Degree {
 	@Id
 	@Required
 	@GeneratedValue
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy="degree")
 	private Long id;
 	@ManyToOne
 	private long degreeTId;
