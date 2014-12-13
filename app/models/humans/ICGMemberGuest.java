@@ -1,4 +1,4 @@
-package models;
+package models.humans;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +14,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import models.AdditionalPacket;
+import models.Address;
+import models.Arrival;
+import models.Attachments;
+import models.Departure;
+import models.EmailAddress;
+import models.Event;
+import models.Identification;
+import models.Languages;
+import models.Organization;
+import models.Phone;
+import models.Role;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -22,21 +34,23 @@ import play.data.validation.Constraints.Required;
 import java.util.Date;
 
 @Entity
-public class HeadOfDelegation extends Human{
+public class ICGMemberGuest extends Human{
 	
 	
-	@Required
-	private List <Phone>phones;
 	@Required
 	private List <Address>addresses;
 	@Required
+	private List <Phone>phones;
+	@Required
 	private List <Identification>identifications;
 	@Required
-	private List <Languages> languages;
+	private List<Languages> languages;
 	@Required
 	private List <Event>events;
 	@Required
 	private List <Organization>organizations;
+	@Required
+	private List <AdditionalPacket>additionalpackets;
 	@Required
 	private EmailAddress emailAddress;
 	@Required
@@ -49,17 +63,17 @@ public class HeadOfDelegation extends Human{
 	private Role role;
 	
 	
-	public List<Phone> getPhones() {
-		return phones;
-	}
-	public void setPhones(List<Phone> phones) {
-		this.phones = phones;
-	}
 	public List<Address> getAddresses() {
 		return addresses;
 	}
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
+	}
+	public List<Phone> getPhones() {
+		return phones;
+	}
+	public void setPhones(List<Phone> phones) {
+		this.phones = phones;
 	}
 	public List<Identification> getIdentifications() {
 		return identifications;
@@ -84,6 +98,12 @@ public class HeadOfDelegation extends Human{
 	}
 	public void setOrganizations(List<Organization> organizations) {
 		this.organizations = organizations;
+	}
+	public List<AdditionalPacket> getAdditionalpackets() {
+		return additionalpackets;
+	}
+	public void setAdditionalpackets(List<AdditionalPacket> additionalpackets) {
+		this.additionalpackets = additionalpackets;
 	}
 	public EmailAddress getEmailAddress() {
 		return emailAddress;
@@ -115,9 +135,6 @@ public class HeadOfDelegation extends Human{
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	
-	
 	
 	
 

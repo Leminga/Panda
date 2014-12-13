@@ -1,4 +1,4 @@
-package models;
+package models.humans;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +14,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import models.Address;
+import models.Arrival;
+import models.Attachments;
+import models.Departure;
+import models.EmailAddress;
+import models.Event;
+import models.Identification;
+import models.Languages;
+import models.Organization;
+import models.Phone;
+import models.Role;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -21,20 +32,18 @@ import play.data.validation.Constraints.Required;
 
 import java.util.Date;
 
-// TODO: Why don't derive from CityRepresentative?
-
 @Entity
-public class CityRepresentativeGuest extends Human{
+public class HeadOfDelegation extends Human{
 	
 	
-	@Required
-	private List <Address>addresses;
 	@Required
 	private List <Phone>phones;
 	@Required
+	private List <Address>addresses;
+	@Required
 	private List <Identification>identifications;
 	@Required
-	private List<Languages> languages;
+	private List <Languages> languages;
 	@Required
 	private List <Event>events;
 	@Required
@@ -48,22 +57,20 @@ public class CityRepresentativeGuest extends Human{
 	@Required
 	private List <Departure>departures;
 	@Required
-	private List <AdditionalPacket>additionalPacket;
-	@Required
 	private Role role;
 	
 	
-	public List<Address> getAddresses() {
-		return addresses;
-	}
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
 	public List<Phone> getPhones() {
 		return phones;
 	}
 	public void setPhones(List<Phone> phones) {
 		this.phones = phones;
+	}
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 	public List<Identification> getIdentifications() {
 		return identifications;
@@ -113,18 +120,15 @@ public class CityRepresentativeGuest extends Human{
 	public void setDepartures(List<Departure> departures) {
 		this.departures = departures;
 	}
-	public List<AdditionalPacket> getAdditionalPacket() {
-		return additionalPacket;
-	}
-	public void setAdditionalPacket(List<AdditionalPacket> additionalPacket) {
-		this.additionalPacket = additionalPacket;
-	}
 	public Role getRole() {
 		return role;
 	}
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
+	
+	
 	
 	
 

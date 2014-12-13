@@ -1,4 +1,4 @@
-package models;
+package models.humans;
 
 import play.db.ebean.Model.Finder;
 

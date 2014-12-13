@@ -1,4 +1,4 @@
-package models;
+package models.humans;
 
 import play.db.ebean.Model.Finder;
 
@@ -10,6 +10,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import models.ActualJob;
+import models.Address;
+import models.Attachments;
+import models.Contact;
+import models.Educationlevel;
+import models.EmailAddress;
+import models.EmergencyContact;
+import models.Identification;
+import models.Interview;
+import models.ItKnowledge;
+import models.Languages;
+import models.Phone;
+import models.PreferredCommunicationLanguage;
+import models.Role;
+import models.Sizes;
+import models.Sport;
+import models.Training;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;

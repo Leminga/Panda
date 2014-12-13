@@ -1,13 +1,17 @@
-package models;
+package models.humans;
 
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
+import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.MappedSuperclass;
 
+import models.Degree;
+import models.Nationality;
+import models.Sex;
 import play.data.validation.Constraints.Required;
 
 /**
@@ -17,7 +21,7 @@ import play.data.validation.Constraints.Required;
  * 
  * @author Michael Bredel <michael.bredel@fh-kufstein.ac.at>
  */
-@Entity
+@MappedSuperclass
 public abstract class Human {
 	/** The database id. */
 	@Id
@@ -38,10 +42,10 @@ public abstract class Human {
 	public Date dateOfBirth;
 	/** The (multiple) nationalities of the person. */
 	@Required
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List <Nationality>nationality;
 	/** The (multiple) degrees of the person. */
-	@OneToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List <Degree>degree;
 	
 	/**

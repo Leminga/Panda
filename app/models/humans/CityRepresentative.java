@@ -1,4 +1,4 @@
-package models;
+package models.humans;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +14,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import models.Address;
+import models.Arrival;
+import models.Attachments;
+import models.Departure;
+import models.EmailAddress;
+import models.Event;
+import models.Identification;
+import models.Languages;
+import models.Organization;
+import models.Phone;
+import models.Role;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -21,10 +32,8 @@ import play.data.validation.Constraints.Required;
 
 import java.util.Date;
 
-// TODO: This is exactly the same as CityRepresentativeGuest!
-
 @Entity
-public class CityGuest extends Human{
+public class CityRepresentative extends Human {
 	
 	
 	@Required
@@ -40,17 +49,13 @@ public class CityGuest extends Human{
 	@Required
 	private List <Organization>organizations;
 	@Required
-	private List <AdditionalPacket>additionalPackets;
-	@Required
 	private EmailAddress emailAddress;
 	@Required
 	private List <Attachments>attachments;
 	@Required
 	private List <Arrival>arrivals;
 	@Required
-	private List <Departure>departures;
-	@Required
-	private List <AdditionalPacket>additionalpackets;
+	private List<Departure>departures;
 	@Required
 	private Role role;
 	
@@ -91,12 +96,6 @@ public class CityGuest extends Human{
 	public void setOrganizations(List<Organization> organizations) {
 		this.organizations = organizations;
 	}
-	public List<AdditionalPacket> getAdditionalPackets() {
-		return additionalPackets;
-	}
-	public void setAdditionalPackets(List<AdditionalPacket> additionalPackets) {
-		this.additionalPackets = additionalPackets;
-	}
 	public EmailAddress getEmailAddress() {
 		return emailAddress;
 	}
@@ -121,18 +120,14 @@ public class CityGuest extends Human{
 	public void setDepartures(List<Departure> departures) {
 		this.departures = departures;
 	}
-	public List<AdditionalPacket> getAdditionalpackets() {
-		return additionalpackets;
-	}
-	public void setAdditionalpackets(List<AdditionalPacket> additionalpackets) {
-		this.additionalpackets = additionalpackets;
-	}
 	public Role getRole() {
 		return role;
 	}
 	public void setRole(Role role) {
 		this.role = role;
 	}
+	
+	
 	
 	
 

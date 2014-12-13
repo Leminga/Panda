@@ -1,4 +1,4 @@
-package models;
+package models.humans;
 
 import java.util.Date;
 import java.util.List;
@@ -9,6 +9,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import models.Address;
+import models.Availability;
+import models.Contact;
+import models.Educationlevel;
+import models.EmailAddress;
+import models.EmergencyContact;
+import models.Event;
+import models.Identification;
+import models.Interview;
+import models.ItKnowledge;
+import models.Languages;
+import models.Organization;
+import models.Phone;
+import models.PreferredCommunicationLanguage;
+import models.Sizes;
 import net.sf.ehcache.util.PreferTCCLObjectInputStream;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;

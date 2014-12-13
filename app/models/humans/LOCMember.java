@@ -1,4 +1,4 @@
-package models;
+package models.humans;
 
 import play.db.ebean.Model.Finder;
 
@@ -11,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import models.Attachments;
+import models.Identification;
+import models.Role;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;

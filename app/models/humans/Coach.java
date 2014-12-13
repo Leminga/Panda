@@ -1,4 +1,4 @@
-package models;
+package models.humans;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +14,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import models.Address;
+import models.Arrival;
+import models.Attachments;
+import models.Departure;
+import models.EmailAddress;
+import models.Event;
+import models.Identification;
+import models.Languages;
+import models.Organization;
+import models.Phone;
+import models.Role;
+import models.Sport;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -22,25 +34,29 @@ import play.data.validation.Constraints.Required;
 import java.util.Date;
 
 @Entity
-public class Athlete extends Human {
+public class Coach extends Human {
 	
 	
 	@Required
 	private List <Address>addresses;
 	@Required
+	private List <Phone>phones;
+	@Required
 	private List <Identification>identifications;
 	@Required
-	private List <Languages>languages;
+	private List<Languages> languages;
+	@Required
+	private List <Event>events;
+	@Required
+	private List <Organization>organizations;
+	@Required
+	private EmailAddress emailAddress;
 	@Required
 	private List <Attachments>attachments;
 	@Required
 	private List <Arrival>arrivals;
 	@Required
 	private List <Departure>departures;
-	@Required
-	private List <Event>events;
-	@Required
-	private List <Organization>organizations;
 	@Required
 	private Role role;
 	@Required
@@ -52,6 +68,12 @@ public class Athlete extends Human {
 	}
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
+	}
+	public List<Phone> getPhones() {
+		return phones;
+	}
+	public void setPhones(List<Phone> phones) {
+		this.phones = phones;
 	}
 	public List<Identification> getIdentifications() {
 		return identifications;
@@ -71,6 +93,18 @@ public class Athlete extends Human {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
+	public List<Organization> getOrganizations() {
+		return organizations;
+	}
+	public void setOrganizations(List<Organization> organizations) {
+		this.organizations = organizations;
+	}
+	public EmailAddress getEmailAddress() {
+		return emailAddress;
+	}
+	public void setEmailAddress(EmailAddress emailAddress) {
+		this.emailAddress = emailAddress;
+	}
 	public List<Attachments> getAttachments() {
 		return attachments;
 	}
@@ -89,12 +123,6 @@ public class Athlete extends Human {
 	public void setDepartures(List<Departure> departures) {
 		this.departures = departures;
 	}
-	public List<Organization> getOrganizations() {
-		return organizations;
-	}
-	public void setOrganizations(List<Organization> organizations) {
-		this.organizations = organizations;
-	}
 	public Role getRole() {
 		return role;
 	}
@@ -107,7 +135,6 @@ public class Athlete extends Human {
 	public void setSport(Sport sport) {
 		this.sport = sport;
 	}
-	
 	
 	
 	

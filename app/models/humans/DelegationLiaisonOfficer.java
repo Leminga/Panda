@@ -1,4 +1,4 @@
-package models;
+package models.humans;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,6 +14,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import models.Address;
+import models.EmailAddress;
+import models.Event;
+import models.Organization;
+import models.Phone;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
@@ -21,7 +26,7 @@ import play.data.validation.Constraints.Required;
 
 import java.util.Date;
 
-@Entity
+//@Entity
 public class DelegationLiaisonOfficer extends Human {
 	
 	@Required

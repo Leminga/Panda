@@ -1,4 +1,6 @@
-package models;
+package models.humans;
+
+import helper.GroupType;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,27 +24,28 @@ import play.data.validation.Constraints.Required;
 import java.util.Date;
 
 @Entity
-public class ContractorLiaisonOfficer extends Human{
+public class LoginReceiver extends Human {
 	
 	@Required
-	private List <Event>events;
+	private String email;
 	@Required
-	private List <Organization>organizations;
-	
-	
-	public List<Event> getEvents() {
-		return events;
+	private GroupType GroupT;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setEvents(List<Event> events) {
-		this.events = events;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public List<Organization> getOrganizations() {
-		return organizations;
+
+	public GroupType getGroupT() {
+		return GroupT;
 	}
-	public void setOrganizations(List<Organization> organizations) {
-		this.organizations = organizations;
+
+	public void setGroupT(GroupType groupT) {
+		GroupT = groupT;
 	}
-	
 	
 	
 
