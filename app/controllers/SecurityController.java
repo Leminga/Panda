@@ -106,7 +106,7 @@ public class SecurityController extends Controller {
      * 
      * @return <b>Result</b> A resulting JSON object containing the authentication token or null.
      */
-    public static Result registerNewUser() {
+    public static Result register() {
     	// The login form.
     	Form<Register> registerForm = Form.form(Register.class).bindFromRequest();
     	
