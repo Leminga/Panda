@@ -7,6 +7,7 @@
 #GET	/							controllers.Application.index()
 #GET	/LoginData					controllers.UserLogin.load()
 POST	/login						controllers.SecurityController.login()
+POST	/register					controllers.SecurityController.register()
 
 
 
