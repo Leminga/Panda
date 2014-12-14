@@ -1,5 +1,6 @@
 package models;
 
+import play.Logger;
 import play.db.ebean.Model.Finder;
 
 import java.util.Date;
@@ -21,9 +22,6 @@ import play.data.validation.Constraints;
 import play.db.ebean.Model;
 import play.libs.Json;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
 import models.exceptions.UserAlreadyExistsException;
 
 import com.avaje.ebean.Ebean;
@@ -41,9 +39,8 @@ public class UserLogin {
     @JsonIgnore
 	private String password;
 	@Constraints.Required
+	private Date creationTime;
 	private Date firstLogin;
-	@Constraints.Required
-	@Basic(optional = false)
 	@Column(name = "LastLogin")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastLogin;
@@ -51,6 +48,19 @@ public class UserLogin {
 	@Constraints.Required
 	@Constraints.MaxLength(32)
 	private String MD5password;
+	
+	/**
+	 * The default constructor.
+	 * 
+	 * @param username The user name.
+	 * @param password The md5 password.
+	 */
+	public UserLogin(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.creationTime = new Date();
+	}
 	
 	public String getUsername() {
 		return username;
@@ -94,11 +104,6 @@ public class UserLogin {
 	public static void setFind(Finder<Long, UserLogin> find) {
 		UserLogin.find = find;
 	}
-	public UserLogin(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
 
 	public static Finder<Long, UserLogin> find = new Finder<Long, UserLogin>(Long.class, UserLogin.class);
 	
@@ -116,12 +121,12 @@ public class UserLogin {
 	}
 	public static UserLogin findByName(String username) {
 		// Check if any username is provided at all.
-	    if (username == null) 
-	    {
+	    if (username == null) {
 	        return null;
 	    }
 	
 	    // Search the database for the user.
+	    Logger.info("FIND USER");
 	    try  {
 	        return find.where().eq("username", username).findUnique();
 	    } catch (Exception e) {
@@ -133,16 +138,13 @@ public class UserLogin {
 	    return find.where().eq(("MD5password"), getMD5password()).findUnique();
 	}
 	
-    public boolean registerUser(String username, String password) throws UserAlreadyExistsException
-	{
-		if (findByName(username) == null)
-		{
+    public static boolean registerUser(String username, String password) throws UserAlreadyExistsException {
+		if (findByName(username) == null) {
 			UserLogin user = new UserLogin(username, password);
 			Ebean.save(user);
+			Logger.info("User "+ username + " stored in database.");
 			return true;
-		}
-		else 
-		{
+		} else  {
 			throw new UserAlreadyExistsException();
 		}
 	}
