@@ -3,7 +3,6 @@ angular.module('Panda')
 .factory('InterceptorService', ['$q','$window','$location', function($q,$window,$location) {
     return {
         request: function(config) {
-
             console.log('Request made with ', config);
             // At every request, the Token is being added to the Header for authentication purposes
             config.headers['X-AUTH-TOKEN'] = $window.sessionStorage.getItem("token");

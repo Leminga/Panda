@@ -3,6 +3,57 @@
 angular.module('Panda',['ngRoute']);
 
 
+angular.module('Panda')
+    .controller('CoreDataFormCtrl', ['CoreDataService', function (CoreDataService) {
+            var self = this;
+
+        self.savePersonalData = function(){
+            CoreDataService.savePersonalData(self.user.personalData)
+        };
+        self.saveEmergencyContacts = function(){
+            CoreDataService.saveEmergencyContacts(self.user.emergencyContacts)
+        };
+
+        self.saveContactData = function(){
+            CoreDataService.saveContactData(self.user.contactData)
+        };
+
+        self.saveSizes = function(){
+            CoreDataService.saveSizes(self.user.sizes)
+        };
+
+        self.saveAll = function(){
+            CoreDataService.saveAll(self.user)
+        };
+
+    }]);
+
+angular.module('Panda')
+    .factory('CoreDataService', ['$http', function ($http) {
+        return {
+            savePersonalData: function (personalData) {
+                return $http.post("/personalData", personalData)
+            },
+
+            saveContactData: function (contactData) {
+                return $http.post("/contactData", contactData);
+            },
+
+            saveEmergencyContacts: function (emergencyContacts) {
+                return $http.post("/emergencyData", emergencyContacts);
+            },
+
+            saveSizes: function (sizes) {
+                return $http.post("/sizes", sizes);
+            },
+
+            saveAll:function(user){
+                return $http.post("/all",user);
+            }
+        };
+
+    }])
+;
 // This controller is used for the forgotten Password webpage. It handles the request to the controller, which checks
 // whether the user exists or not and then handles the password reset.
 angular.module('Panda')
@@ -58,7 +109,6 @@ angular.module('Panda')
 .factory('InterceptorService', ['$q','$window','$location', function($q,$window,$location) {
     return {
         request: function(config) {
-
             console.log('Request made with ', config);
             // At every request, the Token is being added to the Header for authentication purposes
             config.headers['X-AUTH-TOKEN'] = $window.sessionStorage.getItem("token");
@@ -103,7 +153,7 @@ angular.module('Panda')
 // The RouteProvider module, adds hash-bangs (=anchors) to the webpage. This allows fast and convenient routing, without
 // constant reloading of the webpage.
 angular.module('Panda')
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
         $routeProvider
             // This is the root route, which connects to the login.html
             .when('/', {
@@ -122,14 +172,40 @@ angular.module('Panda')
                 templateUrl: 'assets/views/overview.html',
                 controller: 'OverviewFormCtrl as overviewCtrl'
             })
+            .when('/coreData', {
+                templateUrl: 'assets/views/coreData.html',
+                controller: 'CoreDataFormCtrl as coreDataCtrl'
+            })
 
             // If none of the above routes fit to the link that has been inserted, the user is being automatically
             // rerouted to the login.html (route with '/')
             .otherwise({
                 redirectTo: '/'
-            })
+            });
     }]);
 
+// This module is needed for form validation. It checks whether 2 fields are exactly the same or not.
+
+var compareTo = function () {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=compareTo"
+        },
+        link: function (scope, element, attributes, ngModel) {
+
+            ngModel.$validators.compareTo = function (modelValue) {
+                return modelValue == scope.otherModelValue;
+            };
+
+            scope.$watch("otherModelValue", function () {
+                ngModel.$validate();
+            });
+        }
+    };
+};
+
+angular.module('Panda').directive("compareTo", compareTo);
 // This controller handles the overview form, which is used for viewing user-related data on a single page.
 angular.module('Panda')
     .controller('OverviewFormCtrl', ['$window', '$location', function ($window, $location) {
@@ -145,7 +221,7 @@ angular.module('Panda')
         self.logout = function(config){
             sessionStorage.clear();
             localStorage.clear();
-            $location.path("/")
+            $location.path("/");
         }
 
     }]);
@@ -160,18 +236,16 @@ angular.module('Panda')
         };
     }]);
 angular.module('Panda')
-    .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService','$window','$location', function (RegisterService, GetRegisterService) {
+    .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService','$window','$location', function (RegisterService, GetRegistrationService, $window) {
         var self = this;
         self.receivedRegistrationData = {};
 
 
         self.register = function () {
-            self.user.password = md5(self.user.password);
             RegisterService.register(self.user).then(function(response){
-                    $location.path("/");
-                    $window.alert(response.ok);
+                    $window.alert(response.data);
             },function(response){
-                    $window.alert(response.ok);
+                    $window.alert(response.data);
                 }
             );
         };
@@ -188,7 +262,7 @@ angular.module('Panda')
     .factory('RegisterService', ['$http', function ($http) {
         return {
             register:function(user){
-                $http.post("/register",user);
+                return $http.post("/register",user);
             }
         };
     }]);

@@ -13,7 +13,7 @@ angular.module('Panda')
         self.logout = function(config){
             sessionStorage.clear();
             localStorage.clear();
-            $location.path("/")
+            $location.path("/");
         }
 
     }]);

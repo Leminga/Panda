@@ -1,14 +1,4 @@
 <h1>REGISTRATIONFORM</h1>
-<script language='javascript' type='text/javascript'>
-    function password_confirmation(input) {
-        if (input.value != document.getElementById('password').value) {
-            input.setCustomValidity('The two passwords must match.');
-        } else {
-            // input is valid -- reset the error message
-            input.setCustomValidity('');
-        }
-    }
-</script>
 <div>
     <div>
         <form name="form" ng-submit="registerCtrl.register()">
@@ -22,15 +12,16 @@
             <input type="email" name="email" ng-model="registerCtrl.user.email" required="">
 
             <div>Password:</div>
-            <input type="password" id="password" pattern=".{6,}" name="password" ng-model="registerCtrl.user.password"title="6 characters minimum" required="">
+            <input type="password" id="password" pattern=".{6,}" name="password" ng-model="registerCtrl.user.password" title="6 characters minimum" required="">
 
             <div>Repeat Password:</div>
-            <input type="password" oninput="password_confirmation(this)" id="password_repeat" name="password" required="">
+            <input type="password" ng-model="registerCtrl.user.password_repeat" compare-to="registerCtrl.user.password" id="password_repeat" name="password_repeat" required="">
+            <div ng-show='form.password_repeat.$invalid && !form.password_repeat.$pristine'> The repeated password does not match. </div>
 
-            <div><input type="checkbox" required=""> I have read the <a target="" href="narroForm" download="NARRO_Form.pdf">NARROW</a> form</div>
+            <div><input type="checkbox" ng-model="checked" required=""> I have read the <a target="" href="narroForm" download="NARRO_Form.pdf">NARRO</a> form</div>
             <div></div>
-                <button type="submit">Register</button>
-
+                <button type="submit" ng-disabled="form.$invalid">Register</button>
         </form>
+
     </div>
 </div>

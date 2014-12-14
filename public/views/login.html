@@ -1,13 +1,13 @@
 <div>
     <h1>LOGIN</h1>
-    <form ng-submit="loginCtrl.sendLogin()" method="post">
-        Name:<br>
+    <form name="form" ng-submit="loginCtrl.sendLogin()" method="post">
+        E-Mail:<br>
         <input type="text" name="name" ng-model="loginCtrl.user.email" required=""/>
         <br>
         Password:<br>
         <input type="password" name="password" ng-model="loginCtrl.user.password" required="">
         <br><br>
-        <button type="submit">Login</button>
+        <button ng-disabled="form.$invalid" type="submit">Login</button>
     </form>
 </div>
 <div>Click <a href="#/forgottenPassword">here</a> if you have forgotten your credentials.</div>
