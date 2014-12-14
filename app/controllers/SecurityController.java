@@ -1,6 +1,8 @@
 package controllers;
 
 import models.User;
+import models.UserLogin;
+import models.exceptions.UserAlreadyExistsException;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -77,6 +79,18 @@ public class SecurityController extends Controller {
         User user = User.findByEmailAddressAndPassword(login.email, login.password);
         
         if (user == null) {
+        	// BEGIN TESTING
+        	// This code snippet just creates a user in the database
+        	// It is used for testing, since the registration form
+        	// does not work yet.
+        	Logger.debug("START TESTING");
+        	try {
+				UserLogin.registerUser(login.email, login.password);
+			} catch (UserAlreadyExistsException e) {
+				// TODO Auto-generated catch block
+				Logger.info("The user " + login.email + " already exists");
+			}
+        	// END TESTING
         	Logger.debug("Unauthorized login attempt.");
             return Results.unauthorized();
         } else {
