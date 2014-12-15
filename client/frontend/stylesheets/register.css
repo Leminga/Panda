@@ -1,0 +1,20 @@
+body{
+    background-image: url("1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.register {
+    padding: 100px;
+    box-shadow: 0 0 20px 0 #000000;
+    width: 500px;
+    height:320px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: white;
+    border: 7px solid $green-border;
+    border-radius: 10px;
+    margin-top: 100px;
+    margin-left: 25%;
+    background-image: url("reg.jpg");
+    background-repeat: no-repeat;
+}

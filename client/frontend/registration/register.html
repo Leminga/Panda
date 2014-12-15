@@ -1,7 +1,14 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="register.css"  />
+</head>
+<body>
+<div class="register">
+
 <h1>REGISTRATIONFORM</h1>
 <div>
     <div>
-        <form name="form" ng-submit="registerCtrl.register()">
+        <form id="reg-form" name="form" ng-submit="registerCtrl.register()">
             <div>Prename:</div>
             <input type="text" pattern="[a-zA-Z ]+" name="prename" ng-model="registerCtrl.user.prename" required="">
 
@@ -25,3 +32,6 @@
 
     </div>
 </div>
+</div>
+</body>
+</html>
