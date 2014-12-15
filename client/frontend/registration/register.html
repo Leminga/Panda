@@ -1,5 +1,3 @@
-<div class="register">
-
 <h1>REGISTRATIONFORM</h1>
 <div>
     <div>
@@ -14,7 +12,7 @@
             <input type="email" name="email" ng-model="registerCtrl.user.email" required="">
 
             <div>Password:</div>
-            <input type="password" id="password" pattern=".{6,}" name="password" ng-model="registerCtrl.user.password" title="6 characters minimum" required="">
+            <input type="password" ng-required="true" id="password" pattern=".{6,}" name="password" ng-model="registerCtrl.user.password" title="6 characters minimum" required="">
 
             <div>Repeat Password:</div>
             <input type="password" ng-model="registerCtrl.user.password_repeat" compare-to="registerCtrl.user.password" id="password_repeat" name="password_repeat" required="">
@@ -26,5 +24,4 @@
         </form>
 
     </div>
-</div>
 </div>
