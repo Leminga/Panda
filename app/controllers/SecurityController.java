@@ -1,12 +1,14 @@
 package controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import models.User;
 import models.UserLogin;
 import models.exceptions.UserAlreadyExistsException;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import play.Logger;
 import play.libs.Json;
 import play.mvc.*;
 import play.data.Form;
@@ -27,9 +29,11 @@ import play.data.validation.Constraints;
  */
 public class SecurityController extends Controller {
 	/** The authentication token header for the Play framework. */
-	public final static String AUTH_TOKEN_HEADER = "X-AUTH-TOKEN";
+	protected final static String AUTH_TOKEN_HEADER = "X-AUTH-TOKEN";
 	/** The authentication token for the Play framework. */
-    public static final String AUTH_TOKEN = "authToken";
+    protected static final String AUTH_TOKEN = "authToken";
+    /** Logger to log SecurityController events. */
+	protected static Logger LOGGER = LoggerFactory.getLogger(SecurityController.class);
 
     /** 
      * This should somehow present the login screen.
@@ -83,22 +87,22 @@ public class SecurityController extends Controller {
         	// This code snippet just creates a user in the database
         	// It is used for testing, since the registration form
         	// does not work yet.
-        	Logger.debug("START TESTING");
+        	LOGGER.debug("START TESTING");
         	try {
 				UserLogin.registerUser(login.email, login.password);
 			} catch (UserAlreadyExistsException e) {
 				// TODO Auto-generated catch block
-				Logger.info("The user " + login.email + " already exists");
+				LOGGER.info("The user " + login.email + " already exists");
 			}
         	// END TESTING
-        	Logger.debug("Unauthorized login attempt.");
+        	LOGGER.debug("Unauthorized login attempt.");
             return Results.unauthorized();
         } else {
             String authToken = user.createToken();
             ObjectNode authTokenJson = Json.newObject();
             authTokenJson.put(AUTH_TOKEN, authToken);
             response().setCookie(AUTH_TOKEN, authToken);
-            Logger.debug("Authorized login attempt. User " + user.fullName + " logged in successfully.");
+            LOGGER.debug("Authorized login attempt. User " + user.fullName + " logged in successfully.");
             return Results.ok(authTokenJson);
         }
     }
@@ -137,7 +141,7 @@ public class SecurityController extends Controller {
         User user = User.findUserByEmailAddress(register.email);
         
         if (user == null) {
-        	Logger.info("New user to register. " + register.email);
+        	LOGGER.info("New user to register. " + register.email);
         	user = new User(register.email, register.password, register.name + " " + register.surname);
         	String authToken = user.createToken();
             ObjectNode authTokenJson = Json.newObject();
@@ -145,7 +149,7 @@ public class SecurityController extends Controller {
             response().setCookie(AUTH_TOKEN, authToken);
             return Results.ok("user registration ok");
         } else {
-        	Logger.info("User already exists in database.");
+        	LOGGER.info("User already exists in database.");
         	return Results.ok("user exist alread");
         }
     }
