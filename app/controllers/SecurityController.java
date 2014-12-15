@@ -3,9 +3,7 @@ package controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import models.User;
 import models.UserLogin;
-import models.exceptions.UserAlreadyExistsException;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -53,8 +51,8 @@ public class SecurityController extends Controller {
      * 
      * @return <b>User</b> The user that was identified based in...?
      */
-    public static User getUser() {
-        return (User) Http.Context.current().args.get("user");
+    public static UserLogin getUser() {
+        return (UserLogin) Http.Context.current().args.get("user");
     }
     
     /**
@@ -68,41 +66,33 @@ public class SecurityController extends Controller {
      */
     public static Result login() {
     	// The login form.
-    	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
+    	Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
 
     	// Check the form itself for errors.
-        if (loginForm.hasErrors()) {
-            return Results.badRequest(loginForm.errorsAsJson());
+        if (form.hasErrors()) {
+            return Results.badRequest(form.errorsAsJson());
         }
         
         // Get the login information from the login form.
-        Login login = loginForm.get();
+        LoginForm loginForm = form.get();
         
         // Find the user in the database. Return null if the
         // user was not found or could not be verified.
-        User user = User.findByEmailAddressAndPassword(login.email, login.password);
+        UserLogin user = UserLogin.findByNameAndPassword(loginForm.email, loginForm.password);
         
         if (user == null) {
-        	// BEGIN TESTING
-        	// This code snippet just creates a user in the database
-        	// It is used for testing, since the registration form
-        	// does not work yet.
-        	LOGGER.debug("START TESTING");
-        	try {
-				UserLogin.registerUser(login.email, login.password);
-			} catch (UserAlreadyExistsException e) {
-				// TODO Auto-generated catch block
-				LOGGER.info("The user " + login.email + " already exists");
-			}
-        	// END TESTING
-        	LOGGER.debug("Unauthorized login attempt.");
+        	if (LOGGER.isInfoEnabled()) {
+        		LOGGER.info("Unauthorized login attempt for user " + loginForm.email);
+        	}
             return Results.unauthorized();
         } else {
             String authToken = user.createToken();
             ObjectNode authTokenJson = Json.newObject();
             authTokenJson.put(AUTH_TOKEN, authToken);
             response().setCookie(AUTH_TOKEN, authToken);
-            LOGGER.debug("Authorized login attempt. User " + user.fullName + " logged in successfully.");
+            if (LOGGER.isDebugEnabled()) {
+            	LOGGER.debug("Authorized login attempt. User " + user.getUsername() + " logged in successfully.");
+            }
             return Results.ok(authTokenJson);
         }
     }
@@ -125,24 +115,24 @@ public class SecurityController extends Controller {
      * @return <b>Result</b> A resulting JSON object containing the authentication token or null.
      */
     public static Result register() {
-    	// The login form.
-    	Form<Register> registerForm = Form.form(Register.class).bindFromRequest();
+    	// The register form.
+    	Form<RegisterForm> form = Form.form(RegisterForm.class).bindFromRequest();
     	
     	// Check the form itself for errors.
-        if (registerForm.hasErrors()) {
-            return Results.badRequest(registerForm.errorsAsJson());
+        if (form.hasErrors()) {
+            return Results.badRequest(form.errorsAsJson());
         }
         
         // Get the login information from the login form.
-        Register register = registerForm.get();
+        RegisterForm registerForm = form.get();
         
         // Find the user in the database. Return null if the
         // user was not found.
-        User user = User.findUserByEmailAddress(register.email);
+        UserLogin user = UserLogin.findByName(registerForm.email);
         
         if (user == null) {
-        	LOGGER.info("New user to register. " + register.email);
-        	user = new User(register.email, register.password, register.name + " " + register.surname);
+        	LOGGER.info("New user to register: " + registerForm.email);
+        	user = new UserLogin(registerForm.email, registerForm.password);
         	String authToken = user.createToken();
             ObjectNode authTokenJson = Json.newObject();
             authTokenJson.put(AUTH_TOKEN, authToken);
@@ -160,7 +150,7 @@ public class SecurityController extends Controller {
      * 
      * @author Michel Bredel <michael.bredel@fh-kufstein.ac.at>
      */
-    public static class Login {
+    public static class LoginForm {
     	/** The email address of the user. */
         @Constraints.Required
         @Constraints.Email
@@ -176,9 +166,9 @@ public class SecurityController extends Controller {
      * 
      * @author Michel Bredel <michael.bredel@fh-kufstein.ac.at>
      */
-    public static class Register extends Login {
+    public static class RegisterForm extends LoginForm {
     	/** The name of the user. */
-    	public String name;
+    	public String prename;
     	/** The surname of the user. */
     	public String surname;
     }

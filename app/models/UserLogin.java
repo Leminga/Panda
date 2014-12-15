@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,11 +13,9 @@ import org.slf4j.LoggerFactory;
 
 import play.data.validation.Constraints.*;
 import play.db.ebean.Model.Finder;
-
 import models.exceptions.UserAlreadyExistsException;
 
 import com.avaje.ebean.Ebean;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -168,7 +167,7 @@ public class UserLogin {
 	 * @param password The md5 password.
 	 */
 	public UserLogin(String username, String password) {
-		this.username = username;
+		this.username = username.toLowerCase().trim();
 		this.password = password;
 		this.creationTime = new Date();
 	}
@@ -228,7 +227,7 @@ public class UserLogin {
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("User "+ username + " stored in database.");
+				LOGGER.debug("User "+ username + " stored/updated in database.");
 			}
 		} catch (Exception e) {
 			if (LOGGER.isDebugEnabled()) {
@@ -236,4 +235,36 @@ public class UserLogin {
 			}
 		}
 	}
+	
+	/**
+     * Creates an authentication token for the user
+     * and stores it in the database. The token is valid for
+     * some and. The user has to use this token in order to 
+     * access given methods. Thus, the token has to be part
+     * of the URL.
+     * 
+     * @return <b>String</b> The authentication token for the user.
+     */
+    public String createToken() {
+        this.authToken = UUID.randomUUID().toString();
+        this.save();
+        if (LOGGER.isDebugEnabled()) {
+        	LOGGER.debug("Authentication token for user " + this.username + " created.");
+        }
+        return this.authToken;
+    }
+    
+    /**
+     * Deletes a user token, e.g. at logout or after a timeout.
+     * Without the authentication token, the user is not able
+     * to access given secured methods any more. He must log in
+     * again to access secured methods again.
+     */
+    public void deleteAuthToken() {
+        this.authToken = null;
+        if (LOGGER.isDebugEnabled()) {
+        	LOGGER.debug("Authentication token for user " + this.username + " deleted.");
+        }
+        this.save();
+    }
 }

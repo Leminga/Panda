@@ -1,7 +1,7 @@
 package controllers;
 
 import controllers.routes;
-import models.User;
+import models.UserLogin;
 import play.mvc.Http.Context;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -39,13 +39,13 @@ public class Secured extends Security.Authenticator {
 	 */
     @Override
     public String getUsername(Context ctx) {
-        User user = null;
+        UserLogin user = null;
         String[] authTokenHeaderValues = ctx.request().headers().get(SecurityController.AUTH_TOKEN_HEADER);
         if ((authTokenHeaderValues != null) && (authTokenHeaderValues.length == 1) && (authTokenHeaderValues[0] != null)) {
-            user = models.User.findByAuthToken(authTokenHeaderValues[0]);
+            user = UserLogin.findByAuthToken(authTokenHeaderValues[0]);
             if (user != null) {
                 ctx.args.put("user", user);
-                return user.getEmailAddress();
+                return user.getUsername();
             }
         }
         // If the user was not authenticated.
