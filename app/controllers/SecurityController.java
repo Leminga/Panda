@@ -140,7 +140,7 @@ public class SecurityController extends Controller {
             return Results.ok("user registration ok");
         } else {
         	LOGGER.info("User already exists in database.");
-        	return Results.ok("user exist alread");
+        	return Results.ok("user exist already");
         }
     }
     

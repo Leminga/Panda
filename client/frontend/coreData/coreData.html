@@ -3,7 +3,7 @@
 <form name="form" ng-submit="coreDataCtrl.savePersonalData()" ng-show="personal_data">
 
     <div>
-        Degree:<select ng-model="coreDataCtrl.user.personalData.degree">
+        Degree:<select required ng-model="coreDataCtrl.user.personalData.degree">
         <option value='' disabled selected style='display:none;'>Open here</option>
         <option value="bachelor">Bachelor</option>
         <option value="master">Master</option>
@@ -16,7 +16,6 @@
 
     <div>
         Choose your gender:<br><br>
-
         <input type="radio" ng-model="coreDataCtrl.user.personalData.gender" name="gender" value="male" checked>Male
         <br>
         <input type="radio"  ng-model="coreDataCtrl.user.personalData.gender" name="gender" value="female">Female
@@ -297,40 +296,27 @@
 </form>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <div><button ng-click="otherData = !otherData">Open/Close Contact Data</button></div>
-<form ng-show="otherData">
+<form  ng-submit="coreDataCtrl.saveContactData()" ng-show="otherData">
     <div>
         <h4>Address</h4>
 
-        <div>Street:<input type="text" name="street"></div>
+        <div>Street:<input ng-model="coreDataCtrl.user.contactData.street"type="text" name="street"></div>
         <br>
 
-        <div>House Number:<input type="text" name="housenumber"></div>
+        <div>House Number:<input ng-model="coreDataCtrl.user.contactData.houseNumber"type="text" name="housenumber"></div>
         <br>
 
-        <div>Zip:<input type="text" name="zip"></div>
+        <div>Zip:<input ng-model="coreDataCtrl.user.contactData.zip" type="text" name="zip"></div>
         <br>
 
-        <div>City:<input type="text" name="city"></div>
+        <div>City:<input ng-model="coreDataCtrl.user.contactData.city"type="text" name="city"></div>
         <br>
     </div>
 
     <div>
 
-        <label for="country_name">Country : </label><input id="country_name" name="country_name" type="text"
-                                                           list="country"/>
+        <label for="country_name">Country : </label><input ng-model="coreDataCtrl.user.contactData.country" id="country_name" name="country_name" type="text" list="country"/>
 
         <datalist id="country">
             <option value="Albania">Albania</option>
@@ -584,42 +570,42 @@
 
     <div><br>
         Insert your Phone Number:
-        <input type="tel" name="phonenumber">
+        <input type="tel" ng-model="coreDataCtrl.user.contactData.phoneNumber" name="phonenumber">
 
     </div>
 
     <div><br>
         Insert your E-Mail:
-        <input type="email" name="email">
+        <input type="email" ng-model="coreDataCtrl.user.contactData.email" name="email">
     </div>
     <br>
 
     <div>Preferred Communication Language
-        <input type="radio" name="language" value="english">English
-        <input type="radio" name="language" value="german">German
+        <input type="radio" ng-model="coreDataCtrl.user.contactData.language"name="language" value="english">English
+        <input type="radio" ng-model="coreDataCtrl.user.contactData.language" name="language" value="german">German
     </div>
 
     <div>
         <h4>Identification</h4>
 
-        <div>ID Number:<input type="text" name="Id number"></div>
+        <div>ID Number:<input ng-model="coreDataCtrl.user.contactData.idNumber" type="text" name="Id number"></div>
         <br>
 
-        <div>ID Type:<input type="text" name="Id type"></div>
+        <div>ID Type:<input type="text" ng-model="coreDataCtrl.user.contactData.idType" name="Id type"></div>
         <br>
 
-        <div>Expiry Date:<input type="date" name="expiry date"></div>
+        <div>Expiry Date:<input ng-model="coreDataCtrl.user.contactData.expiryDate" type="date" name="expiry date"></div>
         <br>
     </div>
 
     <div>Do you have a driver's licence?<br><br>
-        <input type="radio" name="choice" value="yes" checked>Yes<br>
-        <input type="radio" name="choice" value="no">No<br>
+        <input type="radio" ng-model="coreDataCtrl.user.contactData.driversLicense" name="driversLicense" value="yes" checked>Yes<br>
+        <input type="radio" ng-model="coreDataCtrl.user.contactData.driversLicense" name="driversLicense" value="no">No<br>
     </div>
     <br>
 
     <div>Upload your picture:<br><br>
-        <input type="file" name="pic" accept="image/*">
+        <input type="file" ng-model="coreDataCtrl.user." name="pic" accept="image/*">
     </div>
     <br>
 

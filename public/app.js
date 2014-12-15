@@ -10,6 +10,7 @@ angular.module('Panda')
         self.savePersonalData = function(){
             CoreDataService.savePersonalData(self.user.personalData)
         };
+
         self.saveEmergencyContacts = function(){
             CoreDataService.saveEmergencyContacts(self.user.emergencyContacts)
         };

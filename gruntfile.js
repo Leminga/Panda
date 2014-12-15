@@ -12,6 +12,7 @@ module.exports = function (grunt) {
                 dest: 'public/app.js'
 
             }
+
         },
         watch: {
             scripts: {
@@ -25,23 +26,28 @@ module.exports = function (grunt) {
         copy: {
             views: {
                 files: [
-                    {expand: true, flatten: true, src: ['client/**/*.html','!client/**/index.html'], dest: 'public/views/'}
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['client/**/*.html', '!client/**/index.html'],
+                        dest: 'public/views/'
+                    }
                 ]
             },
-            stylesheets:{
-                files:[
+            stylesheets: {
+                files: [
                     {expand: true, flatten: true, src: ['client/**/*.css'], dest: 'public/stylesheets/'}
                 ]
             },
-            images:{
-                files:[
+            images: {
+                files: [
                     {expand: true, flatten: true, src: ['client/**/images/*'], dest: 'public/images/'}
                 ]
             },
-            index:{
-              files:[
-                  {expand: true, flatten: true, src: ['client/**/index.html'], dest: 'public/'}
-              ]
+            index: {
+                files: [
+                    {expand: true, flatten: true, src: ['client/**/index.html'], dest: 'public/'}
+                ]
             }
 
         }

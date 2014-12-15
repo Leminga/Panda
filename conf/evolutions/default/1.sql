@@ -235,6 +235,9 @@ create table identification (
   constraint ck_identification_identification_type check (identification_type in (0,1)))
 ;
 
+create table identification_type)
+;
+
 create table interview (
   interview_date            timestamp,
   volunteer_id              bigint,
@@ -388,16 +391,6 @@ create table translation (
   german                    varchar(255),
   english                   varchar(255),
   constraint pk_translation primary key (id))
-;
-
-create table user (
-  id                        bigint not null,
-  auth_token                varchar(255),
-  email_address             varchar(256) not null,
-  full_name                 varchar(256) not null,
-  creation_date             timestamp not null,
-  constraint uq_user_email_address unique (email_address),
-  constraint pk_user primary key (id))
 ;
 
 create table user_login (
@@ -725,8 +718,6 @@ create sequence text_boxes_seq;
 
 create sequence translation_seq;
 
-create sequence user_seq;
-
 create sequence user_login_seq;
 
 create sequence volunteer_seq;
@@ -996,6 +987,8 @@ drop table if exists icgmember_guest_degree;
 
 drop table if exists identification;
 
+drop table if exists identification_type;
+
 drop table if exists interview;
 
 drop table if exists it_knowledge;
@@ -1055,8 +1048,6 @@ drop table if exists text_boxes;
 drop table if exists training;
 
 drop table if exists translation;
-
-drop table if exists user;
 
 drop table if exists user_login;
 
@@ -1151,8 +1142,6 @@ drop sequence if exists sport_interest_seq;
 drop sequence if exists text_boxes_seq;
 
 drop sequence if exists translation_seq;
-
-drop sequence if exists user_seq;
 
 drop sequence if exists user_login_seq;
 
