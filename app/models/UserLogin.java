@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -225,15 +226,21 @@ public class UserLogin extends Model {
 	/**
 	 * Saves the current user object to the database.
 	 */
-	public void save() {
+	@Override
+	public void save() throws OptimisticLockException {
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("User "+ username + " stored/updated in database.");
 			}
-		} catch (Exception e) {
+		} catch (OptimisticLockException e) {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.error("Unable to write to the database.");
+			}
+			throw new OptimisticLockException();
+		} catch (Exception e) {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.error("Unable to write to the database. \n" + e.getMessage());
 			}
 		}
 	}
