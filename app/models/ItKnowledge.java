@@ -12,7 +12,10 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class ItKnowledge {
+public class ItKnowledge extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Required

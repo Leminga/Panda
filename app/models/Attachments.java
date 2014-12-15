@@ -20,7 +20,10 @@ import play.data.validation.Constraints.Required;
 import java.util.Date;
 
 @Entity
-public class Attachments {
+public class Attachments extends Model{
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Required
 	private byte[] photo;

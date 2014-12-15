@@ -5,9 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 @Entity
-public class TextBoxes {
+public class TextBoxes extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
+	
 	@Required
 	@Id
 	@GeneratedValue

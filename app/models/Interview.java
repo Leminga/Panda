@@ -19,7 +19,10 @@ import play.data.validation.Constraints.Required;
 import java.util.Date;
 
 @Entity
-public class Interview {
+public class Interview extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 
 	@Required
 	private Date interviewDate;

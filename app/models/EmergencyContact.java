@@ -3,10 +3,15 @@ package models;
 import java.util.List;
 
 import javax.persistence.Entity;
+
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 @Entity
-public class EmergencyContact {
+public class EmergencyContact extends Model{
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Required
 	private String emergencySurname;

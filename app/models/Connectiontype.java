@@ -11,7 +11,10 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Connectiontype {
+public class Connectiontype extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Required

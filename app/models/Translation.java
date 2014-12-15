@@ -14,7 +14,10 @@ import play.libs.Json;
 
 
 @Entity
-public class Translation {
+public class Translation extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Required

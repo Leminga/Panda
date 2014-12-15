@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 /**
  * The nationality and all related information.
@@ -13,8 +14,12 @@ import play.data.validation.Constraints.Required;
  * @author Michael Bredel <michael.bredel@fh-kufstein.ac.at>
  */
 @Entity
-public class Nationality {
+public class Nationality extends Model{
 	/** The unique country code. */
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Required
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy="nationality")

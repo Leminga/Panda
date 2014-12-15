@@ -5,11 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Language {
+public class Language extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Required

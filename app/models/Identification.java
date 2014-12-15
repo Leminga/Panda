@@ -6,9 +6,13 @@ import javax.persistence.Entity;
 
 import helper.IdentificationType;
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 @Entity
-public class Identification {
+public class Identification extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Required
 	private String identificationNumber;

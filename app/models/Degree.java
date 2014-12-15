@@ -8,9 +8,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 @Entity
-public class Degree {
+public class Degree extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Required

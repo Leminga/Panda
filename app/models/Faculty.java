@@ -11,7 +11,10 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Faculty {
+public class Faculty extends Model{
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Required

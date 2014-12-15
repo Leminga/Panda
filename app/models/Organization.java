@@ -22,7 +22,10 @@ import play.data.validation.Constraints.Required;
 import java.util.Date;
 
 @Entity
-public class Organization {
+public class Organization extends Model{
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Required

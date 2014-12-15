@@ -23,8 +23,10 @@ import play.libs.Json;
 import play.data.validation.Constraints.Required;
 
 @Entity
-public class ActualJob {
+public class ActualJob extends Model {
 	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Required
 	@GeneratedValue

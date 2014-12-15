@@ -3,6 +3,7 @@ package models;
 import javax.persistence.Entity;
 
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 /**
  * The Phone class represents the phone number that is
@@ -11,7 +12,10 @@ import play.data.validation.Constraints.Required;
  * @author Michael Bredel <michael.bredel@fh-kufstein.ac.at>
  */
 @Entity
-public class Phone {
+public class Phone extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * An enum that specifies the type of the

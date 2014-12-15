@@ -17,18 +17,21 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class LoginTime {
+public class LoginTime extends Model {
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 
-		@ManyToOne
-		private Date login;
+	@ManyToOne
+	private Date login;
 
-		public Date getLogin() {
-			return login;
-		}
+	public Date getLogin() {
+		return login;
+	}
 
-		public void setLogin(Date login) {
-			this.login = login;
-		}
+	public void setLogin(Date login) {
+		this.login = login;
+	}
 		
 		
 }

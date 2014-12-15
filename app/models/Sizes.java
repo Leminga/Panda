@@ -1,10 +1,15 @@
 package models;
 
 import javax.persistence.Entity;
+
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 @Entity
-public class Sizes {
+public class Sizes extends Model{
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	
 	@Required
 	private int jacketSize;

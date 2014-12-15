@@ -3,7 +3,10 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
+
 import javax.persistence.ManyToOne;
 
 /**
@@ -12,8 +15,12 @@ import javax.persistence.ManyToOne;
  * @author Michael Bredel <michael.bredel@fh-kufstein.ac.at>
  */
 @Entity
-public class Sex {
+public class Sex extends Model{
 	/** The database id. */
+	
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Required
 	@GeneratedValue
