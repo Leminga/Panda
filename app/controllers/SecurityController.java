@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import models.UserLogin;
+import models.humans.Volunteer;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -133,11 +134,18 @@ public class SecurityController extends Controller {
         if (user == null) {
         	LOGGER.info("New user to register: " + registerForm.email);
         	user = new UserLogin(registerForm.email, registerForm.password);
-        	String authToken = user.createToken();
-            ObjectNode authTokenJson = Json.newObject();
-            authTokenJson.put(AUTH_TOKEN, authToken);
-            response().setCookie(AUTH_TOKEN, authToken);
-            return Results.ok("user registration ok");
+        	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname);
+        	volunteer.setUserLogin(user);
+        	try {
+        		volunteer.save();
+        		user.save();
+        		return Results.ok("user registration ok");
+        	} catch (Exception e) {
+        		// Make sure to clean up the database if something went wrong.
+        		volunteer.delete();
+        		user.delete();
+        		return Results.ok("user registration failed");
+        	}
         } else {
         	LOGGER.info("User already exists in database.");
         	return Results.ok("user exist already");
