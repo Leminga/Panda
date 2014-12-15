@@ -3,12 +3,6 @@
 <form name="form" ng-submit="coreDataCtrl.savePersonalData()" ng-show="personal_data">
 
     <div>
-        Degree:<select required ng-model="coreDataCtrl.user.personalData.degree">
-        <option value='' disabled selected style='display:none;'>Open here</option>
-        <option value="bachelor">Bachelor</option>
-        <option value="master">Master</option>
-        <option value="phd">PhD</option>
-    </select><br><br>
         Name: <input type="text" name="name"><br><br>
         Surname: <input type="text" name="surname">
     </div>
@@ -604,10 +598,6 @@
     </div>
     <br>
 
-    <div>Upload your picture:<br><br>
-        <input type="file" ng-model="coreDataCtrl.user." name="pic" accept="image/*">
-    </div>
-    <br>
 
     <div>
         <button type="button">Save</button>
