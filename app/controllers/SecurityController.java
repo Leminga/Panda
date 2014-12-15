@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import models.UserLogin;
 import models.humans.Volunteer;
+import activiti.ServicesTimer;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -66,7 +67,6 @@ public class SecurityController extends Controller {
      * @return <b>Result</b> A resulting JSON object containing the authentication token or null.
      */
     public static Result login() {
-    	
     	// The login form.
     	Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
 
@@ -95,8 +95,6 @@ public class SecurityController extends Controller {
             if (LOGGER.isDebugEnabled()) {
             	LOGGER.debug("Authorized login attempt. User " + user.getUsername() + " logged in successfully.");
             }
-            // Activiti testing
-            activiti.ServicesTimer.startProcess();
             return Results.ok(authTokenJson);
         }
     }
@@ -142,6 +140,9 @@ public class SecurityController extends Controller {
         	try {
         		volunteer.save();
         		user.save();
+        		// START TESTING : Activity service to send an email.
+        		//ServicesTimer.startProcess();
+        		// END TESTING
         		return Results.ok(volunteer.toJson());
         	} catch (Exception e) {
         		// Make sure to clean up the database if something went wrong.
