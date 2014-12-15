@@ -13,6 +13,7 @@ import models.Degree;
 import models.Nationality;
 import models.Sex;
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 /**
  * Contains all the attributes that are related
@@ -22,7 +23,9 @@ import play.data.validation.Constraints.Required;
  * @author Michael Bredel <michael.bredel@fh-kufstein.ac.at>
  */
 @MappedSuperclass
-public abstract class Human {
+public abstract class Human extends Model {
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	/** The database id. */
 	@Id
 	@Required

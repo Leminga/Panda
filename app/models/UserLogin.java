@@ -12,14 +12,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import play.data.validation.Constraints.*;
-import play.db.ebean.Model.Finder;
+import play.db.ebean.Model;
 import models.exceptions.UserAlreadyExistsException;
 
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class UserLogin {
+public class UserLogin extends Model {
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
 	/** A finder to query the database. */
 	public static Finder<Long, UserLogin> FIND = new Finder<Long, UserLogin>(Long.class, UserLogin.class);
 	/** Logger to log SecurityController events. */
