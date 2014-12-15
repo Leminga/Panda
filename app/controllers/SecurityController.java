@@ -66,6 +66,7 @@ public class SecurityController extends Controller {
      * @return <b>Result</b> A resulting JSON object containing the authentication token or null.
      */
     public static Result login() {
+    	
     	// The login form.
     	Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
 
@@ -94,6 +95,8 @@ public class SecurityController extends Controller {
             if (LOGGER.isDebugEnabled()) {
             	LOGGER.debug("Authorized login attempt. User " + user.getUsername() + " logged in successfully.");
             }
+            // Activiti testing
+            activiti.ServicesTimer.startProcess();
             return Results.ok(authTokenJson);
         }
     }
