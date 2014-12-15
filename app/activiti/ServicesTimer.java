@@ -12,22 +12,22 @@ import org.activiti.engine.runtime.ProcessInstance;
 
 public class ServicesTimer {
 	
+	static ProcessEngine processEngine = ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti/resources/activiti.cfg.xml").buildProcessEngine();
 
 		public static void startProcess() {
-			/*ProcessEngine processEngine = ProcessEngineConfiguration.
-					.createStandaloneInMemProcessEngineConfiguration()
-					.buildProcessEngine();*/
-			ProcessEngine processEngine = ProcessEngineConfiguration.createProcessEngineConfigurationFromResource("activiti/resources/activiti.cfg.xml").buildProcessEngine();
+
+	
 			RuntimeService runtimeService = processEngine.getRuntimeService();
-			RepositoryService repositoryService = processEngine
-					.getRepositoryService();
-			repositoryService.createDeployment().addClasspathResource("activiti/resources/diagrams/TimeProcess3.bpmn20.xml").deploy();
 			ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("TimeProcess");
 			
 			System.out.println("Die id des Timer-Processes ist aktuell " + processInstance.getId() + " "	+ processInstance.getProcessDefinitionId());
 			
 		}
 		
-		
+		public static void deployProcess(){
+			
+			RepositoryService repositoryService = processEngine.getRepositoryService();
+			repositoryService.createDeployment().addClasspathResource("activiti/resources/diagrams/TimeProcess3.bpmn20.xml").deploy();
+		}
 		
 }

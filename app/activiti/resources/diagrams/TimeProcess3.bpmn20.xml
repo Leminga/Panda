@@ -7,7 +7,7 @@
         <timeDuration>PT1M</timeDuration>
       </timerEventDefinition>
     </intermediateCatchEvent>
-    <serviceTask id="servicetask1" name="zweiterTask" activiti:class="activiti.Logout"></serviceTask>
+    <serviceTask id="servicetask1" name="MailTask" activiti:class="activiti.TimerTask"></serviceTask>
     <sequenceFlow id="flow2" sourceRef="timerintermediatecatchevent1" targetRef="servicetask1"></sequenceFlow>
     <endEvent id="endevent1" name="End"></endEvent>
     <sequenceFlow id="flow3" sourceRef="servicetask1" targetRef="endevent1"></sequenceFlow>
