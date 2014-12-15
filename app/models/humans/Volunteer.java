@@ -3,6 +3,7 @@ package models.humans;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OptimisticLockException;
 
 import org.slf4j.Logger;
@@ -37,6 +38,9 @@ public class Volunteer extends Human {
 	/** Logger to log SecurityController events. */
 	protected static Logger LOGGER = LoggerFactory.getLogger(Volunteer.class);
 	
+	@Id
+	@Required
+	private long id;
 //	@Required
 	private List <Phone>phones;
 //	@Required
@@ -91,7 +95,34 @@ public class Volunteer extends Human {
 		this.setName(prename);
 		this.setSurname(surname);
 	}
-	
+	public static Logger getLOGGER() {
+		return LOGGER;
+	}
+
+	public static void setLOGGER(Logger lOGGER) {
+		LOGGER = lOGGER;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public UserLogin getLoginData() {
+		return loginData;
+	}
+
+	public void setLoginData(UserLogin loginData) {
+		this.loginData = loginData;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public List<Phone> getPhones() {
 		return phones;
 	}
