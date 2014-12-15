@@ -27,20 +27,21 @@ import play.db.ebean.Model;
 public abstract class Human extends Model {
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
+	
 	/** The database id. */
 	@Id
 	@Required
 	@GeneratedValue
-	private long id;
+	protected long id;
 	/** The surname of the person. */
 	@Required
-	private String surname;
+	protected String surname;
 	/** The name of the person. */
 	@Required
-	private String name;
+	protected String prename;
 	/** The gender. */
 //	@Required
-	private Sex sex;
+	protected Sex sex;
 	/** The date of birth of the person. */
 //	@Required
 	protected Date dateOfBirth;
@@ -84,8 +85,8 @@ public abstract class Human extends Model {
 	 * 
 	 * @return <b>String</b>The name.
 	 */
-	public String getName() {
-		return name;
+	public String getPrename() {
+		return prename;
 	}
 	
 	/**
@@ -93,8 +94,8 @@ public abstract class Human extends Model {
 	 * 
 	 * @param name The name.
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setPrename(String prename) {
+		this.prename = prename;
 	}
 	
 	/**
