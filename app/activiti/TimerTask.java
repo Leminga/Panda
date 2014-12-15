@@ -21,7 +21,7 @@ public class TimerTask implements JavaDelegate {
 		
 		
 		System.out.println("Mail Task follows");
-		mailer.mail.sendMail();
+		mailer.Mail.sendMail();
 		System.out.println("Mail Task done");
 		
 	}

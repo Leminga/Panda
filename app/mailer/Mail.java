@@ -2,13 +2,13 @@ package mailer;
 
 import org.apache.commons.mail.*;
 
-public class mail {
+public class Mail {
 	
 	public static void sendMail() throws EmailException
 	{
 		
 		Email email = new SimpleEmail();
-		email.setHostName("smtp.gmail.com.");
+		email.setHostName("smtp.gmail.com");
 		email.setSmtpPort(465);
 		email.setAuthenticator(new DefaultAuthenticator("SportEVIT@gmail.com", "ppanda!1"));
 		email.setSSL(true);
