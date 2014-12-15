@@ -12,6 +12,7 @@ import javax.persistence.MappedSuperclass;
 import models.Degree;
 import models.Nationality;
 import models.Sex;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -38,18 +39,18 @@ public abstract class Human extends Model {
 	@Required
 	private String name;
 	/** The gender. */
-	@Required
+//	@Required
 	private Sex sex;
 	/** The date of birth of the person. */
-	@Required
-	public Date dateOfBirth;
+//	@Required
+	protected Date dateOfBirth;
 	/** The (multiple) nationalities of the person. */
-	@Required
+//	@Required
 	@ManyToMany(cascade = CascadeType.ALL)
-	public List <Nationality>nationality;
+	protected List <Nationality>nationality;
 	/** The (multiple) degrees of the person. */
 	@ManyToMany(cascade = CascadeType.ALL)
-	public List <Degree>degree;
+	protected List <Degree>degree;
 	
 	/**
 	 * Getter for the database id.

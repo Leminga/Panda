@@ -1,14 +1,14 @@
 package models.humans;
 
-import play.db.ebean.Model.Finder;
-
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OptimisticLockException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.avaje.ebean.Ebean;
 
 import models.ActualJob;
 import models.Address;
@@ -27,61 +27,71 @@ import models.Role;
 import models.Sizes;
 import models.Sport;
 import models.Training;
+import models.UserLogin;
 import play.data.validation.Constraints.Required;
-import play.db.ebean.Model;
-import play.libs.Json;
-import play.db.ebean.Model.Finder;
-
-import java.util.Date;
 
 @Entity
 public class Volunteer extends Human {
+	/** The serialization version identifier. */
+	private static final long serialVersionUID = 1L;
+	/** Logger to log SecurityController events. */
+	protected static Logger LOGGER = LoggerFactory.getLogger(Volunteer.class);
 	
-	
-	@Required
+//	@Required
 	private List <Phone>phones;
-	@Required
+//	@Required
 	private List <Address>addresses;
-	@Required
+//	@Required
 	private List <Contact>contacts;
-	@Required
+//	@Required
 	private List <Identification>identifications;
-	@Required
+//	@Required
 	private List <EmergencyContact>emergencyContacts;
-	@Required
+//	@Required
 	private Sizes sizes;
-	@Required
+//	@Required
 	private Educationlevel highestEducationlevel;
-	@Required
+//	@Required
 	private PreferredCommunicationLanguage preferredCommunicationLanguage;
-	@Required
+//	@Required
 	private List<Languages> languages;
-	@Required
+//	@Required
 	private List<ItKnowledge> itKnowledges;
 	private long idTextBoxes;
 	private long idEventComment;
-	@Required
+//	@Required
 	private EmailAddress emailAddress;
-	@Required
+//	@Required
 	private List <ActualJob>actualJob;
-	@Required
+//	@Required
 	private String socialSecurityNumber;
-	@Required
+//	@Required
 	private List<Attachments>attachments;
-	@Required
+//	@Required
 	private byte[] volunteerAgreement;
-	@Required
+//	@Required
 	private List <Training>trainings;
-	@Required
+//	@Required
 	private List <Interview>interviews;
-	@Required
+//	@Required
 	private Role role;
-	@Required
+//	@Required
 	private Sport sport;
+	/** Login data, if the user is allows to login. */
+	@Required
+	protected UserLogin loginData;
 	
-	public Volunteer(String string, String string2) {
-		
+	/**
+	 * Default constructor;
+	 * 
+	 * @param prename
+	 * @param surname
+	 */
+	public Volunteer(String prename, String surname) {
+		this.setName(prename);
+		this.setSurname(surname);
 	}
+	
 	public List<Phone> getPhones() {
 		return phones;
 	}
@@ -210,8 +220,36 @@ public class Volunteer extends Human {
 		this.sport = sport;
 	}
 	
+	public UserLogin getUserLogin() {
+		return this.loginData;
+	}
+	
+	public void setUserLogin(UserLogin loginData) {
+		this.loginData = loginData;
+	}
 	
 	
+	/**
+	 * Saves the current volunteer object to the database.
+	 */
+	@Override
+	public void save() throws OptimisticLockException {
+		try {
+			Ebean.save(this);
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("Volunteer "+ this.getName() + " " + this.getSurname() + " stored/updated in database.");
+			}
+		} catch (OptimisticLockException e) {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.error("Unable to write to the database.");
+			}
+			throw new OptimisticLockException();
+		} catch (Exception e) {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.error("Unable to write to the database. \n" + e.getMessage());
+			}
+		}
+	}
 	
 	
 
