@@ -13,6 +13,7 @@
   </root>
   
   <!-- The log levels of various packages and classes -->
+  <logger name="activiti" level="DEBUG"/>
   <logger name="controllers" level="DEBUG"/>
   <logger name="helper" level="DEBUG"/>
   <logger name="mailer" level="DEBUG"/>
