@@ -235,6 +235,10 @@ create table identification (
   constraint ck_identification_identification_type check (identification_type in (0,1)))
 ;
 
+create table identification_type (
+  test                      varchar(255))
+;
+
 create table interview (
   interview_date            timestamp,
   volunteer_id              bigint,
@@ -983,6 +987,8 @@ drop table if exists icgmember_guest_nationality;
 drop table if exists icgmember_guest_degree;
 
 drop table if exists identification;
+
+drop table if exists identification_type;
 
 drop table if exists interview;
 
