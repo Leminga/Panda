@@ -27,12 +27,12 @@ import play.data.validation.Constraints;
  * @author Michael Bredel <michael.bredel@fh-kufstein.ac.at>
  */
 public class SecurityController extends Controller {
+	/** Logger to log SecurityController events. */
+	private static Logger LOGGER = LoggerFactory.getLogger(SecurityController.class);
 	/** The authentication token header for the Play framework. */
 	protected final static String AUTH_TOKEN_HEADER = "X-AUTH-TOKEN";
 	/** The authentication token for the Play framework. */
     protected static final String AUTH_TOKEN = "authToken";
-    /** Logger to log SecurityController events. */
-	protected static Logger LOGGER = LoggerFactory.getLogger(SecurityController.class);
 
     /** 
      * This should somehow present the login screen.
@@ -139,7 +139,7 @@ public class SecurityController extends Controller {
         	try {
         		volunteer.save();
         		user.save();
-        		return Results.ok("user registration ok");
+        		return Results.ok(volunteer.toJson());
         	} catch (Exception e) {
         		// Make sure to clean up the database if something went wrong.
         		volunteer.delete();
