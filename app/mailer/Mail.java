@@ -18,4 +18,19 @@ public class Mail {
 		email.addTo("markus.s@deflagratio.at");
 		email.send();
 	};
+	
+	public static void sendMail(String address, String name) throws EmailException
+	{
+		
+		Email email = new SimpleEmail();
+		email.setHostName("smtp.gmail.com");
+		email.setSmtpPort(465);
+		email.setAuthenticator(new DefaultAuthenticator("SportEVIT@gmail.com", "ppanda!1"));
+		email.setSSL(true);
+		email.setFrom("SportEVIT@gmail.com");
+		email.setSubject("Panda Mail");
+		email.setMsg("Hallo "+name+" :-)  - Überraschung eurer Programm kann schon Emails versenden! /n Beste grüße Team Panda");
+		email.addTo(address);
+		email.send();
+	};
 }
