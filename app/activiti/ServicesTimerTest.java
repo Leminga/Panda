@@ -17,7 +17,7 @@ public class ServicesTimerTest {
 		RepositoryService repositoryService = processEngine
 				.getRepositoryService();
 		repositoryService.createDeployment()
-				.addClasspathResource("activiti/resources/diagrams/TimeProcess3.bpmn20.xml").deploy();
+				.addClasspathResource("activiti/resources/diagrams/TimeProcess2.bpmn20.xml").deploy();
 		ProcessInstance processInstance =runtimeService.startProcessInstanceByKey("TimeProcess");	
 		assertNotNull(processInstance.getId());
 		System.out.println("Die Time id des Processes ist aktuell " + processInstance.getId() + " "
