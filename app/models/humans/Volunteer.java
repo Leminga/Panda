@@ -10,6 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.avaje.ebean.Ebean;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import models.ActualJob;
 import models.Address;
@@ -30,13 +36,14 @@ import models.Sport;
 import models.Training;
 import models.UserLogin;
 import play.data.validation.Constraints.Required;
+import play.libs.Json;
 
 @Entity
 public class Volunteer extends Human {
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	/** Logger to log SecurityController events. */
-	protected static Logger LOGGER = LoggerFactory.getLogger(Volunteer.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(Volunteer.class);
 	
 	@Id
 	@Required
@@ -92,7 +99,7 @@ public class Volunteer extends Human {
 	 * @param surname
 	 */
 	public Volunteer(String prename, String surname) {
-		this.setName(prename);
+		this.setPrename(prename);
 		this.setSurname(surname);
 	}
 	public static Logger getLOGGER() {
@@ -259,6 +266,26 @@ public class Volunteer extends Human {
 		this.loginData = loginData;
 	}
 	
+	/**
+	 * Returns the simple name of the class.
+	 * 
+	 * @return <b>String</b> The simple name of the current class.
+	 */
+	@JsonIgnore
+	public String getClassName() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+	
+	/**
+	 * Converts the current volunteer object to e JSON node.
+	 * 
+	 * @return <b>JsonNode</b> A JSON node that contains this volunteer object.
+	 */
+	public JsonNode toJson() {
+		ObjectNode result = Json.newObject();
+		result.put(this.getClassName(), Json.toJson(this));
+		return result;	
+	}
 	
 	/**
 	 * Saves the current volunteer object to the database.
@@ -268,7 +295,7 @@ public class Volunteer extends Human {
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Volunteer "+ this.getName() + " " + this.getSurname() + " stored/updated in database.");
+				LOGGER.debug("Volunteer "+ this.getPrename() + " " + this.getSurname() + " stored/updated in database.");
 			}
 		} catch (OptimisticLockException e) {
 			if (LOGGER.isDebugEnabled()) {
@@ -282,6 +309,16 @@ public class Volunteer extends Human {
 		}
 	}
 	
-	
+	@Override
+	public String toString() {
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectWriter writer = mapper.writer().withDefaultPrettyPrinter();
+		try {
+			return writer.writeValueAsString(this.toJson());
+		} catch (JsonProcessingException e) {
+			LOGGER.debug("Processing Json object failed.");
+			return getPrename() + " " + this.getSurname();
+		}
+	}
 
 }
