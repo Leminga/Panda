@@ -12,7 +12,7 @@ create table actual_job (
 create table additional_coach (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_additional_coach primary key (id))
 ;
@@ -39,7 +39,7 @@ create table arrival (
 create table athlete (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_athlete primary key (id))
 ;
@@ -59,7 +59,7 @@ create table availability (
 create table city_guest (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_city_guest primary key (id))
 ;
@@ -67,7 +67,7 @@ create table city_guest (
 create table city_rep_guest (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_city_rep_guest primary key (id))
 ;
@@ -75,7 +75,7 @@ create table city_rep_guest (
 create table city_representative (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_city_representative primary key (id))
 ;
@@ -83,7 +83,7 @@ create table city_representative (
 create table coach (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_coach primary key (id))
 ;
@@ -105,7 +105,7 @@ create table contact (
 create table contractor (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_contractor primary key (id))
 ;
@@ -181,8 +181,9 @@ create table event_comment (
 create table event_data_volunteer (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
+  name                      varchar(255),
   password                  varchar(255),
   id_text_boxes             bigint,
   id_event_comment          bigint,
@@ -199,7 +200,7 @@ create table faculty (
 create table head_of_delegation (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_head_of_delegation primary key (id))
 ;
@@ -207,7 +208,7 @@ create table head_of_delegation (
 create table icgguest (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_icgguest primary key (id))
 ;
@@ -215,7 +216,7 @@ create table icgguest (
 create table icgmember (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_icgmember primary key (id))
 ;
@@ -223,7 +224,7 @@ create table icgmember (
 create table icgmember_guest (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_icgmember_guest primary key (id))
 ;
@@ -255,7 +256,7 @@ create table it_knowledge (
 create table locliaison_officer (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_locliaison_officer primary key (id))
 ;
@@ -263,7 +264,7 @@ create table locliaison_officer (
 create table locmember (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_locmember primary key (id))
 ;
@@ -283,7 +284,7 @@ create table languages (
 create table login_receiver (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   email                     varchar(255),
   group_t                   integer,
@@ -298,7 +299,7 @@ create table login_time (
 create table media (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   constraint pk_media primary key (id))
 ;
@@ -407,7 +408,7 @@ create table user_login (
 create table volunteer (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   id_text_boxes             bigint,
   id_event_comment          bigint,
@@ -419,7 +420,7 @@ create table volunteer (
 create table volunteer_simple (
   id                        bigint not null,
   surname                   varchar(255),
-  name                      varchar(255),
+  prename                   varchar(255),
   date_of_birth             timestamp,
   social_security_number    varchar(255),
   constraint pk_volunteer_simple primary key (id))
