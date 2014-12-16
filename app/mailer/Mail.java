@@ -29,7 +29,7 @@ public class Mail {
 		email.setSSL(true);
 		email.setFrom("SportEVIT@gmail.com");
 		email.setSubject("Panda Mail");
-		email.setMsg("Hallo "+name+System.lineSeparator()+"  Überraschung eurer Programm kann schon Emails versenden!:-)"+System.lineSeparator()+"  Beste grüße Team Panda");
+		email.setMsg("Hallo "+name+System.lineSeparator()+"Überraschung eurer Programm kann schon zeitgesteuert Emails versenden! :-)"+System.lineSeparator()+"Beste grüße Team Panda");
 		email.addTo(address);
 		email.send();
 	};
