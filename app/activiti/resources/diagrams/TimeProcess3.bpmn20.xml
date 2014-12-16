@@ -4,7 +4,7 @@
     <startEvent id="startevent1" name="Start"></startEvent>
     <intermediateCatchEvent id="timerintermediatecatchevent1" name="TimerCatchEvent">
       <timerEventDefinition>
-        <timeDuration>PT1M</timeDuration>
+        <timeDuration>PT10M</timeDuration>
       </timerEventDefinition>
     </intermediateCatchEvent>
     <serviceTask id="mailtask" name="MailTask" activiti:class="activiti.TimerTask"></serviceTask>
