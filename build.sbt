@@ -17,7 +17,8 @@ libraryDependencies ++= Seq(
   "org.apache.commons" % "commons-email" % "1.2",
   "junit" % "junit" % "4.11",  
   "org.webjars" % "angularjs" % "1.3.2",
-  "org.st-js.bridge" % "angularjs" % "1.0.7.bv0"   
+  "org.st-js.bridge" % "angularjs" % "1.0.7.bv0",
+  "org.webjars" % "ngStorage" % "0.3.0"
 )
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
