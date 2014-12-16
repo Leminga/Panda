@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   "net.sourceforge.jtds" % "jtds" % "1.2" ,
-  "mysql" % "mysql-connector-java" % "5.1.18",
+  "mysql" % "mysql-connector-java" % "5.1.34",
   "org.activiti" % "activiti-engine" % "5.16.4",
   "org.apache.commons" % "commons-email" % "1.2",
   "junit" % "junit" % "4.11",  
