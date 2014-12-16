@@ -2,7 +2,7 @@ angular.module('Panda')
     .factory('CoreDataService', ['$http', function ($http) {
         return {
             savePersonalData: function (personalData) {
-                return $http.post("/personalData", personalData)
+                return $http.post("/personalData", personalData);
             },
 
             saveContactData: function (contactData) {
@@ -17,10 +17,9 @@ angular.module('Panda')
                 return $http.post("/sizes", sizes);
             },
 
-            saveAll:function(user){
-                return $http.post("/all",user);
+            saveAll: function (user) {
+                return $http.post("/all", user);
             }
         };
 
-    }])
-;
+    }]);

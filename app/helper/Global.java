@@ -10,9 +10,9 @@ public class Global extends GlobalSettings {
 	@Override
 	  public void onStart(Application app) {
 		// Deploy Activiti services.
-		ServicesTimer.deployProcess();
+		//ServicesTimer.deployProcess();
 		// Für Email-Präsentationsprozess starten
-		ServicesTimer.startProcess();
+		// ServicesTimer.startProcess();
 		
 		//mailer test
 		/*try {

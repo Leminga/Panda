@@ -1,6 +1,6 @@
 // This controller handles the overview form, which is used for viewing user-related data on a single page.
 angular.module('Panda')
-    .controller('OverviewFormCtrl', ['$window', '$location', function ($window, $location) {
+    .controller('OverviewFormCtrl', ['$window' ,'$location', function ($window, $location) {
         // Check whether the user is logged in or not
         if ($window.sessionStorage.getItem("token") === null) {
             $location.path("/");

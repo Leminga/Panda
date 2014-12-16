@@ -1,39 +1,49 @@
 // This is the instantiated main-module. Every other module builds upon this one. Dependencies can be added in
 // the square brackets.
-angular.module('Panda',['ngRoute']);
+angular.module('Panda',['ngRoute','ngStorage']);
 
 
 angular.module('Panda')
-    .controller('CoreDataFormCtrl', ['CoreDataService', function (CoreDataService) {
+    .controller('CoreDataFormCtrl', ['CoreDataService', '$localStorage', '$sessionStorage',
+        function (CoreDataService, $localStorage, $sessionStorage) {
             var self = this;
 
-        self.savePersonalData = function(){
-            CoreDataService.savePersonalData(self.user.personalData)
-        };
+            self.getData = function () {
+                self.user.personalData.prename = $sessionStorage.volunteer.prename;
+                self.user.personalData.surname = $sessionStorage.volunteer.surname;
+                self.user.contactData.email = $sessionStorage.volunteer.loginData.username;
+            };
 
-        self.saveEmergencyContacts = function(){
-            CoreDataService.saveEmergencyContacts(self.user.emergencyContacts)
-        };
+            self.savePersonalData = function () {
+                $sessionStorage.volunteer.prename = self.user.personalData.prename;
+                $sessionStorage.volunteer.surname = self.user.personalData.surname;
+                //CoreDataService.savePersonalData(self.user.personalData);
+            };
 
-        self.saveContactData = function(){
-            CoreDataService.saveContactData(self.user.contactData)
-        };
+            self.saveEmergencyContacts = function () {
+                CoreDataService.saveEmergencyContacts(self.user.emergencyContacts);
+            };
 
-        self.saveSizes = function(){
-            CoreDataService.saveSizes(self.user.sizes)
-        };
+            self.saveContactData = function () {
+                $sessionStorage.volunteer.loginData.username = self.user.contactData.email;
+                //CoreDataService.saveContactData(self.user.contactData);
+            };
 
-        self.saveAll = function(){
-            CoreDataService.saveAll(self.user)
-        };
+            self.saveSizes = function () {
+                CoreDataService.saveSizes(self.user.sizes);
+            };
 
-    }]);
+            self.saveAll = function () {
+                CoreDataService.saveAll(self.user);
+            };
+
+        }]);
 
 angular.module('Panda')
     .factory('CoreDataService', ['$http', function ($http) {
         return {
             savePersonalData: function (personalData) {
-                return $http.post("/personalData", personalData)
+                return $http.post("/personalData", personalData);
             },
 
             saveContactData: function (contactData) {
@@ -48,13 +58,12 @@ angular.module('Panda')
                 return $http.post("/sizes", sizes);
             },
 
-            saveAll:function(user){
-                return $http.post("/all",user);
+            saveAll: function (user) {
+                return $http.post("/all", user);
             }
         };
 
-    }])
-;
+    }]);
 // This controller is used for the forgotten Password webpage. It handles the request to the controller, which checks
 // whether the user exists or not and then handles the password reset.
 angular.module('Panda')
@@ -78,9 +87,8 @@ angular.module('Panda')
 
 // The LoginFormController handles the login and authentication of the user.
 angular.module('Panda')
-    .controller('LoginFormCtrl', ['LoginService', '$window','$location', function (LoginService, $window, $location) {
+    .controller('LoginFormCtrl', ['LoginService' ,'$window', '$location', function (LoginService, $window, $location) {
         var self = this;
-
         // This sends the Login to the controller, where it is being checked, whether the user exists or not.
         // If the user does not exist, then he receives an Error Message (TBD)
         self.sendLogin = function () {
@@ -91,16 +99,17 @@ angular.module('Panda')
                     $location.path('/overview')
                 }, function (response) {  // error function
                     $window.alert("Wrong credentials");
+                    console.log(self.user.test.test.test.email);
                 });
         };
     }]);
 
 // Service that is being used with the LoginFormCtrl.
 angular.module('Panda')
-    .factory('LoginService', ['$http', function ($http){
-        return{
-            login:function(user){
-                return $http.post("/login",user);
+    .factory('LoginService', ['$http', function ($http) {
+        return {
+            login: function (user) {
+                return $http.post("/login", user);
             }
         };
 
@@ -151,6 +160,111 @@ angular.module('Panda')
     .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('InterceptorService');
 }]);
+'use strict';
+
+(function() {
+
+    /**
+     * @ngdoc overview
+     * @name ngStorage
+     */
+
+    angular.module('ngStorage', []).
+
+    /**
+     * @ngdoc object
+     * @name ngStorage.$localStorage
+     * @requires $rootScope
+     * @requires $window
+     */
+
+        factory('$localStorage', _storageFactory('localStorage')).
+
+    /**
+     * @ngdoc object
+     * @name ngStorage.$sessionStorage
+     * @requires $rootScope
+     * @requires $window
+     */
+
+        factory('$sessionStorage', _storageFactory('sessionStorage'));
+
+    function _storageFactory(storageType) {
+        return [
+            '$rootScope',
+            '$window',
+            '$log',
+
+            function(
+                $rootScope,
+                $window,
+                $log
+            ){
+                // #9: Assign a placeholder object if Web Storage is unavailable to prevent breaking the entire AngularJS app
+                var webStorage = $window[storageType] || ($log.warn('This browser does not support Web Storage!'), {}),
+                    $storage = {
+                        $default: function(items) {
+                            for (var k in items) {
+                                angular.isDefined($storage[k]) || ($storage[k] = items[k]);
+                            }
+
+                            return $storage;
+                        },
+                        $reset: function(items) {
+                            for (var k in $storage) {
+                                '$' === k[0] || delete $storage[k];
+                            }
+
+                            return $storage.$default(items);
+                        }
+                    },
+                    _last$storage,
+                    _debounce;
+
+                for (var i = 0, k; i < webStorage.length; i++) {
+                    // #8, #10: `webStorage.key(i)` may be an empty string (or throw an exception in IE9 if `webStorage` is empty)
+                    (k = webStorage.key(i)) && 'ngStorage-' === k.slice(0, 10) && ($storage[k.slice(10)] = angular.fromJson(webStorage.getItem(k)));
+                }
+
+                _last$storage = angular.copy($storage);
+
+                $rootScope.$watch(function() {
+                    _debounce || (_debounce = setTimeout(function() {
+                        _debounce = null;
+
+                        if (!angular.equals($storage, _last$storage)) {
+                            angular.forEach($storage, function(v, k) {
+                                angular.isDefined(v) && '$' !== k[0] && webStorage.setItem('ngStorage-' + k, angular.toJson(v));
+
+                                delete _last$storage[k];
+                            });
+
+                            for (var k in _last$storage) {
+                                webStorage.removeItem('ngStorage-' + k);
+                            }
+
+                            _last$storage = angular.copy($storage);
+                        }
+                    }, 100));
+                });
+
+                // #6: Use `$window.addEventListener` instead of `angular.element` to avoid the jQuery-specific `event.originalEvent`
+                'localStorage' === storageType && $window.addEventListener && $window.addEventListener('storage', function(event) {
+                    if ('ngStorage-' === event.key.slice(0, 10)) {
+                        event.newValue ? $storage[event.key.slice(10)] = angular.fromJson(event.newValue) : delete $storage[event.key.slice(10)];
+
+                        _last$storage = angular.copy($storage);
+
+                        $rootScope.$apply();
+                    }
+                });
+
+                return $storage;
+            }
+        ];
+    }
+
+})();
 // The RouteProvider module, adds hash-bangs (=anchors) to the webpage. This allows fast and convenient routing, without
 // constant reloading of the webpage.
 angular.module('Panda')
@@ -209,7 +323,7 @@ var compareTo = function () {
 angular.module('Panda').directive("compareTo", compareTo);
 // This controller handles the overview form, which is used for viewing user-related data on a single page.
 angular.module('Panda')
-    .controller('OverviewFormCtrl', ['$window', '$location', function ($window, $location) {
+    .controller('OverviewFormCtrl', ['$window' ,'$location', function ($window, $location) {
         // Check whether the user is logged in or not
         if ($window.sessionStorage.getItem("token") === null) {
             $location.path("/");
@@ -237,28 +351,34 @@ angular.module('Panda')
         };
     }]);
 angular.module('Panda')
-    .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService','$window','$location', function (RegisterService, GetRegistrationService, $window) {
-        var self = this;
-        self.receivedRegistrationData = {};
+    .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService', '$window', '$location', '$sessionStorage',
+        function (RegisterService, GetRegistrationService, $window, $localStorage, $sessionStorage) {
+            var self = this;
+            self.receivedRegistrationData = {};
+            $sessionStorage;
+
+            self.register = function () {
+                RegisterService.register(self.user).then(function (response) {
+                        $sessionStorage.volunteer = response.data.volunteer;
+                        console.log($sessionStorage.volunteer);
+                        console.log($sessionStorage.volunteer.prename);
+                        console.log($sessionStorage.volunteer.surname);
+                        console.log($sessionStorage.volunteer.loginData.username);
+                        $window.alert("Registration successful");
+                    }, function (response) {
+                        $window.alert("Registration unsuccessful");
+                    }
+                );
+            };
 
 
-        self.register = function () {
-            RegisterService.register(self.user).then(function(response){
-                    $window.alert(response.data);
-            },function(response){
-                    $window.alert(response.data);
-                }
-            );
-        };
+            self.getRegistration = function () {
+                GetRegistrationService.getRegistration().then(function (response) {
+                    self.receivedRegistrationData = response.data;
+                });
 
-
-        self.getRegistration = function () {
-            GetRegistrationService.getRegistration().then(function (response) {
-                self.receivedRegistrationData = response.data;
-            });
-
-        };
-    }]);
+            };
+        }]);
 angular.module('Panda')
     .factory('RegisterService', ['$http', function ($http) {
         return {
