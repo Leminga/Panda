@@ -51,7 +51,7 @@ public class UserLogin extends Model {
 	private Date lastLogin;
 	/** The authentication token when the user is logged in. */
 	private String authToken;
-	/** */
+	/** Tracks whether their have been changes on the model. */
 	@Transient
 	private boolean hasChanged;
 	
@@ -304,4 +304,5 @@ public class UserLogin extends Model {
         	LOGGER.debug("Authentication token for user " + this.username + " deleted.");
         }
     }
+
 }
