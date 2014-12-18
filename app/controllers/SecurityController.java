@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import models.UserLogin;
 import models.humans.Volunteer;
-import activiti.ServicesTimer;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -90,13 +89,16 @@ public class SecurityController extends Controller {
         } else {
         	user.updateLastLogin();
             String authToken = user.createToken();
-            ObjectNode authTokenJson = Json.newObject();
-            authTokenJson.put(AUTH_TOKEN, authToken);
+            ObjectNode loginJson = Json.newObject();
+            loginJson.put(AUTH_TOKEN, authToken);
             response().setCookie(AUTH_TOKEN, authToken);
+            // Add the user information to the result.
+            loginJson.put("UserLogin", user.toJson());
+            
             if (LOGGER.isDebugEnabled()) {
             	LOGGER.debug("Authorized login attempt. User " + user.getUsername() + " logged in successfully.");
             }
-            return Results.ok(authTokenJson);
+            return Results.ok(loginJson);
         }
     }
     
