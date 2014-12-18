@@ -1,36 +1,32 @@
 package helper;
 
-import org.apache.commons.mail.EmailException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import activiti.ServicesTimer;
+
 import play.*;
 
 public class Global extends GlobalSettings {
+	/** Logger to log SecurityController events. */
+	private static Logger LOGGER = LoggerFactory.getLogger(Global.class);
 	
 	@Override
-	  public void onStart(Application app) {
+	public void onStart(Application app) {
 		// Deploy Activiti services.
-		//ServicesTimer.deployProcess();
-		// Für Email-Präsentationsprozess starten
-		// ServicesTimer.startProcess();
+		ServicesTimer.deployProcess();
+		// TESTING : Fills database with some default values.
+		Starter.start();
 		
-		//mailer test
-		/*try {
-			mailer.Mail.sendMail();
-		} catch (EmailException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (LOGGER.isInfoEnabled()) {
+			LOGGER.info("Application has started");
 		}
-		*/
-		
-		
-		
-	    Logger.info("Application has started");
 	  }  
 
-	  @Override
-	  public void onStop(Application app) {
-	    Logger.info("Application shutdown...");
-	  }  
-	  
+	@Override
+	public void onStop(Application app) {
+		if (LOGGER.isInfoEnabled()) {
+			LOGGER.info("Application shutdown...");
+		}
+	}  
 }
