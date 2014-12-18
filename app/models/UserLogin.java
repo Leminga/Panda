@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,10 @@ public class UserLogin extends Model {
 	private Date lastLogin;
 	/** The authentication token when the user is logged in. */
 	private String authToken;
+	/** */
+	@Transient
+	private boolean hasChanged;
+	
 	
 	/**
 	 * Queries the database to find a user that is
@@ -173,6 +178,7 @@ public class UserLogin extends Model {
 		this.username = username.toLowerCase().trim();
 		this.password = password;
 		this.creationTime = new Date();
+		this.hasChanged = true;
 	}
 	
 	///
@@ -185,6 +191,7 @@ public class UserLogin extends Model {
 	
 	public void setUsername(String username) {
 		this.username = username.toLowerCase().trim();
+		this.hasChanged = true;
 	}
 	
 	public String getPassword() {
@@ -193,6 +200,7 @@ public class UserLogin extends Model {
 	
 	public void setPassword(String password) {
 		this.password = password;
+		this.hasChanged = true;
 	}
 	
 	public Date getFirstLogin() {
@@ -201,6 +209,7 @@ public class UserLogin extends Model {
 	
 	public void setFirstLogin(Date firstLogin) {
 		this.firstLogin = firstLogin;
+		this.hasChanged = true;
 	}
 	
 	public Date getLastLogin() {
@@ -209,6 +218,7 @@ public class UserLogin extends Model {
 	
 	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
+		this.hasChanged = true;
 	}
 	
 	public String getAuthToken() {
@@ -217,6 +227,7 @@ public class UserLogin extends Model {
 	
 	public void setAuthToken(String authToken) {
 		this.authToken = authToken;
+		this.hasChanged = true;
 	}
 	
 	///
@@ -224,10 +235,25 @@ public class UserLogin extends Model {
 	///
 	
 	/**
+	 * Sets the last login date to the current
+	 * date.
+	 */
+	public void updateLastLogin() {
+		this.lastLogin = new Date();
+		this.hasChanged = true;
+		this.save();
+	}
+	
+	/**
 	 * Saves the current user object to the database.
 	 */
 	@Override
 	public void save() throws OptimisticLockException {
+		// If the entity was not changed, just return.
+		if (!this.hasChanged) {
+			return;
+		}
+		
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
@@ -256,6 +282,7 @@ public class UserLogin extends Model {
      */
     public String createToken() {
         this.authToken = UUID.randomUUID().toString();
+        this.hasChanged = true;
         this.save();
         if (LOGGER.isDebugEnabled()) {
         	LOGGER.debug("Authentication token for user " + this.username + " created.");
@@ -271,9 +298,10 @@ public class UserLogin extends Model {
      */
     public void deleteAuthToken() {
         this.authToken = null;
+        this.hasChanged = true;
+        this.save();
         if (LOGGER.isDebugEnabled()) {
         	LOGGER.debug("Authentication token for user " + this.username + " deleted.");
         }
-        this.save();
     }
 }
