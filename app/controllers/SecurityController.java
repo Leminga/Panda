@@ -88,6 +88,7 @@ public class SecurityController extends Controller {
         	}
             return Results.unauthorized();
         } else {
+        	user.updateLastLogin();
             String authToken = user.createToken();
             ObjectNode authTokenJson = Json.newObject();
             authTokenJson.put(AUTH_TOKEN, authToken);
