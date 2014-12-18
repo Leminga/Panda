@@ -15,10 +15,13 @@ import org.slf4j.LoggerFactory;
 
 import play.data.validation.Constraints.*;
 import play.db.ebean.Model;
+import play.libs.Json;
 import models.exceptions.UserAlreadyExistsException;
 
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Entity
 public class UserLogin extends Model {
@@ -194,6 +197,7 @@ public class UserLogin extends Model {
 		this.hasChanged = true;
 	}
 	
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -203,6 +207,7 @@ public class UserLogin extends Model {
 		this.hasChanged = true;
 	}
 	
+	@JsonIgnore
 	public Date getFirstLogin() {
 		return firstLogin;
 	}
@@ -212,6 +217,7 @@ public class UserLogin extends Model {
 		this.hasChanged = true;
 	}
 	
+	@JsonIgnore
 	public Date getLastLogin() {
 		return lastLogin;
 	}
@@ -221,6 +227,7 @@ public class UserLogin extends Model {
 		this.hasChanged = true;
 	}
 	
+	@JsonIgnore
 	public String getAuthToken() {
 		return authToken;
 	}
@@ -304,5 +311,26 @@ public class UserLogin extends Model {
         	LOGGER.debug("Authentication token for user " + this.username + " deleted.");
         }
     }
+    
+    /**
+	 * Returns the simple name of the class.
+	 * 
+	 * @return <b>String</b> The simple name of the current class.
+	 */
+	@JsonIgnore
+	public String getClassName() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+    
+    /**
+	 * Converts the current volunteer object to e JSON node.
+	 * 
+	 * @return <b>JsonNode</b> A JSON node that contains this volunteer object.
+	 */
+	public JsonNode toJson() {
+		ObjectNode result = Json.newObject();
+		result.put(this.getClassName().toLowerCase(), Json.toJson(this));
+		return result;	
+	}
 
 }
