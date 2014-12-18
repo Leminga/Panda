@@ -94,6 +94,7 @@ public class SecurityController extends Controller {
             response().setCookie(AUTH_TOKEN, authToken);
             // Add the user information to the result.
             loginJson.put("UserLogin", user.toJson());
+            // TODO: Search the corresponding volunteer and add its data to the JsonObject that is responded.
             
             if (LOGGER.isDebugEnabled()) {
             	LOGGER.debug("Authorized login attempt. User " + user.getUsername() + " logged in successfully.");
