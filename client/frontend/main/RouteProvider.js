@@ -1,7 +1,7 @@
 // The RouteProvider module, adds hash-bangs (=anchors) to the webpage. This allows fast and convenient routing, without
 // constant reloading of the webpage.
 angular.module('Panda')
-    .config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
+    .config(['$routeProvider', '$locationProvider', function ($routeProvider) {
         $routeProvider
             // This is the root route, which connects to the login.html
             .when('/', {
@@ -24,10 +24,20 @@ angular.module('Panda')
                 templateUrl: 'assets/views/coreData.html',
                 controller: 'CoreDataFormCtrl as coreDataCtrl'
             })
+            .when('/eventSpecific', {
+                templateUrl: 'assets/views/eventSpecific.html',
+                controller: 'EventSpecificFormCtrl as eventSpecificCtrl'
+            })
+            .when('/qualifications', {
+                templateUrl: 'assets/views/qualifications.html',
+                controller: 'QualificationsFormCtrl as qualificationsCtrl'
+            })
+
 
             // If none of the above routes fit to the link that has been inserted, the user is being automatically
             // rerouted to the login.html (route with '/')
             .otherwise({
                 redirectTo: '/'
             });
-    }]);
+    }])
+;

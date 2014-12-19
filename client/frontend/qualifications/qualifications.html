@@ -1,8 +1,9 @@
-
-    <details><summary>Career</summary><br>
-        <form>
-            <div>Current work:
-            <select>
+<h1>QUALIFICATIONS</h1>
+<button ng-click="career = !career; qualificationsCtrl.getData()">Career</button>
+    <br>
+    <form ng-show="career">
+        <div>Current work:
+            <select ng-model="qualificationsCtrl.user.currentWork">
                 <option value='' disabled selected style='display:none;'>Open here</option>
                 <option value="pupil">Pupil</option>
                 <option value="undergratuate">Undergraduate</option>
@@ -11,18 +12,27 @@
                 <option value="freelance">Freelance</option>
                 <option value="retiree">Retiree</option>
             </select>
-            </div><br>
+        </div>
+        <br>
 
-        <div>Faculty:<input type="text"></div><br>
-        <div>Education Institute:<input type="text"></div><br>
-        <div>Career:<textarea cols="50" rows="10" name="textbox"></textarea></div><br>
-       </form>
-    </details>
+        <div>Faculty:<input ng-model="qualificationsCtrl.user.faculty" type="text"></div>
+        <br>
 
-    <details><summary>Knowledge</summary><br>
-        <form>
-            <div>Mother Tongue:
-            <select>
+        <div>Education Institute:<input ng-model="qualificationsCtrl.user.educationInstitute" type="text"></div>
+        <br>
+
+        <div>Career:<textarea ng-model="qualificationsCtrl.user.career" cols="50" rows="10" name="textbox"></textarea></div>
+        <br>
+        <button ng-click="qualificationsCtrl.saveData()">Save</button>
+
+    </form>
+
+    <button ng-click="knowledge = !knowledge; qualificationsCtrl.getData()">Knowledge</button>
+    <br>
+
+    <form ng-show="knowledge">
+        <div>Mother Tongue:
+            <select ng-model="qualificationsCtrl.user.motherTongue">
                 <option value='' disabled selected style='display:none;'>Open here</option>
                 <option value="english">English</option>
                 <option value="french">French</option>
@@ -30,10 +40,11 @@
                 <option value="italian">Italian</option>
                 <option value="other">Other</option>
             </select>
-            </div><br>
+        </div>
+        <br>
 
-            <div>Additional Languages:
-            <select>
+        <div>Additional Languages:
+            <select ng-model="qualificationsCtrl.user.additionalLanguages">
                 <option value='' disabled selected style='display:none;'>Open here</option>
                 <option value="english">English</option>
                 <option value="french">French</option>
@@ -41,42 +52,52 @@
                 <option value="italian">Italian</option>
                 <option value="other">Other</option>
             </select>
-            </div><br>
+        </div>
+        <br>
 
-            <div>Translation Knowledge:<select>
-                <option value='' disabled selected style='display:none;'>Open here</option>
-                <option value="english">English</option>
-                <option value="french">French</option>
-                <option value="german">German</option>
-                <option value="italian">Italian</option>
-                <option value="other">Other</option>
+        <div>Translation Knowledge:<select ng-model="qualificationsCtrl.user.translationKnowledge">
+            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value="english">English</option>
+            <option value="french">French</option>
+            <option value="german">German</option>
+            <option value="italian">Italian</option>
+            <option value="other">Other</option>
 
-            </select>
-            </div><br>
+        </select>
+        </div>
+        <br>
 
-            <div>Interpreting Knowledge:<select>
-                <option value='' disabled selected style='display:none;'>Open here</option>
-                <option value="english">English</option>
-                <option value="french">French</option>
-                <option value="german">German</option>
-                <option value="italian">Italian</option>
-                <option value="other">Other</option>
+        <div>Interpreting Knowledge:<select ng-model="qualificationsCtrl.user.interpretingKnowledge">
+            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value="english">English</option>
+            <option value="french">French</option>
+            <option value="german">German</option>
+            <option value="italian">Italian</option>
+            <option value="other">Other</option>
 
-            </select>
-            </div><br>
+        </select>
+        </div>
+        <br>
 
-            <div>IT-Knowledge:<select>
-                <option value='' disabled selected style='display:none;'>Open here</option>
-                <option value="none">None</option>
-                <option value="basic">Basic</option>
-                <option value="advanced">Advanced</option>
-                <option value="expert">Expert</option>
+        <div>IT-Knowledge:<select ng-model="qualificationsCtrl.user.ITKnowledge">
+            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value="none">None</option>
+            <option value="basic">Basic</option>
+            <option value="advanced">Advanced</option>
+            <option value="expert">Expert</option>
 
-            </select>
-            </div><br>
+        </select>
+        </div>
+        <br>
 
-            <div>Additional Qualifications:<textarea cols="50" rows="10" name="textbox"></textarea></div><br>
+        <div>Additional Qualifications:<textarea ng-model="qualificationsCtrl.user.additionalQualifications" cols="50" rows="10" name="textbox"></textarea></div>
+        <br>
 
-            <div>Event Experiences:<input type="text"></div><br>
-        </form>
-    </details>
+        <div>Event Experiences:<input ng-model="qualificationsCtrl.user.eventExperiences" type="text"></div>
+        <br>
+        <button ng-click="qualificationsCtrl.saveData()">Save</button>
+
+    </form>
+
+<button ng-click="qualificationsCtrl.saveData()">Save All</button>
+

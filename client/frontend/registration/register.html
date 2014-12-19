@@ -12,14 +12,45 @@
             <input type="email" name="email" ng-model="registerCtrl.user.email" required="">
 
             <div>Password:</div>
-            <input type="password" ng-required="true" id="password" pattern=".{6,}" name="password" ng-model="registerCtrl.user.password" title="6 characters minimum" required="">
+            <input type="password" ng-required="true" id="password" pattern=".{6,}" name="password"
+                   ng-model="registerCtrl.user.password" title="6 characters minimum" required="">
 
             <div>Repeat Password:</div>
-            <input type="password" ng-model="registerCtrl.user.password_repeat" compare-to="registerCtrl.user.password" id="password_repeat" name="password_repeat" required="">
-            <div ng-show='form.password_repeat.$invalid && !form.password_repeat.$pristine'> The repeated password does not match. </div>
+            <input type="password" ng-model="registerCtrl.user.password_repeat" compare-to="registerCtrl.user.password"
+                   id="password_repeat" name="password_repeat" required="">
 
-            <div><input type="checkbox" ng-model="checked" required=""> I have read the <a target="" href="narroForm" download="NARRO_Form.pdf">NARRO</a> form</div>
-            <div></div>
+            <div ng-show='form.password_repeat.$invalid && !form.password_repeat.$pristine'> The repeated password does
+                not match.
+            </div>
+
+            <div><input type="checkbox" ng-model="checked" required="">
+                I have read the <a href="" ng-click="narro = !narro"> NARRO-form </a></div>
+
+                <div ng-show="narro"><iframe srcdoc="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+                    et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+                    dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+                    et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+                    dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+                    et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+                    dolor sit amet.
+                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                    dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
+                    praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit
+                    amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
+                    aliquam erat volutpat.
+                    Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
+                    aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit
+                    esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et
+                    iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla
+                    facilisi.
+                    Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim
+                    placerat facer"></iframe>
+                </div>
+
+                <div></div>
                 <button type="submit" ng-disabled="form.$invalid">Register</button>
         </form>
 

@@ -14,9 +14,9 @@ public class Global extends GlobalSettings {
 	@Override
 	public void onStart(Application app) {
 		// Deploy Activiti services.
-		ServicesTimer.deployProcess();
+		//ServicesTimer.deployProcess();
 		// TESTING : Fills database with some default values.
-		Starter.start();
+		//Starter.start();
 		
 		if (LOGGER.isInfoEnabled()) {
 			LOGGER.info("Application has started");

@@ -1,35 +1,17 @@
 angular.module('Panda')
-    .controller('CoreDataFormCtrl', ['CoreDataService', '$localStorage', '$sessionStorage',
-        function (CoreDataService, $localStorage, $sessionStorage) {
+    .controller('CoreDataFormCtrl', ['DataService', '$window',
+        function (DataService, $window) {
             var self = this;
+            var token = $window.sessionStorage.getItem("token");
+
+            self.saveData = function () {
+                DataService.save(self.user);
+            };
 
             self.getData = function () {
-                self.user.personalData.prename = $sessionStorage.volunteer.prename;
-                self.user.personalData.surname = $sessionStorage.volunteer.surname;
-                self.user.contactData.email = $sessionStorage.volunteer.loginData.username;
-            };
-
-            self.savePersonalData = function () {
-                $sessionStorage.volunteer.prename = self.user.personalData.prename;
-                $sessionStorage.volunteer.surname = self.user.personalData.surname;
-                //CoreDataService.savePersonalData(self.user.personalData);
-            };
-
-            self.saveEmergencyContacts = function () {
-                CoreDataService.saveEmergencyContacts(self.user.emergencyContacts);
-            };
-
-            self.saveContactData = function () {
-                $sessionStorage.volunteer.loginData.username = self.user.contactData.email;
-                //CoreDataService.saveContactData(self.user.contactData);
-            };
-
-            self.saveSizes = function () {
-                CoreDataService.saveSizes(self.user.sizes);
-            };
-
-            self.saveAll = function () {
-                CoreDataService.saveAll(self.user);
+                DataService.get(token).then(function(response){
+                    self.user = response.data;
+                });
             };
 
         }]);
