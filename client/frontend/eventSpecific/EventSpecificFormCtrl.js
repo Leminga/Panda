@@ -1,16 +1,22 @@
 angular.module('Panda')
-    .controller('EventSpecificFormCtrl', ['DataService', '$window',
-        function (DataService,$window) {
-        var self = this;
-        var token = $window.sessionStorage.getItem("token");
+    .controller('EventSpecificFormCtrl', ['DataService',
+        function (DataService) {
+            var self = this;
 
-        self.saveData = function () {
-            DataService.save(self.user);
-        };
 
-        self.getData = function () {
-            DataService.get(token).then(function(response){
+            DataService.get().then(function (response) {
                 self.user = response.data;
             });
-        };
-    }]);
+
+            self.saveData = function (user) {
+                if(user.profilePictures != null){
+                    user.profilePictures = JSON.encodeBase64(user.profilePicture);
+                }
+                if(user.passportPicture != null){
+                    user.passportPicture = JSON.encodeBase64(user.passportPicture);
+                }
+                DataService.save(user);
+            };
+
+
+        }]);

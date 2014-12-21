@@ -1,16 +1,22 @@
 angular.module('Panda')
     .controller('QualificationsFormCtrl', ['DataService', '$window',
         function (DataService, $window) {
-        var self = this;
-        var token = $window.sessionStorage.getItem("token");
+            var self = this;
 
-        self.saveData = function () {
-            DataService.save(self.user);
-        };
-
-        self.getData = function () {
-            DataService.get(token).then(function(response){
+            DataService.get().then(function (response) {
                 self.user = response.data;
             });
-        };
-    }]);
+
+            self.saveData = function (user) {
+                DataService.save(user);
+            };
+
+            self.languageCheck = function(language){
+                if(language == 'other' || language == null){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+
+        }]);

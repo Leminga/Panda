@@ -1,42 +1,46 @@
 // This is the instantiated main-module. Every other module builds upon this one. Dependencies can be added in
 // the square brackets.
-angular.module('Panda',['ngRoute']);
+angular.module('Panda', ['ngRoute']);
 
 
 angular.module('Panda')
     .controller('CoreDataFormCtrl', ['DataService', '$window',
-        function (DataService, $window) {
+        function (DataService) {
             var self = this;
-            var token = $window.sessionStorage.getItem("token");
 
-            self.saveData = function () {
-                DataService.save(self.user);
+            DataService.get().then(function (response) {
+                self.user = response.data;
+            });
+
+            self.saveData = function (user) {
+                DataService.save(user);
             };
 
-            self.getData = function () {
-                DataService.get(token).then(function(response){
-                    self.user = response.data;
-                });
-            };
 
         }]);
 
 angular.module('Panda')
-    .controller('EventSpecificFormCtrl', ['DataService', '$window',
-        function (DataService,$window) {
-        var self = this;
-        var token = $window.sessionStorage.getItem("token");
+    .controller('EventSpecificFormCtrl', ['DataService',
+        function (DataService) {
+            var self = this;
 
-        self.saveData = function () {
-            DataService.save(self.user);
-        };
 
-        self.getData = function () {
-            DataService.get(token).then(function(response){
+            DataService.get().then(function (response) {
                 self.user = response.data;
             });
-        };
-    }]);
+
+            self.saveData = function (user) {
+                if(user.profilePictures != null){
+                    user.profilePictures = JSON.encodeBase64(user.profilePicture);
+                }
+                if(user.passportPicture != null){
+                    user.passportPicture = JSON.encodeBase64(user.passportPicture);
+                }
+                DataService.save(user);
+            };
+
+
+        }]);
 
 // This controller is used for the forgotten Password webpage. It handles the request to the controller, which checks
 // whether the user exists or not and then handles the password reset.
@@ -86,20 +90,23 @@ angular.module('Panda')
         };
 
     }]);
+// This is the main Data service. Due to the forms working the same, this service is integrated in many
+// controllers.
 angular.module('Panda')
-    .service('DataService', ['$http', function ($http) {
+    .service('DataService', ['$http', '$window', function ($http, $window) {
         return {
             save: function (user) {
                 return $http.patch("/saveUser", user);
             },
 
-            get: function (token) {
-                return $http.get("/getUser",{
-                  params:{token: token}
-                });
+            get: function () {
+                // The token is given to the Backend controller right away.
+                return $http.post("/getUser", $window.sessionStorage.getItem("token"));
             }
-        };
+        }
     }]);
+
+
 // The InterceptorService reacts to any of the mentioned http-methods (request, requestError..)
 angular.module('Panda')
     .factory('InterceptorService', ['$q', '$window', function ($q, $window) {
@@ -146,6 +153,9 @@ angular.module('Panda')
     // build-up of the webpage.
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('InterceptorService');
+        // This stores every HTTP-Call in a corresponding cache - this could prove to be useful for data-refreshing in
+        // forms.
+        $httpProvider.defaults.cache = true;
     }]);
 // The RouteProvider module, adds hash-bangs (=anchors) to the webpage. This allows fast and convenient routing, without
 // constant reloading of the webpage.
@@ -215,41 +225,48 @@ var compareTo = function () {
 angular.module('Panda').directive("compareTo", compareTo);
 // This controller handles the overview form, which is used for viewing user-related data on a single page.
 angular.module('Panda')
-    .controller('OverviewFormCtrl', ['$window' ,'$location', function ($window, $location) {
-        // Check whether the user is logged in or not
-        if ($window.sessionStorage.getItem("token") === null) {
-            $location.path("/");
-        }
-
+    .controller('OverviewFormCtrl', ['$window', '$location','DataService', function ($window, $location, DataService) {
         var self = this;
+
+        DataService.get().then(function (response) {
+            self.user = response.data;
+        });
+
 
         // Logout function that clears the local and session storage (= Cookies) from the user and
         // then he is being rerouted to the login page
-        self.logout = function(config){
+        self.logout = function (config) {
             sessionStorage.clear();
             localStorage.clear();
             $location.path("/");
         }
 
-    }]);
+    }])
+;
 
 
 angular.module('Panda')
     .controller('QualificationsFormCtrl', ['DataService', '$window',
         function (DataService, $window) {
-        var self = this;
-        var token = $window.sessionStorage.getItem("token");
+            var self = this;
 
-        self.saveData = function () {
-            DataService.save(self.user);
-        };
-
-        self.getData = function () {
-            DataService.get(token).then(function(response){
+            DataService.get().then(function (response) {
                 self.user = response.data;
             });
-        };
-    }]);
+
+            self.saveData = function (user) {
+                DataService.save(user);
+            };
+
+            self.languageCheck = function(language){
+                if(language == 'other' || language == null){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+
+        }]);
 
 angular.module('Panda')
     .factory('GetRegistrationService', ['$http', function ($http) {

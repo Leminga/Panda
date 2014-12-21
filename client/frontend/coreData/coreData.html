@@ -1,9 +1,10 @@
 <h1>CORE DATA</h1>
 <div>
-    <button ng-click="personal_data = !personal_data; coreDataCtrl.user = {};coreDataCtrl.getData()">Open/Close Personal Data</button>
+    <button ng-click="personal_data = !personal_data">Open/Close Personal Data</button>
     <br>
 
-    <form name="form" ng-submit="coreDataCtrl.saveData()" ng-show="personal_data" method="post">
+    <form id="form_personal" name="form_personal" ng-submit="coreDataCtrl.saveData(coreDataCtrl.user.personalData)"
+          ng-show="personal_data">
 
         <div>
             Prename: <input type="text" name="prename" ng-model="coreDataCtrl.user.personalData.prename"><br><br>
@@ -23,7 +24,8 @@
         <div>
 
             <label for="nat_name">Nationality: </label><input ng-model="coreDataCtrl.user.personalData.nationality"
-                                                              id="nat_name" name="nat_name" type="text" list="nation"/>
+                                                              id="nat_name" name="nat_name" type="text"
+                                                              list="nation"/>
 
             <datalist id="nation">
                 <option value='' disabled selected style='display:none;'>Open here</option>
@@ -293,24 +295,26 @@
         <br>
 
         <div>
-            <button type="submit">Save</button>
+            <button type="submit" form="form_personal">Save</button>
         </div>
     </form>
 
 
     <div>
-        <button ng-click="otherData = !otherData;coreDataCtrl.getData()">Open/Close Contact
+        <button ng-click="otherData = !otherData">Open/Close Contact
             Data
         </button>
     </div>
-    <form ng-submit="coreDataCtrl.saveData()" ng-show="otherData">
+    <form id="form_contactData" name="form_contactData" ng-submit="coreDataCtrl.saveData(coreDataCtrl.user.contactData)"
+          ng-show="otherData">
         <div>
             <h4>Address</h4>
 
             <div>Street:<input ng-model="coreDataCtrl.user.contactData.street" type="text" name="street"></div>
             <br>
 
-            <div>House Number:<input ng-model="coreDataCtrl.user.contactData.houseNumber" type="text" name="housenumber">
+            <div>House Number:<input ng-model="coreDataCtrl.user.contactData.houseNumber" type="text"
+                                     name="housenumber">
             </div>
             <br>
 
@@ -594,55 +598,67 @@
             <input type="radio" ng-model="coreDataCtrl.user.contactData.language" name="language" value="english">English
             <input type="radio" ng-model="coreDataCtrl.user.contactData.language" name="language" value="german">German
         </div>
-
+        <button form="form_contactData" type="submit">Save</button>
         <div>
-            <h4>Identification</h4>
-
-            <div>ID Number:<input ng-model="coreDataCtrl.user.contactData.idNumber" type="text" name="Id number"></div>
-            <br>
-
-            <div>ID Type:<input type="text" ng-model="coreDataCtrl.user.contactData.idType" name="Id type"></div>
-            <br>
-
-            <div>Expiry Date:<input placeholder="dd/mm/yyyy" ng-model="coreDataCtrl.user.contactData.expiryDate"
-                                    pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
-                                    type="text" name="expiry date"></div>
-            <br>
         </div>
+    </form>
+<div>
+  <button type="button" ng-click="identifier = !identifier">Open/Close Identification</button>
+</div>
+      <div ng-show="identifier">
+    <form id="identification"  name="identification" ng-submit="coreDataCtrl.saveData(coreDataCtrl.user.identification)">
+        <h4>Identification</h4>
+
+        <div>ID Number:<input ng-model="coreDataCtrl.user.identification.idNumber" type="text" name="Id number">
+        </div>
+        <br>
+
+        <div>ID Type:<input type="text" ng-model="coreDataCtrl.user.identification.idType" name="Id type"></div>
+        <br>
+
+        <div>Expiry Date:<input placeholder="dd/mm/yyyy" ng-model="coreDataCtrl.user.identification.expiryDate"
+                                pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
+                                type="text" name="expiry date"></div>
+        <br>
+
 
         <div>Do you have a driver's licence?<br><br>
-            <input type="radio" ng-model="coreDataCtrl.user.contactData.driversLicense" name="driversLicense" value="yes"
+            <input type="radio" ng-model="coreDataCtrl.user.identification.driversLicense" name="driversLicense"
+                   value="yes"
                    checked>Yes<br>
-            <input type="radio" ng-model="coreDataCtrl.user.contactData.driversLicense" name="driversLicense"
+            <input type="radio" ng-model="coreDataCtrl.user.identification.driversLicense" name="driversLicense"
                    value="no">No<br>
         </div>
         <br>
 
-
         <div>
-            <button type="submit">Save</button>
+            <button form="identification" type="submit">Save</button>
             <br>
         </div>
 
-
     </form>
-
-
-    <button ng-click="emergency_contacts = !emergency_contacts;coreDataCtrl.getData()">Open/Close Emergency Contacts</button>
-    <form ng-submit="coreDataCtrl.saveData()" ng-show="emergency_contacts">
+    </div>
+    <button ng-click="emergency_contacts = !emergency_contacts">Open/Close Emergency Contacts</button>
+    <form id="form_emergencyContacts" name="form_emergencyContacts"
+          ng-submit="coreDataCtrl.saveData(coreDataCtrl.user.emergencyContacts)" ng-show="emergency_contacts">
         <div><br>
 
-            <div>Emergency Contact Prename:<input ng-model="coreDataCtrl.user.emergencyContacts.prename" type="text"></div>
-            <div>Emergency Contact Surname:<input ng-model="coreDataCtrl.user.emergencyContacts.surname" type="text"></div>
-            <div>Emergency Contact Relation:<input ng-model="coreDataCtrl.user.emergencyContacts.relation" type="text">
+            <div>Emergency Contact Prename:<input ng-model="coreDataCtrl.user.emergencyContacts.em_prename"
+                                                  type="text"></div>
+            <div>Emergency Contact Surname:<input ng-model="coreDataCtrl.user.emergencyContacts.em_surname"
+                                                  type="text"></div>
+            <div>Emergency Contact Relation:<input ng-model="coreDataCtrl.user.emergencyContacts.em_relation"
+                                                   type="text">
             </div>
-            <div>Emergency Contact Phonenumber:<input ng-model="coreDataCtrl.user.emergencyContacts.phonenumber" type="tel">
+            <div>Emergency Contact Phonenumber:<input ng-model="coreDataCtrl.user.emergencyContacts.em_phonenumber"
+                                                      type="tel">
             </div>
-            <div>Emergency Contact E-Mail:<input ng-model="coreDataCtrl.user.emergencyContacts.email" type="email"></div>
+            <div>Emergency Contact E-Mail:<input ng-model="coreDataCtrl.user.emergencyContacts.em_email" type="email">
+            </div>
         </div>
 
         <div>
-            <button type="submit">Save</button>
+            <button form="form_emergencyContacts" type="submit">Save</button>
         </div>
         <br>
 
@@ -650,10 +666,10 @@
 
 
     <div>
-        <button ng-click="sizes = !sizes;coreDataCtrl.getData()">Open/Close Sizes</button>
+        <button ng-click="sizes = !sizes;">Open/Close Sizes</button>
     </div>
 
-    <form ng-submit="coreDataCtrl.saveData()" ng-show="sizes">
+    <form ng-submit="coreDataCtrl.saveData(coreDataCtrl.user.sizes)" ng-show="sizes">
 
         <div><br>
             <label for="jacket_sizes">Choose your jacket size: </label>
@@ -669,7 +685,7 @@
 
         <div>
             <label for="trouser_sizes">Choose your trouser size: </label>
-            <select ng-model="coreDataCtrl.user.sizes.trouserSizes" id="trouser_sizes" name="jacket_sizes">
+            <select ng-model="coreDataCtrl.user.sizes.trouserSizes" id="trouser_sizes" name="trouser_sizes">
                 <option value='' disabled selected style='display:none;'>Open here</option>
                 <option value="S">S</option>
                 <option value="M">M</option>
@@ -720,6 +736,6 @@
         <br>
     </form>
     <div>
-        <button ng-click="coreDataCtrl.saveAll()" type="submit">Save all</button>
     </div>
-    <br></div>
+    <br>
+</div>

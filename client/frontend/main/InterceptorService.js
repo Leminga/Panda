@@ -44,4 +44,7 @@ angular.module('Panda')
     // build-up of the webpage.
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('InterceptorService');
+        // This stores every HTTP-Call in a corresponding cache - this could prove to be useful for data-refreshing in
+        // forms.
+        $httpProvider.defaults.cache = true;
     }]);
