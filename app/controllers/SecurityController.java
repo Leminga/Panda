@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import models.UserLogin;
-import models.humans.Volunteer;
+import models.volunteer.Volunteer;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -139,7 +139,7 @@ public class SecurityController extends Controller {
         if (user == null) {
         	LOGGER.info("New user to register: " + registerForm.email);
         	user = new UserLogin(registerForm.email, registerForm.password);
-        	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname);
+        	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname, registerForm.email);
         	volunteer.setUserLogin(user);
         	try {
         		volunteer.save();
