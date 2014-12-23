@@ -1,6 +1,7 @@
 package models;
 
 import play.db.ebean.Model.Finder;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,11 @@ import play.libs.Json;
 @Entity
 public class EmailAddress extends Model{
 	
+	public EmailAddress(String emailAddress) {
+		super();
+		this.emailAddress = emailAddress;
+	}
+
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	

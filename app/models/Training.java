@@ -31,6 +31,8 @@ public class Training extends Model{
 	private Date trainingdate;
 	@Required
 	private String trainingquota;
+	
+	
 	public String getTrainingName() {
 		return trainingName;
 	}

@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Languages extends Model{
+public class LanguagesTranslation extends Model{
 	
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
@@ -21,7 +21,7 @@ public class Languages extends Model{
 	@GeneratedValue
 	private long id;
 	@ManyToOne
-	private long languageTId;
+	private long languageTranslationTId;
 	
 	public long getId() {
 		return id;
@@ -30,10 +30,10 @@ public class Languages extends Model{
 		this.id = id;
 	}
 	public long getLanguageDe() {
-		return languageTId;
+		return languageTranslationTId;
 	}
-	public void setLanguageDe(long languageTId) {
-		this.languageTId = languageTId;
+	public void setLanguageDe(long languageTranslationTId) {
+		this.languageTranslationTId = languageTranslationTId;
 	}
 	
 	

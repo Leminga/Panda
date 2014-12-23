@@ -56,9 +56,5 @@ public class Interview extends Model {
 	}
 	public void setInterviewComment(String interviewComment) {
 		this.interviewComment = interviewComment;
-	}
-	
-	
-	
-	
+	}	
 }

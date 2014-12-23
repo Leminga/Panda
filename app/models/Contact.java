@@ -15,8 +15,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import models.volunteer.Volunteer;
+
 
 @Entity
+
 public class Contact extends Model{
 	
 	/** The serialization version identifier. */
@@ -26,10 +29,11 @@ public class Contact extends Model{
 	@Required
 	@GeneratedValue
 	private long id;
-	@Required
-	private ConnectionType connectionType;
 	@ManyToOne
 	private long connectionTypeTId;
+	@ManyToOne // owning side
+	private Volunteer volunteer;
+
 	
 	public long getId() {
 		return id;
@@ -37,12 +41,7 @@ public class Contact extends Model{
 	public void setId(long id) {
 		this.id = id;
 	}
-	public ConnectionType getConnectionType() {
-		return connectionType;
-	}
-	public void setConnectionType(ConnectionType connectionType) {
-		this.connectionType = connectionType;
-	}
+	
 	public long getConnectionTypeTId() {
 		return connectionTypeTId;
 	}

@@ -21,7 +21,7 @@ import models.Departure;
 import models.EmailAddress;
 import models.Event;
 import models.Identification;
-import models.Languages;
+import models.LanguagesTranslation;
 import models.Organization;
 import models.Phone;
 import models.Role;
@@ -43,7 +43,7 @@ public class ICGMember extends Human{
 	@Required
 	private List <Identification>identifications;
 	@Required
-	private List<Languages> languages;
+	private List<LanguagesTranslation> languagesTranslation;
 	@Required
 	private List <Event>events;
 	@Required
@@ -78,11 +78,11 @@ public class ICGMember extends Human{
 	public void setIdentifications(List<Identification> identifications) {
 		this.identifications = identifications;
 	}
-	public List<Languages> getLanguages() {
-		return languages;
+	public List<LanguagesTranslation> getLanguages() {
+		return languagesTranslation;
 	}
-	public void setLanguages(List<Languages> languages) {
-		this.languages = languages;
+	public void setLanguages(List<LanguagesTranslation> languagesTranslation) {
+		this.languagesTranslation = languagesTranslation;
 	}
 	public List<Event> getEvents() {
 		return events;

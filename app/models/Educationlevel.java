@@ -36,7 +36,4 @@ public class Educationlevel extends Model {
 	public void setEducationTId(String educationTId) {
 		this.educationTId = educationTId;
 	}
-	
-	
-
 }

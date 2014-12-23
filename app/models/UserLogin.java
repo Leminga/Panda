@@ -44,10 +44,8 @@ public class UserLogin extends Model {
 	private String password;
 	/** The date that user was created, ie. registered, the first time. */
 	@Required
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationTime;
 	/** The date, the user logged in the first time. */
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date firstLogin;
 	/** The date the user logged in the last time. */
 	@Temporal(TemporalType.TIMESTAMP)

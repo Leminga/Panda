@@ -1,10 +1,14 @@
-package models.humans;
+package models.volunteer;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OptimisticLockException;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +28,12 @@ import models.Contact;
 import models.Educationlevel;
 import models.EmailAddress;
 import models.EmergencyContact;
+import models.Event;
 import models.Identification;
 import models.Interview;
 import models.ItKnowledge;
-import models.Languages;
+import models.Language;
+import models.LanguagesTranslation;
 import models.Phone;
 import models.PreferredCommunicationLanguage;
 import models.Role;
@@ -35,6 +41,7 @@ import models.Sizes;
 import models.Sport;
 import models.Training;
 import models.UserLogin;
+import models.humans.Human;
 import play.data.validation.Constraints.Required;
 import play.libs.Json;
 
@@ -48,49 +55,56 @@ public class Volunteer extends Human {
 	@Id
 	@Required
 	private long id;
-//	@Required
-	private List <Phone>phones;
-//	@Required
-	private List <Address>addresses;
-//	@Required
+	@OneToMany(cascade = CascadeType.ALL)
 	private List <Contact>contacts;
-//	@Required
+	@OneToMany(cascade = CascadeType.ALL)
 	private List <Identification>identifications;
-//	@Required
+	@OneToMany(cascade = CascadeType.ALL)
 	private List <EmergencyContact>emergencyContacts;
-//	@Required
+	
+	@OneToOne(mappedBy = "volunteer")
 	private Sizes sizes;
-//	@Required
-	private Educationlevel highestEducationlevel;
-//	@Required
-	private PreferredCommunicationLanguage preferredCommunicationLanguage;
-//	@Required
-	private List<Languages> languages;
-//	@Required
-	private List<ItKnowledge> itKnowledges;
-	private long idTextBoxes;
-	private long idEventComment;
-//	@Required
+	
+	@Required
 	private EmailAddress emailAddress;
-//	@Required
-	private List <ActualJob>actualJob;
-//	@Required
+	
+	private Educationlevel highestEducationlevel;
+
+	private PreferredCommunicationLanguage preferredCommunicationLanguage;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Language> languages;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<ItKnowledge> itKnowledges;
+	
+	@OneToOne(mappedBy = "volunteer")
+	private long idTextBoxes;
+	
+	@OneToOne(mappedBy = "volunteer")
+	private ActualJob actualJob;
+	
 	private String socialSecurityNumber;
-//	@Required
+
 	private List<Attachments>attachments;
 //	@Required
 	private byte[] volunteerAgreement;
+
+	
 //	@Required
 	private List <Training>trainings;
 //	@Required
 	private List <Interview>interviews;
 //	@Required
 	private Role role;
-//	@Required
+	//TODO: Relevanz checken für sport
+	//	@Required
 	private Sport sport;
 	/** Login data, if the user is allows to login. */
 	@Required
 	protected UserLogin loginData;
+//	@Required
+	private List <Event>events;
 	
 	/**
 	 * Default constructor;
@@ -98,9 +112,11 @@ public class Volunteer extends Human {
 	 * @param prename
 	 * @param surname
 	 */
-	public Volunteer(String prename, String surname) {
+	public Volunteer(String prename, String surname, String emailAddress) {
 		this.setPrename(prename);
 		this.setSurname(surname);
+		EmailAddress address = new EmailAddress(emailAddress);
+		this.setEmailAddress(address);
 	}
 	public static Logger getLOGGER() {
 		return LOGGER;
@@ -130,24 +146,28 @@ public class Volunteer extends Human {
 		return serialVersionUID;
 	}
 
-	public List<Phone> getPhones() {
-		return phones;
-	}
-	public void setPhones(List<Phone> phones) {
-		this.phones = phones;
-	}
-	public List<Address> getAddresses() {
-		return addresses;
-	}
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
 	public List<Contact> getContacts() {
 		return contacts;
 	}
-	public void setContacts(List<Contact> contacts) {
-		this.contacts = contacts;
+	public void setContacts(Contact contact) {
+		this.contacts.add(contact);
 	}
+	public EmailAddress getEmailAddress() {
+		return emailAddress;
+	}
+	public void setEmailAddress(EmailAddress emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	
+//TODO: relevanz checken
+//	public void removeContacts(Contact contact) {
+//		if(this.contacts.contains(contact))
+//		{
+//			this.contacts.remove(contact);
+//		}
+//	}
+	
 	public List<Identification> getIdentifications() {
 		return identifications;
 	}
@@ -179,10 +199,10 @@ public class Volunteer extends Human {
 			PreferredCommunicationLanguage preferredCommunicationLanguage) {
 		this.preferredCommunicationLanguage = preferredCommunicationLanguage;
 	}
-	public List<Languages> getLanguages() {
+	public List<Language> getLanguages() {
 		return languages;
 	}
-	public void setLanguages(List<Languages> languages) {
+	public void setLanguages(List<Language> languages) {
 		this.languages = languages;
 	}
 	public List<ItKnowledge> getItKnowledges() {
@@ -197,24 +217,7 @@ public class Volunteer extends Human {
 	public void setIdTextBoxes(long idTextBoxes) {
 		this.idTextBoxes = idTextBoxes;
 	}
-	public long getIdEventComment() {
-		return idEventComment;
-	}
-	public void setIdEventComment(long idEventComment) {
-		this.idEventComment = idEventComment;
-	}
-	public EmailAddress getEmailAddress() {
-		return emailAddress;
-	}
-	public void setEmailAddress(EmailAddress emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-	public List<ActualJob> getActualJob() {
-		return actualJob;
-	}
-	public void setActualJob(List<ActualJob> actualJob) {
-		this.actualJob = actualJob;
-	}
+	
 	public String getSocialSecurityNumber() {
 		return socialSecurityNumber;
 	}

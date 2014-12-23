@@ -22,7 +22,7 @@ import models.Departure;
 import models.EmailAddress;
 import models.Event;
 import models.Identification;
-import models.Languages;
+import models.LanguagesTranslation;
 import models.Organization;
 import models.Phone;
 import models.Role;

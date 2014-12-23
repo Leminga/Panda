@@ -43,7 +43,7 @@ public abstract class Human extends Model {
 //	@Required
 	protected Sex sex;
 	/** The date of birth of the person. */
-//	@Required
+	@Required
 	protected Date dateOfBirth;
 	/** The (multiple) nationalities of the person. */
 //	@Required
