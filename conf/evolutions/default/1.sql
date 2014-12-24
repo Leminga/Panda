@@ -6,6 +6,8 @@
 create table actual_job (
   id                        bigint not null,
   actual_job_tid            bigint,
+  vid                       bigint,
+  constraint uq_actual_job_vid unique (vid),
   constraint pk_actual_job primary key (id))
 ;
 
@@ -88,17 +90,10 @@ create table coach (
   constraint pk_coach primary key (id))
 ;
 
-create table connectiontype (
-  id                        bigint not null,
-  connection_type_tid       varchar(255),
-  constraint pk_connectiontype primary key (id))
-;
-
 create table contact (
   id                        bigint not null,
-  connection_type           integer,
   connection_type_tid       bigint,
-  constraint ck_contact_connection_type check (connection_type in (0,1)),
+  volunteer_id              bigint,
   constraint pk_contact primary key (id))
 ;
 
@@ -149,6 +144,7 @@ create table email_address (
 ;
 
 create table emergency_contact (
+  volunteer_id              bigint not null,
   emergency_surname         varchar(255),
   emergency_name            varchar(255))
 ;
@@ -176,19 +172,6 @@ create table event_comment (
   id                        bigint not null,
   comment                   varchar(255),
   constraint pk_event_comment primary key (id))
-;
-
-create table event_data_volunteer (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  name                      varchar(255),
-  password                  varchar(255),
-  id_text_boxes             bigint,
-  id_event_comment          bigint,
-  social_security_number    varchar(255),
-  constraint pk_event_data_volunteer primary key (id))
 ;
 
 create table faculty (
@@ -230,6 +213,7 @@ create table icgmember_guest (
 ;
 
 create table identification (
+  volunteer_id              bigint not null,
   identification_number     varchar(255),
   identification_type       integer,
   expiry_date               timestamp,
@@ -249,6 +233,7 @@ create table interview (
 
 create table it_knowledge (
   id                        bigint not null,
+  volunteer_id              bigint not null,
   it_knowledge_tid          bigint,
   constraint pk_it_knowledge primary key (id))
 ;
@@ -271,14 +256,15 @@ create table locmember (
 
 create table language (
   id                        bigint not null,
+  volunteer_id              bigint not null,
   language_tid              bigint,
   constraint pk_language primary key (id))
 ;
 
-create table languages (
+create table languages_translation (
   id                        bigint not null,
-  language_tid              bigint,
-  constraint pk_languages primary key (id))
+  language_translation_tid  bigint,
+  constraint pk_languages_translation primary key (id))
 ;
 
 create table login_receiver (
@@ -358,9 +344,13 @@ create table sex (
 ;
 
 create table sizes (
+  id                        bigint not null,
+  vid                       bigint,
   jacket_size               integer,
   trousers_size             integer,
-  shoe_size                 integer)
+  shoe_size                 integer,
+  constraint uq_sizes_vid unique (vid),
+  constraint pk_sizes primary key (id))
 ;
 
 create table sport (
@@ -379,6 +369,8 @@ create table text_boxes (
   id                        bigint not null,
   career                    varchar(255),
   other_qualification       varchar(255),
+  vid                       bigint,
+  constraint uq_text_boxes_vid unique (vid),
   constraint pk_text_boxes primary key (id))
 ;
 
@@ -410,20 +402,9 @@ create table volunteer (
   surname                   varchar(255),
   prename                   varchar(255),
   date_of_birth             timestamp,
-  id_text_boxes             bigint,
-  id_event_comment          bigint,
   social_security_number    varchar(255),
   volunteer_agreement       varbinary(255),
   constraint pk_volunteer primary key (id))
-;
-
-create table volunteer_simple (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  social_security_number    varchar(255),
-  constraint pk_volunteer_simple primary key (id))
 ;
 
 
@@ -509,18 +490,6 @@ create table contractor_degree (
   contractor_id                  bigint not null,
   degree_id                      bigint not null,
   constraint pk_contractor_degree primary key (contractor_id, degree_id))
-;
-
-create table event_data_volunteer_nationality (
-  event_data_volunteer_id        bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_event_data_volunteer_nationality primary key (event_data_volunteer_id, nationality_country_id))
-;
-
-create table event_data_volunteer_degree (
-  event_data_volunteer_id        bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_event_data_volunteer_degree primary key (event_data_volunteer_id, degree_id))
 ;
 
 create table head_of_delegation_nationality (
@@ -630,18 +599,6 @@ create table volunteer_degree (
   degree_id                      bigint not null,
   constraint pk_volunteer_degree primary key (volunteer_id, degree_id))
 ;
-
-create table volunteer_simple_nationality (
-  volunteer_simple_id            bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_volunteer_simple_nationality primary key (volunteer_simple_id, nationality_country_id))
-;
-
-create table volunteer_simple_degree (
-  volunteer_simple_id            bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_volunteer_simple_degree primary key (volunteer_simple_id, degree_id))
-;
 create sequence actual_job_seq;
 
 create sequence additional_coach_seq;
@@ -655,8 +612,6 @@ create sequence city_rep_guest_seq;
 create sequence city_representative_seq;
 
 create sequence coach_seq;
-
-create sequence connectiontype_seq;
 
 create sequence contact_seq;
 
@@ -673,8 +628,6 @@ create sequence email_seq;
 create sequence emergency_relation_seq;
 
 create sequence event_comment_seq;
-
-create sequence event_data_volunteer_seq;
 
 create sequence faculty_seq;
 
@@ -694,7 +647,7 @@ create sequence locmember_seq;
 
 create sequence language_seq;
 
-create sequence languages_seq;
+create sequence languages_translation_seq;
 
 create sequence login_receiver_seq;
 
@@ -712,6 +665,8 @@ create sequence role_seq;
 
 create sequence sex_seq;
 
+create sequence sizes_seq;
+
 create sequence sport_seq;
 
 create sequence sport_interest_seq;
@@ -724,8 +679,22 @@ create sequence user_login_seq;
 
 create sequence volunteer_seq;
 
-create sequence volunteer_simple_seq;
-
+alter table actual_job add constraint fk_actual_job_volunteer_1 foreign key (Vid) references volunteer (id) on delete restrict on update restrict;
+create index ix_actual_job_volunteer_1 on actual_job (Vid);
+alter table contact add constraint fk_contact_volunteer_2 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_contact_volunteer_2 on contact (volunteer_id);
+alter table emergency_contact add constraint fk_emergency_contact_volunteer_3 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_emergency_contact_volunteer_3 on emergency_contact (volunteer_id);
+alter table identification add constraint fk_identification_volunteer_4 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_identification_volunteer_4 on identification (volunteer_id);
+alter table it_knowledge add constraint fk_it_knowledge_volunteer_5 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_it_knowledge_volunteer_5 on it_knowledge (volunteer_id);
+alter table language add constraint fk_language_volunteer_6 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_language_volunteer_6 on language (volunteer_id);
+alter table sizes add constraint fk_sizes_volunteer_7 foreign key (Vid) references volunteer (id) on delete restrict on update restrict;
+create index ix_sizes_volunteer_7 on sizes (Vid);
+alter table text_boxes add constraint fk_text_boxes_volunteer_8 foreign key (Vid) references volunteer (id) on delete restrict on update restrict;
+create index ix_text_boxes_volunteer_8 on text_boxes (Vid);
 
 
 
@@ -784,14 +753,6 @@ alter table contractor_nationality add constraint fk_contractor_nationality_nat_
 alter table contractor_degree add constraint fk_contractor_degree_contract_01 foreign key (contractor_id) references contractor (id) on delete restrict on update restrict;
 
 alter table contractor_degree add constraint fk_contractor_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table event_data_volunteer_nationality add constraint fk_event_data_volunteer_natio_01 foreign key (event_data_volunteer_id) references event_data_volunteer (id) on delete restrict on update restrict;
-
-alter table event_data_volunteer_nationality add constraint fk_event_data_volunteer_natio_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table event_data_volunteer_degree add constraint fk_event_data_volunteer_degre_01 foreign key (event_data_volunteer_id) references event_data_volunteer (id) on delete restrict on update restrict;
-
-alter table event_data_volunteer_degree add constraint fk_event_data_volunteer_degre_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
 
 alter table head_of_delegation_nationality add constraint fk_head_of_delegation_nationa_01 foreign key (head_of_delegation_id) references head_of_delegation (id) on delete restrict on update restrict;
 
@@ -865,14 +826,6 @@ alter table volunteer_degree add constraint fk_volunteer_degree_volunteer_01 for
 
 alter table volunteer_degree add constraint fk_volunteer_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
 
-alter table volunteer_simple_nationality add constraint fk_volunteer_simple_nationali_01 foreign key (volunteer_simple_id) references volunteer_simple (id) on delete restrict on update restrict;
-
-alter table volunteer_simple_nationality add constraint fk_volunteer_simple_nationali_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table volunteer_simple_degree add constraint fk_volunteer_simple_degree_vo_01 foreign key (volunteer_simple_id) references volunteer_simple (id) on delete restrict on update restrict;
-
-alter table volunteer_simple_degree add constraint fk_volunteer_simple_degree_de_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
@@ -925,8 +878,6 @@ drop table if exists coach_nationality;
 
 drop table if exists coach_degree;
 
-drop table if exists connectiontype;
-
 drop table if exists contact;
 
 drop table if exists contractor;
@@ -954,12 +905,6 @@ drop table if exists emergency_relation;
 drop table if exists event;
 
 drop table if exists event_comment;
-
-drop table if exists event_data_volunteer;
-
-drop table if exists event_data_volunteer_nationality;
-
-drop table if exists event_data_volunteer_degree;
 
 drop table if exists faculty;
 
@@ -1009,7 +954,7 @@ drop table if exists locmember_degree;
 
 drop table if exists language;
 
-drop table if exists languages;
+drop table if exists languages_translation;
 
 drop table if exists login_receiver;
 
@@ -1059,12 +1004,6 @@ drop table if exists volunteer_nationality;
 
 drop table if exists volunteer_degree;
 
-drop table if exists volunteer_simple;
-
-drop table if exists volunteer_simple_nationality;
-
-drop table if exists volunteer_simple_degree;
-
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists actual_job_seq;
@@ -1081,8 +1020,6 @@ drop sequence if exists city_representative_seq;
 
 drop sequence if exists coach_seq;
 
-drop sequence if exists connectiontype_seq;
-
 drop sequence if exists contact_seq;
 
 drop sequence if exists contractor_seq;
@@ -1098,8 +1035,6 @@ drop sequence if exists email_seq;
 drop sequence if exists emergency_relation_seq;
 
 drop sequence if exists event_comment_seq;
-
-drop sequence if exists event_data_volunteer_seq;
 
 drop sequence if exists faculty_seq;
 
@@ -1119,7 +1054,7 @@ drop sequence if exists locmember_seq;
 
 drop sequence if exists language_seq;
 
-drop sequence if exists languages_seq;
+drop sequence if exists languages_translation_seq;
 
 drop sequence if exists login_receiver_seq;
 
@@ -1137,6 +1072,8 @@ drop sequence if exists role_seq;
 
 drop sequence if exists sex_seq;
 
+drop sequence if exists sizes_seq;
+
 drop sequence if exists sport_seq;
 
 drop sequence if exists sport_interest_seq;
@@ -1148,6 +1085,4 @@ drop sequence if exists translation_seq;
 drop sequence if exists user_login_seq;
 
 drop sequence if exists volunteer_seq;
-
-drop sequence if exists volunteer_simple_seq;
 
