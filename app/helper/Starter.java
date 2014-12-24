@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import models.UserLogin;
-import models.humans.Volunteer;
+import models.volunteer.Volunteer;
 
 /**
  * Initializes the Panda application and
@@ -54,7 +54,7 @@ public class Starter {
 	 */
 	private static void createVolunteers() {
 		UserLogin userA = new UserLogin("demo@user.at", Starter.getMD5("password"));
-		Volunteer volunteerA = new Volunteer("demo", "user");
+		Volunteer volunteerA = new Volunteer("demo", "user", "Demo@Demo.com");
 		volunteerA.setUserLogin(userA);
 		
 		userA.save();
