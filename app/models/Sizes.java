@@ -34,6 +34,7 @@ public class Sizes extends Model{
 	private int trousersSize;
 	@Required
 	private int shoeSize;
+	
 	@OneToOne
 	@JoinColumn(name = "Vid")
 	private Volunteer volunteer;
