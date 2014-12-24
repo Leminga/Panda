@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import models.volunteer.Volunteer;
 import play.data.validation.Constraints.Required;
@@ -27,6 +28,7 @@ public class TextBoxes extends Model {
 	@Column(unique=true)
 	private long Vid;
 	
+	@OneToOne
 	@JoinColumn(name = "Vid")
 	private Volunteer volunteer;
 	
