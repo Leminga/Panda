@@ -39,6 +39,7 @@ import models.PreferredCommunicationLanguage;
 import models.Role;
 import models.Sizes;
 import models.Sport;
+import models.TextBoxes;
 import models.Training;
 import models.UserLogin;
 import models.humans.Human;
@@ -79,7 +80,7 @@ public class Volunteer extends Human {
 	private List<ItKnowledge> itKnowledges;
 	
 	@OneToOne(mappedBy = "volunteer")
-	private long idTextBoxes;
+	private TextBoxes textBoxes;
 	
 	@OneToOne(mappedBy = "volunteer")
 	private ActualJob actualJob;
@@ -210,12 +211,6 @@ public class Volunteer extends Human {
 	}
 	public void setItKnowledges(List<ItKnowledge> itKnowledges) {
 		this.itKnowledges = itKnowledges;
-	}
-	public long getIdTextBoxes() {
-		return idTextBoxes;
-	}
-	public void setIdTextBoxes(long idTextBoxes) {
-		this.idTextBoxes = idTextBoxes;
 	}
 	
 	public String getSocialSecurityNumber() {
