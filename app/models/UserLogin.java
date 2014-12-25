@@ -3,8 +3,11 @@ package models;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,6 +20,7 @@ import play.data.validation.Constraints.*;
 import play.db.ebean.Model;
 import play.libs.Json;
 import models.exceptions.UserAlreadyExistsException;
+import models.volunteer.Volunteer;
 
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -55,7 +59,14 @@ public class UserLogin extends Model {
 	/** Tracks whether their have been changes on the model. */
 	@Transient
 	private boolean hasChanged;
+	@Required
+	@Column(unique=true)
+	private long Vid;
 	
+	//OneToOne Relation to Volunteer
+	@OneToOne
+	@JoinColumn(name = "Vid")
+	private Volunteer volunteer;
 	
 	/**
 	 * Queries the database to find a user that is

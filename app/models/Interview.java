@@ -1,22 +1,20 @@
 package models;
 
-import play.db.ebean.Model.Finder;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+import models.humans.Human;
+import models.volunteer.Volunteer;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.libs.Json;
-import play.data.validation.Constraints.Required;
-
-import java.util.Date;
 
 @Entity
 public class Interview extends Model {
@@ -24,14 +22,26 @@ public class Interview extends Model {
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue
 	@Required
+	private long Id;
 	private Date interviewDate;
-	@Required
+	@Column(unique=true)
 	private long volunteerId;
-	@Required
+	@ManyToOne
 	private long interviewerId;
 	@Required
 	private String interviewComment;
+	
+	//OneToOne Relation to Volunteer
+	@OneToOne
+	@JoinColumn(name = "volunteerId")
+	private Volunteer volunteer;
+	
+	//ManyToOne Relation to Human
+	@ManyToOne // owning side
+	private Human human;
 	
 	public Date getInterviewDate() {
 		return interviewDate;

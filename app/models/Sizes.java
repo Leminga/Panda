@@ -6,8 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.UniqueConstraint;
-import javax.validation.Constraint;
 
 import models.volunteer.Volunteer;
 import play.data.validation.Constraints.Required;
@@ -35,6 +33,7 @@ public class Sizes extends Model{
 	@Required
 	private int shoeSize;
 	
+	//OneToOne Relation to Volunteer
 	@OneToOne
 	@JoinColumn(name = "Vid")
 	private Volunteer volunteer;

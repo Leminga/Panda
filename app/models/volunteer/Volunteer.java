@@ -4,11 +4,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OptimisticLockException;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,6 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import models.ActualJob;
-import models.Address;
 import models.Attachments;
 import models.Contact;
 import models.Educationlevel;
@@ -33,8 +33,6 @@ import models.Identification;
 import models.Interview;
 import models.ItKnowledge;
 import models.Language;
-import models.LanguagesTranslation;
-import models.Phone;
 import models.PreferredCommunicationLanguage;
 import models.Role;
 import models.Sizes;
@@ -55,57 +53,56 @@ public class Volunteer extends Human {
 	
 	@Id
 	@Required
+	@GeneratedValue
 	private long id;
+	
+	//OneToMany Relations
 	@OneToMany(cascade = CascadeType.ALL)
 	private List <Contact>contacts;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List <Identification>identifications;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List <EmergencyContact>emergencyContacts;
-	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Language> languages;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<ItKnowledge> itKnowledges;
+
+	//OneToOne Relations
 	@OneToOne(mappedBy = "volunteer")
 	private Sizes sizes;
+	@OneToOne(mappedBy = "volunteer")
+	private TextBoxes textBoxes;
+	@OneToOne(mappedBy = "volunteer")
+	private ActualJob actualJob;
+	@OneToOne(mappedBy = "volunteer")
+	private List <Interview>interviews;
+	@OneToOne(mappedBy = "volunteer")
+	private Role role;
+	@OneToOne(mappedBy = "volunteer")
+	protected UserLogin loginData;
+	/** Login data, if the user is allows to login. */
+	
+	//ManyToMany Relations
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List <Training>trainings;
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List <Event>events;
 	
 	@Required
 	private EmailAddress emailAddress;
-	
 	private Educationlevel highestEducationlevel;
-
 	private PreferredCommunicationLanguage preferredCommunicationLanguage;
-
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Language> languages;
-
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<ItKnowledge> itKnowledges;
-	
-	@OneToOne(mappedBy = "volunteer")
-	private TextBoxes textBoxes;
-	
-	@OneToOne(mappedBy = "volunteer")
-	private ActualJob actualJob;
-	
 	private String socialSecurityNumber;
 
+	//TODO: attachments überarbeiten
 	private List<Attachments>attachments;
 //	@Required
 	private byte[] volunteerAgreement;
 
-	
-//	@Required
-	private List <Training>trainings;
-//	@Required
-	private List <Interview>interviews;
-//	@Required
-	private Role role;
 	//TODO: Relevanz checken für sport
 	//	@Required
 	private Sport sport;
-	/** Login data, if the user is allows to login. */
-	@Required
-	protected UserLogin loginData;
-//	@Required
-	private List <Event>events;
 	
 	/**
 	 * Default constructor;

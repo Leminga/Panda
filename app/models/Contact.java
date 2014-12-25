@@ -1,19 +1,16 @@
 package models;
 
-
-import play.db.ebean.Model.Finder;
-import helper.ConnectionType;
-
 import javax.persistence.Entity;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.libs.Json;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import models.volunteer.Volunteer;
 
@@ -29,8 +26,16 @@ public class Contact extends Model{
 	@Required
 	@GeneratedValue
 	private long id;
-	@ManyToOne
-	private long connectionTypeTId;
+	@Required
+	@Column(unique=true)
+	private long connectionTypeTid;
+	
+	//OneToOneRelation to Translation
+	@OneToOne
+	@JoinColumn(name = "connectionTypeTid")
+	private Translation translation;
+	
+	//ManyToOne Relation to Volunteer
 	@ManyToOne // owning side
 	private Volunteer volunteer;
 
@@ -40,13 +45,6 @@ public class Contact extends Model{
 	}
 	public void setId(long id) {
 		this.id = id;
-	}
-	
-	public long getConnectionTypeTId() {
-		return connectionTypeTId;
-	}
-	public void setConnectionTypeTId(long connectionTypeTId) {
-		this.connectionTypeTId = connectionTypeTId;
 	}
 	
 	

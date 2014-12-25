@@ -28,6 +28,7 @@ public class TextBoxes extends Model {
 	@Column(unique=true)
 	private long Vid;
 	
+	//OneToOne Relation to Volunteer
 	@OneToOne
 	@JoinColumn(name = "Vid")
 	private Volunteer volunteer;

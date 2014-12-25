@@ -2,30 +2,14 @@ package models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-
-
-
-import play.db.ebean.Model.Finder;
-
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import models.volunteer.Volunteer;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.libs.Json;
-import play.data.validation.Constraints.Required;
 
 @Entity
 public class ActualJob extends Model {
@@ -36,17 +20,23 @@ public class ActualJob extends Model {
 	@Required
 	@GeneratedValue
 	private long id;
-	
-	@ManyToOne
+	@Required
+	@Column(unique=true)
 	private long actualJobTid;
-	
 	@Required
 	@Column(unique=true)
 	private long Vid;
 	
+	//OneToOne Relation to Volunteer
 	@OneToOne
 	@JoinColumn(name = "Vid")
 	private Volunteer volunteer;
+		
+	//OneToOneRelation to Translation
+	@OneToOne
+	@JoinColumn(name = "actualJobTid")
+	private Translation translation;
+	
 	public long getId() {
 		return id;
 	}

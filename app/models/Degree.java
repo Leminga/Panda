@@ -1,11 +1,13 @@
 package models;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -21,8 +23,14 @@ public class Degree extends Model {
 	@GeneratedValue
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy="degree")
 	private Long id;
-	@ManyToOne
-	private long degreeTId;
+	@Required
+	@Column(unique=true)
+	private long degreeTid;
+	
+	//OneToOneRelation to Translation
+	@OneToOne
+	@JoinColumn(name = "degreeTid")
+	private Translation translation;
 	
 	
 	public Long getId() {
@@ -31,14 +39,6 @@ public class Degree extends Model {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public long getDegreeTId() {
-		return degreeTId;
-	}
-
-	public void setDegreeTId(long degreeTId) {
-		this.degreeTId = degreeTId;
 	}
 
 	

@@ -8,11 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
 import models.Degree;
+import models.Interview;
 import models.Nationality;
 import models.Sex;
-
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -52,6 +53,8 @@ public abstract class Human extends Model {
 	/** The (multiple) degrees of the person. */
 	@ManyToMany(cascade = CascadeType.ALL)
 	protected List <Degree>degree;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Interview>interviews;
 	
 	/**
 	 * Getter for the database id.

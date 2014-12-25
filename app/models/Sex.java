@@ -1,13 +1,14 @@
 package models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-
-import javax.persistence.ManyToOne;
 
 /**
  * Specifies possible gender attributes.
@@ -26,8 +27,14 @@ public class Sex extends Model{
 	@GeneratedValue
 	private long id;
 	/** The id in the translation table. */
-	@ManyToOne
-	private long sexTId;
+	@Required
+	@Column(unique=true)
+	private long sexTid;
+	
+	//OneToOneRelation to Translation
+	@OneToOne
+	@JoinColumn(name = "sexTid")
+	private Translation translation;
 	
 	/**
 	 * Getter for the database id.
@@ -43,8 +50,8 @@ public class Sex extends Model{
 	 * 
 	 * @return <b>long</b> The id in the translation table.
 	 */
-	public long getSexTId() {
-		return sexTId;
+	public long getSexTid() {
+		return sexTid;
 	}
 	
 	/**
@@ -52,7 +59,7 @@ public class Sex extends Model{
 	 * 
 	 * @param sexTId The id in the tranlation table.
 	 */
-	public void setSexTId(long sexTId) {
-		this.sexTId = sexTId;
+	public void setSexTId(long sexTid) {
+		this.sexTid = sexTid;
 	}
 }

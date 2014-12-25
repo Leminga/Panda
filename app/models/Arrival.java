@@ -1,24 +1,15 @@
 package models;
 
-import play.db.ebean.Model.Finder;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.libs.Json;
-import play.data.validation.Constraints.Required;
-
-import java.util.Date;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Arrival extends Model{
@@ -28,8 +19,15 @@ public class Arrival extends Model{
 	
 	@Required
 	private Date arrivalDate;
-	@ManyToOne
+	@Required
+	@Column(unique=true)
 	private long arrivalPlaceTid;
+	
+	//OneToOneRelation to Translation
+	@OneToOne
+	@JoinColumn(name = "arrivalPlaceTid")
+	private Translation translation;
+	
 	@Required
 	private String arrivalFlightNumber;
 	@Required

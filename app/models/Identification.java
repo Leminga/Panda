@@ -3,7 +3,9 @@ package models;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
+import models.volunteer.Volunteer;
 import helper.IdentificationType;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -20,6 +22,11 @@ public class Identification extends Model {
 	private IdentificationType identificationType;
 	@Required
 	private Date expiryDate;
+	
+	//ManyToOne Relation to Volunteer
+	@ManyToOne // owning side
+	private Volunteer volunteer;
+	
 	
 	public String getIdentificationNumber() {
 		return identificationNumber;

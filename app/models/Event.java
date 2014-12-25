@@ -1,25 +1,18 @@
 package models;
 
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import play.db.ebean.Model.Finder;
+
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.libs.Json;
-
-import play.data.validation.Constraints.Required;
-import java.util.Date;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Event extends Model{
@@ -27,14 +20,24 @@ public class Event extends Model{
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	
+	//ManyToMany relation to Volunteer
+	@Id
 	@Required
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy="event")
 	private String eventname;
 	@Required
 	private Date eventStart;
 	@Required
 	private Date eventEnd;
-	@ManyToOne
-	private String eventDiscriptionTId;
+	@Required
+	@Column(unique=true)
+	private long eventDiscriptionTid;
+	
+	//OneToOneRelation to Translation
+	@OneToOne
+	@JoinColumn(name = "eventDiscriptionTid")
+	private Translation translation;
+	
 	@Required
 	private boolean volunteerOpen;
 	@Required
@@ -69,12 +72,6 @@ public class Event extends Model{
 	}
 	public void setEventEnd(Date eventEnd) {
 		this.eventEnd = eventEnd;
-	}
-	public String getEventDiscriptionTId() {
-		return eventDiscriptionTId;
-	}
-	public void setEventDiscriptionTId(String eventDiscription) {
-		this.eventDiscriptionTId = eventDiscription;
 	}
 
 	public boolean isVolunteerOpen() {

@@ -3,7 +3,9 @@ package models;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
+import models.volunteer.Volunteer;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -21,6 +23,10 @@ public class EmergencyContact extends Model{
 	private EmergencyRelation emergencyRelation;
 	@Required
 	private List <Contact>emergencyContacts;
+	
+	//ManyToOne Relation to Volunteer
+	@ManyToOne // owning side
+	private Volunteer volunteer;
 	
 	public String getEmergencySurname() {
 		return emergencySurname;
