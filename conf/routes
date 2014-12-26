@@ -8,8 +8,8 @@
 #GET	/LoginData					controllers.UserLogin.load()
 POST	/login						controllers.SecurityController.login()
 POST	/register					controllers.SecurityController.register()
-
-
+#POST    /getUser                    controllers.VolunteerController.userRequest()
+#PATCH  /saveUser                   controllers.VolunteerController.saveAll()
 
 # Map static resources from the /public folder to the /assets URL path
 GET		/assets/*file				controllers.Assets.at(path="/public", file)
