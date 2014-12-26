@@ -76,7 +76,7 @@ public class Volunteer extends Human {
 	@OneToOne(mappedBy = "volunteer")
 	private ActualJob actualJob;
 	@OneToOne(mappedBy = "volunteer")
-	private List <Interview>interviews;
+	private Interview interview;
 	@OneToOne(mappedBy = "volunteer")
 	private Role role;
 	@OneToOne(mappedBy = "volunteer")
@@ -233,12 +233,6 @@ public class Volunteer extends Human {
 	}
 	public void setTrainings(List<Training> trainings) {
 		this.trainings = trainings;
-	}
-	public List<Interview> getInterviews() {
-		return interviews;
-	}
-	public void setInterviews(List<Interview> interviews) {
-		this.interviews = interviews;
 	}
 	public Role getRole() {
 		return role;

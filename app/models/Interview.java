@@ -27,9 +27,10 @@ public class Interview extends Model {
 	@Required
 	private long Id;
 	private Date interviewDate;
+	@Required
 	@Column(unique=true)
 	private long volunteerId;
-	@ManyToOne
+	@Required
 	private long interviewerId;
 	@Required
 	private String interviewComment;
@@ -39,9 +40,9 @@ public class Interview extends Model {
 	@JoinColumn(name = "volunteerId")
 	private Volunteer volunteer;
 	
-	//ManyToOne Relation to Human
+	/*//ManyToOne Relation to Human
 	@ManyToOne // owning side
-	private Human human;
+	private Human human;*/
 	
 	public Date getInterviewDate() {
 		return interviewDate;

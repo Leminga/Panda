@@ -53,8 +53,8 @@ public abstract class Human extends Model {
 	/** The (multiple) degrees of the person. */
 	@ManyToMany(cascade = CascadeType.ALL)
 	protected List <Degree>degree;
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Interview>interviews;
+	/*@OneToMany(cascade = CascadeType.ALL)
+	private List <Interview>interview;*/
 	
 	/**
 	 * Getter for the database id.
