@@ -34,6 +34,7 @@ import models.Identification;
 import models.Interview;
 import models.ItKnowledge;
 import models.Language;
+import models.Nationality;
 import models.Permission;
 import models.PreferredCommunicationLanguage;
 import models.Role;
@@ -115,11 +116,13 @@ public class Volunteer extends Human {
 	 * @param prename
 	 * @param surname
 	 */
-	public Volunteer(String prename, String surname, String emailAddress) {
+	public Volunteer(String prename, String surname, String emailAddress, String nationality) {
 		this.setPrename(prename);
 		this.setSurname(surname);
 		EmailAddress address = new EmailAddress(emailAddress);
 		this.setEmailAddress(address);
+		Nationality nation = new Nationality(nationality);
+		nation.setLongName(nationality);
 	}
 	public static Logger getLOGGER() {
 		return LOGGER;
@@ -299,6 +302,28 @@ public class Volunteer extends Human {
 		} catch (Exception e) {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.error("Unable to write to the database. \n" + e.getMessage());
+			}
+		}
+	}
+	
+	/**
+	 * Deletes the current volunteer object to the database.
+	 */
+	@Override
+	public void delete() throws OptimisticLockException {
+		try {
+			Ebean.delete(this);
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("Volunteer "+ this.getPrename() + " " + this.getSurname() + " deleted.");
+			}
+		} catch (OptimisticLockException e) {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.error("Unable to delete.");
+			}
+			throw new OptimisticLockException();
+		} catch (Exception e) {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.error("Unable to delete. \n" + e.getMessage());
 			}
 		}
 	}
