@@ -20,6 +20,12 @@ public class Nationality extends Model{
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	
+	/** Constructor for Nationality */
+	public Nationality(String nationality) {
+		super();
+		this.longName=nationality;
+		}
+	
 	@Id
 	@Required
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy="nationality")
