@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import models.UserLogin;
+import models.humans.Human;
 import models.volunteer.Volunteer;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -86,7 +87,14 @@ public class SecurityController extends Controller {
         		LOGGER.info("Unauthorized login attempt for user " + loginForm.email);
         	}
             return Results.unauthorized();
-        } else {
+       
+        } 
+        
+        //else if (user !=null && ){
+        	
+        //}
+        
+        else {
         	user.updateLastLogin();
             String authToken = user.createToken();
             ObjectNode loginJson = Json.newObject();
@@ -139,7 +147,10 @@ public class SecurityController extends Controller {
         if (user == null) {
         	LOGGER.info("New user to register: " + registerForm.email);
         	user = new UserLogin(registerForm.email, registerForm.password);
-        	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname, registerForm.email);
+        	
+        	//if (volunteer)
+        		
+        	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname, registerForm.email, registerForm.nationality);
         	volunteer.setUserLogin(user);
         	try {
         		volunteer.save();
@@ -154,6 +165,9 @@ public class SecurityController extends Controller {
         		user.delete();
         		return Results.ok("user registration failed");
         	}
+        	
+        	//if(admin)
+        	//if(anderer mensch)
         } else {
         	LOGGER.info("User already exists in database.");
         	return Results.ok("user exist already");
@@ -187,5 +201,7 @@ public class SecurityController extends Controller {
     	public String prename;
     	/** The surname of the user. */
     	public String surname;
+    	/** The nationality of the user. */
+    	public String nationality;
     }
 }
