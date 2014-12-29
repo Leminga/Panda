@@ -61,8 +61,7 @@ public abstract class Human extends Model {
 	//@ManyToOne // owning side
 	//private Permission permission;
 	
-	@Required
-	protected boolean admin;
+
 	
 	/**
 	 * Getter for the database id.
@@ -182,6 +181,12 @@ public abstract class Human extends Model {
 		if (this.nationality.contains(nationality))
 			this.nationality.remove(nationality);
 	}
+	
+	
+	public String getNationality() {
+		return this.nationality.toString();
+	}
+	
 	
 	/**
 	 * Adds a degree to a person.
