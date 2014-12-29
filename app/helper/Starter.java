@@ -54,7 +54,7 @@ public class Starter {
 	 */
 	private static void createVolunteers() {
 		UserLogin userA = new UserLogin("demo@user.at", Starter.getMD5("password"));
-		Volunteer volunteerA = new Volunteer("demo", "user", "Demo@Demo.com");
+		Volunteer volunteerA = new Volunteer("demo", "user", "Demo@Demo.com","Austria");
 		volunteerA.setUserLogin(userA);
 		
 		userA.save();
