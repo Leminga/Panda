@@ -1,89 +1,83 @@
 <h1>EVENTSPECIFIC DATA</h1>
-<button ng-click="specific = !specific">Eventspecific Data
-</button>
+    <button ng-click="specific = !specific">Eventspecific Data</button>
 
     <form id="eventspecific" name="eventspecific" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user.specific)">
-        <div ng-show="specific">
-        <div>Preferred Working Area:
-            <select ng-model="eventSpecificCtrl.user.specific.preferredWorkingArea">
-                <option value='' disabled selected style='display:none;'>Open here</option>
-                <option value="none"></option>
-                <option value="driver">Driver</option>
-                <option value="security">Security</option>
-            </select>
+        <div ng-show="specific"></div>
+            <div>Preferred Working Area:
+                <select ng-model="eventSpecificCtrl.user.specific.preferredWorkingArea">
+                    <option value='' disabled selected style='display:none;'>Open here</option>
+                    <option value="none"></option>
+                    <option value="driver">Driver</option>
+                    <option value="security">Security</option>
+                </select>
+            </div><br>
+
+        <div>
+            Availability:
+            From:<datepicker date-min-limit="05/01/2016" date-max-limit="17/01/2016">
+                    <input ng-model="eventSpecificCtrl.user.specific.fromAvailability" placeholder="dd/mm/yyyy"  type="text">
+                </datepicker> <br>
+            Until:<datepicker date-min-limit="05/01/2016" date-max-limit="17/01/2016">
+                    <input ng-model="eventSpecificCtrl.user.specific.untilAvailability" placeholder="dd/mm/yyyy" type="text">
+                </datepicker>
         </div>
-        <br>
 
-        <div>Availability</div>
-        From:<input ng-model="eventSpecificCtrl.user.specific.fromAvailability" placeholder="dd/mm/yyyy"
-                    pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
-                    type="text"><br>
-        Until:<input ng-model="eventSpecificCtrl.user.specific.untilAvailability" placeholder="dd/mm/yyyy"
-                     pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
-                     type="text">
-
-        <div>Are you interested in assisting beforehand?<br>
+        <div>
+            Are you interested in assisting beforehand?<br>
             <input ng-model="eventSpecificCtrl.user.specific.assistance" type="radio" name="assistance" value="yes"
                    checked>Yes<br>
             <input ng-model="eventSpecificCtrl.user.specific.assistance" type="radio" name="assistance" value="no">No<br>
-        </div>
-        <br>
+        </div><br>
 
-        <div>Volunteer Comment:<textarea ng-model="eventSpecificCtrl.user.specific.volunteerComment" cols="50" rows="10"
-                                         name="textbox"></textarea></div>
-        <br>
+        <div>
+            Volunteer Comment:
+            <textarea ng-model="eventSpecificCtrl.user.specific.volunteerComment" cols="50" rows="10" name="textbox"></textarea>
+        </div><br>
 
         <div>Volunteer Agreement:<br>
-            <input type="radio" ng-model="eventSpecificCtrl.user.specific.agreement" name="agreement" value="yes" checked>Yes, I
-            agree<br>
-            <input type="radio" ng-model="eventSpecificCtrl.user.specific.agreement" name="agreement" value="no">No, I do not
-            agree<br>
-        </div>
-        <br>
+            <input type="radio" ng-model="eventSpecificCtrl.user.specific.agreement" name="agreement" value="yes" checked>
+            Yes, I agree<br>
+            <input type="radio" ng-model="eventSpecificCtrl.user.specific.agreement" name="agreement" value="no">
+            No, I do not agree<br>
+        </div><br>
 
         <div>Select the form of sport:</div>
-        <select ng-model="eventSpecificCtrl.user.specific.sport">
-            <option value='' disabled selected style='display:none;'>Open here</option>
-            <option value="alpine skiing boys">Alpine Skiing Boys</option>
-            <option value="alpine skiing girls">Alpine Skiing Girls</option>
-            <option value="biathlon boys">Biathlon Boys</option>
-            <option value="biathlon girls">Biathlon Girls</option>
-            <option value="cross-country skiing boys">Cross-Country Skiing Boys</option>
-            <option value="cross-country skiing girls">Cross-Country Skiing Girls</option>
-            <option value="figure skating boys">Figure Skating Boys</option>
-            <option value="figure skating girls">Figure Skating Girls</option>
-            <option value="freestyle boys">Freestyle Boys</option>
-            <option value="freestyle girls">Freestyle Girls</option>
-            <option value="ice hockey boys ">Ice Hockey Boys</option>
-            <option value="ice speed skating boys">Ice Speed Skating Boys</option>
-            <option value="ice speed skating girls">Ice Speed Skating Girls</option>
-            <option value="snowboarding boys">Snowboarding Boys</option>
-            <option value="snowboarding girls">Snowboarding Girls</option>
-        </select>
-        <br><br>
+            <select ng-model="eventSpecificCtrl.user.specific.sport">
+                <option value='' disabled selected style='display:none;'>Open here</option>
+                <option value="alpine skiing boys">Alpine Skiing Boys</option>
+                <option value="alpine skiing girls">Alpine Skiing Girls</option>
+                <option value="biathlon boys">Biathlon Boys</option>
+                <option value="biathlon girls">Biathlon Girls</option>
+                <option value="cross-country skiing boys">Cross-Country Skiing Boys</option>
+                <option value="cross-country skiing girls">Cross-Country Skiing Girls</option>
+                <option value="figure skating boys">Figure Skating Boys</option>
+                <option value="figure skating girls">Figure Skating Girls</option>
+                <option value="freestyle boys">Freestyle Boys</option>
+                <option value="freestyle girls">Freestyle Girls</option>
+                <option value="ice hockey boys ">Ice Hockey Boys</option>
+                <option value="ice speed skating boys">Ice Speed Skating Boys</option>
+                <option value="ice speed skating girls">Ice Speed Skating Girls</option>
+                <option value="snowboarding boys">Snowboarding Boys</option>
+                <option value="snowboarding girls">Snowboarding Girls</option>
+            </select><br><br>
             <button form="eventspecific" type="submit">Save</button>
-        <div>
-        </div>
 
-        </div>
+    </form>
 
-</form>
-<button ng-click="pictures = !pictures">Pictures</button>
-<form id="pictures" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user.pictures)">
-        <div ng-show="pictures">
-            <!-- TBD: Upload for pictures - ng-model doesn't work here. -->
-            <div>Upload your picture:<br>
-                <input type="file" ng-model="eventSpecificCtrl.user.pictures.profilePicture" name="pic" accept="image/*">
-            </div>
-            <br>
+        <button ng-click="pictures = !pictures">Pictures</button>
+        <form id="pictures" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user.pictures)">
+            <div ng-show="pictures">
+                <!-- TBD: Upload for pictures - ng-model doesn't work here. -->
+                 <div>Upload your picture:<br>
+                    <input type="file" ng-model="eventSpecificCtrl.user.pictures.profilePicture" name="pic" accept="image/*">
+                 </div><br>
 
             <div>Upload a copy of your passport:<br>
                 <input type="file" ng-model="eventSpecificCtrl.user.pictures.passportPicture" name="passport" accept="image/*">
-            </div>
-            <br>
+            </div><br>
+
             <button form="pictures" type="submit">Save</button>
         </div>
-
     </form>
 
 

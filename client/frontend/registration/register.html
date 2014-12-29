@@ -1,32 +1,41 @@
 <h1>REGISTRATIONFORM</h1>
+
 <div>
     <div>
         <form id="reg-form" name="form" ng-submit="registerCtrl.register()">
-            <div>Prename:</div>
-            <input type="text" pattern="[a-zA-Z ]+" name="prename" ng-model="registerCtrl.user.prename" required="">
+            <div>
+                Prename:
+            </div><input type="text" pattern="[a-zA-Z ]+" name="prename" ng-model="registerCtrl.user.prename" required="">
 
-            <div>Surname:</div>
-            <input type="text" pattern="[a-zA-Z ]+" name="surname" ng-model="registerCtrl.user.surname" required="">
+            <div>
+                Surname:
+            </div><input type="text" pattern="[a-zA-Z ]+" name="surname" ng-model="registerCtrl.user.surname" required="">
 
-            <div>E-Mail:</div>
-            <input type="email" name="email" ng-model="registerCtrl.user.email" required="">
+            <div>
+                E-Mail:
+            </div><input type="email" name="email" ng-model="registerCtrl.user.email" required="">
 
-            <div>Password:</div>
-            <input type="password" ng-required="true" id="password" pattern=".{6,}" name="password"
+            <div>
+                Password:
+            </div><input type="password" ng-required="true" id="password" pattern=".{6,}" name="password"
                    ng-model="registerCtrl.user.password" title="6 characters minimum" required="">
 
-            <div>Repeat Password:</div>
-            <input type="password" ng-model="registerCtrl.user.password_repeat" compare-to="registerCtrl.user.password"
+            <div>
+                Repeat Password:
+            </div><input type="password" ng-model="registerCtrl.user.password_repeat" compare-to="registerCtrl.user.password"
                    id="password_repeat" name="password_repeat" required="">
 
-            <div ng-show='form.password_repeat.$invalid && !form.password_repeat.$pristine'> The repeated password does
-                not match.
+
+            <div ng-show='form.password_repeat.$invalid && !form.password_repeat.$pristine'>
+                The repeated password does not match.
             </div>
 
-            <div><input type="checkbox" ng-model="checked" required="">
-                I have read the <a href="" ng-click="narro = !narro"> NARRO-form </a></div>
+            <div>
+                <input type="checkbox" ng-model="checked" required="">
+                    I have read the <a href="" ng-click="narro = !narro"> NARRO-form </a>
+            </div>
 
-                <div ng-show="narro"><iframe srcdoc="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+            <div ng-show="narro"><iframe srcdoc="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
                     tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
                     et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
                     dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
@@ -71,9 +80,9 @@
                     placerat facer</iframe>
                 </div>
 
-                <div></div>
+            <div>
                 <button type="submit" ng-disabled="form.$invalid">Register</button>
+            </div>
         </form>
-
     </div>
 </div>
