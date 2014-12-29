@@ -3,16 +3,15 @@ angular.module('Panda')
         function (DataService) {
             var self = this;
 
-
             DataService.get().then(function (response) {
                 self.user = response.data;
             });
 
             self.saveData = function (user) {
-                if(user.profilePictures != null){
+                if (user.profilePictures != null) {
                     user.profilePictures = JSON.encodeBase64(user.profilePicture);
                 }
-                if(user.passportPicture != null){
+                if (user.passportPicture != null) {
                     user.passportPicture = JSON.encodeBase64(user.passportPicture);
                 }
                 DataService.save(user);

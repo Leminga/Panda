@@ -24,16 +24,15 @@ angular.module('Panda')
         function (DataService) {
             var self = this;
 
-
             DataService.get().then(function (response) {
                 self.user = response.data;
             });
 
             self.saveData = function (user) {
-                if(user.profilePictures != null){
+                if (user.profilePictures != null) {
                     user.profilePictures = JSON.encodeBase64(user.profilePicture);
                 }
-                if(user.passportPicture != null){
+                if (user.passportPicture != null) {
                     user.passportPicture = JSON.encodeBase64(user.passportPicture);
                 }
                 DataService.save(user);
@@ -65,7 +64,7 @@ angular.module('Panda')
 
 // The LoginFormController handles the login and authentication of the user.
 angular.module('Panda')
-    .controller('LoginFormCtrl', ['LoginService' ,'$window', '$location', function (LoginService, $window, $location) {
+    .controller('LoginFormCtrl', ['LoginService', '$window', '$location', function (LoginService, $window, $location) {
         var self = this;
         // This sends the Login to the controller, where it is being checked, whether the user exists or not.
         // If the user does not exist, then he receives an Error Message (TBD)
