@@ -36,7 +36,19 @@ public class EducationInstitute extends Model {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
-
+	public long getEducationInstituteTid() {
+		return educationInstituteTid;
+	}
+	public void setEducationInstituteTid(long educationInstituteTid) {
+		this.educationInstituteTid = educationInstituteTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

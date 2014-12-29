@@ -31,7 +31,7 @@ public class Role extends Model{
 	@JoinColumn(name = "roleTid")
 	private Translation translation;
 	
-	@Required
+//	@Required
 	private boolean visibleFor;
 	@Required
 	@Column(unique=true)
@@ -53,6 +53,33 @@ public class Role extends Model{
 	}
 	public void setVisibleFor(boolean visibleFor) {
 		this.visibleFor = visibleFor;
+	}
+	public long getRoleTid() {
+		return roleTid;
+	}
+	public void setRoleTid(long roleTid) {
+		this.roleTid = roleTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public long getVid() {
+		return Vid;
+	}
+	public void setVid(long vid) {
+		Vid = vid;
+	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	

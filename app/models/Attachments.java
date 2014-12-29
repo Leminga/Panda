@@ -12,11 +12,11 @@ public class Attachments extends Model{
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	
-	@Required
+//	@Required
 	private byte[] photo;
-	@Required
+//	@Required
 	private byte[] copyPassport;
-	@Required
+//	@Required
 	private byte[] waiver;
 	
 	public byte[] getPhoto() {

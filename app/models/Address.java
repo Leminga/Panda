@@ -10,15 +10,15 @@ public class Address extends Contact{
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	
-	@Required
+//	@Required
 	private String street;
-	@Required
+//	@Required
 	private String housenumber;
-	@Required
+//	@Required
 	private String zip;
-	@Required
+//	@Required
 	private String city;
-	@Required
+//	@Required
 	private Nationality country;
 	
 	public String getStreet() {
@@ -51,8 +51,8 @@ public class Address extends Contact{
 	public void setCountry(Nationality country) {
 		this.country = country;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
-	
-	
-
 }

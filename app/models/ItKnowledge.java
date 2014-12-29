@@ -43,7 +43,25 @@ public class ItKnowledge extends Model {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
-	
+	public long getItKnowledgeTid() {
+		return itKnowledgeTid;
+	}
+	public void setItKnowledgeTid(long itKnowledgeTid) {
+		this.itKnowledgeTid = itKnowledgeTid;
+	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

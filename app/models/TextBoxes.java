@@ -51,5 +51,20 @@ public class TextBoxes extends Model {
 	public void setOtherQualification(String otherQualification) {
 		this.otherQualification = otherQualification;
 	}
+	public long getVid() {
+		return Vid;
+	}
+	public void setVid(long vid) {
+		Vid = vid;
+	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 		
 }

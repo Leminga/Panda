@@ -32,7 +32,7 @@ public class Interview extends Model {
 	private long volunteerId;
 	@Required
 	private long interviewerId;
-	@Required
+//	@Required
 	private String interviewComment;
 	
 	//OneToOne Relation to Volunteer
@@ -67,5 +67,21 @@ public class Interview extends Model {
 	}
 	public void setInterviewComment(String interviewComment) {
 		this.interviewComment = interviewComment;
-	}	
+	}
+	public long getId() {
+		return Id;
+	}
+	public void setId(long id) {
+		Id = id;
+	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

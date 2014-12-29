@@ -36,4 +36,20 @@ public class PreferredWorkingArea extends Model {
 	public void setId(long id) {
 		this.id = id;
 	}
+	public long getPreferredAreaTid() {
+		return preferredAreaTid;
+	}
+	public void setPreferredAreaTid(long preferredAreaTid) {
+		this.preferredAreaTid = preferredAreaTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

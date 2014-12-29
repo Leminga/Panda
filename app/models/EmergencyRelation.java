@@ -36,6 +36,21 @@ public class EmergencyRelation extends Model{
 	public void setId(long id) {
 		this.id = id;
 	}
+	public long getEmergencyRelationTid() {
+		return emergencyRelationTid;
+	}
+	public void setEmergencyRelationTid(long emergencyRelationTid) {
+		this.emergencyRelationTid = emergencyRelationTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 
 }

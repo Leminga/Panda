@@ -41,9 +41,23 @@ public class Degree extends Model {
 		this.id = id;
 	}
 
-	
-	
-	
-	
+	public long getDegreeTid() {
+		return degreeTid;
+	}
 
+	public void setDegreeTid(long degreeTid) {
+		this.degreeTid = degreeTid;
+	}
+
+	public Translation getTranslation() {
+		return translation;
+	}
+
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

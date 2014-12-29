@@ -17,7 +17,7 @@ public class EventComment extends Model {
 	@Id
 	@GeneratedValue
 	private long id;
-	@Required
+//	@Required
 	private String comment;
 	
 	public long getId() {

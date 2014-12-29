@@ -15,13 +15,13 @@ public class EmergencyContact extends Model{
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	
-	@Required
+//	@Required
 	private String emergencySurname;
-	@Required
+//	@Required
 	private String emergencyName;
-	@Required
+//	@Required
 	private EmergencyRelation emergencyRelation;
-	@Required
+//	@Required
 	private List <Contact>emergencyContacts;
 	
 	//ManyToOne Relation to Volunteer
@@ -46,6 +46,21 @@ public class EmergencyContact extends Model{
 	public void setEmergencyRelation(EmergencyRelation emergencyRelation) {
 		this.emergencyRelation = emergencyRelation;
 	}
-
+	public List<Contact> getEmergencyContacts() {
+		return emergencyContacts;
+	}
+	public void setEmergencyContacts(List<Contact> emergencyContacts) {
+		this.emergencyContacts = emergencyContacts;
+	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 }

@@ -49,7 +49,7 @@ public class Phone extends Contact {
 	
 	/** The country calling code, e.g. 0049 for Germany. */
 	// TODO: Why not only store the country calling code, but the nationality?
-	@Required
+//	@Required
 	private Nationality callingCode;
 	
 	/** The phone type, ie. home, work, mobile. */

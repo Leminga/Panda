@@ -7,13 +7,16 @@ import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 
 import models.Degree;
 import models.Interview;
 import models.Nationality;
+import models.Permission;
 import models.Sex;
+import models.volunteer.Volunteer;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -55,6 +58,11 @@ public abstract class Human extends Model {
 	protected List <Degree>degree;
 	/*@OneToMany(cascade = CascadeType.ALL)
 	private List <Interview>interview;*/
+	//@ManyToOne // owning side
+	//private Permission permission;
+	
+	@Required
+	protected boolean admin;
 	
 	/**
 	 * Getter for the database id.

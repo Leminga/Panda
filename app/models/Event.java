@@ -25,9 +25,9 @@ public class Event extends Model{
 	@Required
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy="event")
 	private String eventname;
-	@Required
+//	@Required
 	private Date eventStart;
-	@Required
+//	@Required
 	private Date eventEnd;
 	@Required
 	@Column(unique=true)
@@ -38,17 +38,17 @@ public class Event extends Model{
 	@JoinColumn(name = "eventDiscriptionTid")
 	private Translation translation;
 	
-	@Required
+//	@Required
 	private boolean volunteerOpen;
-	@Required
+//	@Required
 	private boolean dloOpen;
-	@Required
+//	@Required
 	private boolean icgMemberOpen;
-	@Required
+//	@Required
 	private boolean cloOpen;
-	@Required
+//	@Required
 	private boolean locOpen;
-	@Required
+//	@Required
 	private boolean mediaOpen;
 	
 	public void Inotify(){
@@ -121,8 +121,5 @@ public class Event extends Model{
 	public void setMediaOpen(boolean mediaOpen) {
 		this.mediaOpen = mediaOpen;
 	}
-	
-	
-	
 
 }

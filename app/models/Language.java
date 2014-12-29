@@ -50,5 +50,26 @@ public class Language extends Model {
 	public void setLevels(int[] levels) {
 		this.levels = levels;
 	}
+	public long getLanguageTid() {
+		return languageTid;
+	}
+	public void setLanguageTid(long languageTid) {
+		this.languageTid = languageTid;
+	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

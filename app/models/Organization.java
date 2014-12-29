@@ -18,14 +18,15 @@ public class Organization extends Model{
 	@Required
 	@GeneratedValue
 	private long id;
-	@Required
+//	@Required
 	private String organizationType;
-	@Required
+//	@Required
 	private String organizationName;
-	@Required 
+//	@Required 
 	private int organizationSize;
-	@Required
+//	@Required
 	private boolean visibleFor;
+	
 	public long getId() {
 		return id;
 	}

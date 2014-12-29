@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OptimisticLockException;
@@ -33,6 +34,7 @@ import models.Identification;
 import models.Interview;
 import models.ItKnowledge;
 import models.Language;
+import models.Permission;
 import models.PreferredCommunicationLanguage;
 import models.Role;
 import models.Sizes;
@@ -103,6 +105,9 @@ public class Volunteer extends Human {
 	//TODO: Relevanz checken für sport
 	//	@Required
 	private Sport sport;
+	@ManyToOne // owning side
+	private Permission permission;
+	
 	
 	/**
 	 * Default constructor;

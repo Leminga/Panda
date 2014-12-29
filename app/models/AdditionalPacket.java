@@ -11,10 +11,11 @@ public class AdditionalPacket extends Model{
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	
-	@Required
+//	@Required
 	private boolean packetBooked;
-	@Required
+//	@Required
 	private boolean packetPaid;
+	
 	public boolean isPacketBooked() {
 		return packetBooked;
 	}

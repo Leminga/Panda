@@ -36,6 +36,21 @@ public class Educationlevel extends Model {
 	public void setId(long id) {
 		this.id = id;
 	}
+	public long getEducationlevelTid() {
+		return educationlevelTid;
+	}
+	public void setEducationlevelTid(long educationlevelTid) {
+		this.educationlevelTid = educationlevelTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 
 }

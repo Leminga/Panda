@@ -23,6 +23,10 @@ public class LoginTime extends Model {
 	public void setLogin(Date login) {
 		this.login = login;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 		
 		
 }

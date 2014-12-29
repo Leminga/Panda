@@ -35,5 +35,20 @@ public class Faculty extends Model{
 	public void setId(long id) {
 		this.id = id;
 	}
+	public long getFacultyTid() {
+		return facultyTid;
+	}
+	public void setFacultyTid(long facultyTid) {
+		this.facultyTid = facultyTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

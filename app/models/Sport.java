@@ -35,4 +35,20 @@ public class Sport extends Model{
 	public void setId(long id) {
 		this.id = id;
 	}
+	public long getSportTid() {
+		return sportTid;
+	}
+	public void setSportTid(long sportTid) {
+		this.sportTid = sportTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

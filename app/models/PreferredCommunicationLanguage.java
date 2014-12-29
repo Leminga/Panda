@@ -35,5 +35,21 @@ public class PreferredCommunicationLanguage extends Model {
 	public void setId(long id) {
 		this.id = id;
 	}
+	public long getPreferredLanguageTid() {
+		return preferredLanguageTid;
+	}
+	public void setPreferredLanguageTid(long preferredLanguageTid) {
+		this.preferredLanguageTid = preferredLanguageTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 
 }

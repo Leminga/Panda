@@ -17,7 +17,7 @@ public class Arrival extends Model{
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	
-	@Required
+//	@Required
 	private Date arrivalDate;
 	@Required
 	@Column(unique=true)
@@ -57,8 +57,14 @@ public class Arrival extends Model{
 	public void setArrivalComment(String arrivalComment) {
 		this.arrivalComment = arrivalComment;
 	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
-	
-	
-
 }

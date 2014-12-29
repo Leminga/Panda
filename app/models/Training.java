@@ -20,9 +20,9 @@ public class Training extends Model{
 	@Id
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy="training")
 	private String trainingName;
-	@Required
+//	@Required
 	private Date trainingdate;
-	@Required
+//	@Required
 	private String trainingquota;
 	
 	
@@ -43,6 +43,9 @@ public class Training extends Model{
 	}
 	public void setTrainingquota(String trainingquota) {
 		this.trainingquota = trainingquota;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	

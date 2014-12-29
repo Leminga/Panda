@@ -59,7 +59,24 @@ public class Sex extends Model{
 	 * 
 	 * @param sexTId The id in the tranlation table.
 	 */
-	public void setSexTId(long sexTid) {
+	public void setSexTid(long sexTid) {
 		this.sexTid = sexTid;
 	}
+
+	public Translation getTranslation() {
+		return translation;
+	}
+
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 }

@@ -26,11 +26,11 @@ public class Sizes extends Model{
 	@Column(unique=true)
 	private long Vid;
 	
-	@Required
+//	@Required
 	private int jacketSize;
-	@Required
+//	@Required
 	private int trousersSize;
-	@Required
+//	@Required
 	private int shoeSize;
 	
 	//OneToOne Relation to Volunteer
@@ -56,7 +56,26 @@ public class Sizes extends Model{
 	public void setShoeSize(int shoeSize) {
 		this.shoeSize = shoeSize;
 	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public long getVid() {
+		return Vid;
+	}
+	public void setVid(long vid) {
+		Vid = vid;
+	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
-	
-
 }

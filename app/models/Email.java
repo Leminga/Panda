@@ -18,12 +18,13 @@ public class Email extends Model {
 	@Required
 	@GeneratedValue
 	private long id;
-	@Required
+//	@Required
 	private String subject;
-	@Required
+//	@Required
 	private String content;
-	@Required
+//	@Required
 	private byte[] attachement;
+	@Required
 	@ManyToOne
 	private long emailTId;
 	

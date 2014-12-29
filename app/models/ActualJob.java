@@ -49,6 +49,25 @@ public class ActualJob extends Model {
 	public void setActualJobTid(long actualJobTid) {
 		this.actualJobTid = actualJobTid;
 	}
-	
-	
+	public long getVid() {
+		return Vid;
+	}
+	public void setVid(long vid) {
+		Vid = vid;
+	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

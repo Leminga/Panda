@@ -27,9 +27,9 @@ public class Departure extends Model {
 	@JoinColumn(name = "departurePlaceTid")
 	private Translation translation;
 	
-	@Required
+//	@Required
 	private String departureFlightNumber;
-	@Required
+//	@Required
 	private String departureComment;
 	
 	public Date getDepartureDate() {
@@ -56,8 +56,13 @@ public class Departure extends Model {
 	public void setDepartureComment(String departureComment) {
 		this.departureComment = departureComment;
 	}
-	
-	
-	
-
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

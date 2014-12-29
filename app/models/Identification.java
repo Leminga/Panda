@@ -16,11 +16,11 @@ public class Identification extends Model {
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	
-	@Required
+//	@Required
 	private String identificationNumber;
-	@Required
+//	@Required
 	private IdentificationType identificationType;
-	@Required
+//	@Required
 	private Date expiryDate;
 	
 	//ManyToOne Relation to Volunteer
@@ -46,9 +46,14 @@ public class Identification extends Model {
 	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
 	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
-	
-	
-	
-
 }

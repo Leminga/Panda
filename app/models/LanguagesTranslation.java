@@ -19,6 +19,7 @@ public class LanguagesTranslation extends Model{
 	@Required
 	@GeneratedValue
 	private long id;
+	@Required
 	@ManyToOne
 	private long languageTranslationTId;
 	

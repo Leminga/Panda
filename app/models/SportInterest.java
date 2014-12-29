@@ -36,5 +36,20 @@ public class SportInterest extends Model{
 	public void setId(long id) {
 		this.id = id;
 	}
+	public long getSportInterestTid() {
+		return sportInterestTid;
+	}
+	public void setSportInterestTid(long sportInterestTid) {
+		this.sportInterestTid = sportInterestTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

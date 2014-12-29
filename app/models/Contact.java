@@ -16,7 +16,6 @@ import models.volunteer.Volunteer;
 
 
 @Entity
-
 public class Contact extends Model{
 	
 	/** The serialization version identifier. */
@@ -46,7 +45,26 @@ public class Contact extends Model{
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
+	public long getConnectionTypeTid() {
+		return connectionTypeTid;
+	}
+	public void setConnectionTypeTid(long connectionTypeTid) {
+		this.connectionTypeTid = connectionTypeTid;
+	}
+	public Translation getTranslation() {
+		return translation;
+	}
+	public void setTranslation(Translation translation) {
+		this.translation = translation;
+	}
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }
