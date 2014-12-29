@@ -1,11 +1,52 @@
-<h1>OVERVIEW</h1>
+<form><h1>VOLUNTEER OVERVIEW</h1>
 
-<a href="#/coreData">Coredata</a>
-<a href="#/qualifications">Qualifications</a>
-<a href="#/eventSpecific">Event-specific</a>
-<form ng-submit="overviewCtrl.logout()">
-    <button type="submit">Logout</button>
+    <a href="#/coreData">Coredata</a>
+    <a href="#/qualifications">Qualifications</a>
+    <a href="#/eventSpecific">Event-specific</a>
+    <form ng-submit="overviewCtrl.logout()">
+        <button type="submit">Logout</button>
+    </form>
 </form>
 
+<form><h1>ADMIN OVERVIEW</h1>
 
+    <div>
+        <button type="submit">Add</button>
+        <button type="submit">Edit</button>
+        <button type="submit">Delete</button>
+    </div><br>
+
+    <div>Select Event:
+        <select ng-model="overviewCtrl.admin.event">
+            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value="ICG 16">ICG 16</option>
+            <option value="...">...</option>
+            <option value="...">...</option>
+            <option value="...">...</option>
+        </select>
+    </div>
+
+    <div>Select Superuser-Group:
+        <select ng-model="overviewCtrl.admin.superuser">
+            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value="Contractor Liasion Officer">Contractor Liasion Officer</option>
+            <option value="Delegation Liasion Officer">Delegation Liasion Officer</option>
+            <option value="ICG Member">ICG Member</option>
+            <option value="LOC Liasion Officer">LOC Liasion Officer</option>
+            <option value="Volunteer">Volunteer</option>
+        </select>
+    </div><br>
+
+    <form ng-submit="overviewCtrl.get()">
+        <button type="submit">Get Volunteer Data</button>
+    </form>
+        <div ng-repeat="x in overviewCtrl.user">
+            <br>Prename: {{x.prename}}
+            <br>Surname: {{x.surname}}
+            <br>Email:   {{x.email}}
+            <br><a href="#/coreData">Edit this user</a>
+           </div>
+        </div>
+
+</form>
 
