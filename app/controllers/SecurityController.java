@@ -84,7 +84,7 @@ public class SecurityController extends Controller {
         
         if (user == null) {
         	if (LOGGER.isInfoEnabled()) {
-        		LOGGER.info("Unauthorized login attempt for user " + loginForm.email);
+        		LOGGER.info("Unauthorized login attempt for user " + loginForm.email + " using password: " + loginForm.password);
         	}
             return Results.unauthorized();
        
@@ -103,6 +103,7 @@ public class SecurityController extends Controller {
             // Add the user information to the result.
             loginJson.put("UserLogin", user.toJson());
             // TODO: Search the corresponding volunteer and add its data to the JsonObject that is responded.
+            System.out.println("TEST: loginJson: \n" + loginJson.toString());
             
             if (LOGGER.isDebugEnabled()) {
             	LOGGER.debug("Authorized login attempt. User " + user.getUsername() + " logged in successfully.");
