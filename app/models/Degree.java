@@ -1,12 +1,12 @@
 package models;
 
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+//import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import play.data.validation.Constraints.Required;
@@ -21,7 +21,7 @@ public class Degree extends Model {
 	@Id
 	@Required
 	@GeneratedValue
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy="degree")
+	//@ManyToMany(cascade = CascadeType.ALL, mappedBy="degree") // Not needed, as the relation is unidirectional.
 	private Long id;
 	@Required
 	@Column(unique=true)
@@ -55,9 +55,5 @@ public class Degree extends Model {
 
 	public void setTranslation(Translation translation) {
 		this.translation = translation;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 }

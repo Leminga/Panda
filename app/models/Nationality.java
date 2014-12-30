@@ -28,7 +28,7 @@ public class Nationality extends Model{
 	
 	@Id
 	@Required
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy="nationality")
+	//@ManyToMany(cascade = CascadeType.ALL, mappedBy="nationality") // Not needed, as the relation is unidirectional.
 	private int countryId;
 	@Required
 	private String iso2;
