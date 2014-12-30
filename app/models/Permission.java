@@ -19,14 +19,14 @@ public class Permission {
 	private long id;
 	
 	@Required
-	@OneToMany(cascade = CascadeType.ALL)
-	private int[] permission;
+	//@OneToMany(cascade = CascadeType.ALL)
+	private List<Integer> permission;
 
-	public int[] getPermission() {
+	public List<Integer> getPermission() {
 		return permission;
 	}
 
-	public void setPermission(int[] permission) {
+	public void setPermission(List<Integer> permission) {
 		this.permission = permission;
 	}
 }
