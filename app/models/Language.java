@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +38,7 @@ public class Language extends Model {
 	private Translation translation;
 	
 	@Required 
-	private int[] levels;
+	private List<Integer> levels;
 	
 	public long getId() {
 		return id;
@@ -44,10 +46,10 @@ public class Language extends Model {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public int[] getLevels() {
+	public List<Integer> getLevels() {
 		return levels;
 	}
-	public void setLevels(int[] levels) {
+	public void setLevels(List<Integer> levels) {
 		this.levels = levels;
 	}
 	public long getLanguageTid() {
