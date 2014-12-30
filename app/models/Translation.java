@@ -3,7 +3,7 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import play.data.validation.Constraints.Required;
@@ -18,7 +18,7 @@ public class Translation extends Model {
 	@Id
 	@Required
 	@GeneratedValue
-	@OneToMany
+	//@OneToMany // Not needed, as the relation is unidirectional.
 	private long Tid;
 	@Required
 	private String german;
