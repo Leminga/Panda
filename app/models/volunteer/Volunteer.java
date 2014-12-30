@@ -4,10 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OptimisticLockException;
@@ -35,7 +32,7 @@ import models.Interview;
 import models.ItKnowledge;
 import models.Language;
 import models.Nationality;
-import models.Permission;
+//import models.Permission;
 import models.PreferredCommunicationLanguage;
 import models.Role;
 import models.Sizes;
@@ -53,11 +50,6 @@ public class Volunteer extends Human {
 	private static final long serialVersionUID = 1L;
 	/** Logger to log SecurityController events. */
 	private static Logger LOGGER = LoggerFactory.getLogger(Volunteer.class);
-	
-	@Id
-	@Required
-	@GeneratedValue
-	private long id;
 	
 	//OneToMany Relations
 	@OneToMany(cascade = CascadeType.ALL)
@@ -106,9 +98,8 @@ public class Volunteer extends Human {
 	//TODO: Relevanz checken für sport
 	//	@Required
 	private Sport sport;
-	@ManyToOne // owning side
-	private Permission permission;
-	
+//	@ManyToOne // owning side
+//	private Permission permission;
 	
 	/**
 	 * Default constructor;
@@ -124,32 +115,14 @@ public class Volunteer extends Human {
 		Nationality nation = new Nationality(nationality);
 		nation.setLongName(nationality);
 	}
-	public static Logger getLOGGER() {
-		return LOGGER;
-	}
 
-	public static void setLOGGER(Logger lOGGER) {
-		LOGGER = lOGGER;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
+	@JsonIgnore
 	public UserLogin getLoginData() {
 		return loginData;
 	}
 
 	public void setLoginData(UserLogin loginData) {
 		this.loginData = loginData;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	public List<Contact> getContacts() {
@@ -255,6 +228,7 @@ public class Volunteer extends Human {
 		this.sport = sport;
 	}
 	
+	@JsonIgnore
 	public UserLogin getUserLogin() {
 		return this.loginData;
 	}
@@ -313,6 +287,12 @@ public class Volunteer extends Human {
 	public void delete() throws OptimisticLockException {
 		try {
 			Ebean.delete(this);
+			
+			// Make sure the related entities are deleted in order to
+			// avoid referential integrity constraint violations.
+			if (this.loginData != null)
+				this.loginData.delete();
+			
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Volunteer "+ this.getPrename() + " " + this.getSurname() + " deleted.");
 			}
@@ -336,7 +316,7 @@ public class Volunteer extends Human {
 			return writer.writeValueAsString(this.toJson());
 		} catch (JsonProcessingException e) {
 			LOGGER.debug("Processing Json object failed.");
-			return getPrename() + " " + this.getSurname();
+			return this.getPrename() + " " + this.getSurname();
 		}
 	}
 

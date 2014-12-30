@@ -7,16 +7,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
 
 import models.Degree;
-import models.Interview;
 import models.Nationality;
-import models.Permission;
+//import models.Permission;
 import models.Sex;
-import models.volunteer.Volunteer;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 

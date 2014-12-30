@@ -3,12 +3,11 @@ package models;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.OptimisticLockException;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -24,7 +23,10 @@ import models.volunteer.Volunteer;
 
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 @Entity
@@ -59,15 +61,15 @@ public class UserLogin extends Model {
 	/** Tracks whether their have been changes on the model. */
 	@Transient
 	private boolean hasChanged;
-	@Required
-	@Column(unique=true)
-	private long Vid;
+//	@Required
+//	@Column(unique=true)
+//	private long Vid;
 	
 	//OneToOne Relation to Volunteer
-	@OneToOne
-	@JoinColumn(name = "Vid")
+	@OneToOne(optional = true)
+	@PrimaryKeyJoinColumn(name = "volunteer_id")
 	private Volunteer volunteer;
-	
+
 	/**
 	 * Queries the database to find a user that is
 	 * uniquely identified by its authentication
@@ -246,6 +248,14 @@ public class UserLogin extends Model {
 		this.hasChanged = true;
 	}
 	
+	public Volunteer getVolunteer() {
+		return volunteer;
+	}
+
+	public void setVolunteer(Volunteer volunteer) {
+		this.volunteer = volunteer;
+	}
+	
 	///
 	/// All the other methods.
 	///
@@ -269,6 +279,11 @@ public class UserLogin extends Model {
 		if (!this.hasChanged) {
 			return;
 		}
+		
+		// Make sure the related entities are saved in order to
+		// avoid referential integrity constraint violations.
+		if (this.volunteer != null)
+			this.volunteer.save();
 		
 		try {
 			Ebean.save(this);
@@ -340,6 +355,18 @@ public class UserLogin extends Model {
 		ObjectNode result = Json.newObject();
 		result.put(this.getClassName().toLowerCase(), Json.toJson(this));
 		return result;	
+	}
+	
+	@Override
+	public String toString() {
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectWriter writer = mapper.writer().withDefaultPrettyPrinter();
+		try {
+			return writer.writeValueAsString(this.toJson());
+		} catch (JsonProcessingException e) {
+			LOGGER.debug("Processing Json object failed.");
+			return this.getUsername();
+		}
 	}
 
 }
