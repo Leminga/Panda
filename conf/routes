@@ -14,3 +14,10 @@ POST	/register					controllers.SecurityController.register()
 # Map static resources from the /public folder to the /assets URL path
 GET		/assets/*file				controllers.Assets.at(path="/public", file)
 GET		/							controllers.Assets.at(path="/public", file="index.html")
+
+# Routes I would expect ... and many more ...
+# POST		/volunteers				controllers.VolunteerController.createVolunteer()
+# GET		/volunteers				controllers.VolunteerController.getVolunteers()
+# GET		/volunteers/:id			controllers.VolunteerController.getVolunteer(id: Long)
+# PUT		/volunteers/:id			controllers.VolunteerController.updateVolunteer(id: Long)
+# DELETE	/volunteers/:id			controllers.VolunteerController.deleteVolunteer(id: Long)
