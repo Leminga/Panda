@@ -1,8 +1,8 @@
 <h1>EVENTSPECIFIC DATA</h1>
-    <button ng-click="specific = !specific">Eventspecific Data</button>
 
+    <button ng-click="specific = !specific">Eventspecific Data</button>
     <form id="eventspecific" name="eventspecific" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user.specific)">
-        <div ng-show="specific"></div>
+        <div ng-show="specific">
             <div>Preferred Working Area:
                 <select ng-model="eventSpecificCtrl.user.specific.preferredWorkingArea">
                     <option value='' disabled selected style='display:none;'>Open here</option>
@@ -14,14 +14,16 @@
 
         <div>
             Availability:
-            From:<datepicker date-min-limit="05/01/2016" date-max-limit="17/01/2016">
-                    <input ng-model="eventSpecificCtrl.user.specific.fromAvailability" placeholder="dd/mm/yyyy"  type="text">
-                </datepicker> <br>
-            Until:<datepicker date-min-limit="05/01/2016" date-max-limit="17/01/2016">
-                    <input ng-model="eventSpecificCtrl.user.specific.untilAvailability" placeholder="dd/mm/yyyy" type="text">
-                </datepicker>
-        </div>
+            From                <input id="from" placeholder="dd/mm/yyyy" type="text"
+                                       pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
+                                       ng-model="eventSpecificCtrl.user.specific.availabilityFrom" name="date of birth">
+        </div><br>
 
+            Until:                <input id="until" placeholder="dd/mm/yyyy" type="text"
+                                         pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
+                                         ng-model="eventSpecificCtrl.user.specific.availabilityUntil" name="date of birth">
+        <br>
+<div ng-if="eventSpecificCtrl.user.specific.availabilityUntil <= eventSpecificCtrl.user.specific.availabilityFrom">The date range is invalid.</div>
         <div>
             Are you interested in assisting beforehand?<br>
             <input ng-model="eventSpecificCtrl.user.specific.assistance" type="radio" name="assistance" value="yes"
@@ -61,22 +63,29 @@
                 <option value="snowboarding girls">Snowboarding Girls</option>
             </select><br><br>
             <button form="eventspecific" type="submit">Save</button>
-
+        </div>
+        </div>
     </form>
 
         <button ng-click="pictures = !pictures">Pictures</button>
-        <form id="pictures" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user.pictures)">
+        <form id="pictures" ng-submit="eventSpecificCtrl.saveData   (eventSpecificCtrl.user.pictures)">
             <div ng-show="pictures">
                 <!-- TBD: Upload for pictures - ng-model doesn't work here. -->
                  <div>Upload your picture:<br>
-                    <input type="file" ng-model="eventSpecificCtrl.user.pictures.profilePicture" name="pic" accept="image/*">
+                    <input type="file" ng-model="eventSpecificCtrl.user.pictures.profilePicture" name="pic" accept="image/*" app-filereader>
+                     <br> Your picture
+                     <img ng-src="{{eventSpecificCtrl.user.pictures.profilePicture}}" width="300px">
+                     <div>Test: {{eventSpecificCtrl.user.pictures.profilePicture}}</div>
                  </div><br>
 
             <div>Upload a copy of your passport:<br>
-                <input type="file" ng-model="eventSpecificCtrl.user.pictures.passportPicture" name="passport" accept="image/*">
+                <input type="file" ng-model="eventSpecificCtrl.user.pictures.passportPicture" name="passport" accept="image/*" app-filereader>
+                <br> Passport
+                <img ng-src="{{eventSpecificCtrl.user.pictures.passportPicture}}" width="300px">
             </div><br>
-
+                <div>Test: {{eventSpecificCtrl.user.pictures.passportPicture}}</div>
             <button form="pictures" type="submit">Save</button>
+
         </div>
     </form>
 

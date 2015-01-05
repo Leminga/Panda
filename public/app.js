@@ -29,12 +29,12 @@ angular.module('Panda')
             });
 
             self.saveData = function (user) {
-                if (user.profilePictures != null) {
-                    user.profilePictures = JSON.encodeBase64(user.profilePicture);
+               /* if (user.profilePicture != null) {
+                    user.profilePicture = JSON.encodeBase64(user.profilePicture);
                 }
                 if (user.passportPicture != null) {
                     user.passportPicture = JSON.encodeBase64(user.passportPicture);
-                }
+                }*/
                 DataService.save(user);
             };
 
@@ -106,6 +106,52 @@ angular.module('Panda')
     }]);
 
 
+angular.module('Panda')
+    .directive('appFilereader', function(
+        $q
+    ){
+        var slice = Array.prototype.slice;
+
+        return {
+            restrict: 'A'
+            , require: '?ngModel'
+            , link: function(scope, element, attrs, ngModel){
+                if(!ngModel) return;
+
+                ngModel.$render = function(){}
+
+                element.bind('change', function(e){
+                    var element = e.target;
+
+                    $q.all(slice.call(element.files, 0).map(readFile))
+                        .then(function(values){
+                            if(element.multiple) ngModel.$setViewValue(values);
+                            else ngModel.$setViewValue(values.length ? values[0] : null);
+                        });
+
+                    function readFile(file) {
+                        var deferred = $q.defer();
+
+                        var reader = new FileReader()
+                        reader.onload = function(e){
+                            deferred.resolve(e.target.result);
+                        }
+                        reader.onerror = function(e) {
+                            deferred.reject(e);
+                        }
+                        reader.readAsDataURL(file);
+
+                        return deferred.promise;
+                    }
+
+                });//change
+
+            }//link
+
+        };//return
+
+    })//appFilereader
+;
 // The InterceptorService reacts to any of the mentioned http-methods (request, requestError..)
 angular.module('Panda')
     .factory('InterceptorService', ['$q', '$window', function ($q, $window) {
