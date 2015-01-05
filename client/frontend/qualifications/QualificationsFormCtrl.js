@@ -11,6 +11,7 @@ angular.module('Panda')
                 DataService.save(user);
             };
 
+            // Check whether the language is "Other" or not. If so, then don't display the additional fields.
             self.languageCheck = function(language){
                 if(language == 'other' || language == null){
                     return false;

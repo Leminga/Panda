@@ -1,3 +1,4 @@
+// Controller for eventSpecific.html
 angular.module('Panda')
     .controller('EventSpecificFormCtrl', ['DataService',
         function (DataService) {
@@ -8,12 +9,6 @@ angular.module('Panda')
             });
 
             self.saveData = function (user) {
-               /* if (user.profilePicture != null) {
-                    user.profilePicture = JSON.encodeBase64(user.profilePicture);
-                }
-                if (user.passportPicture != null) {
-                    user.passportPicture = JSON.encodeBase64(user.passportPicture);
-                }*/
                 DataService.save(user);
             };
 

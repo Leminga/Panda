@@ -19,6 +19,7 @@ angular.module('Panda')
 
         }]);
 
+// Controller for eventSpecific.html
 angular.module('Panda')
     .controller('EventSpecificFormCtrl', ['DataService',
         function (DataService) {
@@ -29,12 +30,6 @@ angular.module('Panda')
             });
 
             self.saveData = function (user) {
-               /* if (user.profilePicture != null) {
-                    user.profilePicture = JSON.encodeBase64(user.profilePicture);
-                }
-                if (user.passportPicture != null) {
-                    user.passportPicture = JSON.encodeBase64(user.passportPicture);
-                }*/
                 DataService.save(user);
             };
 
@@ -106,6 +101,7 @@ angular.module('Panda')
     }]);
 
 
+// Converts files (in this case our profile and passport pictures) to BASE64 and adds the data output to that data model
 angular.module('Panda')
     .directive('appFilereader', function(
         $q
@@ -303,6 +299,7 @@ angular.module('Panda')
                 DataService.save(user);
             };
 
+            // Check whether the language is "Other" or not. If so, then don't display the additional fields.
             self.languageCheck = function(language){
                 if(language == 'other' || language == null){
                     return false;
@@ -321,15 +318,19 @@ angular.module('Panda')
             }
         };
     }]);
+// This controller handles the registration of a user
 angular.module('Panda')
     .controller('RegisterFormCtrl', ['RegisterService', 'GetRegistrationService', '$window', '$location',
         function (RegisterService, GetRegistrationService, $window,$location) {
             var self = this;
             self.receivedRegistrationData = {};
 
+// This method sends the input data to the controller and receives information on the success or failure of the
+// registration.
 
             self.register = function () {
                 RegisterService.register(self.user).then(function (response) {
+                        // TODO: React to the controllers messages, don't leave them hardcoded.
                         $window.alert("Registration successful");
                         $window.setTimeout($location.path("/"),3000);
                     }, function (response) {

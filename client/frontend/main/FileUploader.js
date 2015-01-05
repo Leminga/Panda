@@ -1,3 +1,4 @@
+// Converts files (in this case our profile and passport pictures) to BASE64 and adds the data output to that data model
 angular.module('Panda')
     .directive('appFilereader', function(
         $q
