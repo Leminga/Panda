@@ -1,4 +1,4 @@
-<form><h1>VOLUNTEER OVERVIEW</h1>
+<form ng-show="overviewCtrl.user.role == volunteer"><h1>VOLUNTEER OVERVIEW</h1>
 
     <a href="#/coreData">Coredata</a>
     <a href="#/qualifications">Qualifications</a>
@@ -8,7 +8,7 @@
     </form>
 </form>
 
-<form><h1>ADMIN OVERVIEW</h1>
+<form ng-show="overviewCtrl.user.role == admin"><h1>ADMIN OVERVIEW</h1>
 
     <div>
         <button type="submit">Add</button>
@@ -26,16 +26,6 @@
         </select>
     </div>
 
-    <div>Select Superuser-Group:
-        <select ng-model="overviewCtrl.admin.superuser">
-            <option value='' disabled selected style='display:none;'>Open here</option>
-            <option value="Contractor Liasion Officer">Contractor Liasion Officer</option>
-            <option value="Delegation Liasion Officer">Delegation Liasion Officer</option>
-            <option value="ICG Member">ICG Member</option>
-            <option value="LOC Liasion Officer">LOC Liasion Officer</option>
-            <option value="Volunteer">Volunteer</option>
-        </select>
-    </div><br>
 
     <form ng-submit="overviewCtrl.get()">
         <button type="submit">Get Volunteer Data</button>
