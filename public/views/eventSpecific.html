@@ -1,8 +1,6 @@
 <h1>EVENTSPECIFIC DATA</h1>
 
-<button ng-click="specific = !specific">Eventspecific Data</button>
-<form id="eventspecific" name="eventspecific" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user.specific)">
-    <div ng-show="specific">
+<form id="eventspecific" name="eventspecific" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user)">
         <div>Preferred Working Area:
             <select ng-model="eventSpecificCtrl.user.specific.preferredWorkingArea">
                 <option value='' disabled selected style='display:none;'>Open here</option>
@@ -73,35 +71,8 @@
             <option value="snowboarding boys">Snowboarding Boys</option>
             <option value="snowboarding girls">Snowboarding Girls</option>
         </select><br><br>
+    </div>
         <button form="eventspecific" type="submit">Save</button>
-    </div>
-    </div>
-</form>
-
-<button ng-click="pictures = !pictures">Pictures</button>
-<form id="pictures" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user.pictures)">
-    <div ng-show="pictures">
-        <div>Upload your picture:<br>
-            <input type="file" ng-model="eventSpecificCtrl.user.pictures.profilePicture" name="pic" accept="image/*"
-                   app-filereader>
-            <br> Your picture
-            <img ng-src="{{eventSpecificCtrl.user.pictures.profilePicture}}" width="300px">
-
-            <div>Test: {{eventSpecificCtrl.user.pictures.profilePicture}}</div>
-        </div>
-        <br>
-
-        <div>Upload a copy of your passport:<br>
-            <input type="file" ng-model="eventSpecificCtrl.user.pictures.passportPicture" name="passport"
-                   accept="image/*" app-filereader>
-            <br> Passport
-            <img ng-src="{{eventSpecificCtrl.user.pictures.passportPicture}}" width="300px">
-        </div>
-        <br>
-
-        <div>Test: {{eventSpecificCtrl.user.pictures.passportPicture}}</div>
-        <button form="pictures" type="submit">Save</button>
-
     </div>
 </form>
 
