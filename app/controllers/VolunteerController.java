@@ -39,20 +39,25 @@ public class VolunteerController extends Controller {
 	//@Security.Authenticated(Secured.class)
 	public static Result dummyData (){
     	
-    	ObjectNode userin = Json.newObject();
-    	userin.put("prename","hans");
-		userin.put("surname", "wurst");
-		userin.put("emailAddress", "hans.wurst@metzgerei.at");
-		userin.put("gender", "male");
-		userin.put("dateOfBirth", "12/01/1998");
-		userin.put("nationality", "austria");
-		userin.put("socialSecurityNumber", "3589125814");
-		
-		ObjectNode userout = Json.newObject();
-		userout.put("user", userin);
+    	ObjectNode user = Json.newObject();
+    	user.put("prename","hans");
+		user.put("surname", "wurst");
+		user.put("emailAddress", "hans.wurst@metzgerei.at");
+		user.put("gender", "male");
+		user.put("dateOfBirth", "12/01/1998");
+		user.put("nationality", "austria");
+		user.put("socialSecurityNumber", "3589125814");
          
-		return Results.ok(userout);
-    	
+    	ObjectNode description = Json.newObject();
+    	description.put("prename","Vorname:");
+		description.put("surname", "Nachname:");
+		description.put("emailAddress", "Deine E.Mail Adresse:");
+
+		ObjectNode jsonReturn = Json.newObject();
+		jsonReturn.put("description", description);
+		jsonReturn.put("user", user);
+
+		return Results.ok(jsonReturn);  	
     }
 	
 public static Result userDataTest (){
@@ -162,6 +167,7 @@ public static Result userDataTest (){
 		}
 	}
 
+	//Methode für das parsen von String zu Date
 	public static Date parseStringToDate(String input) {
 		try {
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -178,6 +184,7 @@ public static Result userDataTest (){
 		}
 	}
 
+	//Methode für das parsen von Date zu String
 	public static String parseDatetoString(Date input) {
 		try {
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
