@@ -4,6 +4,7 @@ import controllers.routes;
 import models.UserLogin;
 import play.mvc.Http.Context;
 import play.mvc.Result;
+import play.mvc.Results;
 import play.mvc.Security;
 
 /**
@@ -60,6 +61,9 @@ public class Secured extends Security.Authenticator {
      */
     @Override
     public Result onUnauthorized(Context ctx) {
-        return redirect(routes.SecurityController.login());
+    	//return redirect(routes.SecurityController.login());
+    	
+    	// redirect to Login Screen
+        return Results.redirect("/");
     }
 }
