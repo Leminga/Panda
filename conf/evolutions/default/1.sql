@@ -347,6 +347,11 @@ create table organization (
   constraint pk_organization primary key (id))
 ;
 
+create table permission (
+  id                        bigint not null,
+  constraint pk_permission primary key (id))
+;
+
 create table phone (
   id                        bigint not null,
   connection_type_tid       bigint,
@@ -450,8 +455,7 @@ create table user_login (
   first_login               timestamp,
   last_login                timestamp,
   auth_token                varchar(255),
-  vid                       bigint,
-  constraint uq_user_login_vid unique (vid),
+  volunteer_id              bigint,
   constraint pk_user_login primary key (username))
 ;
 
@@ -733,6 +737,8 @@ create sequence nationality_seq;
 
 create sequence organization_seq;
 
+create sequence permission_seq;
+
 create sequence phone_seq;
 
 create sequence preferred_communication_language_seq;
@@ -823,8 +829,8 @@ alter table sport_interest add constraint fk_sport_interest_translation_31 forei
 create index ix_sport_interest_translation_31 on sport_interest (sportInterestTid);
 alter table text_boxes add constraint fk_text_boxes_volunteer_32 foreign key (Vid) references volunteer (id) on delete restrict on update restrict;
 create index ix_text_boxes_volunteer_32 on text_boxes (Vid);
-alter table user_login add constraint fk_user_login_volunteer_33 foreign key (Vid) references volunteer (id) on delete restrict on update restrict;
-create index ix_user_login_volunteer_33 on user_login (Vid);
+alter table user_login add constraint fk_user_login_volunteer_33 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_user_login_volunteer_33 on user_login (volunteer_id);
 
 
 
@@ -1112,6 +1118,8 @@ drop table if exists nationality;
 
 drop table if exists organization;
 
+drop table if exists permission;
+
 drop table if exists phone;
 
 drop table if exists preferred_communication_language;
@@ -1211,6 +1219,8 @@ drop sequence if exists media_seq;
 drop sequence if exists nationality_seq;
 
 drop sequence if exists organization_seq;
+
+drop sequence if exists permission_seq;
 
 drop sequence if exists phone_seq;
 
