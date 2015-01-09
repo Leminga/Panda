@@ -1,22 +1,25 @@
 <h1>CORE DATA</h1>
 <form id="form_personal" name="form_personal" ng-submit="coreDataCtrl.saveData(coreDataCtrl.user)">
-
     <div>
-        Prename: <input type="text" name="prename" ng-model="coreDataCtrl.user.personalData.prename"><br>
+        {{coreDataCtrl.description.prename}}
+        Prename: <input type="text" name="prename" ng-model="coreDataCtrl.user.prename"><br>
         <br>
-        Surname: <input ng-model="coreDataCtrl.user.personalData.surname" type="text" name="surname">
+        {{coreDataCtrl.description.surname}}
+        Surname: <input ng-model="coreDataCtrl.user.surname" type="text" name="surname">
     </div><br>
 
     <div>
+        {{coreDataCtrl.description.gender}}
         Choose your gender:<br>
         <br>
-        <input type="radio" ng-model="coreDataCtrl.user.personalData.gender" name="gender" value="male" checked>Male<br>
-        <input type="radio" ng-model="coreDataCtrl.user.personalData.gender" name="gender" value="female">Female
+        <input type="radio" ng-model="coreDataCtrl.user.gender" name="gender" value="male" checked>Male<br>
+        <input type="radio" ng-model="coreDataCtrl.user.gender" name="gender" value="female">Female
     </div><br>
 
     <div>
+        {{coreDataCtrl.description.nationality}}
         <label for="nat_name">Nationality: </label>
-        <input ng-model="coreDataCtrl.user.personalData.nationality" id="nat_name" name="nat_name" type="text" list="nation"/>
+        <input ng-model="coreDataCtrl.user.nationality" id="nat_name" name="nat_name" type="text" list="nation"/>
         <datalist id="nation">
             <option value='' disabled selected style='display:none;'>Open here</option>
             <option value="Albania">Albania</option>
@@ -269,43 +272,50 @@
     </div><br>
 
     <div>
+        {{coreDataCtrl.description.dateOfBirth}}
         Date of Birth:
         <input id="bday" placeholder="dd/mm/yyyy" type="text"
                pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
-               ng-model="coreDataCtrl.user.personalData.dateOfBirth" name="date of birth">
+               ng-model="coreDataCtrl.user.dateOfBirth" name="date of birth">
     </div><br>
     <br>
 
     <div>
+        {{coreDataCtrl.description.socialSecurityNumber}}
         Insert your Social Security Number:
-        <input id="ssn" type="text" ng-model="coreDataCtrl.user.personalData.socialSecurityNumber"
+        <input id="ssn" type="text" ng-model="coreDataCtrl.user.socialSecurityNumber"
                name="social security number">
     </div><br>
 
 
     <div>
+        {{coreDataCtrl.description.address}}
         <h4>Address</h4>
 
         <div>
-            Street:<input ng-model="coreDataCtrl.user.contactData.street" type="text" name="street">
+            {{coreDataCtrl.description.street}}
+            Street:<input ng-model="coreDataCtrl.user.street" type="text" name="street">
         </div><br>
 
         <div>
-            House Number:<input ng-model="coreDataCtrl.user.contactData.houseNumber" type="text" name="housenumber">
+            {{coreDataCtrl.description.housenumber}}
+            House Number:<input ng-model="coreDataCtrl.user.houseNumber" type="text" name="housenumber">
         </div><br>
 
         <div>
-            Zip:<input ng-model="coreDataCtrl.user.contactData.zip" type="text" name="zip">
+            {{coreDataCtrl.description.zip}}
+            Zip:<input ng-model="coreDataCtrl.user.zip" type="text" name="zip">
         </div><br>
 
         <div>
-            City:<input ng-model="coreDataCtrl.user.contactData.city" type="text" name="city">
+            {{coreDataCtrl.description.city}}
+            City:<input ng-model="coreDataCtrl.user.city" type="text" name="city">
         </div><br>
     </div>
 
     <div>
-
-        <label for="country_name">Country : </label><input ng-model="coreDataCtrl.user.contactData.country" id="country_name" name="country_name" type="text" list="country"/>
+{{coreDataCtrl.description.country}}
+        <label for="country_name">Country : </label><input ng-model="coreDataCtrl.user.country" id="country_name" name="country_name" type="text" list="country"/>
         <datalist id="country">
             <option value='' disabled selected style='display:none;'>Open here</option>
             <option value="Albania">Albania</option>
@@ -559,73 +569,83 @@
 
     <div>
         <br>
-        Insert your Phone Number:<input type="tel" ng-model="coreDataCtrl.user.contactData.phoneNumber" name="phonenumber">
+        {{coreDataCtrl.description.phonenumber}}
+        Insert your Phone Number:<input type="tel" ng-model="coreDataCtrl.user.phoneNumber" name="phonenumber">
     </div>
 
     <div>
         <br>
+        {{coreDataCtrl.description.email}}
         Insert your E-Mail:
-        <input type="email" ng-model="coreDataCtrl.user.contactData.email" name="email">
+        <input type="email" ng-model="coreDataCtrl.user.email" name="email">
     </div><br>
-
+{{coreDataCtrl.description.language}}
     <div>Preferred Communication Language
-        <input type="radio" ng-model="coreDataCtrl.user.contactData.language" name="language" value="english">English
-        <input type="radio" ng-model="coreDataCtrl.user.contactData.language" name="language" value="german">German
+        <input type="radio" ng-model="coreDataCtrl.user.language" name="language" value="english">English
+        <input type="radio" ng-model="coreDataCtrl.user.language" name="language" value="german">German
     </div>
-
+    {{coreDataCtrl.description.identification}}
     <h4>Identification</h4>
-
+{{coreDataCtrl.description.idType}}
     <div>ID Type:
-        <input type="text" ng-model="coreDataCtrl.user.identification.idType" name="idtype">
+        <input type="text" ng-model="coreDataCtrl.user.idType" name="idtype">
         <!-- Passport / ID-Card -->
     </div><br>
 
     <div>
-        ID Number:<input ng-model="coreDataCtrl.user.identification.idNumber" type="text" name="idnumber">
+        {{coreDataCtrl.description.idNumber}}
+        ID Number:<input ng-model="coreDataCtrl.user.idNumber" type="text" name="idnumber">
     </div><br>
-
-    <div>Expiry Date:<input placeholder="dd/mm/yyyy" ng-model="coreDataCtrl.user.identification.expiryDate"
+{{coreDataCtrl.description.expiryDate}}
+    <div>Expiry Date:<input placeholder="dd/mm/yyyy" ng-model="coreDataCtrl.user.expiryDate"
                             pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
                             type="text" name="expiry date">
     </div><br>
 
     <div>
+        {{coreDataCtrl.description.driversLicense}}
         Do you have a driver's licence?<br>
         <br>
-        <input checked type="radio" ng-model="coreDataCtrl.user.identification.driversLicense" name="driversLicense"
+        <input checked type="radio" ng-model="coreDataCtrl.user.driversLicense" name="driversLicense"
                value="yes"
-                >Yes<br>
-        <input type="radio" ng-model="coreDataCtrl.user.identification.driversLicense" name="driversLicense"
-               value="no">No<br>
+                >{{coreDataCtrl.description.driversLicenseYes}}Yes<br>
+        <input type="radio" ng-model="coreDataCtrl.user.driversLicense" name="driversLicense"
+               value="no">{{coreDataCtrl.description.driversLicenseNo}} No<br>
     </div><br>
 
     <div><br>
 
         <div>
-            Emergency Contact Prename:<input ng-model="coreDataCtrl.user.emergencyContacts.em_prename" type="text">
+            {{coreDataCtrl.description.em_prename}}
+            Emergency Contact Prename:<input ng-model="coreDataCtrl.user.em_prename" type="text">
         </div>
 
         <div>
-            Emergency Contact Surname:<input ng-model="coreDataCtrl.user.emergencyContacts.em_surname" type="text">
+           {{coreDataCtrl.description.em_surname}}
+            Emergency Contact Surname:<input ng-model="coreDataCtrl.user.em_surname" type="text">
         </div>
 
         <div>
-            Emergency Contact Relation:<input ng-model="coreDataCtrl.user.emergencyContacts.em_relation" type="text">
+            {{coreDataCtrl.description.em_relation}}
+            Emergency Contact Relation:<input ng-model="coreDataCtrl.user.em_relation" type="text">
         </div>
 
         <div>
-            Emergency Contact Phonenumber:<input ng-model="coreDataCtrl.user.emergencyContacts.em_phonenumber" type="tel">
+            {{coreDataCtrl.description.em_phonenumber}}
+            Emergency Contact Phonenumber:<input ng-model="coreDataCtrl.user.em_phonenumber" type="tel">
         </div>
 
         <div>
-            Emergency Contact E-Mail:<input ng-model="coreDataCtrl.user.emergencyContacts.em_email" type="email">
+            {{coreDataCtrl.description.em_email}}
+            Emergency Contact E-Mail:<input ng-model="coreDataCtrl.user.em_email" type="email">
         </div>
 
     </div>
 
     <div><br>
+        {{coreDataCtrl.description.jacketSize}}
         <label for="jacket_sizes">Choose your jacket size: </label>
-        <select id="jacket_sizes" ng-model="coreDataCtrl.user.sizes.jacketSizes" name="jacket_sizes">
+        <select id="jacket_sizes" ng-model="coreDataCtrl.user.jacketSizes" name="jacket_sizes">
             <option value='' disabled selected style='display:none;'>Open here</option>
             <option value="S">S</option>
             <option value="M">M</option>
@@ -635,8 +655,9 @@
     </div><br>
 
     <div>
+        {{coreDataCtrl.description.trouserSize}}
         <label for="trouser_sizes">Choose your trouser size: </label>
-        <select ng-model="coreDataCtrl.user.sizes.trouserSizes" id="trouser_sizes" name="trouser_sizes">
+        <select ng-model="coreDataCtrl.user.trouserSizes" id="trouser_sizes" name="trouser_sizes">
             <option value='' disabled selected style='display:none;'>Open here</option>
             <option value="S">S</option>
             <option value="M">M</option>
@@ -646,8 +667,9 @@
     </div><br>
 
     <div>
+        {{coreDataCtrl.description.shoeSize}}
         <label for="shoe_sizes">Choose your shoe size: </label>
-        <select id="shoe_sizes" name="sizes" ng-model="coreDataCtrl.user.sizes.shoeSizes">
+        <select id="shoe_sizes" name="sizes" ng-model="coreDataCtrl.user.shoeSizes">
             <option value='' disabled selected style='display:none;'>Open here</option>
             <option value="27">27</option>
             <option value="28">28</option>
@@ -677,11 +699,13 @@
             <option value="52">52</option>
         </select>
     </div><br>
+    {{coreDataCtrl.description.picture}}
     <div>Upload your picture:<br>
-        <input type="file" ng-model="coreDataCtrl.user.pictures.profilePicture" name="pic" accept="image/*"
+        <input type="file" ng-model="coreDataCtrl.user.profilePicture" name="pic" accept="image/*"
                app-filereader><br>
+        {{coreDataCtrl.description.profilePicture}}
         <br> Your picture: <br>
-        <img ng-src="{{coreDataCtrl.user.pictures.profilePicture}}" width="300px">
+        <img ng-src="{{coreDataCtrl.user.profilePicture}}" width="300px">
 
     </div>
     <div>

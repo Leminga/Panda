@@ -14,12 +14,15 @@
         <button type="submit">Add</button>
         <button type="submit">Edit</button>
         <button type="submit">Delete</button>
-    </div><br>
-
+    </div>
+    <br>
     <div>Select Event:
         <select ng-model="overviewCtrl.admin.event">
             <option value='' disabled selected style='display:none;'>Open here</option>
             <option value="ICG 16">ICG 16</option>
+            <option value="...">...</option>
+            <option value="...">...</option>
+            <option value="...">...</option>
         </select>
     </div>
 
@@ -30,10 +33,10 @@
         <div ng-repeat="x in overviewCtrl.user">
             <br>Prename: {{x.prename}}
             <br>Surname: {{x.surname}}
-            <br>Email:   {{x.email}}
+            <br>Email: {{x.email}}
             <br><a href="#/coreData">Edit this user</a>
-           </div>
         </div>
+    </div>
 
 </form>
 

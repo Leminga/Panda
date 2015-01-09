@@ -9,7 +9,8 @@ angular.module('Panda')
             var self = this;
 
             DataService.get().then(function (response) {
-                self.user = response.data;
+                self.user = response.data.user;
+                self.description = response.data.description;
             });
 
             self.saveData = function (user) {
