@@ -61,11 +61,13 @@ public class UserLogin extends Model {
 	/** Tracks whether their have been changes on the model. */
 	@Transient
 	private boolean hasChanged;
-//	@Required
-//	@Column(unique=true)
-//	private long Vid;
+	/**gewählte Sprache des Volunteers. */
+	@Required
+	private String chosenLanguage;
 	
-	//OneToOne Relation to Volunteer
+	/*
+	 * OneToOne Relation to Volunteer
+	 */
 	@OneToOne(optional = true)
 	@PrimaryKeyJoinColumn(name = "volunteer_id")
 	private Volunteer volunteer;
@@ -193,6 +195,7 @@ public class UserLogin extends Model {
 		this.password = password;
 		this.creationTime = new Date();
 		this.hasChanged = true;
+		this.chosenLanguage = "E";
 	}
 	
 	///
@@ -353,7 +356,7 @@ public class UserLogin extends Model {
 	 */
 	public JsonNode toJson() {
 		ObjectNode result = Json.newObject();
-		result.put(this.getClassName().toLowerCase(), Json.toJson(this));
+		result.put(this.getClassName(), Json.toJson(this));
 		return result;	
 	}
 	

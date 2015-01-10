@@ -44,10 +44,15 @@ public class Sex extends Model{
 	protected Volunteer volunteer;
 	
 	//OneToOneRelation to Translation
+	@Required
 	@OneToOne
 	@JoinColumn(name = "sexTid")
 	private Translation translation;
-	
+
+	public Sex(long tid) {
+		
+	}
+
 	/**
 	 * Getter for the database id.
 	 * 
@@ -105,5 +110,9 @@ public class Sex extends Model{
 		result.put(this.getClassName(), Json.toJson(this));
 		return result;	
 	}
+
+	
+
+	
 	
 }
