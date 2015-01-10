@@ -51,13 +51,18 @@ public class VolunteerController extends Controller {
 		description.put("prename", "Vorname:");
 		description.put("surname", "Nachname:");
 		description.put("emailAddress", "Deine E.Mail Adresse:");
-		description.put("gender", languageDummy(1));
+		description.put("gender", "Geschlecht");
+		
+		ObjectNode values = Json.newObject();
+		values.put("gender", languageDummy(1));
+		values.put("nationality", "JSON FOLLOWING");
 		
 
 		ObjectNode jsonReturn = Json.newObject();
 		jsonReturn.put("description", description);
 		jsonReturn.put("user", user);
 		jsonReturn.put("volunteers", AdminController.dummyDataAdmin());
+		jsonReturn.put("values", values);
 
 		return Results.ok(jsonReturn);
 	}
