@@ -11,7 +11,7 @@ POST	/register					controllers.SecurityController.register()
 #PATCH  /saveUser                   controllers.VolunteerController.saveAll()
 
 # Dummy-Routes
-GET 	/getUserTest				controllers.VolunteerController.userDataTest()
+#GET 	/getUserTest				controllers.VolunteerController.userDataTest()
 GET    /getUser                    	controllers.VolunteerController.dummyData()
 
 
