@@ -23,6 +23,7 @@ import models.Sex;
 import models.volunteer.Volunteer;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
+import play.data.format.*;
 
 /**
  * Contains all the attributes that are related
@@ -53,8 +54,8 @@ public abstract class Human extends Model {
 	protected Sex sex;*/
 	/** The date of birth of the person. */
 	@Required
-	//@Formats.DateTime(pattern = "dd/MM/yyyy")
-	public Date dateOfBirth;
+	@Formats.DateTime(pattern = "dd/MM/yyyy")
+	public Date dateOfBirth = new Date();
 	/** The (multiple) nationalities of the person. */
 //	@Required
 	@ManyToMany(cascade = CascadeType.ALL)

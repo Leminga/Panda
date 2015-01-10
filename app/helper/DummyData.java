@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlUpdate;
@@ -40,6 +41,7 @@ public class DummyData {
 		Volunteer dummyVolunteer = new Volunteer("dummy", "panda", "dummy@panda.at","Austria");
 		
 		dummyVolunteer.setUserLogin(dummyUser);
+		dummyVolunteer.setDateOfBirth(new Date("12/03/1993"));
 		dummyVolunteer.save();
 		
 		
