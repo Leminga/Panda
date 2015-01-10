@@ -41,7 +41,7 @@ public class VolunteerController extends Controller {
 		user.put("prename", "hans");
 		user.put("surname", "wurst");
 		user.put("emailAddress", "hans.wurst@metzgerei.at");
-		user.put("gender", "male");
+		user.put("gender", "männlich");
 		user.put("dateOfBirth", "12/01/1998");
 		user.put("nationality", "austria");
 		user.put("socialSecurityNumber", "3589125814");
@@ -50,6 +50,7 @@ public class VolunteerController extends Controller {
 		description.put("prename", "Vorname:");
 		description.put("surname", "Nachname:");
 		description.put("emailAddress", "Deine E.Mail Adresse:");
+		description.put("gender", languageDummy(1));
 		
 
 		ObjectNode jsonReturn = Json.newObject();
@@ -60,30 +61,27 @@ public class VolunteerController extends Controller {
 		return Results.ok(jsonReturn);
 	}
 
-	public static Result languageDummy(String preferred) {
+	public static ObjectNode languageDummy(int preferred) {
 
 		//Sprachtest -> angenommen Spracheinstellung ist Deutsch für Geschlecht(Sex) -> soll dann im Dropdown angezeigt werden
-		ObjectNode innerDummyGER = Json.newObject();
-		innerDummyGER.put("1", "männlich");
-		innerDummyGER.put("2", "weiblich");
-		
-		ObjectNode innerDummyENG = Json.newObject();
-		innerDummyENG.put("1", "male");
-		innerDummyENG.put("2", "female");		
-		
-		ObjectNode dummy = Json.newObject();	
-		
-		LOGGER.info(preferred);
+	
 
-		if(preferred.equals(":1")){
-			dummy.put("gender", innerDummyGER);
+		if(preferred == 1){
+			ObjectNode innerDummyGER = Json.newObject();
+			innerDummyGER.put("1", "männlich");
+			innerDummyGER.put("2", "weiblich");
+			return innerDummyGER;
+		
 		}
 		
-		else if(preferred.equals(":2")){
-			dummy.put("gender", innerDummyENG);
+		else {
+			ObjectNode innerDummyENG = Json.newObject();
+			innerDummyENG.put("1", "male");
+			innerDummyENG.put("2", "female");
+			return innerDummyENG;
 		}
 
-		return ok(dummy);
+	
 	}
 
 	@Security.Authenticated(Secured.class)
@@ -170,7 +168,8 @@ public class VolunteerController extends Controller {
 		}
 	}
 
-	// Methode für das parsen von String zu Date
+	// Methode für das parsen von String zu Date -- Gehört eigentlich ins Model - 
+	//funktioniert so noch nicht da von Date zu Date in anderem Format "geparst" gehört"
 	public static Date parseStringToDate(String input) {
 		try {
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
