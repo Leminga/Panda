@@ -2,7 +2,6 @@ package models;
 
 import javax.persistence.Entity;
 
-import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity

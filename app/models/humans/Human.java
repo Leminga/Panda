@@ -1,19 +1,26 @@
 package models.humans;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
+
+import org.jboss.logging.FormatWith;
+
+import com.avaje.ebean.annotation.Formula;
 
 import models.Degree;
 import models.Nationality;
 //import models.Permission;
 import models.Sex;
-
+import models.volunteer.Volunteer;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -40,12 +47,14 @@ public abstract class Human extends Model {
 	/** The name of the person. */
 	@Required
 	protected String prename;
-	/** The gender. */
-//	@Required
-	protected Sex sex;
+	/** The gender. 
+	@Required
+	@OneToOne(mappedBy = "human")
+	protected Sex sex;*/
 	/** The date of birth of the person. */
 	@Required
-	protected Date dateOfBirth;
+	//@Formats.DateTime(pattern = "dd/MM/yyyy")
+	public Date dateOfBirth;
 	/** The (multiple) nationalities of the person. */
 //	@Required
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -53,10 +62,12 @@ public abstract class Human extends Model {
 	/** The (multiple) degrees of the person. */
 	@ManyToMany(cascade = CascadeType.ALL)
 	protected List <Degree>degree;
+	
 	/*@OneToMany(cascade = CascadeType.ALL)
 	private List <Interview>interview;*/
 	//@ManyToOne // owning side
 	//private Permission permission;
+	
 	
 
 	
@@ -109,7 +120,7 @@ public abstract class Human extends Model {
 	 * Getter for the gender.
 	 * 
 	 * @return <b>Sex</b>The gender of the person.
-	 */
+	 
 	public Sex getSex() {
 		return sex;
 	}
@@ -118,10 +129,10 @@ public abstract class Human extends Model {
 	 * Setter for the gender.
 	 * 
 	 * @param sex The gender of the person.
-	 */
+	 
 	public void setSex(Sex sex) {
 		this.sex = sex;
-	}
+	}*/
 	
 	/**
 	 * Getter for the date of birth.

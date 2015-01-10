@@ -3,6 +3,9 @@ package helper;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.avaje.ebean.Ebean;
+
+import models.Translation;
 import models.UserLogin;
 import models.volunteer.Volunteer;
 
@@ -17,6 +20,7 @@ public class Starter {
 	public static void start() {
 		Starter.createUsers();
 		Starter.createVolunteers();
+		//Starter.createSex();
 	}
 	
 	/**
@@ -56,11 +60,33 @@ public class Starter {
 		UserLogin userA = new UserLogin("demo@user.at", Starter.getMD5("password"));
 		Volunteer volunteerA = new Volunteer("demo", "user", "Demo@Demo.com","Austria");
 		
+		/*UserLogin dummyUser = new UserLogin("dummy@panda.at", Starter.getMD5("panda123"));
+		Volunteer dummyVolunteer = new Volunteer("dummy", "panda", "dummy@panda.at", "Austria");*/
+		
+		
 		volunteerA.setUserLogin(userA);
 		volunteerA.save();
 		
 		userA.setVolunteer(volunteerA);
 		userA.save();
+		
+		/*dummyVolunteer.setUserLogin(dummyUser);
+		dummyVolunteer.save();
+		
+		dummyUser.setVolunteer(dummyVolunteer);
+		dummyUser.save();*/
 	}
+	/**
+	 * Speichert das Geschlecht in Deutsch und Englisch in der Translation Tabelle in der Datenbank
+	 
+	private static void createSex(){
+		Translation sex1 = new Translation("maennlich","male");
+		Translation sex2 = new Translation("weiblich","female");
+		
+		sex1.setTranslation(sex1);
+		sex1.save();
+		sex2.setTranslation(sex2);
+		sex2.save();
+	}*/
 
 }

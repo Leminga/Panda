@@ -6,14 +6,29 @@ import javax.persistence.Id;
 //import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import models.volunteer.Volunteer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
+import play.libs.Json;
 
 @Entity
 public class Translation extends Model {
 	
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
+	/** Logger to log SecurityController events. */
+	private static Logger LOGGER = LoggerFactory.getLogger(Translation.class);
 	
 	@Id
 	@Required
@@ -62,12 +77,14 @@ public class Translation extends Model {
 	private Sport sport;
 	@OneToOne(mappedBy = "translation")
 	private SportInterest sportInterest;
+
+	private Translation sex1;
 	
 	
 	public long getTid() {
 		return Tid;
 	}
-	public void setId(long Tid) {
+	public void setTid(long Tid) {
 		this.Tid = Tid;
 	}
 	public String getGerman() {
@@ -83,6 +100,13 @@ public class Translation extends Model {
 		this.english = english;
 	}
 	
-	
+	public Translation(String german, String english) {
+		this.setGerman(german);
+		this.setEnglish(english);
+	}
+	public void setTranslation(Translation sex1) {
+		this.sex1 = sex1;
+		
+	}
 
 }

@@ -3,7 +3,9 @@ package models.volunteer;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -35,6 +37,7 @@ import models.Nationality;
 //import models.Permission;
 import models.PreferredCommunicationLanguage;
 import models.Role;
+import models.Sex;
 import models.Sizes;
 import models.Sport;
 import models.TextBoxes;
@@ -50,6 +53,16 @@ public class Volunteer extends Human {
 	private static final long serialVersionUID = 1L;
 	/** Logger to log SecurityController events. */
 	private static Logger LOGGER = LoggerFactory.getLogger(Volunteer.class);
+	
+	//@Required
+	//@Column(unique=true)
+	//private long SexId;
+	//OneToOne Relation to Volunteer
+	/** the gender */
+	@Required
+	@OneToOne
+	@JoinColumn(name = "SexId")
+	protected Sex sex;
 	
 	//OneToMany Relations
 	@OneToMany(cascade = CascadeType.ALL)
@@ -96,7 +109,7 @@ public class Volunteer extends Human {
 	private byte[] volunteerAgreement;
 
 	//TODO: Relevanz checken für sport
-	//	@Required
+//	@Required
 	private Sport sport;
 //	@ManyToOne // owning side
 //	private Permission permission;
@@ -235,6 +248,23 @@ public class Volunteer extends Human {
 	
 	public void setUserLogin(UserLogin loginData) {
 		this.loginData = loginData;
+	}
+	/**
+	 * Getter for the gender.
+	 * 
+	 * @return <b>Sex</b>The gender of the person.
+	 */
+	public Sex getSex() {
+		return sex;
+	}
+	
+	/**
+	 * Setter for the gender.
+	 * 
+	 * @param sex The gender of the person.
+	 */
+	public void setSex(Sex sex) {
+		this.sex = sex;
 	}
 	
 	/**

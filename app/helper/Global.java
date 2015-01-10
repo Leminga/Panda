@@ -17,6 +17,7 @@ public class Global extends GlobalSettings {
 		//ServicesTimer.deployProcess();
 		// TESTING : Fills database with some default values.
 		//Starter.start();
+		DummyData.start();
 		
 		if (LOGGER.isInfoEnabled()) {
 			LOGGER.info("Application has started");
