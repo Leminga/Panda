@@ -393,9 +393,7 @@ create table role (
 
 create table sex (
   id                        bigint not null,
-  sex_tid                   bigint,
   sexTid                    bigint,
-  constraint uq_sex_sex_tid unique (sex_tid),
   constraint pk_sex primary key (id))
 ;
 
@@ -464,6 +462,7 @@ create table volunteer (
   surname                   varchar(255),
   prename                   varchar(255),
   date_of_birth             timestamp,
+  SexId                     bigint,
   social_security_number    varchar(255),
   volunteer_agreement       varbinary(255),
   constraint pk_volunteer primary key (id))
@@ -831,6 +830,8 @@ alter table text_boxes add constraint fk_text_boxes_volunteer_32 foreign key (Vi
 create index ix_text_boxes_volunteer_32 on text_boxes (Vid);
 alter table user_login add constraint fk_user_login_volunteer_33 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
 create index ix_user_login_volunteer_33 on user_login (volunteer_id);
+alter table volunteer add constraint fk_volunteer_sex_34 foreign key (SexId) references sex (id) on delete restrict on update restrict;
+create index ix_volunteer_sex_34 on volunteer (SexId);
 
 
 
