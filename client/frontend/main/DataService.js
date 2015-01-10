@@ -11,6 +11,10 @@ angular.module('Panda')
                 // The token is given to the Backend controller right away.
                 //return $http.post("/getUser", $window.sessionStorage.getItem("token"));
                 return $http.get("/getUser");
+            },
+
+            getDescriptions: function () {
+                return $http.get("/getDescriptions")
             }
         }
     }]);
