@@ -60,31 +60,30 @@ public class VolunteerController extends Controller {
 		return Results.ok(jsonReturn);
 	}
 
-	public static Result userDataTest() {
+	public static Result languageDummy(String preferred) {
 
-		// token test für user aktuellen
-		UserLogin user = UserLogin
-				.findByAuthToken("437f1e06-5f53-4545-8dec-c3fb25e6b88e");
-		LOGGER.info(" username is: " + user);
+		//Sprachtest -> angenommen Spracheinstellung ist Deutsch für Geschlecht(Sex) -> soll dann im Dropdown angezeigt werden
+		ObjectNode innerDummyGER = Json.newObject();
+		innerDummyGER.put("1", "männlich");
+		innerDummyGER.put("2", "weiblich");
+		
+		ObjectNode innerDummyENG = Json.newObject();
+		innerDummyENG.put("1", "male");
+		innerDummyENG.put("2", "female");		
+		
+		ObjectNode dummy = Json.newObject();	
+		
+		LOGGER.info(preferred);
 
-		Volunteer volunteer = new Volunteer(null, null, user.getUsername(),
-				null);
+		if(preferred.equals(":1")){
+			dummy.put("gender", innerDummyGER);
+		}
+		
+		else if(preferred.equals(":2")){
+			dummy.put("gender", innerDummyENG);
+		}
 
-		volunteer.setLoginData(user);
-
-		ObjectNode loginJson = Json.newObject();
-		loginJson.put("prename", volunteer.getPrename());
-		loginJson.put("surname", volunteer.getSurname());
-		// loginJson.put("emailAddress",
-		// volunteer.getEmailAddress().toString());
-		// loginJson.put("gender", volunteer.getSex().toString());
-		// loginJson.put("dateofBirth",parseDatetoString(volunteer.getDateOfBirth()));
-		loginJson.put("nationality", volunteer.getNationality());
-		loginJson.put("socialSecurityNumber",
-				volunteer.getSocialSecurityNumber());
-
-		return Results.ok(loginJson);
-
+		return ok(dummy);
 	}
 
 	@Security.Authenticated(Secured.class)
