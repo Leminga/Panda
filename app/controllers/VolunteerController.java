@@ -33,10 +33,12 @@ public class VolunteerController extends Controller {
 	/** The authentication token for the Play framework. */
 	protected static final String AUTH_TOKEN = "authToken";
 
-	// Test Dummy für Frontend Backend Test
+
+	// Test Dummy für Frontend Backend Test mit passender Json Struktur
 	// @Security.Authenticated(Secured.class)
 	public static Result dummyData() {
 
+		// Neues Json Objekt für User Daten
 		ObjectNode user = Json.newObject();
 		user.put("prename", "hans");
 		user.put("surname", "wurst");
@@ -47,19 +49,41 @@ public class VolunteerController extends Controller {
 		user.put("socialSecurityNumber", "3589125814");
 		user.put("profilePicture", AdminController.dummyPicture());
 
-		ObjectNode description = Json.newObject();
-		description.put("prename", "Vorname:");
-		description.put("surname", "Nachname:");
-		description.put("emailAddress", "Deine E.Mail Adresse:");
-		description.put("gender", "Geschlecht");
-		
-		ObjectNode values = Json.newObject();
-		values.put("gender", languageDummy(1));
-		values.put("nationality", "JSON FOLLOWING");
-		
+		// Neue Label bezeichnungen in der jeweiligen Sprache - Dummy default ->
+		// deutsch
+		ObjectNode labels = Json.newObject();
+		labels.put("prename", "Vorname:");
+		labels.put("surname", "Nachname:");
+		labels.put("emailAddress", "Deine E.Mail Adresse:");
+		labels.put("gender", "Geschlecht");
 
+		// Test Json für Befüllung der Geschlechter Dropdowns - jeweils mit
+		// Value (der setzt und speichert) und passender Description - ISSET ob
+		// gewählt ist
+		ObjectNode test = Json.newObject();
+		test.put("Value", "2");
+		test.put("Description", "Female");
+		test.put("ISSET", "1");
+
+		// Test Json 2 selbe Funktion wie test
+		ObjectNode test2 = Json.newObject();
+		test2.put("Value", "1");
+		test2.put("Description", "Male");
+		test2.put("ISSET", "0");
+
+		// Json das die beiden TestJson beinhaltet
+		ObjectNode upperJson = Json.newObject();
+		upperJson.put("1", test2);
+		upperJson.put("2", test);
+
+		// Json welches die passenden gruppen beinhaltet
+		ObjectNode values = Json.newObject();
+		values.put("gender", upperJson);
+		values.put("nationality", "JSON FOLLOWING");
+
+		// Gesammeltes Json aller Ausgaben
 		ObjectNode jsonReturn = Json.newObject();
-		jsonReturn.put("description", description);
+		jsonReturn.put("labels", labels);
 		jsonReturn.put("user", user);
 		jsonReturn.put("volunteers", AdminController.dummyDataAdmin());
 		jsonReturn.put("values", values);
@@ -69,17 +93,17 @@ public class VolunteerController extends Controller {
 
 	public static ObjectNode languageDummy(int preferred) {
 
-		//Sprachtest -> angenommen Spracheinstellung ist Deutsch für Geschlecht(Sex) -> soll dann im Dropdown angezeigt werden
-	
+		// Sprachtest -> angenommen Spracheinstellung ist Deutsch für
+		// Geschlecht(Sex) -> soll dann im Dropdown angezeigt werden
 
-		if(preferred == 1){
+		if (preferred == 1) {
 			ObjectNode innerDummyGER = Json.newObject();
 			innerDummyGER.put("1", "männlich");
 			innerDummyGER.put("2", "weiblich");
 			return innerDummyGER;
-		
+
 		}
-		
+
 		else {
 			ObjectNode innerDummyENG = Json.newObject();
 			innerDummyENG.put("1", "male");
@@ -87,7 +111,6 @@ public class VolunteerController extends Controller {
 			return innerDummyENG;
 		}
 
-	
 	}
 
 	@Security.Authenticated(Secured.class)
@@ -174,8 +197,8 @@ public class VolunteerController extends Controller {
 		}
 	}
 
-	// Methode für das parsen von String zu Date -- Gehört eigentlich ins Model - 
-	//funktioniert so noch nicht da von Date zu Date in anderem Format "geparst" gehört"
+	// Methode für das parsen von String zu Date -- Gehört eigentlich ins Model
+	// funktioniert so noch nicht da von Date zu Date in anderes Format "geparst" gehört"
 	public static Date parseStringToDate(String input) {
 		try {
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
