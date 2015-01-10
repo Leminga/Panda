@@ -33,90 +33,94 @@ public class VolunteerController extends Controller {
 	/** The authentication token for the Play framework. */
 	protected static final String AUTH_TOKEN = "authToken";
 
-	
-	
 	// Test Dummy für Frontend Backend Test
-	//@Security.Authenticated(Secured.class)
-	public static Result dummyData (){
-    	
-    	ObjectNode user = Json.newObject();
-    	user.put("prename","hans");
+	// @Security.Authenticated(Secured.class)
+	public static Result dummyData() {
+
+		ObjectNode user = Json.newObject();
+		user.put("prename", "hans");
 		user.put("surname", "wurst");
 		user.put("emailAddress", "hans.wurst@metzgerei.at");
 		user.put("gender", "male");
 		user.put("dateOfBirth", "12/01/1998");
 		user.put("nationality", "austria");
 		user.put("socialSecurityNumber", "3589125814");
-         
-    	ObjectNode description = Json.newObject();
-    	description.put("prename","Vorname:");
+
+		ObjectNode description = Json.newObject();
+		description.put("prename", "Vorname:");
 		description.put("surname", "Nachname:");
 		description.put("emailAddress", "Deine E.Mail Adresse:");
+		
 
 		ObjectNode jsonReturn = Json.newObject();
 		jsonReturn.put("description", description);
 		jsonReturn.put("user", user);
+		jsonReturn.put("volunteers", AdminController.dummyDataAdmin());
 
-		return Results.ok(jsonReturn);  	
-    }
-	
-public static Result userDataTest (){
-	
-		//token test für user aktuellen
-		UserLogin user = UserLogin.findByAuthToken("437f1e06-5f53-4545-8dec-c3fb25e6b88e");
+		return Results.ok(jsonReturn);
+	}
+
+	public static Result userDataTest() {
+
+		// token test für user aktuellen
+		UserLogin user = UserLogin
+				.findByAuthToken("437f1e06-5f53-4545-8dec-c3fb25e6b88e");
 		LOGGER.info(" username is: " + user);
 
-		Volunteer volunteer = new Volunteer(null, null, user.getUsername(),	null);
+		Volunteer volunteer = new Volunteer(null, null, user.getUsername(),
+				null);
 
 		volunteer.setLoginData(user);
 
 		ObjectNode loginJson = Json.newObject();
 		loginJson.put("prename", volunteer.getPrename());
 		loginJson.put("surname", volunteer.getSurname());
-		//loginJson.put("emailAddress", volunteer.getEmailAddress().toString());
-		//loginJson.put("gender", volunteer.getSex().toString());
-		//loginJson.put("dateofBirth",parseDatetoString(volunteer.getDateOfBirth()));
+		// loginJson.put("emailAddress",
+		// volunteer.getEmailAddress().toString());
+		// loginJson.put("gender", volunteer.getSex().toString());
+		// loginJson.put("dateofBirth",parseDatetoString(volunteer.getDateOfBirth()));
 		loginJson.put("nationality", volunteer.getNationality());
 		loginJson.put("socialSecurityNumber",
-		volunteer.getSocialSecurityNumber());
+				volunteer.getSocialSecurityNumber());
 
-		
 		return Results.ok(loginJson);
-    	
-    }
 
-@Security.Authenticated(Secured.class)
+	}
+
+	@Security.Authenticated(Secured.class)
 	public static Result userRequest() {
-	
-			String authHeader = request().getHeader("X-AUTH-TOKEN");
-			UserLogin user = UserLogin.findByAuthToken(authHeader);
-			
-			LOGGER.info(" username is: " + user);
 
-			
-			//Test Objekt
-			Volunteer volunteer = new Volunteer(null, null, user.getUsername(),	null);
+		/*
+		 * //Abfrage ob admin oder nicht if (admin){ //Wenn Admin dann sollen
+		 * alle Volunteers mitgegeben werden AdminController.dummyDataAdmin(); }
+		 */
 
-			volunteer.setLoginData(user);
-			
+		String authHeader = request().getHeader("X-AUTH-TOKEN");
+		UserLogin user = UserLogin.findByAuthToken(authHeader);
 
-				ObjectNode loginJson = Json.newObject();
-				loginJson.put("prename", volunteer.getPrename());
-				loginJson.put("surname", volunteer.getSurname());
-				loginJson.put("emailAddress", volunteer.getEmailAddress()
-						.toString());
-				loginJson.put("gender", volunteer.getSex().toString());
-				loginJson.put("dateofBirth",
-						parseDatetoString(volunteer.getDateOfBirth()));
-				loginJson.put("nationality", volunteer.getNationality());
-				loginJson.put("socialSecurityNumber",
-						volunteer.getSocialSecurityNumber());
+		LOGGER.info(" username is: " + user);
 
-				LOGGER.info(" userRequest successfully by : "
-						+ volunteer.getPrename() + " " + volunteer.getSurname());
-				return ok(loginJson);
-				
-				
+		// Test Objekt
+		Volunteer volunteer = new Volunteer(null, null, user.getUsername(),
+				null);
+
+		volunteer.setLoginData(user);
+
+		ObjectNode loginJson = Json.newObject();
+		loginJson.put("prename", volunteer.getPrename());
+		loginJson.put("surname", volunteer.getSurname());
+		loginJson.put("emailAddress", volunteer.getEmailAddress().toString());
+		loginJson.put("gender", volunteer.getSex().toString());
+		loginJson.put("dateofBirth",
+				parseDatetoString(volunteer.getDateOfBirth()));
+		loginJson.put("nationality", volunteer.getNationality());
+		loginJson.put("socialSecurityNumber",
+				volunteer.getSocialSecurityNumber());
+
+		LOGGER.info(" userRequest successfully by : " + volunteer.getPrename()
+				+ " " + volunteer.getSurname());
+		return ok(loginJson);
+
 	}
 
 	public static Result saveAll() {
@@ -167,7 +171,7 @@ public static Result userDataTest (){
 		}
 	}
 
-	//Methode für das parsen von String zu Date
+	// Methode für das parsen von String zu Date
 	public static Date parseStringToDate(String input) {
 		try {
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -184,7 +188,7 @@ public static Result userDataTest (){
 		}
 	}
 
-	//Methode für das parsen von Date zu String
+	// Methode für das parsen von Date zu String
 	public static String parseDatetoString(Date input) {
 		try {
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
