@@ -45,6 +45,7 @@ public class VolunteerController extends Controller {
 		user.put("dateOfBirth", "12/01/1998");
 		user.put("nationality", "austria");
 		user.put("socialSecurityNumber", "3589125814");
+		user.put("profilePicture", AdminController.dummyPicture());
 
 		ObjectNode description = Json.newObject();
 		description.put("prename", "Vorname:");
