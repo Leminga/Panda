@@ -1,12 +1,15 @@
 package controllers;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import play.libs.Json;
 import play.mvc.Controller;
-
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class AdminController extends Controller {
 
@@ -23,50 +26,57 @@ public class AdminController extends Controller {
 	// Test Dummy für Frontend Backend Test
 	// Aufgerufen in VolunteerController wenn Admin bestätigt - und für Dummy
 	//@Security.Authenticated(Secured.class)
-	public static ObjectNode dummyDataAdmin (){
-
-		ObjectNode nationalityInput = Json.newObject();
+	public static ObjectNode dummyDataAdmin () throws JSONException{
+		
+		//Object input for Nationality Array
+		JSONObject nationalityInput = new JSONObject();
 		nationalityInput.put("Value", "2");
 		nationalityInput.put("Description", "Austria");
 		nationalityInput.put("ISSET", "1");
 		
-		ObjectNode nationalityInput2 = Json.newObject();
+		//Object input for Nationality Array
+		JSONObject nationalityInput2 = new JSONObject();
 		nationalityInput2.put("Value", "1");
 		nationalityInput2.put("Description", "Germany");
 		nationalityInput2.put("ISSET", "0");
 		
-		ObjectNode nationality = Json.newObject();
-		nationality.put("1", nationalityInput);
-		nationality.put("2", nationalityInput2);
-
-		ObjectNode iTimport1 = Json.newObject();
+		//Nationality-Array for Volunteer  
+		JSONArray nationality = new JSONArray();
+		nationality.put(nationalityInput);
+		nationality.put(nationalityInput2);
+		
+		//Object input for itKnowledge Array
+		JSONObject iTimport1 = new JSONObject();
 		iTimport1.put("Value", "2");
 		iTimport1.put("Description", "MS Office");
 		iTimport1.put("ISSET", "1");
 		
-		ObjectNode itImport2 = Json.newObject();
+		//Object input for itKnowledge Array
+		JSONObject itImport2 = new JSONObject();
 		itImport2.put("Value", "1");
 		itImport2.put("Description", "Photoshop");
 		itImport2.put("ISSET", "0");
 		
-		ObjectNode itImport3 = Json.newObject();
+		//Object input for itKnowledge Array
+		JSONObject itImport3 = new JSONObject();
 		itImport3.put("Value", "3");
 		itImport3.put("Description", "Linux Mint");
 		itImport3.put("ISSET", "0");
 		
-		ObjectNode itImport4 = Json.newObject();
+		//Object input for itKnowledge Array
+		JSONObject itImport4 = new JSONObject();
 		itImport4.put("Value", "4");
 		itImport4.put("Description", "Netzwerke");
 		itImport4.put("ISSET", "0");
 		
-		ObjectNode itKnowledge = Json.newObject();
-		itKnowledge.put("1", iTimport1);
-		itKnowledge.put("2", itImport2);
-		itKnowledge.put("3", itImport3);
-		itKnowledge.put("4", itImport4);
+		//Object input for itKnowledge Array
+		JSONArray itKnowledge = new JSONArray();
+		itKnowledge.put(iTimport1);
+		itKnowledge.put(itImport2);
+		itKnowledge.put(itImport3);
+		itKnowledge.put(itImport4);
 
-
-		
+		// Dummy Volunteer Object
 		ObjectNode volunteer1 = Json.newObject();
 		volunteer1.put("ID","3254879");
     	volunteer1.put("prename","hans");
@@ -78,11 +88,11 @@ public class AdminController extends Controller {
 		volunteer1.put("phoneNumber", "0900666666");
 		volunteer1.put("currentWork", "Metzger");
 		volunteer1.put("motherTongue", "Deutsch");
-		volunteer1.put("itKnowledge", itKnowledge);
-		volunteer1.put("nationality",nationality);
-		
+		volunteer1.put("itKnowledge", itKnowledge.toString());
+		volunteer1.put("nationality",nationality.toString());		
 
-    	ObjectNode volunteer2 = Json.newObject();
+		// Dummy Volunteer Object
+		ObjectNode volunteer2 = Json.newObject();
     	volunteer2.put("ID","123456789");
     	volunteer2.put("prename","johann:");
 		volunteer2.put("surname", "hinterseer:");
@@ -93,14 +103,15 @@ public class AdminController extends Controller {
 		volunteer2.put("phoneNumber", "0900333666");
 		volunteer2.put("currentWork", "Metzger");
 		volunteer2.put("motherTongue", "Deutsch");
-		volunteer2.put("itKnowledge", itKnowledge);
-		volunteer2.put("nationality",nationality);
+		volunteer2.put("itKnowledge", itKnowledge.toString());
+		volunteer2.put("nationality",nationality.toString());
 
+		//Object with "all" dummy Objects 
 		ObjectNode jsonReturn = Json.newObject();
 		jsonReturn.put("volunteer1", volunteer2);
 		jsonReturn.put("volunteer2", volunteer1);
 		
-
+		//returns Object Node - e.g. for VOlunteerController 
 		return jsonReturn;  	
     }
 	
