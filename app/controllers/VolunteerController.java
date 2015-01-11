@@ -93,7 +93,6 @@ public class VolunteerController extends Controller {
 		mainObj.put("labels", labels);
 		mainObj.put("user", user);
 		mainObj.put("volunteers", AdminController.dummyDataAdmin());
-		mainObj.put("values", values);
 
 		return Results.ok(mainObj.toString());
 	}
