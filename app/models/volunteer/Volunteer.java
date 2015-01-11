@@ -3,7 +3,6 @@ package models.volunteer;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -22,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import models.ActualJob;
+import models.CurrentJob;
 import models.Attachments;
 import models.Contact;
 import models.Educationlevel;
@@ -32,16 +31,18 @@ import models.Event;
 import models.Identification;
 import models.Interview;
 import models.ItKnowledge;
+import models.JacketSizes;
 import models.Language;
 import models.Nationality;
 //import models.Permission;
 import models.PreferredCommunicationLanguage;
 import models.Role;
 import models.Sex;
-import models.Sizes;
+import models.ShoeSizes;
 import models.Sport;
 import models.TextBoxes;
 import models.Training;
+import models.TrousersSizes;
 import models.UserLogin;
 import models.humans.Human;
 import play.data.validation.Constraints.Required;
@@ -54,15 +55,30 @@ public class Volunteer extends Human {
 	/** Logger to log SecurityController events. */
 	private static Logger LOGGER = LoggerFactory.getLogger(Volunteer.class);
 	
-	//@Required
-	//@Column(unique=true)
-	//private long SexId;
-	//OneToOne Relation to Volunteer
+	/*
+	 * OneToOne Beziehungen, owning side Volunteer
+	 */
 	/** the gender */
 	@Required
 	@OneToOne
 	@JoinColumn(name = "SexId")
 	protected Sex sex;
+	@Required
+	@OneToOne
+	@JoinColumn(name = "JacketId")
+	private JacketSizes jacketId;
+	@Required
+	@OneToOne
+	@JoinColumn(name = "TrousersId")
+	private TrousersSizes trousersId;
+	@Required
+	@OneToOne
+	@JoinColumn(name = "ShoeId")
+	private ShoeSizes shoeId;
+	@Required
+	@OneToOne
+	@JoinColumn(name = "CurrentJobid")
+	private CurrentJob currentJobid;
 	
 	//OneToMany Relations
 	@OneToMany(cascade = CascadeType.ALL)
@@ -78,11 +94,7 @@ public class Volunteer extends Human {
 
 	//OneToOne Relations
 	@OneToOne(mappedBy = "volunteer")
-	private Sizes sizes;
-	@OneToOne(mappedBy = "volunteer")
 	private TextBoxes textBoxes;
-	@OneToOne(mappedBy = "volunteer")
-	private ActualJob actualJob;
 	@OneToOne(mappedBy = "volunteer")
 	private Interview interview;
 	@OneToOne(mappedBy = "volunteer")
@@ -171,12 +183,6 @@ public class Volunteer extends Human {
 	}
 	public void setEmergencyContacts(List<EmergencyContact> emergencyContacts) {
 		this.emergencyContacts = emergencyContacts;
-	}
-	public Sizes getSizes() {
-		return sizes;
-	}
-	public void setSizes(Sizes sizes) {
-		this.sizes = sizes;
 	}
 	public Educationlevel getHighestEducationlevel() {
 		return highestEducationlevel;

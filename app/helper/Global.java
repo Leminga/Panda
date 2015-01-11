@@ -1,10 +1,11 @@
 package helper;
 
+import models.SetupDatabase;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import activiti.ServicesTimer;
-
 import play.*;
 
 public class Global extends GlobalSettings {
@@ -17,7 +18,8 @@ public class Global extends GlobalSettings {
 		//ServicesTimer.deployProcess();
 		// TESTING : Fills database with some default values.
 		//Starter.start();
-		DummyData.start();
+		//DummyData.start();
+		SetupDatabase.setup();
 		
 		if (LOGGER.isInfoEnabled()) {
 			LOGGER.info("Application has started");

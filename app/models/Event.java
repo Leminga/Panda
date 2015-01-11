@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
@@ -23,17 +24,20 @@ public class Event extends Model{
 	//ManyToMany relation to Volunteer
 	@Id
 	@Required
+	@GeneratedValue
+	private long eventId;
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy="event")
 	private String eventname;
 //	@Required
 	private Date eventStart;
 //	@Required
 	private Date eventEnd;
-	@Required
-	@Column(unique=true)
-	private long eventDiscriptionTid;
+//	@Required
+//	@Column(unique=true)
+//	private long eventDiscriptionTid;
 	
 	//OneToOneRelation to Translation
+	@Required
 	@OneToOne
 	@JoinColumn(name = "eventDiscriptionTid")
 	private Translation translation;
@@ -51,6 +55,13 @@ public class Event extends Model{
 //	@Required
 	private boolean mediaOpen;
 	
+	
+
+	public Event(String eventname) {
+		
+		this.setEventname(eventname);
+	}
+
 	public void Inotify(){
 		
 	}

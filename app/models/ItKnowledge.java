@@ -23,9 +23,6 @@ public class ItKnowledge extends Model {
 	@Required
 	@GeneratedValue
 	private long id;
-	@Required
-	@Column(unique=true)
-	private long itKnowledgeTid;
 	
 	//ManyToOne Relation to Volunteer
 	@ManyToOne // owning side
@@ -36,18 +33,17 @@ public class ItKnowledge extends Model {
 	@JoinColumn(name = "itKnowledgeTid")
 	private Translation translation;
 	
+	/*
+	 * Konstruktor der Klasse 
+	 */
+	public ItKnowledge(long tid) {
+	}
 	
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
-	}
-	public long getItKnowledgeTid() {
-		return itKnowledgeTid;
-	}
-	public void setItKnowledgeTid(long itKnowledgeTid) {
-		this.itKnowledgeTid = itKnowledgeTid;
 	}
 	public Volunteer getVolunteer() {
 		return volunteer;

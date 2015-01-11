@@ -12,48 +12,42 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
-public class ActualJob extends Model {
+public class CurrentJob extends Model {
 	
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Required
 	@GeneratedValue
-	private long id;
-	@Required
-	@Column(unique=true)
-	private long actualJobTid;
-	@Required
-	@Column(unique=true)
-	private long Vid;
+	private long currentJobid;
 	
-	//OneToOne Relation to Volunteer
-	@OneToOne
-	@JoinColumn(name = "Vid")
-	private Volunteer volunteer;
+	/*
+	 * OneToOne Beziehung, owning side Volunteer
+	 */
+	@Required
+	@OneToOne(mappedBy = "currentJobid")
+	protected Volunteer volunteer;
 		
-	//OneToOneRelation to Translation
+	/*
+	 * OneToOneRelation to Translation
+	 */
 	@OneToOne
-	@JoinColumn(name = "actualJobTid")
+	@JoinColumn(name = "currentJobTid")
 	private Translation translation;
 	
-	public long getId() {
-		return id;
+	/*
+	 * Konstruktor der Klasse
+	 */
+	public CurrentJob(long tid) {
 	}
-	public void setId(long id) {
-		this.id = id;
+	/*
+	 * Getter und Setter
+	 */
+	public long getCurrentJobid() {
+		return currentJobid;
 	}
-	public long getActualJobTid() {
-		return actualJobTid;
-	}
-	public void setActualJobTid(long actualJobTid) {
-		this.actualJobTid = actualJobTid;
-	}
-	public long getVid() {
-		return Vid;
-	}
-	public void setVid(long vid) {
-		Vid = vid;
+	public void setCurrentJobid(long currentJobid) {
+		this.currentJobid = currentJobid;
 	}
 	public Volunteer getVolunteer() {
 		return volunteer;

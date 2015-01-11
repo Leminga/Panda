@@ -3,24 +3,13 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-//import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import models.volunteer.Volunteer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
-import play.libs.Json;
 
 @Entity
 public class Translation extends Model {
@@ -42,7 +31,7 @@ public class Translation extends Model {
 	
 	//OneToOne Relations (Translations)
 	@OneToOne(mappedBy = "translation")
-	private ActualJob actualJob;
+	private CurrentJob currentJob;
 	@OneToOne(mappedBy = "translation")
 	private Arrival arrivalPlace;
 	@OneToOne(mappedBy = "translation")
@@ -103,10 +92,6 @@ public class Translation extends Model {
 	public Translation(String german, String english) {
 		this.setGerman(german);
 		this.setEnglish(english);
-	}
-	public void setTranslation(Translation sex1) {
-		this.sex1 = sex1;
-		
 	}
 
 }
