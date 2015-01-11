@@ -56,15 +56,15 @@ public class VolunteerController extends Controller {
 		// Value (der setzt und speichert) und passender Description - ISSET ob
 		// gewählt ist
 		JSONObject test = new JSONObject();
-		test.put("Value", "2");
-		test.put("Description", "Female");
-		test.put("ISSET", "1");
+		test.put("value", "2");
+		test.put("description", "Female");
+		test.put("isSet", "1");
 
 		// Test Json 2 selbe Funktion wie test
 		JSONObject test2 = new JSONObject();
-		test2.put("Value", "1");
-		test2.put("Description", "Male");
-		test2.put("ISSET", "0");
+		test2.put("value", "1");
+		test2.put("description", "Male");
+		test2.put("isSet", "0");
 
 		// Neues Json Objekt für User Daten
 		ObjectNode user = Json.newObject();
@@ -87,13 +87,7 @@ public class VolunteerController extends Controller {
 		values.put("gender", gender.toString());
 		values.put("nationality", "JSON FOLLOWING");
 
-		// Gesammeltes JsonObject aller Ausgaben
-		JSONObject mainObj = new JSONObject();
-		mainObj.put("values", values);
-		mainObj.put("labels", labels);
-		mainObj.put("user", user);
-		mainObj.put("volunteers", AdminController.dummyDataAdmin());
-
+		// Gesammeltes ObjectNode aller Ausgaben
 		ObjectNode jsonReturn = Json.newObject();
 		jsonReturn.put("values", values);
 		jsonReturn.put("labels", labels);
