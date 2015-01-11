@@ -20,7 +20,10 @@ libraryDependencies ++= Seq(
   "org.st-js.bridge" % "angularjs" % "1.0.7.bv0",
   "org.webjars" % "ngStorage" % "0.3.0",
   "org.apache.commons" % "commons-csv" % "1.1",
-  "org.webjars" % "cryptojs" % "3.1.2"
+  "org.webjars" % "cryptojs" % "3.1.2",
+  "org.imgscalr" % "imgscalr-lib" % "4.2",
+  "org.apache.directory.studio" % "org.apache.commons.io" % "2.4",
+   "org.json" % "org.json" % "chargebee-1.0"
 )
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
