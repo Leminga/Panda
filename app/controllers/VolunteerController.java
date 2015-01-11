@@ -8,6 +8,9 @@ import models.EmailAddress;
 import models.UserLogin;
 import models.volunteer.Volunteer;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +20,6 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Results;
 import play.mvc.Security;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -33,21 +35,14 @@ public class VolunteerController extends Controller {
 	/** The authentication token for the Play framework. */
 	protected static final String AUTH_TOKEN = "authToken";
 
-
 	// Test Dummy für Frontend Backend Test mit passender Json Struktur
 	// @Security.Authenticated(Secured.class)
-	public static Result dummyData() {
+	/**
+	 * @return
+	 * @throws JSONException
+	 */
 
-		// Neues Json Objekt für User Daten
-		ObjectNode user = Json.newObject();
-		user.put("prename", "hans");
-		user.put("surname", "wurst");
-		user.put("emailAddress", "hans.wurst@metzgerei.at");
-		user.put("gender", "männlich");
-		user.put("dateOfBirth", "12/01/1998");
-		user.put("nationality", "austria");
-		user.put("socialSecurityNumber", "3589125814");
-		user.put("profilePicture", AdminController.dummyPicture());
+	public static Result dummyData() throws JSONException {
 
 		// Neue Label bezeichnungen in der jeweiligen Sprache - Dummy default ->
 		// deutsch
@@ -60,35 +55,47 @@ public class VolunteerController extends Controller {
 		// Test Json für Befüllung der Geschlechter Dropdowns - jeweils mit
 		// Value (der setzt und speichert) und passender Description - ISSET ob
 		// gewählt ist
-		ObjectNode test = Json.newObject();
+		JSONObject test = new JSONObject();
 		test.put("Value", "2");
 		test.put("Description", "Female");
 		test.put("ISSET", "1");
 
 		// Test Json 2 selbe Funktion wie test
-		ObjectNode test2 = Json.newObject();
+		JSONObject test2 = new JSONObject();
 		test2.put("Value", "1");
 		test2.put("Description", "Male");
 		test2.put("ISSET", "0");
 
-		// Json das die beiden TestJson beinhaltet
-		ObjectNode upperJson = Json.newObject();
-		upperJson.put("1", test2);
-		upperJson.put("2", test);
+		// Neues Json Objekt für User Daten
+		ObjectNode user = Json.newObject();
+		user.put("prename", "hans");
+		user.put("surname", "wurst");
+		user.put("emailAddress", "hans.wurst@metzgerei.at");
+		user.put("gender", "männlich");
+		user.put("dateOfBirth", "12/01/1998");
+		user.put("nationality", "austria");
+		user.put("socialSecurityNumber", "3589125814");
+		user.put("profilePicture", AdminController.dummyPicture());
+
+		// JSONArray enthält die Gender Ausprägungen
+		JSONArray gender = new JSONArray();
+		gender.put(test2);
+		gender.put(test);
 
 		// Json welches die passenden gruppen beinhaltet
-		ObjectNode values = Json.newObject();
-		values.put("gender", upperJson);
+		JSONObject values = new JSONObject();
+		values.put("gender", gender);
 		values.put("nationality", "JSON FOLLOWING");
 
-		// Gesammeltes Json aller Ausgaben
-		ObjectNode jsonReturn = Json.newObject();
-		jsonReturn.put("labels", labels);
-		jsonReturn.put("user", user);
-		jsonReturn.put("volunteers", AdminController.dummyDataAdmin());
-		jsonReturn.put("values", values);
+		// Gesammeltes JsonObject aller Ausgaben
+		JSONObject mainObj = new JSONObject();
+		mainObj.put("values", values);
+		mainObj.put("labels", labels);
+		mainObj.put("user", user);
+		mainObj.put("volunteers", AdminController.dummyDataAdmin());
+		mainObj.put("values", values);
 
-		return Results.ok(jsonReturn);
+		return Results.ok(mainObj.toString());
 	}
 
 	public static ObjectNode languageDummy(int preferred) {
@@ -137,8 +144,8 @@ public class VolunteerController extends Controller {
 		loginJson.put("surname", volunteer.getSurname());
 		loginJson.put("emailAddress", volunteer.getEmailAddress().toString());
 		loginJson.put("gender", volunteer.getSex().toString());
-		loginJson.put("dateofBirth",
-				parseDatetoString(volunteer.getDateOfBirth()));
+		// loginJson.put("dateofBirth",
+		// parseDatetoString(volunteer.getDateOfBirth()));
 		loginJson.put("nationality", volunteer.getNationality());
 		loginJson.put("socialSecurityNumber",
 				volunteer.getSocialSecurityNumber());
@@ -198,7 +205,8 @@ public class VolunteerController extends Controller {
 	}
 
 	// Methode für das parsen von String zu Date -- Gehört eigentlich ins Model
-	// funktioniert so noch nicht da von Date zu Date in anderes Format "geparst" gehört"
+	// funktioniert so noch nicht da von Date zu Date in anderes Format
+	// "geparst" gehört"
 	public static Date parseStringToDate(String input) {
 		try {
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -215,20 +223,16 @@ public class VolunteerController extends Controller {
 		}
 	}
 
-	// Methode für das parsen von Date zu String
-	public static String parseDatetoString(Date input) {
-		try {
-			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
-			String dateAsString = sourceFormat.format(input);
-			LOGGER.info("Parse Date to String.");
+	// Methode um DB Zugang zu testen - mit Json ausgabe
+	public static Result dataBaseTest() {
 
-			return dateAsString;
-		} catch (Exception e) {
-			LOGGER.debug("Parsing DatetoString not successfully - Exception: "
-					+ e);
-			return null;
+		Volunteer test = new Volunteer("sepp", "huber", "s.huber@bauer.at",
+				"austria");
 
-		}
+		JsonNode user = test.toJson();
+
+		return ok(user);
+
 	}
 
 	/**
