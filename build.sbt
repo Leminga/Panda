@@ -23,7 +23,8 @@ libraryDependencies ++= Seq(
   "org.webjars" % "cryptojs" % "3.1.2",
   "org.imgscalr" % "imgscalr-lib" % "4.2",
   "org.apache.directory.studio" % "org.apache.commons.io" % "2.4",
-   "org.json" % "org.json" % "chargebee-1.0"
+   "org.json" % "org.json" % "chargebee-1.0",
+   "net.java.openjfx.backport" %"openjfx-78-backport" %"1.8.0-ea-b96.1"
 )
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
