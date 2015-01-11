@@ -83,8 +83,8 @@ public class VolunteerController extends Controller {
 		gender.put(test);
 
 		// Json welches die passenden gruppen beinhaltet
-		JSONObject values = new JSONObject();
-		values.put("gender", gender);
+		ObjectNode values = Json.newObject();
+		values.put("gender", gender.toString());
 		values.put("nationality", "JSON FOLLOWING");
 
 		// Gesammeltes JsonObject aller Ausgaben
@@ -94,7 +94,13 @@ public class VolunteerController extends Controller {
 		mainObj.put("user", user);
 		mainObj.put("volunteers", AdminController.dummyDataAdmin());
 
-		return Results.ok(mainObj.toString());
+		ObjectNode jsonReturn = Json.newObject();
+		jsonReturn.put("values", values);
+		jsonReturn.put("labels", labels);
+		jsonReturn.put("user", user);
+		jsonReturn.put("volunteers", AdminController.dummyDataAdmin());
+		
+		return Results.ok(jsonReturn);
 	}
 
 	public static ObjectNode languageDummy(int preferred) {
