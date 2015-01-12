@@ -24,9 +24,6 @@ public class Language extends Model {
 	@Required
 	@GeneratedValue
 	private long id;
-	@Required
-	@Column(unique=true)
-	private long languageTid;
 	
 	//ManyToOne Relation to Volunteer
 	@ManyToOne // owning side
@@ -56,12 +53,6 @@ public class Language extends Model {
 	}
 	public void setLevels(List<Integer> levels) {
 		this.levels = levels;
-	}
-	public long getLanguageTid() {
-		return languageTid;
-	}
-	public void setLanguageTid(long languageTid) {
-		this.languageTid = languageTid;
 	}
 	public Volunteer getVolunteer() {
 		return volunteer;
