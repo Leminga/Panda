@@ -1,42 +1,68 @@
-<form ng-show="overviewCtrl.user.role == volunteer"><h1>VOLUNTEER OVERVIEW</h1>
+<form>
 
-    <a href="#/coreData">Coredata</a>
-    <a href="#/qualifications">Qualifications</a>
-    <a href="#/eventSpecific">Event-specific</a>
+    <div><a href="#/coreData">Coredata</a></div>
+    <div><a href="#/qualifications">Qualifications</a></div>
+    <div ng-show="showme" ng-if="overviewCtrl.eventCheck(overviewCtrl.user.event)"><a href="#/eventSpecific">Event-specific</a></div>
     <form ng-submit="overviewCtrl.logout()">
         <button type="submit">Logout</button>
     </form>
 </form>
 
-<form ng-show="overviewCtrl.user.role == admin"><h1>ADMIN OVERVIEW</h1>
+<form><h1>PROFILE OVERVIEW</h1>
 
-    <div>
-        <button type="submit">Add</button>
-        <button type="submit">Edit</button>
-        <button type="submit">Delete</button>
+   <div>
+    <img ng-src="{{overviewCtrl.user.profilePicture}}" width = "50px"><br>
+       {{overviewCtrl.labels.prename}}
+            {{overviewCtrl.user.prename}}<br>
+
+       {{overviewCtrl.labels.surname}}
+            {{overviewCtrl.user.surname}}<br>
+
+       {{overviewCtrl.labels.emailAddress}}
+           {{overviewCtrl.user.emailAddress}}<br>
+
+       {{overviewCtrl.labels.gender}}:
+        {{overviewCtrl.user.gender}}<br>
+
+
+       Land:{{overviewCtrl.labels.nationality}}
+            {{overviewCtrl.user.nationality}}<br>
+
+      <!-- {{overviewCtrl.labels.zip}}
+           {{overviewCtrl.user.zip}} {{overviewCtrl.user.city}}<br>
+
+       {{overviewCtrl.labels.phonenumber}}
+           {{overviewCtrl.user.phoneNumber}}<br>
+
+       {{overviewCtrl.labels.currentWork}}
+           {{overviewCtrl.user.currentWork}}<br>
+
+       {{overviewCtrl.labels.motherTongue}}
+           {{overviewCtrl.user.motherTongue}}<br>
+
+       {{overviewCtrl.labels.itKnowledge}}
+           {{overviewCtrl.user.it1}}<br>
+           {{overviewCtrl.user.it2}}<br>
+           {{overviewCtrl.user.it3}}<br>
+           {{overviewCtrl.user.it4}}<br>-->
     </div><br>
 
-    <div>Select Event:
-        <select ng-model="overviewCtrl.admin.event">
+    <div ng-show="show=true">Select Event:
+        <select ng-model="overviewCtrl.user.event">
             <option value='' disabled selected style='display:none;'>Open here</option>
             <option value="ICG 16">ICG 16</option>
-            <option value="...">...</option>
-            <option value="...">...</option>
-            <option value="...">...</option>
         </select>
-    </div>
+
+    </div><br>
 
 
-    <form ng-submit="overviewCtrl.get()">
-        <button type="submit">Get Volunteer Data</button>
-    </form>
-        <div ng-repeat="x in overviewCtrl.user">
-            <br>Prename: {{x.prename}}
-            <br>Surname: {{x.surname}}
-            <br>Email:   {{x.email}}
-            <br><a href="#/coreData">Edit this user</a>
-           </div>
+        <div ng-show="show">
+            <button ng-click="showme=true">Add</a></button>
         </div>
 
+    </div>
 </form>
+
+
+
 
