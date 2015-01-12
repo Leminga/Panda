@@ -8,7 +8,7 @@ module.exports = function (grunt) {
                 separator: "\n" //add a new line after each file
             },
             dist: {
-                src: ['client/app.js', 'client/**/*.js'],
+                src: ['bower_components/ngImgCrop/compile/unminified/*.js','client/app.js', 'client/**/*.js'],
                 dest: 'public/app.js'
 
             }
@@ -48,8 +48,12 @@ module.exports = function (grunt) {
                 files: [
                     {expand: true, flatten: true, src: ['client/**/index.html'], dest: 'public/'}
                 ]
+            },
+            imgcrop: {
+                files: [
+                    {expand: true, flatten: true, src: ['bower_components/ngImgCrop/compile/unminified/*.css'], dest: 'public/stylesheets/'}
+                ]
             }
-
         }
     });
 

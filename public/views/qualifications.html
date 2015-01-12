@@ -31,7 +31,7 @@
 
     <div>Mother Tongue:
         <select ng-model="qualificationsCtrl.user.qualifications.motherTongue">
-            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value='' selected>Open here</option>
             <option value="english">English</option>
             <option value="french">French</option>
             <option value="german">German</option>
@@ -44,7 +44,7 @@
 
     <div>1st Additional Language:
         <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages1">
-            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value='' selected>Open here</option>
             <option value="english">English</option>
             <option value="french">French</option>
             <option value="german">German</option>
@@ -55,8 +55,8 @@
         <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.additionalLanguages1)">
             <div>
                 Knowledge:
-                <select ng-model="qualificationsCtrl.user.qualifications.languageknowledge1">
-                    <option value='' disabled selected style='display:none;'>Open here</option>
+                <select ng-model="qualificationsCtrl.user.qualifications.languageKnowledge1">
+                    <option value='' selected>Open here</option>
                     <option value="basic">Basic</option>
                     <option value="good">Good</option>
                     <option value="great">Great</option>
@@ -71,7 +71,7 @@
         <div ng-show="qualificationsCtrl.user.qualifications.additionalLanguages1">
             <div>2nd Additional Language:
                 <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages2">
-                    <option value='' disabled selected style='display:none;'>Open here</option>
+                    <option value='' selected>Open here</option>
                     <option value="english">English</option>
                     <option value="french">French</option>
                     <option value="german">German</option>
@@ -82,8 +82,8 @@
                 <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.additionalLanguages2)">
                     <div>
                         Knowledge:
-                        <select ng-model="qualificationsCtrl.user.qualifications.languageknowledge2">
-                            <option value='' disabled selected style='display:none;'>Open here</option>
+                        <select ng-model="qualificationsCtrl.user.qualifications.languageKnowledge2">
+                            <option value='' selected>Open here</option>
                             <option value="basic">Basic</option>
                             <option value="good">Good</option>
                             <option value="great">Great</option>
@@ -97,7 +97,7 @@
             <div ng-show="qualificationsCtrl.user.qualifications.additionalLanguages2">
                 <div>3rd Additional Language:
                     <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages3">
-                        <option value='' disabled selected style='display:none;'>Open here</option>
+                        <option value='' selected>Open here</option>
                         <option value="english">English</option>
                         <option value="french">French</option>
                         <option value="german">German</option>
@@ -108,8 +108,8 @@
                     <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.additionalLanguages3)">
                         <div>
                             Knowledge:
-                            <select ng-model="qualificationsCtrl.user.qualifications.languageknowledge3">
-                                <option value='' disabled selected style='display:none;'>Open here</option>
+                            <select ng-model="qualificationsCtrl.user.qualifications.languageKnowledge3">
+                                <option value='' selected>Open here</option>
                                 <option value="basic">Basic</option>
                                 <option value="good">Good</option>
                                 <option value="great">Great</option>
@@ -126,7 +126,7 @@
         <div ng-show="qualificationsCtrl.user.qualifications.additionalLanguages3">
             <div>4th Additional Language:
                 <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages4">
-                    <option value='' disabled selected style='display:none;'>Open here</option>
+                    <option value='' selected>Open here</option>
                     <option value="english">English</option>
                     <option value="french">French</option>
                     <option value="german">German</option>
@@ -137,8 +137,8 @@
                 <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.additionalLanguages4)">
                     <div>
                         Knowledge:
-                        <select ng-model="qualificationsCtrl.user.qualifications.languageknowledge4">
-                            <option value='' disabled selected style='display:none;'>Open here</option>
+                        <select ng-model="qualificationsCtrl.user.qualifications.languageKnowledge4">
+                            <option value='' selected>Open here</option>
                             <option value="basic">Basic</option>
                             <option value="good">Good</option>
                             <option value="great">Great</option>
@@ -163,6 +163,7 @@
 
 
     Translation Knowledge:
+    <div>
     <input type="text" ng-model="qualificationsCtrl.user.qualifications.translationKnowledge">
     </div>
     <br>
@@ -171,114 +172,120 @@
     <div>
         IT-Knowledge:
         <select ng-model="qualificationsCtrl.user.qualifications.it1">
-            <option value='' disabled selected style='display:none;'>Open here</option>
-            <option value="none">None</option>
+            <option value='' selected>Open here</option>
             <option value="msoffice">MSOffice</option>
             <option value="itnetworks">IT-Networks</option>
             <option value="contentmanagement">Data/Content-Management</option>
             <option value="graphic">Graphic Design / Layouting</option>
         </select>
-        <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it1)">
-            <div>
-                Knowledge:
-                <select ng-model="qualificationsCtrl.user.qualifications.itknowledge1">
-                    <option value='' disabled selected style='display:none;'>Open here</option>
-                    <option value="basic">Basic</option>
-                    <option value="good">Good</option>
-                    <option value="great">Great</option>
-                </select>
-            </div>
-            <br>
-        </div>
-        <br>
+
+        <!-- Knowledge-Level will be implemented in the future. --
+<div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it1)">
+    <div>
+        Knowledge:
+        <select ng-model="qualificationsCtrl.user.qualifications.itknowledge1">
+            <option value='' selected>Open here</option>
+            <option value="basic">Basic</option>
+            <option value="good">Good</option>
+            <option value="great">Great</option>
+        </select>
+    </div>
+    <br>
+</div>
+-->
+<br>
 </div>
 
 
-        <div ng-show="qualificationsCtrl.user.qualifications.it1">
-            <div>
-                IT-Knowledge:
-                <select ng-model="qualificationsCtrl.user.qualifications.it2">
-                    <option value='' disabled selected style='display:none;'>Open here</option>
-                    <option value="none">None</option>
-                    <option value="msoffice">MSOffice</option>
-                    <option value="itnetworks">IT-Networks</option>
-                    <option value="contentmanagement">Data/Content-Management</option>
-                    <option value="graphic">Graphic Design / Layouting</option>
-                </select>
+<div ng-show="qualificationsCtrl.user.qualifications.it1">
+    <div>
+        IT-Knowledge:
+        <select ng-model="qualificationsCtrl.user.qualifications.it2">
+            <option value='' selected>Open here</option>
+            <option value="msoffice">MSOffice</option>
+            <option value="itnetworks">IT-Networks</option>
+            <option value="contentmanagement">Data/Content-Management</option>
+            <option value="graphic">Graphic Design / Layouting</option>
+        </select>
+        <!-- Knowledge-Level will be implemented in the future. --
 
-                <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it2)">
-                    <div>
-                        Knowledge:
-                        <select ng-model="qualificationsCtrl.user.qualifications.itknowledge2">
-                            <option value='' disabled selected style='display:none;'>Open here</option>
-                            <option value="basic">Basic</option>
-                            <option value="good">Good</option>
-                            <option value="great">Great</option>
-                        </select>
-                    </div>
-                    <br>
-                </div>
-                <br>
-            </div>
-        </div>
+         <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it2)">
+             <div>
+                 Knowledge:
+                 <select ng-model="qualificationsCtrl.user.qualifications.itknowledge2">
+                     <option value='' selected>Open here</option>
+                     <option value="basic">Basic</option>
+                     <option value="good">Good</option>
+                     <option value="great">Great</option>
+                 </select>
+             </div>
+             <br>
+         </div>
+         -->
+                 <br>
+             </div>
+         </div>
 
-        <div ng-show="qualificationsCtrl.user.qualifications.it2">
+         <div ng-show="qualificationsCtrl.user.qualifications.it2">
 
-            <div>
-                IT-Knowledge:
-                <select ng-model="qualificationsCtrl.user.qualifications.it3">
-                    <option value='' selected style='display:none;'>Open here</option>
-                    <option value="none">None</option>
-                    <option value="msoffice">MSOffice</option>
-                    <option value="itnetworks">IT-Networks</option>
-                    <option value="contentmanagement">Data/Content-Management</option>
-                    <option value="graphic">Graphic Design / Layouting</option>
-                </select>
+             <div>
+                 IT-Knowledge:
+                 <select ng-model="qualificationsCtrl.user.qualifications.it3">
+                     <option value='' selected>Open here</option>
+                     <option value="msoffice">MSOffice</option>
+                     <option value="itnetworks">IT-Networks</option>
+                     <option value="contentmanagement">Data/Content-Management</option>
+                     <option value="graphic">Graphic Design / Layouting</option>
+                 </select>
+                 <!-- Knowledge-Level will be implemented in the future. --
+                  <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it3)">
+                      <div>
+                          Knowledge:
+                          <select ng-model="qualificationsCtrl.user.qualifications.itknowledge3">
+                              <option value='' selected>Open here</option>
+                              <option value="basic">Basic</option>
+                              <option value="good">Good</option>
+                              <option value="great">Great</option>
+                          </select>
+                      </div>
+                      <br>
+                  </div>
+                  -->
+                 <br>
+             </div>
+         </div>
 
-                <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it3)">
-                    <div>
-                        Knowledge:
-                        <select ng-model="qualificationsCtrl.user.qualifications.itknowledge3">
-                            <option value='' disabled selected style='display:none;'>Open here</option>
-                            <option value="basic">Basic</option>
-                            <option value="good">Good</option>
-                            <option value="great">Great</option>
-                        </select>
-                    </div>
-                    <br>
-                </div>
-                <br>
-            </div>
-        </div>
 
+         <div>
+             <div ng-show="qualificationsCtrl.user.qualifications.it3">
 
-        <div>
-            <div ng-show="qualificationsCtrl.user.qualifications.it3">
+                 IT-Knowledge:
+                 <select ng-model="qualificationsCtrl.user.qualifications.it4">
+                     <option value='' selected>Open here</option>
+                     <option value="none">None</option>
+                     <option value="msoffice">MSOffice</option>
+                     <option value="itnetworks">IT-Networks</option>
+                     <option value="contentmanagement">Data/Content-Management</option>
+                     <option value="graphic">Graphic Design / Layouting</option>
+                 </select>
 
-                IT-Knowledge:
-                <select ng-model="qualificationsCtrl.user.qualifications.it4">
-                    <option value='' disabled selected style='display:none;'>Open here</option>
-                    <option value="none">None</option>
-                    <option value="msoffice">MSOffice</option>
-                    <option value="itnetworks">IT-Networks</option>
-                    <option value="contentmanagement">Data/Content-Management</option>
-                    <option value="graphic">Graphic Design / Layouting</option>
-                </select>
+                <!-- Knowledge-Level will be implemented in the future. --
 
-                <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it4)">
-                    <div>
-                        Knowledge:
-                        <select ng-model="qualificationsCtrl.user.qualifications.itknowledge4">
-                            <option value='' disabled selected style='display:none;'>Open here</option>
-                            <option value="basic">Basic</option>
-                            <option value="good">Good</option>
-                            <option value="great">Great</option>
-                        </select>
-                    </div>
-                    <br>
-                    <br>
+                 <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it4)">
+                     <div>
+                         Knowledge:
+                         <select ng-model="qualificationsCtrl.user.qualifications.itknowledge4">
+                             <option value='' selected>Open here</option>
+                             <option value="basic">Basic</option>
+                             <option value="good">Good</option>
+                             <option value="great">Great</option>
+                         </select>
+                     </div>
+                     <br>
+                     <br>
 
-                    <div> Only 4 IT skills can be chosen</div>
+                     <div> Only 4 IT skills can be chosen</div>
+                     -->
                 </div>
             </div>
         </div>

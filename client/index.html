@@ -3,14 +3,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.js"></script>
     <script src="/assets/app.js"></script>
-  <!--  <link rel="stylesheet" href="/assets/stylesheets/forgottenPassword.css">
-    <link rel="stylesheet" href="/assets/stylesheets/login.css">
-    <link rel="stylesheet" href="/assets/stylesheets/qualifications.css">
-    <link rel="stylesheet" href="/assets/stylesheets/register.css"> -->
-
-</head >
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/ng-img-crop.css">
+</head>
 
 <body>
+<div ng-controller="LanguageController as languageCtrl">
+    <button ng-click="languageCtrl.changeLanguage()" ng-if="languageCtrl.language == 'D'" ng-model='languageCtrl.language'>Change to English</button>
+    <button ng-click="languageCtrl.changeLanguage()" ng-if="languageCtrl.language == 'E' || languageCtrl.language == undefined " ng-model='languageCtrl.language'>Zu Deutsch wechseln</button>
+</div>
 <!-- The ng-view is needed to allow the usage of ngRoute with the anchors/hash-bangs -->
 <div ng-view=""></div>
 </body>

@@ -13,8 +13,8 @@ angular.module('Panda')
                 return $http.get("/getUser");
             },
 
-            getDescriptions: function () {
-                return $http.get("/getDescriptions")
+            changeLanguage: function (language) {
+                return $http.post("/changeLanguage",language)
             }
         }
     }]);
