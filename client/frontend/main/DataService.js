@@ -22,8 +22,8 @@ angular.module('Panda')
                 return $http.get("/getAllVolunteers")
             },
 
-            sendId: function(id){
-                return $http.post("/sendVolunteerId", id)
+            getAdminVolunteer: function(id){
+                return $http.post("/getAdminVolunteer", id)
 
             }
 

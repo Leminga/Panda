@@ -1882,14 +1882,10 @@ crop.directive('imgCrop', ['$timeout', 'cropHost', 'cropPubSub', function($timeo
 angular.module('Panda', ['ngRoute','ngImgCrop']);
 
 angular.module('Panda')
-    .controller('AdminOverviewCtrl', ['$window', '$location','DataService', function ($window, $location, DataService) {
+    .controller('AdminOverviewCtrl', ['$window', '$location', 'DataService', function ($window, $location, DataService) {
         var self = this;
-
-       self.adminEditVolunteer = function () {
-            $location.path( "#/overview" );
-
-        };
-
+        self.adminEditVolunteer = "";
+        self.adminDeleteVolunteer = "";
 
         DataService.get().then(function (response) {
             self.user = response.data.user;
@@ -1898,6 +1894,21 @@ angular.module('Panda')
             self.values = response.data.values;
         });
 
+        self.adminEditVolunteer = function (id) {
+            DataService.sendId(id).then(function (response) {
+                $location.path("/overview");
+            },function(){
+                $location.path("/overview");
+            })
+        };
+
+        self.adminDeleteVolunteer = function (id) {
+            DataService.sendId(id).then(function (response) {
+                $window.location.reload();
+            },function(){
+                $window.location.reload();
+            })
+        };
         /*DataService.getAll().then(function(response){
          self.volunteer = response.data;
          })*/
@@ -2035,8 +2046,8 @@ angular.module('Panda')
                 return $http.get("/getAllVolunteers")
             },
 
-            sendId: function(id){
-                return $http.post("/sendVolunteerId", id)
+            getAdminVolunteer: function(id){
+                return $http.post("/getAdminVolunteer", id)
 
             }
 
