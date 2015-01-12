@@ -32,6 +32,10 @@ angular.module('Panda')
                 templateUrl: 'assets/views/qualifications.html',
                 controller: 'QualificationsFormCtrl as qualificationsCtrl'
             })
+            .when('/adminOverview', {
+                templateUrl: 'assets/views/adminOverview.html',
+                controller: 'AdminOverviewCtrl as adminCtrl'
+            })
 
 
             // If none of the above routes fit to the link that has been inserted, the user is being automatically

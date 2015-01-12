@@ -15,7 +15,18 @@ angular.module('Panda')
 
             changeLanguage: function (language) {
                 return $http.post("/changeLanguage",language)
+            },
+
+            getAll: function() {
+
+                return $http.get("/getAllVolunteers")
+            },
+
+            sendId: function(id){
+                return $http.post("/sendVolunteerId", id)
+
             }
+
         }
     }]);
 

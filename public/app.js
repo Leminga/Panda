@@ -1881,7 +1881,37 @@ crop.directive('imgCrop', ['$timeout', 'cropHost', 'cropPubSub', function($timeo
 // the square brackets.
 angular.module('Panda', ['ngRoute','ngImgCrop']);
 
+angular.module('Panda')
+    .controller('AdminOverviewCtrl', ['$window', '$location','DataService', function ($window, $location, DataService) {
+        var self = this;
 
+       self.adminEditVolunteer = function () {
+            $location.path( "#/overview" );
+
+        };
+
+
+        DataService.get().then(function (response) {
+            self.user = response.data.user;
+            self.labels = response.data.labels;
+            self.volunteers = response.data.volunteers;
+            self.values = response.data.values;
+        });
+
+        /*DataService.getAll().then(function(response){
+         self.volunteer = response.data;
+         })*/
+
+        // Logout function that clears the local and session storage (= Cookies) from the user and
+        // then he is being rerouted to the login page
+        self.logout = function (config) {
+            sessionStorage.clear();
+            localStorage.clear();
+            $location.path("/");
+        }
+
+    }])
+;
 angular.module('Panda')
     .controller('CoreDataFormCtrl', ['DataService',
         function (DataService) {
@@ -1958,10 +1988,12 @@ angular.module('Panda')
         var self = this;
         // This sends the Login to the controller, where it is being checked, whether the user exists or not.
         // If the user does not exist, then he receives an Error Message (TBD)
+        // if-selection: is user volunteer ('/overview') or admin ('/adminOverview')?
         self.sendLogin = function () {
             LoginService.login(self.user).then(
-                function (response) { // success function
+                    function (response) { // success function
                     $window.sessionStorage.setItem("token", response.data.authToken);
+
                     $location.path('/overview')
                 }, function (response) {  // error function
                     $window.alert("Wrong credentials");
@@ -1996,7 +2028,18 @@ angular.module('Panda')
 
             changeLanguage: function (language) {
                 return $http.post("/changeLanguage",language)
+            },
+
+            getAll: function() {
+
+                return $http.get("/getAllVolunteers")
+            },
+
+            sendId: function(id){
+                return $http.post("/sendVolunteerId", id)
+
             }
+
         }
     }]);
 
@@ -2153,6 +2196,10 @@ angular.module('Panda')
                 templateUrl: 'assets/views/qualifications.html',
                 controller: 'QualificationsFormCtrl as qualificationsCtrl'
             })
+            .when('/adminOverview', {
+                templateUrl: 'assets/views/adminOverview.html',
+                controller: 'AdminOverviewCtrl as adminCtrl'
+            })
 
 
             // If none of the above routes fit to the link that has been inserted, the user is being automatically
@@ -2191,6 +2238,7 @@ angular.module('Panda')
         var self = this;
 
 
+
         DataService.get().then(function (response) {
             self.labels = response.data.labels;
             self.user = response.data.user;
@@ -2198,10 +2246,6 @@ angular.module('Panda')
             self.volunteers = response.data.volunteers;
 
         });
-
-        /*DataService.getAll().then(function(response){
-            self.volunteer = response.data;
-        })*/
 
 
         // Logout function that clears the local and session storage (= Cookies) from the user and
@@ -2219,7 +2263,6 @@ angular.module('Panda')
                 return true;
             }
         }
-
     }])
 ;
 

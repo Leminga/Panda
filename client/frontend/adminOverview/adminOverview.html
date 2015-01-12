@@ -1,0 +1,25 @@
+<form><h1>Admin Overview</h1></form>
+    <form>
+            <button ng-submit="adminCtrl.logout()">Logout</button>
+    </form>
+
+    <table>
+        <th>{{adminCtrl.labels.profilePicture}}<th>
+        <th>{{adminCtrl.labels.prename}}<th>
+        <th>{{adminCtrl.labels.surname}}<th>
+        <th>{{adminCtrl.labels.emailAddress}}<th>
+
+    <tr ng-click="adminCtrl.adminEditVolunteer()" ng-repeat="volunteer in adminCtrl.volunteers ">
+
+
+        <td><img ng-src="{{volunteer.profilePicture}}"></td>
+               <td> {{volunteer.prename}}</td>
+                <td>{{volunteer.surname}}</td>
+               <td> {{volunteer.emailAddress}}</td>
+        </tr>
+
+    </table>
+</div>
+
+
+
