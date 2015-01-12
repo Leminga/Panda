@@ -9,10 +9,12 @@
 POST	/login						controllers.SecurityController.login()
 POST	/register					controllers.SecurityController.register()
 #PATCH  /saveUser                   controllers.VolunteerController.saveAll()
+GET		/verify/:token						controllers.SecurityController.verificationGetter(token: String)
 
 # Dummy-Routes
 #GET 	/getUserTest				controllers.DummyController.userDataTest()
 GET    	/getUser                    controllers.DummyController.dummyData()
+GET		/getJson					controllers.DummyController.newDummyJson()
 
 
 # Map static resources from the /public folder to the /assets URL path
