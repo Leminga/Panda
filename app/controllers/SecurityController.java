@@ -5,6 +5,7 @@ import forms.RegisterForm;
 import models.UserLogin;
 import models.volunteer.Volunteer;
 
+import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +39,7 @@ import helper.CryptIt;
  * 	- passwort zurücksetzen -> bestätigungsmail
  * 
  */
+
 public class SecurityController extends Controller{
 	/** Logger to log SecurityController events. */
 	private static Logger LOGGER = LoggerFactory.getLogger(SecurityController.class);
@@ -64,6 +66,7 @@ public class SecurityController extends Controller{
      * 
      * @return <b>User</b> The user that was identified based in...?
      */
+    //@Security.Authenticated(Secured.class)
     public static UserLogin getUser() {
         return (UserLogin) Http.Context.current().args.get("user");
     }
@@ -77,6 +80,7 @@ public class SecurityController extends Controller{
      * 
      * @return <b>Result</b> A resulting JSON object containing the authentication token or null.
      */
+    
     public static Result login() {
     	// The login form.
     	Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
@@ -112,14 +116,19 @@ public class SecurityController extends Controller{
         //User not null and mail confirmed
         else{
         	user.updateLastLogin();
-            String authToken = user.createToken();
+        	String authToken = user.getAuthToken();
+        	
+        	if(authToken==null){
+        		authToken = user.createToken();
+        	}
+            
             ObjectNode loginJson = Json.newObject();
             loginJson.put(AUTH_TOKEN, authToken);
             response().setCookie(AUTH_TOKEN, authToken);
             // Add the user information to the result.
-            loginJson.put("UserLogin", user.toJson());
+            //loginJson.put("UserLogin", user.toJson());
             // TODO: Search the corresponding volunteer and add its data to the JsonObject that is responded.
-            System.out.println("TEST: loginJson: \n" + loginJson.toString());
+
             
             if (LOGGER.isDebugEnabled()) {
             	LOGGER.debug("Authorized login attempt. User " + user.getUsername() + " logged in successfully.");
@@ -165,9 +174,11 @@ public class SecurityController extends Controller{
         if (user == null) {
         	LOGGER.info("New user to register: " + registerForm.email);
         	user = new UserLogin(registerForm.email, CryptIt.cleartextToHash(registerForm.password));
+        	
 
         	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname, registerForm.email, registerForm.nationality);
         	volunteer.setUserLogin(user);
+        	verificationSend(volunteer);
 
         	try {
         		volunteer.save();
@@ -187,9 +198,61 @@ public class SecurityController extends Controller{
   }      
     
     
+    // send a verification token to registered users
+   public static void verificationSend(Volunteer volunteer){
+	  
+       String authToken = volunteer.getUserLogin().createToken();
+       
+       String prename = volunteer.getPrename();
+       String surname =	volunteer.getSurname();
+       String emailAddress	= 	volunteer.getUserLogin().getUsername();
+       
+       try {
+		mailer.Mail.confirmationMail(prename, surname, emailAddress, authToken);
+		LOGGER.info("Confirmation Mail to User "+emailAddress+" sended");
+		
+	} catch (EmailException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		LOGGER.debug("Confirmation for User "+emailAddress+" not successfully: "+e);
+	}
+ 
+   }
+   
+   //checks if the sended verification token is already saved in DB - then redirects
+   public static Result verificationGetter(String authToken){
+		  
+	   UserLogin user = UserLogin.findByAuthToken(authToken);
+    
+	   if (user == null ) {
+       	if (LOGGER.isInfoEnabled()) {
+       		LOGGER.info("Verification not successful");
+       	}  	
+           //return Results.unauthorized();   
+       	return Results.redirect("/");
+       } 
+
+       else{
+       	user.updateLastLogin();
+       	user.setMailConfirmation(true);
+        ObjectNode loginJson = Json.newObject();
+        loginJson.put(AUTH_TOKEN, authToken);
+        response().setCookie(AUTH_TOKEN, authToken);
+        // Add the user information to the result.
+ 
+        if (LOGGER.isDebugEnabled()) {
+        	LOGGER.debug("Verification attempt. User " + user.getUsername() + " logged in successfully.");
+        }
+        return Results.redirect("/#/overview");
+    }
+ 
+   }
+   
+   //Method to reset the password - send a mail to confirm
    public static Result resetPassword(){
 	   
-   		// The register form.
+	   
+	    // The register form.
    		Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
    	
    		// Check the form itself for errors.
@@ -198,14 +261,14 @@ public class SecurityController extends Controller{
        }
        
        // Get the login information from the login form.
-       LoginForm registerForm = form.get();
+       LoginForm loginForm = form.get();
        
        // Find the user in the database. Return null if the
        // user was not found.
-       UserLogin user = UserLogin.findByName(registerForm.email);
-	   
-	   
-	   
+       UserLogin user = UserLogin.findByName(loginForm.email);
+       
+       //Code for reseting the PW
+       
 	   return Results.ok();
    }
         
