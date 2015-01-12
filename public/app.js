@@ -1939,6 +1939,15 @@ angular.module('Panda')
                         gender: [
                             {"description": "Male", "value": "1"},
                             {"description": "Female", "value": "100"}
+                        ],
+                        nationalities:[
+                            {"description": "Austria", "value":"1"},
+                            {"description": "America","value":"2"}
+                        ],
+
+                        driversLicense: [
+                            {"description": "Austria", "value":"0"},
+                            {"description": "America","value":"1"}
                         ]
                     };
 
