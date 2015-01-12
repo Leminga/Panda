@@ -5,7 +5,6 @@ import models.SetupDatabase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import activiti.ServicesTimer;
 import play.*;
 
 public class Global extends GlobalSettings {
@@ -14,8 +13,6 @@ public class Global extends GlobalSettings {
 	
 	@Override
 	public void onStart(Application app) {
-		// Deploy Activiti services.
-		//ServicesTimer.deployProcess();
 		// TESTING : Fills database with some default values.
 		//Starter.start();
 		//DummyData.start();

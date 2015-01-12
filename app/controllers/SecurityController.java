@@ -1,18 +1,21 @@
 package controllers;
 
+import forms.LoginForm;
+import forms.RegisterForm;
+import models.UserLogin;
+import models.volunteer.Volunteer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import models.UserLogin;
-import models.humans.Human;
-import models.volunteer.Volunteer;
+import play.data.Form;
+import play.libs.Json;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
+import play.mvc.Results;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import play.libs.Json;
-import play.mvc.*;
-import play.data.Form;
-import play.data.validation.Constraints;
 
 /**
  * The security controller allows for a secure
@@ -26,8 +29,15 @@ import play.data.validation.Constraints;
  * the user logs out, or after some idle timeout.
  * 
  * @author Michael Bredel <michael.bredel@fh-kufstein.ac.at>
+ * 
+ * 
+ * Folgende Funktionen sollen im SecurityController realisiert werden:
+ * 	- wie bereits vorhanden : register, login, logout - logout momentan nocht nicht geroutet
+ * 	- für Methoden auf die geroutet wird - mit Secured Annotation ?!
+ * 	- passwort zurücksetzen -> bestätigungsmail
+ * 
  */
-public class SecurityController extends Controller {
+public class SecurityController extends Controller{
 	/** Logger to log SecurityController events. */
 	private static Logger LOGGER = LoggerFactory.getLogger(SecurityController.class);
 	/** The authentication token header for the Play framework. */
@@ -82,19 +92,24 @@ public class SecurityController extends Controller {
         // user was not found or could not be verified.
         UserLogin user = UserLogin.findByNameAndPassword(loginForm.email, loginForm.password);
         
-        if (user == null) {
+        
+        if (user == null ) {
         	if (LOGGER.isInfoEnabled()) {
         		LOGGER.info("Unauthorized login attempt for user " + loginForm.email + " using password: " + loginForm.password);
-        	}
-            return Results.unauthorized();
-       
+        	}  	
+            return Results.unauthorized();   
         } 
         
-        //else if (user !=null && ){
-        	
-        //}
-        
-        else {
+        //if User has not confirmed the confirmation mail
+    /*    else if(!user.isMailConfirmation()){
+        	if (LOGGER.isInfoEnabled()) {
+        		LOGGER.info("Unauthorized login attempt for user " + loginForm.email + " using password: " + loginForm.password+" Confirmation Email not confirmed");
+        	}  	
+            return Results.unauthorized();
+        }*/
+
+        //User not null and mail confirmed
+        else{
         	user.updateLastLogin();
             String authToken = user.createToken();
             ObjectNode loginJson = Json.newObject();
@@ -110,6 +125,7 @@ public class SecurityController extends Controller {
             }
             return Results.ok(loginJson);
         }
+
     }
     
     /**
@@ -144,21 +160,17 @@ public class SecurityController extends Controller {
         // Find the user in the database. Return null if the
         // user was not found.
         UserLogin user = UserLogin.findByName(registerForm.email);
-        
+
         if (user == null) {
         	LOGGER.info("New user to register: " + registerForm.email);
         	user = new UserLogin(registerForm.email, registerForm.password);
-        	
-        	//if (volunteer)
-        		
+
         	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname, registerForm.email, registerForm.nationality);
         	volunteer.setUserLogin(user);
+
         	try {
         		volunteer.save();
         		user.save();
-        		// START TESTING : Activity service to send an email.
-        		//ServicesTimer.startProcess();
-        		// END TESTING
         		return Results.ok(volunteer.toJson());
         	} catch (Exception e) {
         		// Make sure to clean up the database if something went wrong.
@@ -167,42 +179,34 @@ public class SecurityController extends Controller {
         		return Results.ok("user registration failed");
         	}
         	
-        	//if(admin)
-        	//if(anderer mensch)
         } else {
         	LOGGER.info("User already exists in database.");
         	return Results.ok("user exist already");
         }
-    }
+  }      
     
-    /**
-     * Maps the login form fields to a
-     * login object.
-     * 
-     * @author Michel Bredel <michael.bredel@fh-kufstein.ac.at>
-     */
-    public static class LoginForm {
-    	/** The email address of the user. */
-        @Constraints.Required
-        @Constraints.Email
-        public String email;
-        /** The password (as a MD5-Hash) of the user. */
-        @Constraints.Required
-        public String password;
-    }
     
-    /**
-     * Maps the register form fields to a
-     * register object.
-     * 
-     * @author Michel Bredel <michael.bredel@fh-kufstein.ac.at>
-     */
-    public static class RegisterForm extends LoginForm {
-    	/** The name of the user. */
-    	public String prename;
-    	/** The surname of the user. */
-    	public String surname;
-    	/** The nationality of the user. */
-    	public String nationality;
-    }
+   public static Result resetPassword(){
+	   
+   		// The register form.
+   		Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
+   	
+   		// Check the form itself for errors.
+       if (form.hasErrors()) {
+           return Results.badRequest(form.errorsAsJson());
+       }
+       
+       // Get the login information from the login form.
+       LoginForm registerForm = form.get();
+       
+       // Find the user in the database. Return null if the
+       // user was not found.
+       UserLogin user = UserLogin.findByName(registerForm.email);
+	   
+	   
+	   
+	   return Results.ok();
+   }
+        
+    
 }

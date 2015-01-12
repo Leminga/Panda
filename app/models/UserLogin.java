@@ -64,6 +64,8 @@ public class UserLogin extends Model {
 	/**gewählte Sprache des Volunteers. */
 	@Required
 	private String chosenLanguage;
+	/** Tracks if the Registration Mail has been confirmed. */
+	private boolean mailConfirmation; 
 	
 	/*
 	 * OneToOne Relation to Volunteer
@@ -196,6 +198,8 @@ public class UserLogin extends Model {
 		this.creationTime = new Date();
 		this.hasChanged = true;
 		this.chosenLanguage = "E";
+		// Für das Testen true gesetzt - später wenn Mail-Bestätigung funktioniert auf false ändern
+		this.mailConfirmation = true;
 	}
 	
 	///
@@ -263,6 +267,20 @@ public class UserLogin extends Model {
 	/// All the other methods.
 	///
 	
+	/**
+	 * @return the mailConfirmation
+	 */
+	public boolean isMailConfirmation() {
+		return mailConfirmation;
+	}
+
+	/**
+	 * @param mailConfirmation the mailConfirmation to set
+	 */
+	public void setMailConfirmation(boolean mailConfirmation) {
+		this.mailConfirmation = mailConfirmation;
+	}
+
 	/**
 	 * Sets the last login date to the current
 	 * date.

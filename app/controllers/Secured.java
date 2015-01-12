@@ -1,6 +1,5 @@
 package controllers;
 
-import controllers.routes;
 import models.UserLogin;
 import play.mvc.Http.Context;
 import play.mvc.Result;
