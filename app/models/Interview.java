@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import models.humans.Human;
@@ -44,6 +43,9 @@ public class Interview extends Model {
 	@ManyToOne // owning side
 	private Human human;*/
 	
+	/*
+	 * Getter und Setter
+	 */
 	public Date getInterviewDate() {
 		return interviewDate;
 	}

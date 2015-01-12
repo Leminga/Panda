@@ -36,7 +36,7 @@ public class Sex extends Model{
 	//@Column(unique=true)
 	//private long sexTid;
 	
-	/** The gender. */
+	/** OneToOne Relation, Volunteer owning side */
 	@Required
 	@OneToOne(mappedBy = "sex")
 	protected Volunteer volunteer;

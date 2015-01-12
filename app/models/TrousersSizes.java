@@ -11,6 +11,9 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
 
+/*
+ * enthält die Hosengrößen
+ */
 @Entity
 public class TrousersSizes extends Model {
 	
@@ -24,7 +27,7 @@ public class TrousersSizes extends Model {
 	private String trousersSize;
 	
 	/*
-	 * OneToOne Beziehung, owning side Volunteer
+	 * OneToOne Beziehung, owning side Volunteer, ein Volunteer hat eine Hosengröße
 	 */
 	@Required
 	@OneToOne(mappedBy = "trousersId")

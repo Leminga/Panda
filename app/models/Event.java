@@ -19,6 +19,9 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
 
+/*
+ * Klasse für die verschiedenen Veranstaltungen
+ */
 @Entity
 public class Event extends Model{
 	

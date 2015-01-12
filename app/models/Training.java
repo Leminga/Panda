@@ -7,7 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
-import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity

@@ -15,6 +15,9 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
 
+/*
+ * aktueller Job des Volunteers
+ */
 @Entity
 public class CurrentJob extends Model {
 	
@@ -26,14 +29,14 @@ public class CurrentJob extends Model {
 	private long currentJobid;
 	
 	/*
-	 * OneToOne Beziehung, owning side Volunteer
+	 * OneToOne Beziehung, owning side Volunteer, ein Volunteer hat einen akutellen Job
 	 */
 	@Required
 	@OneToOne(mappedBy = "currentJobid")
 	protected Volunteer volunteer;
 		
 	/*
-	 * OneToOneRelation to Translation
+	 * OneToOneRelation to Translation, enthält die Übersetzungen der Jobs
 	 */
 	@OneToOne
 	@JoinColumn(name = "currentJobTid")

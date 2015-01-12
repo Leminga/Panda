@@ -84,6 +84,10 @@ public class Volunteer extends Human {
 	@OneToOne
 	@JoinColumn(name = "PreferredWorkingAreaId")
 	private PreferredWorkingArea preferredWorkingAreaId;
+	@Required
+	@OneToOne
+	@JoinColumn(name="TextBoxesId")
+	private TextBoxes textBoxesId;
 	
 	//OneToMany Relations
 	@OneToMany(cascade = CascadeType.ALL)
@@ -98,8 +102,7 @@ public class Volunteer extends Human {
 	private List<ItKnowledge> itKnowledges;
 
 	//OneToOne Relations
-	@OneToOne(mappedBy = "volunteer")
-	private TextBoxes textBoxes;
+	// damit im Interview gespeichert wird welcher Volunteer interviewt wird
 	@OneToOne(mappedBy = "volunteer")
 	private Interview interview;
 //	@OneToOne(mappedBy = "volunteer")

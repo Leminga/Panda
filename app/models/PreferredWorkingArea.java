@@ -15,6 +15,9 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 import play.libs.Json;
 
+/*
+ * bevorzugter Einsatzbereich
+ */
 @Entity
 public class PreferredWorkingArea extends Model {
 	

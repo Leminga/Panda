@@ -24,14 +24,10 @@ public class TextBoxes extends Model {
 	private String career;
 	private String otherQualification;
 	
+	/** OneToOne Relation, Volunteer owning side */
 	@Required
-	@Column(unique=true)
-	private long Vid;
-	
-	//OneToOne Relation to Volunteer
-	@OneToOne
-	@JoinColumn(name = "Vid")
-	private Volunteer volunteer;
+	@OneToOne(mappedBy = "textBoxesId")
+	protected Volunteer volunteer;
 	
 	public long getId() {
 		return id;
@@ -50,12 +46,6 @@ public class TextBoxes extends Model {
 	}
 	public void setOtherQualification(String otherQualification) {
 		this.otherQualification = otherQualification;
-	}
-	public long getVid() {
-		return Vid;
-	}
-	public void setVid(long vid) {
-		Vid = vid;
 	}
 	public Volunteer getVolunteer() {
 		return volunteer;

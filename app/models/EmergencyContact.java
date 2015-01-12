@@ -8,25 +8,27 @@ import javax.persistence.ManyToOne;
 import models.volunteer.Volunteer;
 import play.db.ebean.Model;
 
+/*
+ * Notfallkontaktdaten des Volunteers
+ */
 @Entity
 public class EmergencyContact extends Model{
 	
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
 	
-//	@Required
 	private String emergencySurname;
-//	@Required
 	private String emergencyName;
-//	@Required
 	private EmergencyRelation emergencyRelation;
-//	@Required
 	private List <Contact>emergencyContacts;
 	
 	//ManyToOne Relation to Volunteer
 	@ManyToOne // owning side
 	private Volunteer volunteer;
 	
+	/*
+	 * Getter und Setter
+	 */
 	public String getEmergencySurname() {
 		return emergencySurname;
 	}

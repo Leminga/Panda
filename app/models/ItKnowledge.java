@@ -16,7 +16,9 @@ import play.db.ebean.Model;
 import play.libs.Json;
 import models.volunteer.Volunteer;
 
-
+/*
+ * IT-Kenntnisse des Volunteers
+ */
 @Entity
 public class ItKnowledge extends Model {
 	
@@ -42,7 +44,9 @@ public class ItKnowledge extends Model {
 	 */
 	public ItKnowledge(long tid) {
 	}
-	
+	/*
+	 * Getter und Setter
+	 */
 	public long getId() {
 		return id;
 	}

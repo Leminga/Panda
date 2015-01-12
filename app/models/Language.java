@@ -40,6 +40,11 @@ public class Language extends Model {
 	@Required 
 	private List<Integer> levels;
 	
+	/*
+	 * Konstruktor
+	 */
+	public Language(long tid) {
+	}
 	public long getId() {
 		return id;
 	}

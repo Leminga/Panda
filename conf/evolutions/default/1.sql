@@ -420,8 +420,6 @@ create table text_boxes (
   id                        bigint not null,
   career                    varchar(255),
   other_qualification       varchar(255),
-  vid                       bigint,
-  constraint uq_text_boxes_vid unique (vid),
   constraint pk_text_boxes primary key (id))
 ;
 
@@ -469,6 +467,7 @@ create table volunteer (
   ShoeId                    bigint,
   CurrentJobid              bigint,
   PreferredWorkingAreaId    bigint,
+  TextBoxesId               bigint,
   social_security_number    varchar(255),
   volunteer_agreement       varbinary(255),
   constraint pk_volunteer primary key (id))
@@ -832,22 +831,22 @@ alter table sport add constraint fk_sport_translation_28 foreign key (sportTid) 
 create index ix_sport_translation_28 on sport (sportTid);
 alter table sport_interest add constraint fk_sport_interest_translation_29 foreign key (sportInterestTid) references translation (tid) on delete restrict on update restrict;
 create index ix_sport_interest_translation_29 on sport_interest (sportInterestTid);
-alter table text_boxes add constraint fk_text_boxes_volunteer_30 foreign key (Vid) references volunteer (id) on delete restrict on update restrict;
-create index ix_text_boxes_volunteer_30 on text_boxes (Vid);
-alter table user_login add constraint fk_user_login_volunteer_31 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_user_login_volunteer_31 on user_login (volunteer_id);
-alter table volunteer add constraint fk_volunteer_sex_32 foreign key (SexId) references sex (id) on delete restrict on update restrict;
-create index ix_volunteer_sex_32 on volunteer (SexId);
-alter table volunteer add constraint fk_volunteer_jacketId_33 foreign key (JacketId) references jacket_sizes (jacket_id) on delete restrict on update restrict;
-create index ix_volunteer_jacketId_33 on volunteer (JacketId);
-alter table volunteer add constraint fk_volunteer_trousersId_34 foreign key (TrousersId) references trousers_sizes (trousers_id) on delete restrict on update restrict;
-create index ix_volunteer_trousersId_34 on volunteer (TrousersId);
-alter table volunteer add constraint fk_volunteer_shoeId_35 foreign key (ShoeId) references shoe_sizes (shoe_id) on delete restrict on update restrict;
-create index ix_volunteer_shoeId_35 on volunteer (ShoeId);
-alter table volunteer add constraint fk_volunteer_currentJobid_36 foreign key (CurrentJobid) references current_job (current_jobid) on delete restrict on update restrict;
-create index ix_volunteer_currentJobid_36 on volunteer (CurrentJobid);
-alter table volunteer add constraint fk_volunteer_preferredWorking_37 foreign key (PreferredWorkingAreaId) references preferred_working_area (id) on delete restrict on update restrict;
-create index ix_volunteer_preferredWorking_37 on volunteer (PreferredWorkingAreaId);
+alter table user_login add constraint fk_user_login_volunteer_30 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_user_login_volunteer_30 on user_login (volunteer_id);
+alter table volunteer add constraint fk_volunteer_sex_31 foreign key (SexId) references sex (id) on delete restrict on update restrict;
+create index ix_volunteer_sex_31 on volunteer (SexId);
+alter table volunteer add constraint fk_volunteer_jacketId_32 foreign key (JacketId) references jacket_sizes (jacket_id) on delete restrict on update restrict;
+create index ix_volunteer_jacketId_32 on volunteer (JacketId);
+alter table volunteer add constraint fk_volunteer_trousersId_33 foreign key (TrousersId) references trousers_sizes (trousers_id) on delete restrict on update restrict;
+create index ix_volunteer_trousersId_33 on volunteer (TrousersId);
+alter table volunteer add constraint fk_volunteer_shoeId_34 foreign key (ShoeId) references shoe_sizes (shoe_id) on delete restrict on update restrict;
+create index ix_volunteer_shoeId_34 on volunteer (ShoeId);
+alter table volunteer add constraint fk_volunteer_currentJobid_35 foreign key (CurrentJobid) references current_job (current_jobid) on delete restrict on update restrict;
+create index ix_volunteer_currentJobid_35 on volunteer (CurrentJobid);
+alter table volunteer add constraint fk_volunteer_preferredWorking_36 foreign key (PreferredWorkingAreaId) references preferred_working_area (id) on delete restrict on update restrict;
+create index ix_volunteer_preferredWorking_36 on volunteer (PreferredWorkingAreaId);
+alter table volunteer add constraint fk_volunteer_textBoxesId_37 foreign key (TextBoxesId) references text_boxes (id) on delete restrict on update restrict;
+create index ix_volunteer_textBoxesId_37 on volunteer (TextBoxesId);
 
 
 

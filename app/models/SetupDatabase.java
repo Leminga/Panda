@@ -1,10 +1,10 @@
 package models;
 
+
+/*
+ * enthält Daten für die Dropdowns
+ */
 public class SetupDatabase {
-	
-	/*
-	 * enthält Daten für die Dropdowns
-	 */
 	
 	public static void setup(){
 		
@@ -142,6 +142,68 @@ public class SetupDatabase {
 		area5.save();
 		area6.save();
 		area7.save();
+		
+		/*
+		 * speichert die Sprachen in die Translation Tabelle
+		 */
+		Translation language = new Translation ("deutsch","german");
+		Translation language2 = new Translation ("englisch","english");
+		Translation language3 = new Translation ("spanisch","spanish");
+		Translation language4 = new Translation ("italienisch","italian");
+		Translation language5 = new Translation ("rumänisch","romanian");
+		Translation language6 = new Translation ("russisch","russian");
+		Translation language7 = new Translation ("chinesisch","chinese");
+		Translation language8 = new Translation ("französisch","french");
+		Translation language9 = new Translation ("arabisch","arabic");
+		Translation language10 = new Translation ("tschechisch","czech");
+		
+		language.save();
+		language2.save();
+		language3.save();
+		language4.save();
+		language5.save();
+		language6.save();
+		language7.save();
+		language8.save();
+		language9.save();
+		language10.save();
+		
+		/*
+		 * Primärschlüssel der Translation Tabelle verweist auf Fremdschlüssel in Language Tabelle
+		 */
+		Language langtid = new Language(language.getTid());
+		Language langtid2 = new Language(language2.getTid());
+		Language langtid3 = new Language(language3.getTid());
+		Language langtid4 = new Language(language4.getTid());
+		Language langtid5 = new Language(language5.getTid());
+		Language langtid6 = new Language(language6.getTid());
+		Language langtid7 = new Language(language7.getTid());
+		Language langtid8 = new Language(language8.getTid());
+		Language langtid9 = new Language(language9.getTid());
+		Language langtid10 = new Language(language10.getTid());
+		
+		langtid.setTranslation(language);
+		langtid2.setTranslation(language2);
+		langtid3.setTranslation(language3);
+		langtid4.setTranslation(language4);
+		langtid5.setTranslation(language5);
+		langtid6.setTranslation(language6);
+		langtid7.setTranslation(language7);
+		langtid8.setTranslation(language8);
+		langtid9.setTranslation(language9);
+		langtid10.setTranslation(language10);
+		
+		langtid.save();
+		langtid2.save();
+		langtid3.save();
+		langtid4.save();
+		langtid5.save();
+		langtid6.save();
+		langtid7.save();
+		langtid8.save();
+		langtid9.save();
+		langtid10.save();
+		
 		
 	}
 	private static void setupEvent(){
