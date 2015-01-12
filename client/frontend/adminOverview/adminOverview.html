@@ -1,7 +1,5 @@
 <form><h1>Admin Overview</h1></form>
-<form>
-    <button ng-submit="adminCtrl.logout()">Logout</button>
-</form>
+    <button ng-click="adminCtrl.logout()">Logout</button>
 
 <div id="exportable">
     <table>
@@ -15,16 +13,16 @@
         </thead>
         <tbody>
         <tr ng-repeat="volunteer in adminCtrl.volunteers ">
-            <td><img ng-src="{{volunteer.profilePicture}}"></td>
-            <td> {{volunteer.prename}}</td>
-            <td>{{volunteer.surname}}</td>
-            <td> {{volunteer.emailAddress}}</td>
-            <td>
-                <button ng-click="adminCtrl.adminEditVolunteer(volunteer.ID)">Edit Volunteer</button>
-            </td>
-            <td>
-                <button ng-click="adminCtrl.adminDeleteVolunteer(volunteer.ID)">Delete Volunteer</button>
-            </td>
+                <td><img ng-src="{{volunteer.profilePicture}}"></td>
+                <td>{{volunteer.prename}}</td>
+                <td>{{volunteer.surname}}</td>
+                <td>{{volunteer.emailAddress}}</td>
+                <td>
+                    <button ng-click="adminCtrl.adminEditVolunteer(volunteer.ID)">Edit Volunteer</button>
+                </td>
+                <td>
+                    <button ng-click="adminCtrl.adminDeleteVolunteer(volunteer.ID)">Delete Volunteer</button>
+                </td>
         </tr>
         </tbody>
     </table>

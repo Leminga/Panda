@@ -1922,14 +1922,6 @@ angular.module('Panda')
          self.volunteer = response.data;
          })*/
 
-        // Logout function that clears the local and session storage (= Cookies) from the user and
-        // then he is being rerouted to the login page
-        self.logout = function (config) {
-            sessionStorage.clear();
-            localStorage.clear();
-            $location.path("/");
-        }
-
     }])
 ;
 angular.module('Panda')
@@ -2113,6 +2105,35 @@ angular.module('Panda')
 
     })//appFilereader
 ;
+angular.module('Panda')
+    .controller('IndexController', ['DataService', '$window','$location', function (DataService, $window, $location) {
+        var self = this;
+
+        self.changeLanguage = function () {
+            if (self.language == 'D') {
+                self.language = 'E';
+            } else if (self.language = 'E') {
+                self.language = 'D'
+            }
+
+            DataService.changeLanguage(self.language).then(function (response) {
+                $window.location.reload();
+            }, function () {
+                console.log("Reload");
+                $window.location.reload();
+            });
+        };
+
+        // Logout function that clears the local and session storage (= Cookies) from the user and
+// then he is being rerouted to the login page
+
+        self.logout = function () {
+            sessionStorage.clear();
+            localStorage.clear();
+            $location.path("/");
+        };
+    }]);
+
 // The InterceptorService reacts to any of the mentioned http-methods (request, requestError..)
 angular.module('Panda')
     .factory('InterceptorService', ['$q', '$window', function ($q, $window) {
@@ -2163,26 +2184,6 @@ angular.module('Panda')
         // forms.
         $httpProvider.defaults.cache = true;
     }]);
-angular.module('Panda')
-    .controller('LanguageController', ['DataService', '$window', function (DataService, $window) {
-        var self = this;
-
-        self.changeLanguage = function () {
-            if (self.language == 'D') {
-                self.language = 'E';
-            } else if (self.language = 'E') {
-                self.language = 'D'
-            }
-
-            DataService.changeLanguage(self.language).then(function (response) {
-                $window.location.reload();
-            }, function () {
-                console.log("Reload");
-                $window.location.reload();
-            });
-        }
-    }]);
-
 // The RouteProvider module, adds hash-bangs (=anchors) to the webpage. This allows fast and convenient routing, without
 // constant reloading of the webpage.
 angular.module('Panda')
@@ -2267,15 +2268,6 @@ angular.module('Panda')
             self.volunteers = response.data.volunteers;
 
         });
-
-
-        // Logout function that clears the local and session storage (= Cookies) from the user and
-        // then he is being rerouted to the login page
-        self.logout = function (config) {
-            sessionStorage.clear();
-            localStorage.clear();
-            $location.path("/");
-        },
 
         self.eventCheck = function (event) {
             if(event == null){

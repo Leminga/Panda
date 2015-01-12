@@ -1,5 +1,5 @@
 angular.module('Panda')
-    .controller('LanguageController', ['DataService', '$window', function (DataService, $window) {
+    .controller('IndexController', ['DataService', '$window','$location', function (DataService, $window, $location) {
         var self = this;
 
         self.changeLanguage = function () {
@@ -15,5 +15,14 @@ angular.module('Panda')
                 console.log("Reload");
                 $window.location.reload();
             });
-        }
+        };
+
+        // Logout function that clears the local and session storage (= Cookies) from the user and
+// then he is being rerouted to the login page
+
+        self.logout = function () {
+            sessionStorage.clear();
+            localStorage.clear();
+            $location.path("/");
+        };
     }]);

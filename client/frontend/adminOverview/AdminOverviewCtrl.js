@@ -39,13 +39,5 @@ angular.module('Panda')
          self.volunteer = response.data;
          })*/
 
-        // Logout function that clears the local and session storage (= Cookies) from the user and
-        // then he is being rerouted to the login page
-        self.logout = function (config) {
-            sessionStorage.clear();
-            localStorage.clear();
-            $location.path("/");
-        }
-
     }])
 ;
