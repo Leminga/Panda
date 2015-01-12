@@ -11,8 +11,8 @@ POST	/register					controllers.SecurityController.register()
 #PATCH  /saveUser                   controllers.VolunteerController.saveAll()
 
 # Dummy-Routes
-#GET 	/getUserTest				controllers.VolunteerController.userDataTest()
-GET    /getUser                    	controllers.VolunteerController.dummyData()
+#GET 	/getUserTest				controllers.DummyController.userDataTest()
+GET    	/getUser                    controllers.DummyController.dummyData()
 
 
 # Map static resources from the /public folder to the /assets URL path
