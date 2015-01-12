@@ -2,7 +2,7 @@
 
     <div><a href="#/coreData">Coredata</a></div>
     <div><a href="#/qualifications">Qualifications</a></div>
-    <div ng-show="showme" ng-if="overviewCtrl.eventCheck(overviewCtrl.user.event)"><a href="#/eventSpecific">Event-specific</a></div>
+    <div ng-if="overviewCtrl.eventCheck(overviewCtrl.user.event_selected)"><a href="#/eventSpecific">Event-specific</a></div>
     <form ng-submit="overviewCtrl.logout()">
         <button type="submit">Logout</button>
     </form>
@@ -56,13 +56,15 @@
     </div><br>
 
 
-        <div ng-show="show">
-            <button ng-click="showme=true">Add</a></button>
+        <div>
+            <button ng-click="overviewCtrl.user.event_selected = overviewCtrl.user.event">Add</a></button>
         </div>
 
+    <div>
+        <button ng-click="overviewCtrl.user.event_selected = null">Remove</a></button>
+    </div>
     </div>
 </form>
-
 
 
 
