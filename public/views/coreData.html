@@ -22,7 +22,7 @@
         <br>
 
         <select ng-model="coreDataCtrl.user.gender"
-                ng-options="gender.value as gender.description for gender in coreDataCtrl.test.gender">
+                ng-options="gender.value as gender.description for gender in coreDataCtrl.values.gender">
             <!-- gender.value = Value that is being sent
             as gender.description = Description that is being inserted (that is what the user sees)
             for gender = that's the name of each element in the data repeat
@@ -44,6 +44,8 @@
     <div>
         {{coreDataCtrl.labels.nationality}}
         <label for="nat_name">Nationality: </label>
+        <select ng-model="coreDataCtrl.user.nationality"
+                ng-options="nationality.value as nationality.description for nationality in coreDataCtrl.test.gender">
         <input ng-model="coreDataCtrl.user.nationality" id="nat_name" name="nat_name" type="text" list="nation"/>
         <datalist id="nation">
             <option value='' disabled selected style='display:none;'>Open here</option>

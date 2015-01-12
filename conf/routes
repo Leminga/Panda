@@ -14,7 +14,7 @@ GET		/verify/:token						controllers.SecurityController.verificationGetter(token
 # Dummy-Routes
 #GET 	/getUserTest				controllers.DummyController.userDataTest()
 GET    	/getUser                    controllers.DummyController.dummyData()
-GET		/getJson					controllers.DummyController.newDummyJson()
+#GET		/getJson					controllers.DummyController.newDummyJson()
 
 
 # Map static resources from the /public folder to the /assets URL path

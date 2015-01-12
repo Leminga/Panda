@@ -98,7 +98,7 @@ public class DummyController {
 		//JSON werden per hand 
     	//JSONHelper.objectToJsonAndPlot();
 		
-		return Results.ok();
+		return Results.ok(jsonReturn);
 	}
 
 	public static ObjectNode languageDummy(int preferred) {
