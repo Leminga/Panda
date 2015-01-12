@@ -1,5 +1,5 @@
 angular.module('Panda')
-    .controller('LanguageController', ['DataService','$window', function (DataService,$window) {
+    .controller('LanguageController', ['DataService', '$window', function (DataService, $window) {
         var self = this;
 
         self.changeLanguage = function () {
@@ -11,7 +11,7 @@ angular.module('Panda')
 
             DataService.changeLanguage(self.language).then(function (response) {
                 $window.location.reload();
-            },function(){
+            }, function () {
                 console.log("Reload");
                 $window.location.reload();
             });

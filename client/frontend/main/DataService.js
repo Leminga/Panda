@@ -22,11 +22,13 @@ angular.module('Panda')
                 return $http.get("/getAllVolunteers")
             },
 
-            getAdminVolunteer: function(id){
-                return $http.post("/getAdminVolunteer", id)
+            getVolunteerAdmin: function(id){
+                return $http.post("/getVolunteerAdmin", id)
+            },
 
+            deleteVolunteerAdmin: function(id){
+                return $http.post("/deleteVolunteerAdmin", id)
             }
-
         }
     }]);
 

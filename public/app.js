@@ -1895,7 +1895,7 @@ angular.module('Panda')
         });
 
         self.adminEditVolunteer = function (id) {
-            DataService.sendId(id).then(function (response) {
+            DataService.getVolunteerAdmin(id).then(function (response) {
                 $location.path("/overview");
             },function(){
                 $location.path("/overview");
@@ -1903,7 +1903,7 @@ angular.module('Panda')
         };
 
         self.adminDeleteVolunteer = function (id) {
-            DataService.sendId(id).then(function (response) {
+            DataService.deleteVolunteerAdmin(id).then(function (response) {
                 $window.location.reload();
             },function(){
                 $window.location.reload();
@@ -2046,11 +2046,13 @@ angular.module('Panda')
                 return $http.get("/getAllVolunteers")
             },
 
-            getAdminVolunteer: function(id){
-                return $http.post("/getAdminVolunteer", id)
+            getVolunteerAdmin: function(id){
+                return $http.post("/getVolunteerAdmin", id)
+            },
 
+            deleteVolunteerAdmin: function(id){
+                return $http.post("/deleteVolunteerAdmin", id)
             }
-
         }
     }]);
 
@@ -2153,7 +2155,7 @@ angular.module('Panda')
         $httpProvider.defaults.cache = true;
     }]);
 angular.module('Panda')
-    .controller('LanguageController', ['DataService','$window', function (DataService,$window) {
+    .controller('LanguageController', ['DataService', '$window', function (DataService, $window) {
         var self = this;
 
         self.changeLanguage = function () {
@@ -2165,7 +2167,7 @@ angular.module('Panda')
 
             DataService.changeLanguage(self.language).then(function (response) {
                 $window.location.reload();
-            },function(){
+            }, function () {
                 console.log("Reload");
                 $window.location.reload();
             });

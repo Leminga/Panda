@@ -12,7 +12,7 @@ angular.module('Panda')
         });
 
         self.adminEditVolunteer = function (id) {
-            DataService.sendId(id).then(function (response) {
+            DataService.getVolunteerAdmin(id).then(function (response) {
                 $location.path("/overview");
             },function(){
                 $location.path("/overview");
@@ -20,7 +20,7 @@ angular.module('Panda')
         };
 
         self.adminDeleteVolunteer = function (id) {
-            DataService.sendId(id).then(function (response) {
+            DataService.deleteVolunteerAdmin(id).then(function (response) {
                 $window.location.reload();
             },function(){
                 $window.location.reload();
