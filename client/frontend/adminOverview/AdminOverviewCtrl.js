@@ -17,7 +17,7 @@ angular.module('Panda')
             var blob = new Blob([document.getElementById('exportable').innerHTML], {
                 type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
             });
-            saveAs(blob, "Report.xls");
+            saveAs(blob, "Volunteers.xls");
         };
 
         self.adminEditVolunteer = function (id) {
