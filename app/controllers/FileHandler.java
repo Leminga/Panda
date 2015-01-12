@@ -110,7 +110,7 @@ public class FileHandler {
 	/*
 	 * Build the Directory path.
 	 */
-	private static String pathBuilder(String vId, String prename, String surename,String event) {
+	 static String pathBuilder(String vId, String prename, String surename,String event) {
 		String confPath = Play.application().configuration().getString("directory.path");
 		String path = FileSystemView.getFileSystemView().getRoots()[0].toString();
 		path += File.separator + confPath +File.separator+ event + File.separator + surename + "_"+ prename + "_" + vId + File.separator;
