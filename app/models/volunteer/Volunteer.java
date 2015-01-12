@@ -36,6 +36,7 @@ import models.Language;
 import models.Nationality;
 //import models.Permission;
 import models.PreferredCommunicationLanguage;
+import models.PreferredWorkingArea;
 import models.Role;
 import models.Sex;
 import models.ShoeSizes;
@@ -79,6 +80,10 @@ public class Volunteer extends Human {
 	@OneToOne
 	@JoinColumn(name = "CurrentJobid")
 	private CurrentJob currentJobid;
+	@Required
+	@OneToOne
+	@JoinColumn(name = "PreferredWorkingAreaId")
+	private PreferredWorkingArea preferredWorkingAreaId;
 	
 	//OneToMany Relations
 	@OneToMany(cascade = CascadeType.ALL)
@@ -97,8 +102,8 @@ public class Volunteer extends Human {
 	private TextBoxes textBoxes;
 	@OneToOne(mappedBy = "volunteer")
 	private Interview interview;
-	@OneToOne(mappedBy = "volunteer")
-	private Role role;
+//	@OneToOne(mappedBy = "volunteer")
+//	private Role role;
 	@OneToOne(mappedBy = "volunteer")
 	protected UserLogin loginData;
 	/** Login data, if the user is allows to login. */
@@ -122,7 +127,7 @@ public class Volunteer extends Human {
 
 	//TODO: Relevanz checken für sport
 //	@Required
-	private Sport sport;
+//	private Sport sport;
 //	@ManyToOne // owning side
 //	private Permission permission;
 	
@@ -234,18 +239,18 @@ public class Volunteer extends Human {
 	public void setTrainings(List<Training> trainings) {
 		this.trainings = trainings;
 	}
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
-	public Sport getSport() {
-		return sport;
-	}
-	public void setSport(Sport sport) {
-		this.sport = sport;
-	}
+//	public Role getRole() {
+//		return role;
+//	}
+//	public void setRole(Role role) {
+//		this.role = role;
+//	}
+//	public Sport getSport() {
+//		return sport;
+//	}
+//	public void setSport(Sport sport) {
+//		this.sport = sport;
+//	}
 	
 	@JsonIgnore
 	public UserLogin getUserLogin() {

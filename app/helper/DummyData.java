@@ -2,17 +2,11 @@ package helper;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.SqlUpdate;
 
 import models.Sex;
 import models.Translation;
 import models.UserLogin;
-import models.humans.Human;
 import models.volunteer.Volunteer;
 
 public class DummyData {

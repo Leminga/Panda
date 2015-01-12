@@ -83,9 +83,9 @@ public class SetupDatabase {
 		 * Primärschlüssel der Translation Tabelle verweist auf Fremdschlüssel in CurrentJob Tabelle
 		 */
 		ItKnowledge ittid = new ItKnowledge(it.getTid());
-		ItKnowledge ittid2 = new ItKnowledge(it.getTid());
-		ItKnowledge ittid3 = new ItKnowledge(it.getTid());
-		ItKnowledge ittid4 = new ItKnowledge(it.getTid());
+		ItKnowledge ittid2 = new ItKnowledge(it2.getTid());
+		ItKnowledge ittid3 = new ItKnowledge(it3.getTid());
+		ItKnowledge ittid4 = new ItKnowledge(it4.getTid());
 		
 		ittid.setTranslation(it);
 		ittid2.setTranslation(it2);
@@ -96,6 +96,52 @@ public class SetupDatabase {
 		ittid2.save();
 		ittid3.save();
 		ittid4.save();
+		
+		/*
+		 * speichert die Einsatzbereiche in die Translation Tabelle
+		 */
+		Translation sport = new Translation("Skifahren","Alpine");
+		Translation sport2 = new Translation("Snowboard","Snowboard");
+		Translation sport3 = new Translation("Langlauf","Cross-country Skiing");
+		Translation sport4 = new Translation("Biathlon","Biathlon");
+		Translation sport5 = new Translation("Eislaufen","Ice-skating");
+		Translation sport6 = new Translation("Eishockey","Ice-hockey");
+		Translation sport7 = new Translation("Skifahren","Alpine");
+		
+		sport.save();
+		sport2.save();
+		sport3.save();
+		sport4.save();
+		sport5.save();
+		sport6.save();
+		sport7.save();
+		
+		/*
+		 * Primärschlüssel der Translation Tabelle verweist auf Fremdschlüssel in CurrentJob Tabelle
+		 */
+		PreferredWorkingArea area = new PreferredWorkingArea(sport.getTid());
+		PreferredWorkingArea area2 = new PreferredWorkingArea(sport2.getTid());
+		PreferredWorkingArea area3 = new PreferredWorkingArea(sport3.getTid());
+		PreferredWorkingArea area4 = new PreferredWorkingArea(sport4.getTid());
+		PreferredWorkingArea area5 = new PreferredWorkingArea(sport5.getTid());
+		PreferredWorkingArea area6 = new PreferredWorkingArea(sport6.getTid());
+		PreferredWorkingArea area7 = new PreferredWorkingArea(sport7.getTid());
+		
+		area.setTranslation(sport);
+		area2.setTranslation(sport2);
+		area3.setTranslation(sport3);
+		area4.setTranslation(sport4);
+		area5.setTranslation(sport5);
+		area6.setTranslation(sport6);
+		area7.setTranslation(sport7);
+
+		area.save();
+		area2.save();
+		area3.save();
+		area4.save();
+		area5.save();
+		area6.save();
+		area7.save();
 		
 	}
 	private static void setupEvent(){

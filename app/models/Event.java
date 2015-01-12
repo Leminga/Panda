@@ -5,15 +5,19 @@ import javax.persistence.Id;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
+import play.libs.Json;
 
 @Entity
 public class Event extends Model{
@@ -56,7 +60,9 @@ public class Event extends Model{
 	private boolean mediaOpen;
 	
 	
-
+	/*
+	 * Konstruktor der Klasse
+	 */
 	public Event(String eventname) {
 		
 		this.setEventname(eventname);
@@ -65,7 +71,9 @@ public class Event extends Model{
 	public void Inotify(){
 		
 	}
-	
+	/*
+	 * Getter und Setter 
+	 */
 	public String getEventname() {
 		return eventname;
 	}
@@ -132,5 +140,19 @@ public class Event extends Model{
 	public void setMediaOpen(boolean mediaOpen) {
 		this.mediaOpen = mediaOpen;
 	}
-
+	@JsonIgnore
+	public String getClassName() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+	
+	/**
+	 * Converts the current volunteer object to e JSON node.
+	 * 
+	 * @return <b>JsonNode</b> A JSON node that contains this volunteer object.
+	 */
+	public JsonNode toJson() {
+		ObjectNode result = Json.newObject();
+		result.put(this.getClassName(), Json.toJson(this));
+		return result;	
+	}
 }

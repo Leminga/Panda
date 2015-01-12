@@ -373,9 +373,7 @@ create table preferred_communication_language (
 
 create table preferred_working_area (
   id                        bigint not null,
-  preferred_area_tid        bigint,
   preferredAreaTid          bigint,
-  constraint uq_preferred_working_area_prefer unique (preferred_area_tid),
   constraint pk_preferred_working_area primary key (id))
 ;
 
@@ -455,6 +453,7 @@ create table user_login (
   last_login                timestamp,
   auth_token                varchar(255),
   chosen_language           varchar(255),
+  mail_confirmation         boolean,
   volunteer_id              bigint,
   constraint pk_user_login primary key (username))
 ;
@@ -469,6 +468,7 @@ create table volunteer (
   TrousersId                bigint,
   ShoeId                    bigint,
   CurrentJobid              bigint,
+  PreferredWorkingAreaId    bigint,
   social_security_number    varchar(255),
   volunteer_agreement       varbinary(255),
   constraint pk_volunteer primary key (id))
@@ -846,6 +846,8 @@ alter table volunteer add constraint fk_volunteer_shoeId_35 foreign key (ShoeId)
 create index ix_volunteer_shoeId_35 on volunteer (ShoeId);
 alter table volunteer add constraint fk_volunteer_currentJobid_36 foreign key (CurrentJobid) references current_job (current_jobid) on delete restrict on update restrict;
 create index ix_volunteer_currentJobid_36 on volunteer (CurrentJobid);
+alter table volunteer add constraint fk_volunteer_preferredWorking_37 foreign key (PreferredWorkingAreaId) references preferred_working_area (id) on delete restrict on update restrict;
+create index ix_volunteer_preferredWorking_37 on volunteer (PreferredWorkingAreaId);
 
 
 
