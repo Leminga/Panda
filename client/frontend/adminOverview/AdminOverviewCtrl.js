@@ -4,12 +4,21 @@ angular.module('Panda')
         self.adminEditVolunteer = "";
         self.adminDeleteVolunteer = "";
 
-        DataService.get().then(function (response) {
+        var load = function(){DataService.get().then(function (response) {
             self.user = response.data.user;
             self.labels = response.data.labels;
             self.volunteers = response.data.volunteers;
             self.values = response.data.values;
-        });
+        });};
+
+        load();
+
+        self.exportDocument = function() {
+            var blob = new Blob([document.getElementById('exportable').innerHTML], {
+                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+            });
+            saveAs(blob, "Report.xls");
+        };
 
         self.adminEditVolunteer = function (id) {
             DataService.getVolunteerAdmin(id).then(function (response) {
@@ -21,9 +30,9 @@ angular.module('Panda')
 
         self.adminDeleteVolunteer = function (id) {
             DataService.deleteVolunteerAdmin(id).then(function (response) {
-                $window.location.reload();
+                load();
             },function(){
-                $window.location.reload();
+                load();
             })
         };
         /*DataService.getAll().then(function(response){

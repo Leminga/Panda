@@ -15,6 +15,5 @@ angular.module('Panda')
                 console.log("Reload");
                 $window.location.reload();
             });
-
         }
     }]);
