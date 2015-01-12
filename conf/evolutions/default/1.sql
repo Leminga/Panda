@@ -288,10 +288,8 @@ create table locmember (
 
 create table language (
   id                        bigint not null,
-  language_tid              bigint,
   volunteer_id              bigint,
   languageTid               bigint,
-  constraint uq_language_language_tid unique (language_tid),
   constraint pk_language primary key (id))
 ;
 
