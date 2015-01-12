@@ -16,6 +16,7 @@ import play.mvc.Result;
 import play.mvc.Results;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import helper.CryptIt;
 
 /**
  * The security controller allows for a secure
@@ -90,7 +91,7 @@ public class SecurityController extends Controller{
         
         // Find the user in the database. Return null if the
         // user was not found or could not be verified.
-        UserLogin user = UserLogin.findByNameAndPassword(loginForm.email, loginForm.password);
+        UserLogin user = UserLogin.findByNameAndPassword(loginForm.email, CryptIt.cleartextToHash(loginForm.password));
         
         
         if (user == null ) {
@@ -163,7 +164,7 @@ public class SecurityController extends Controller{
 
         if (user == null) {
         	LOGGER.info("New user to register: " + registerForm.email);
-        	user = new UserLogin(registerForm.email, registerForm.password);
+        	user = new UserLogin(registerForm.email, CryptIt.cleartextToHash(registerForm.password));
 
         	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname, registerForm.email, registerForm.nationality);
         	volunteer.setUserLogin(user);
