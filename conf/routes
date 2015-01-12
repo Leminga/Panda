@@ -16,8 +16,8 @@ GET    	/getUser                    controllers.DummyController.dummyData()
 
 
 # Map static resources from the /public folder to the /assets URL path
+GET		/					controllers.Assets.at(path="/public", file="index.html")
 GET		/assets/*file				controllers.Assets.at(path="/public", file)
-GET		/							controllers.Assets.at(path="/public", file="index.html")
 
 # Routes I would expect ... and many more ...
 # POST		/volunteers				controllers.VolunteerController.createVolunteer()
