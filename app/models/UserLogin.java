@@ -279,7 +279,8 @@ public class UserLogin extends Model {
 	 */
 	public void setMailConfirmation(boolean mailConfirmation) {
 		this.mailConfirmation = mailConfirmation;
-	}
+		Ebean.save(this);
+		}
 
 	/**
 	 * Sets the last login date to the current
@@ -315,7 +316,7 @@ public class UserLogin extends Model {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.error("Unable to write to the database.");
 			}
-			throw new OptimisticLockException();
+			//throw new OptimisticLockException();
 		} catch (Exception e) {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.error("Unable to write to the database. \n" + e.getMessage());
