@@ -59,21 +59,9 @@ public class VolunteerController extends Controller {
 		Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
 		RegisterForm CoreDataForm = form.get();
 
-    	// Check the form itself for errors.
-        if (form.hasErrors()) {
-            return Results.badRequest(form.errorsAsJson());
-
-		} else {
-
-			//Soll wie im SecurityController die GEÄNDERTEN (PATCH) Daten aus dem Frontend auslesen und speichern
-			
-			// wenn sprachen knowledge other entspricht - kenntniss-stand null setzen
-
-			Volunteer volunteer = new Volunteer (CoreDataForm.prename,CoreDataForm.surname,CoreDataForm.email,CoreDataForm.nationality);
-				
-			return connections.VolunteerConnection.saveVolunteer(volunteer);
-
-		}
+                
+                
+                return ok();
 	
 	}
 }
