@@ -11,10 +11,11 @@
 </head>
 
 <body>
+
 <div ng-controller="IndexController as indexCtrl">
     <button ng-click="indexCtrl.changeLanguage()" ng-if="indexCtrl.language == 'D'" ng-model='indexCtrl.language'>Change to English</button>
     <button ng-click="indexCtrl.changeLanguage()" ng-if="indexCtrl.language == 'E' || indexCtrl.language == undefined " ng-model='indexCtrl.language'>Zu Deutsch wechseln</button>
-    <button ng-click="indexCtrl.logout()">Logout</button>
+    <button ng-click="indexCtrl.logout()" ng-if="indexCtrl.checkToken()">Logout</button>
 </div>
 <!-- The ng-view is needed to allow the usage of ngRoute with the anchors/hash-bangs -->
 <div ng-view=""></div>

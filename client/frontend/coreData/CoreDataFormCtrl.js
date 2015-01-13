@@ -26,14 +26,15 @@ angular.module('Panda')
                     };
             });
 
-
             DataService.getDummyPicture().then(function (response) {
                 self.picture =  response.data.picture;
             });
 
-            self.sendDPicture = function () {
-
-            }
+            self.sendDummyPicture = function () {
+                DataService.sendDummyPicture(self.picture).then(function(response){
+                    {console.log("Picture sent")}
+                })
+            };
 
             self.saveData = function (user) {
                 DataService.save(user);

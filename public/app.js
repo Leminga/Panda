@@ -13112,14 +13112,15 @@ angular.module('Panda')
                     };
             });
 
-
             DataService.getDummyPicture().then(function (response) {
                 self.picture =  response.data.picture;
             });
 
-            self.sendDPicture = function () {
-
-            }
+            self.sendDummyPicture = function () {
+                DataService.sendDummyPicture(self.picture).then(function(response){
+                    {console.log("Picture sent")}
+                })
+            };
 
             self.saveData = function (user) {
                 DataService.save(user);
@@ -13326,17 +13327,18 @@ angular.module('Panda')
         };
 
         self.checkToken = function() {
-            if(config.headers['X-AUTH-TOKEN'].isEqual(null)){
-                return true;
+           if ($window.sessionStorage.getItem("token") === null) {
+                return false;
             }else{
-                return false
-            }
-        }
+               return true;
+           }
+        };
 
         // Logout function that clears the local and session storage (= Cookies) from the user and
 // then he is being rerouted to the login page
 
         self.logout = function () {
+            alert("You are now logged out!");
             sessionStorage.clear();
             localStorage.clear();
             $location.path("/");
@@ -13509,8 +13511,8 @@ angular.module('Panda')
                 self.values = response.data.values;
                 self.test = {
                     currentWork: [
-                        {"description": "Male", "value": "1"},
-                        {"description": "Female", "value": "100"}
+                        {"description": "freelance", "value": "1"},
+                        {"description": "student", "value": "100"}
                     ]
                 };
             });
