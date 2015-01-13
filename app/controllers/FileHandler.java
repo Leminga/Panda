@@ -21,8 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import play.Play;
-import sun.misc.BASE64Encoder;
-
 
 
 /*
@@ -163,9 +161,9 @@ public class FileHandler {
 	            ImageIO.write(image, type, bos);
 	            byte[] imageBytes = bos.toByteArray();
 	
-	            BASE64Encoder encoder = new BASE64Encoder();
-	            imageString = encoder.encode(imageBytes);
-	
+                    java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
+                    imageString = encoder.encodeToString(imageBytes);
+                    
 	            bos.close();
 	        } catch (IOException e) {
 	            e.printStackTrace();

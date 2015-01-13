@@ -1,7 +1,6 @@
 package controllers;
 
 import models.UserLogin;
-import models.volunteer.Volunteer;
 import forms.CoreDataForm;
 import forms.RegisterForm;
 
@@ -11,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.Results;
 import play.mvc.Security;
 
 
