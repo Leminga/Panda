@@ -1,10 +1,13 @@
 package controllers;
 
+import java.io.IOException;
+
 import forms.CoreDataForm;
 import forms.RegisterForm;
 import helper.JSONHelper;
 import models.UserLogin;
 import models.volunteer.Volunteer;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,28 +62,38 @@ public class DummyController {
 		
 	}
 	
-//	public static Result dummyPictureSend(){
-//		
-//		
-//		
-//		
-//		return ok;
-//	}
+	public static Result saveDummyPicture(){
+		
+	Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
+    	
+    	// Check the form itself for errors.
+        if (form.hasErrors()) {
+            //return Results.badRequest(form.errorsAsJson());
+        }
+        
+        // Get the login information from the login form.
+        CoreDataForm cdf = form.get();
+
+        FileHandler.savePicture(cdf.vid, cdf.prename, cdf.surname, "ICG", cdf.profilePicture);
+        //FileHandler.savePicture("1", "test", "hans", "ICG", dummyPicture());
+        return Results.ok("Picture saved");
+		
+		
+	}
 	
-	public static void 	dummyPrictureGet()
+	public static Result getDummyPicture() throws IOException
 	{
-//		Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
-//    	
-//    	// Check the form itself for errors.
-//        if (form.hasErrors()) {
-//            //return Results.badRequest(form.errorsAsJson());
-//        }
-//        
-//        // Get the login information from the login form.
-//        CoreDataForm cdf = form.get();
-//        
-//        
-//        FileHandler.getPicture(cdf, prename, surename, event, fileType)
+		Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
+    	
+    	// Check the form itself for errors.
+        if (form.hasErrors()) {
+            //return Results.badRequest(form.errorsAsJson());
+        }
+        
+        // Get the login information from the login form.
+        CoreDataForm cdf = form.get();
+              
+        return Results.ok(FileHandler.getPicture(cdf.vid, cdf.prename, cdf.surname, "ICG", helper.FileType.PICTURE));
 		
 	}
 	public static Result dummyData() throws JSONException {
