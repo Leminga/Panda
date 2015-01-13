@@ -43,7 +43,7 @@
     {{coreDataCtrl.labels.nationality}}
     Nationality:
     <select ng-model="coreDataCtrl.user.nationality"
-            ng-options="gender.value as gender.description for gender in coreDataCtrl.values.nationalities">
+            ng-options="nationality.value as nationality.description for nationality in coreDataCtrl.values.nationalities">
     </select>
 
     <div>
@@ -170,7 +170,10 @@
 
         <div>
             {{coreDataCtrl.labels.em_relation}}
-            Emergency Contact Relation:<input ng-model="coreDataCtrl.user.em_relation" type="text">
+            Emergency Contact Relation:
+            <select ng-model="coreDataCtrl.user.em_relation"
+                    ng-options="emergencyRelation.value as emergencyRelation.description for emergencyRelation in coreDataCtrl.values.em_relations">
+            </select>
         </div>
 
         <div>
