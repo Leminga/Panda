@@ -1,7 +1,8 @@
 <h1>EVENTSPECIFIC DATA</h1>
 
 <form id="eventspecific" name="eventspecific" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user)">
-        <div>Preferred Working Area:{{eventSpecificCtrl.labels.preferredWorkingArea}}
+        <div>
+            Preferred Working Area:{{eventSpecificCtrl.labels.preferredWorkingArea}}
             <select ng-model="eventSpecificCtrl.user.preferredWorkingArea">
                 <option value='' disabled selected style='display:none;'>Open here</option>
                 <option value="none"></option>

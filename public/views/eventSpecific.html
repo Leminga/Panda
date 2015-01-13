@@ -1,8 +1,9 @@
 <h1>EVENTSPECIFIC DATA</h1>
 
 <form id="eventspecific" name="eventspecific" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user)">
-        <div>Preferred Working Area:
-            <select ng-model="eventSpecificCtrl.user.specific.preferredWorkingArea">
+        <div>
+            Preferred Working Area:{{eventSpecificCtrl.labels.preferredWorkingArea}}
+            <select ng-model="eventSpecificCtrl.user.preferredWorkingArea">
                 <option value='' disabled selected style='display:none;'>Open here</option>
                 <option value="none"></option>
                 <option value="driver">Driver</option>
@@ -12,48 +13,50 @@
         <br>
 
         <div>
-            Availability:
+            Availability:{{eventSpecificCtrl.labels.availabilityFrom}}
             From <input id="from" placeholder="dd/mm/yyyy" type="text"
                         pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
-                        ng-model="eventSpecificCtrl.user.specific.availabilityFrom" name="date of birth">
+                        ng-model="eventSpecificCtrl.user.availabilityFrom" name="date of birth">
         </div>
         <br>
-
+        {{eventSpecificCtrl.labels.availabilityFrom}}
         Until: <input id="until" placeholder="dd/mm/yyyy" type="text"
                       pattern="(^(((0[1-9]|[12][0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"
-                      ng-model="eventSpecificCtrl.user.specific.availabilityUntil" name="date of birth">
+                      ng-model="eventSpecificCtrl.user.availabilityUntil" name="date of birth">
         <br>
 
-        <div ng-if="eventSpecificCtrl.user.specific.availabilityUntil <= eventSpecificCtrl.user.specific.availabilityFrom">
+        <div ng-if="eventSpecificCtrl.user.availabilityUntil <= eventSpecificCtrl.user.availabilityFrom">
             The date range is invalid.
         </div>
-        <div>
+        <div>{{eventSpecificCtrl.labels.assistance}}
             Are you interested in assisting beforehand?<br>
-            <input ng-model="eventSpecificCtrl.user.specific.assistance" type="radio" name="assistance" value="yes"
+            <input ng-model="eventSpecificCtrl.user.assistance" type="radio" name="assistance" value="yes"
                    checked>Yes<br>
-            <input ng-model="eventSpecificCtrl.user.specific.assistance" type="radio" name="assistance"
+            <input ng-model="eventSpecificCtrl.user.assistance" type="radio" name="assistance"
                    value="no">No<br>
         </div>
         <br>
 
-        <div>
+        <div>{{eventSpecificCtrl.labels.volunteerComment}}
             Volunteer Comment:
-            <textarea ng-model="eventSpecificCtrl.user.specific.volunteerComment" cols="50" rows="10"
+            <textarea ng-model="eventSpecificCtrl.user.volunteerComment" cols="50" rows="10"
                       name="textbox"></textarea>
         </div>
         <br>
 
-        <div>Volunteer Agreement:<br>
-            <input type="radio" ng-model="eventSpecificCtrl.user.specific.agreement" name="agreement" value="yes"
+        <div>{{eventSpecificCtrl.labels.agreement}}
+            Volunteer Agreement:<br>
+            <input type="radio" ng-model="eventSpecificCtrl.user.agreement" name="agreement" value="yes"
                    checked>
             Yes, I agree<br>
-            <input type="radio" ng-model="eventSpecificCtrl.user.specific.agreement" name="agreement" value="no">
+            <input type="radio" ng-model="eventSpecificCtrl.user.agreement" name="agreement" value="no">
             No, I do not agree<br>
         </div>
         <br>
 
+        {{eventSpecificCtrl.labels.sport}}
         <div>Select the form of sport:</div>
-        <select ng-model="eventSpecificCtrl.user.specific.sport">
+        <select ng-model="eventSpecificCtrl.user.sport">
             <option value='' disabled selected style='display:none;'>Open here</option>
             <option value="alpine skiing boys">Alpine Skiing Boys</option>
             <option value="alpine skiing girls">Alpine Skiing Girls</option>
