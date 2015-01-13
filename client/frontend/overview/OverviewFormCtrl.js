@@ -10,6 +10,13 @@ angular.module('Panda')
             self.user = response.data.user;
             self.values = response.data.values;
             self.volunteers = response.data.volunteers;
+            self.description = response.data.description;
+            self.test ={
+                event:[
+                    {"description": "driver", "value": "1"},
+                    {"description": "cook", "value": "23"}
+
+                ]};
 
         });
 

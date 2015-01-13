@@ -26,7 +26,7 @@
        {{overviewCtrl.labels.nationality}}
             {{overviewCtrl.user.nationality}}<br>
 
-      <!-- {{overviewCtrl.labels.zip}}
+       {{overviewCtrl.labels.zip}}
            {{overviewCtrl.user.zip}} {{overviewCtrl.user.city}}<br>
 
        {{overviewCtrl.labels.phonenumber}}
@@ -42,13 +42,13 @@
            {{overviewCtrl.user.it1}}<br>
            {{overviewCtrl.user.it2}}<br>
            {{overviewCtrl.user.it3}}<br>
-           {{overviewCtrl.user.it4}}<br>-->
+           {{overviewCtrl.user.it4}}<br>
     </div><br>
 
-    <div>Select Event:
-        <select ng-model="overviewCtrl.user.event">
-            <option value='' disabled selected style='display:none;'>Open here</option>
-            <option value="ICG 16">ICG 16</option>
+    <div>{{overviewCtrl.labels.event}}
+        Select Event:
+        <select ng-model="overviewCtrl.user.event"
+                ng-options="event.value as event.description for event in overviewCtrl.values.event">
         </select>
 
     </div><br>
@@ -57,10 +57,10 @@
             <button ng-click="overviewCtrl.user.event_selected = overviewCtrl.user.event">Add</a></button>
         </div>
 
-    <div>
-        <button ng-click="overviewCtrl.user.event_selected = null">Remove</a></button>
-    </div>
-    </div>
+        <div>
+            <button ng-click="overviewCtrl.user.event_selected = null">Remove</a></button>
+        </div>
+
 </form>
 
 

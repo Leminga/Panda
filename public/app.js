@@ -1918,6 +1918,11 @@ angular.module('Panda')
                 load();
             })
         };
+
+
+
+
+
         /*DataService.getAll().then(function(response){
          self.volunteer = response.data;
          })*/
@@ -1972,7 +1977,12 @@ angular.module('Panda')
             var self = this;
 
             DataService.get().then(function (response) {
-                self.user = response.data;
+                self.user = response.data.user;
+                self.description = response.data.description;
+                self.labels = response.data.labels;
+                self.description = response.data.description;
+                self.values = response.data.values;
+
             });
 
             self.saveData = function (user) {
@@ -2275,6 +2285,13 @@ angular.module('Panda')
             self.user = response.data.user;
             self.values = response.data.values;
             self.volunteers = response.data.volunteers;
+            self.description = response.data.description;
+            self.test ={
+                event:[
+                    {"description": "driver", "value": "1"},
+                    {"description": "cook", "value": "23"}
+
+                ]};
 
         });
 
@@ -2295,7 +2312,17 @@ angular.module('Panda')
             var self = this;
 
             DataService.get().then(function (response) {
-                self.user = response.data;
+                self.user = response.data.user;
+                self.description = response.data.description;
+                self.labels = response.data.labels;
+                self.description = response.data.description;
+                self.values = response.data.values;
+                self.test = {
+                    preferredWorkingArea: [
+                        {"description": "Male", "value": "1"},
+                        {"description": "Female", "value": "100"}
+                    ]
+                };
             });
 
             self.saveData = function (user) {
