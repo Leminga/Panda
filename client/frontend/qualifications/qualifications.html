@@ -1,307 +1,214 @@
 <h1>QUALIFICATIONS</h1>
 
 <form id="qualifications" ng-submit="qualificationsCtrl.saveData(qualificationsCtrl.user)">
-    <div>Current work:
-        <select ng-model="qualificationsCtrl.user.career.currentWork">
-            <option value='' disabled selected style='display:none;'>Open here</option>
-            <option value="pupil">Pupil</option>
-            <option value="undergratuate">Undergraduate</option>
-            <option value="apprentice">Apprentice</option>
-            <option value="employee">Employee</option>
-            <option value="freelance">Freelance</option>
-            <option value="retiree">Retiree</option>
-        </select>
-    </div>
-    <br>
-
-    <div>
-        Faculty:<input ng-model="qualificationsCtrl.user.career.faculty" type="text">
-    </div>
-    <br>
-
-    <div>
-        Education Institute:<input ng-model="qualificationsCtrl.user.career.educationInstitute" type="text">
-    </div>
-    <br>
-
-    <div>
-        Career:<textarea ng-model="qualificationsCtrl.user.career.career" cols="50" rows="10" name="textbox"></textarea>
-    </div>
-    <br>
-
-    <div>Mother Tongue:
-        <select ng-model="qualificationsCtrl.user.qualifications.motherTongue">
-            <option value='' selected>Open here</option>
-            <option value="english">English</option>
-            <option value="french">French</option>
-            <option value="german">German</option>
-            <option value="italian">Italian</option>
-            <option value="other">Other</option>
-        </select>
-    </div>
-    <br>
-
-
-    <div>1st Additional Language:
-        <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages1">
-            <option value='' selected>Open here</option>
-            <option value="english">English</option>
-            <option value="french">French</option>
-            <option value="german">German</option>
-            <option value="italian">Italian</option>
-            <option value="other">Other</option>
+    <div>Current work:{{qualificationsCtrl.labels.currentWork}}
+        <select ng-model="qualificationsCtrl.user.currentWork"
+                ng-options="currentWork.value as currentWork.description for currentWork in qualificationsCtrl.values.currentWork"
+                required="">
         </select>
 
-        <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.additionalLanguages1)">
-            <div>
+    </div><br>
+
+    <div>{{qualificationsCtrl.labels.faculty}}
+        Faculty:<input ng-model="qualificationsCtrl.user.faculty" type="text">
+    </div><br>
+
+    <div>{{qualificationsCtrl.labels.educationInstitute}}
+        Education Institute:<input ng-model="qualificationsCtrl.user.educationInstitute" type="text">
+    </div><br>
+
+    <div>{{qualificationsCtrl.labels.career}}
+        Career:<textarea ng-model="qualificationsCtrl.user.career" cols="50" rows="10" name="textbox"></textarea>
+    </div><br>
+
+    <div>{{qualificationsCtrl.labels.motherTongue}}
+        Mother Tongue:
+        <select ng-model="qualificationsCtrl.user.motherTongue"
+                ng-options="motherTongue.value as motherTongue.description for motherTongue in qualificationsCtrl.values.motherTongue"
+                required="">
+        </select>
+    </div><br>
+
+
+    <div>{{qualificationsCtrl.labels.additionalLanguages1}}
+        1st Additional Language:
+        <select ng-model="qualificationsCtrl.user.additionalLanguage1"
+                ng-options="additionalLanguage1.value as additionalLanguage1.description for additionalLanguage1 in qualificationsCtrl.values.additionalLanguage1"
+                >
+        </select>
+
+        <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.additionalLanguage1)">
+            <div>{{qualificationsCtrl.labels.languageKnowledge1}}
                 Knowledge:
-                <select ng-model="qualificationsCtrl.user.qualifications.languageKnowledge1">
-                    <option value='' selected>Open here</option>
-                    <option value="basic">Basic</option>
-                    <option value="good">Good</option>
-                    <option value="great">Great</option>
+                <select ng-model="qualificationsCtrl.user.languageKnowledge1"
+                        ng-options="languageKnowledge1.value as languageKnowledge1.description for languageKnowledge1 in qualificationsCtrl.values.languageKnowledge1">
                 </select>
-            </div>
-            <br>
-
+            </div><br>
 
         </div>
 
-
-        <div ng-show="qualificationsCtrl.user.qualifications.additionalLanguages1">
-            <div>2nd Additional Language:
-                <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages2">
-                    <option value='' selected>Open here</option>
-                    <option value="english">English</option>
-                    <option value="french">French</option>
-                    <option value="german">German</option>
-                    <option value="italian">Italian</option>
-                    <option value="other">Other</option>
+        <div ng-show="qualificationsCtrl.user.additionalLanguages1">
+            <div>{{qualificationsCtrl.labels.additionalLanguage2}}
+                2nd Additional Language:
+                <select ng-model="qualificationsCtrl.user.additionalLanguage2"
+                        ng-options="additionalLanguage2.value as additionalLanguage2.description for additionalLanguage2 in qualificationsCtrl.values.additionalLanguage2">
                 </select>
 
-                <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.additionalLanguages2)">
-                    <div>
+                <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.additionalLanguage2)">
+                    <div>{{qualificationsCtrl.labels.languageKnowledge2}}
                         Knowledge:
-                        <select ng-model="qualificationsCtrl.user.qualifications.languageKnowledge2">
-                            <option value='' selected>Open here</option>
-                            <option value="basic">Basic</option>
-                            <option value="good">Good</option>
-                            <option value="great">Great</option>
+                        <select ng-model="qualificationsCtrl.user.languageKnowledge2"
+                                ng-options="languageKnowledge2.value as languageKnowledge2.description for languageKnowledge2 in qualificationsCtrl.values.languageKnowledge2">
                         </select>
-                    </div>
-                    <br>
+                    </div><br>
                 </div>
             </div>
 
 
-            <div ng-show="qualificationsCtrl.user.qualifications.additionalLanguages2">
-                <div>3rd Additional Language:
-                    <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages3">
-                        <option value='' selected>Open here</option>
-                        <option value="english">English</option>
-                        <option value="french">French</option>
-                        <option value="german">German</option>
-                        <option value="italian">Italian</option>
-                        <option value="other">Other</option>
+            <div ng-show="qualificationsCtrl.user.additionalLanguage2">
+                <div>{{qualificationsCtrl.labels.additionalLanguage3}}
+                    3rd Additional Language:
+                    <select ng-model="qualificationsCtrl.user.additionalLanguage3"
+                            ng-options="additionalLanguage3.value as additionalLanguage3.description for additionalLanguage3 in qualificationsCtrl.values.additionalLanguage3">
                     </select>
 
-                    <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.additionalLanguages3)">
-                        <div>
+                    <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.additionalLanguage3)">
+                        <div>{{qualificationsCtrl.labels.languageKnowledge3}}
                             Knowledge:
-                            <select ng-model="qualificationsCtrl.user.qualifications.languageKnowledge3">
-                                <option value='' selected>Open here</option>
-                                <option value="basic">Basic</option>
-                                <option value="good">Good</option>
-                                <option value="great">Great</option>
+                            <select ng-model="qualificationsCtrl.user.languageKnowledge3"
+                                    ng-options="languageKnowledge3.value as languageKnowledge3.description for languageKnowledge3 in qualificationsCtrl.values.languageKnowledge3">
                             </select>
-                        </div>
-                        <br>
-
-
+                        </div><br>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div ng-show="qualificationsCtrl.user.qualifications.additionalLanguages3">
-            <div>4th Additional Language:
-                <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages4">
-                    <option value='' selected>Open here</option>
-                    <option value="english">English</option>
-                    <option value="french">French</option>
-                    <option value="german">German</option>
-                    <option value="italian">Italian</option>
-                    <option value="other">Other</option>
+        <div ng-show="qualificationsCtrl.user.additionalLanguage3">
+            <div>{{qualificationsCtrl.labels.additionalLanguage4}}
+                4th Additional Language:
+                <select ng-model="qualificationsCtrl.user.additionalLanguage4"
+                        ng-options="additionalLanguage4.value as additionalLanguage4.description for additionalLanguage4 in qualificationsCtrl.values.additionalLanguage4">
                 </select>
 
-                <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.additionalLanguages4)">
-                    <div>
+                <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.additionalLanguage4)">
+                    <div>{{qualificationsCtrl.labels.languageKnowledge4}}
                         Knowledge:
-                        <select ng-model="qualificationsCtrl.user.qualifications.languageKnowledge4">
-                            <option value='' selected>Open here</option>
-                            <option value="basic">Basic</option>
-                            <option value="good">Good</option>
-                            <option value="great">Great</option>
+                        <select ng-model="qualificationsCtrl.user.languageKnowledge4"
+                                ng-options="languageKnowledge4.value as languageKnowledge4.description for languageKnowledge4 in qualificationsCtrl.values.languageKnowledge4">
                         </select>
-                    </div>
-                    <br>
+                    </div><br>
                 </div>
 
-                <div>
+                <div>{{qualificationsCtrl.labels.languageWarning}}
                     Only 4 languages can be chosen!
                 </div>
             </div>
         </div>
-    </div>
-    <br>
+    </div><br>
 
-    <div>
+    <div>{{qualificationsCtrl.labels.interpretingKnowledge}}
         Interpreting Knowledge:
-        <input type="text" ng-model="qualificationsCtrl.user.qualifications.interpretingKnowledge">
-    </div>
-    <br>
+        <input type="text" ng-model="qualificationsCtrl.user.interpretingKnowledge">
+    </div><br>
 
+    <div>{{qualificationsCtrl.labels.translationKnowledge}}
+        Translation Knowledge:
+    <input type="text" ng-model="qualificationsCtrl.user.translationKnowledge">
+    </div><br>
 
-    Translation Knowledge:
-    <div>
-    <input type="text" ng-model="qualificationsCtrl.user.qualifications.translationKnowledge">
-    </div>
-    <br>
-
-
-    <div>
+    <div>{{qualificationsCtrl.labels.it1}}
         IT-Knowledge:
-        <select ng-model="qualificationsCtrl.user.qualifications.it1">
-            <option value='' selected>Open here</option>
-            <option value="msoffice">MSOffice</option>
-            <option value="itnetworks">IT-Networks</option>
-            <option value="contentmanagement">Data/Content-Management</option>
-            <option value="graphic">Graphic Design / Layouting</option>
+        <select ng-model="qualificationsCtrl.user.it1"
+                ng-options="it1.value as it1.description for it1 in qualificationsCtrl.values.it1">
         </select>
 
         <!-- Knowledge-Level will be implemented in the future. --
-<div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it1)">
-    <div>
-        Knowledge:
-        <select ng-model="qualificationsCtrl.user.qualifications.itknowledge1">
-            <option value='' selected>Open here</option>
-            <option value="basic">Basic</option>
-            <option value="good">Good</option>
-            <option value="great">Great</option>
-        </select>
-    </div>
-    <br>
-</div>
--->
-<br>
-</div>
+    <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.it1)">
+        <div>{{qualificationsCtrl.labels.itknowledge1}}
+            Knowledge:
+            <select ng-model="qualificationsCtrl.user.itknowledge1"
+                    ng-options="itknowledge1.value as itknowledge1.description for itknowledge1 in qualificationsCtrl.values.itknowledge1">
+            </select>
+        </div><br>
+    </div>-->
+    </div><br>
 
-
-<div ng-show="qualificationsCtrl.user.qualifications.it1">
-    <div>
-        IT-Knowledge:
-        <select ng-model="qualificationsCtrl.user.qualifications.it2">
-            <option value='' selected>Open here</option>
-            <option value="msoffice">MSOffice</option>
-            <option value="itnetworks">IT-Networks</option>
-            <option value="contentmanagement">Data/Content-Management</option>
-            <option value="graphic">Graphic Design / Layouting</option>
-        </select>
+    <div ng-show="qualificationsCtrl.user.it1">
+        <div>{{qualificationsCtrl.labels.it2}}
+            IT-Knowledge:
+            <select ng-model="qualificationsCtrl.user.it2"
+                    ng-options="it2.value as it2.description for it2 in qualificationsCtrl.values.it2">
+            </select>
         <!-- Knowledge-Level will be implemented in the future. --
 
-         <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it2)">
-             <div>
+         <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.it2)">
+             <div>{{qualificationsCtrl.labels.itknowledge2}}
                  Knowledge:
-                 <select ng-model="qualificationsCtrl.user.qualifications.itknowledge2">
-                     <option value='' selected>Open here</option>
-                     <option value="basic">Basic</option>
-                     <option value="good">Good</option>
-                     <option value="great">Great</option>
+                 <select ng-model="qualificationsCtrl.user.itknowledge2"
+                        ng-options="itknowledge2.value as itknowledge2.description for itknowledge2 in qualificationsCtrl.values.itknowledge2">
                  </select>
-             </div>
-             <br>
-         </div>
-         -->
-                 <br>
-             </div>
-         </div>
+             </div><br>
+         </div>-->
 
-         <div ng-show="qualificationsCtrl.user.qualifications.it2">
+        </div><br>
+    </div>
 
-             <div>
+         <div ng-show="qualificationsCtrl.user.it2">
+
+             <div>{{qualificationsCtrl.labels.it3}}
                  IT-Knowledge:
-                 <select ng-model="qualificationsCtrl.user.qualifications.it3">
-                     <option value='' selected>Open here</option>
-                     <option value="msoffice">MSOffice</option>
-                     <option value="itnetworks">IT-Networks</option>
-                     <option value="contentmanagement">Data/Content-Management</option>
-                     <option value="graphic">Graphic Design / Layouting</option>
+                 <select ng-model="qualificationsCtrl.user.it3"
+                         ng-options="it3.value as it3.description for it3 in qualificationsCtrl.values.it3">
                  </select>
                  <!-- Knowledge-Level will be implemented in the future. --
-                  <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it3)">
-                      <div>
+                  <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.it3)">
+                      <div>{{qualificationsCtrl.labels.itknowledge3}}
                           Knowledge:
-                          <select ng-model="qualificationsCtrl.user.qualifications.itknowledge3">
-                              <option value='' selected>Open here</option>
-                              <option value="basic">Basic</option>
-                              <option value="good">Good</option>
-                              <option value="great">Great</option>
+                          <select ng-model="qualificationsCtrl.user.itknowledge3"
+                                ng-options="itknowledge3.value as itknowledge3.description for itknowledge3 in qualificationsCtrl.values.itknowledge3">
                           </select>
-                      </div>
-                      <br>
-                  </div>
-                  -->
-                 <br>
-             </div>
+                      </div><br>
+                  </div>-->
+             </div><br>
          </div>
 
 
          <div>
-             <div ng-show="qualificationsCtrl.user.qualifications.it3">
-
+             <div ng-show="qualificationsCtrl.user.it3">
+                 {{qualificationsCtrl.labels.it4}}
                  IT-Knowledge:
-                 <select ng-model="qualificationsCtrl.user.qualifications.it4">
-                     <option value='' selected>Open here</option>
-                     <option value="none">None</option>
-                     <option value="msoffice">MSOffice</option>
-                     <option value="itnetworks">IT-Networks</option>
-                     <option value="contentmanagement">Data/Content-Management</option>
-                     <option value="graphic">Graphic Design / Layouting</option>
+                 <select ng-model="qualificationsCtrl.user.it4"
+                         ng-options="it4.value as it4.description for it4 in qualificationsCtrl.values.it4">
                  </select>
 
                 <!-- Knowledge-Level will be implemented in the future. --
 
-                 <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.qualifications.it4)">
-                     <div>
+                 <div ng-if="qualificationsCtrl.check(qualificationsCtrl.user.it4)">
+                     <div>{{qualificationsCtrl.labels.itknowledge4}}
                          Knowledge:
-                         <select ng-model="qualificationsCtrl.user.qualifications.itknowledge4">
-                             <option value='' selected>Open here</option>
-                             <option value="basic">Basic</option>
-                             <option value="good">Good</option>
-                             <option value="great">Great</option>
+                         <select ng-model="qualificationsCtrl.user.itknowledge4"
+                                ng-options="itknowledge4.value as itknowledge4.description for itknowledge4 in qualificationsCtrl.values.itknowledge4">
                          </select>
-                     </div>
-                     <br>
-                     <br>
+                     </div><br><br>
 
-                     <div> Only 4 IT skills can be chosen</div>
-                     -->
+                     <div>{{qualificationsCtrl.labels.itWarning}}
+                      Only 4 IT skills can be chosen</div>-->
                 </div>
             </div>
         </div>
 
 
-        <div>Additional Qualifications:<textarea
-                ng-model="qualificationsCtrl.user.qualifications.additionalQualifications"
+        <div>{{qualificationsCtrl.labels.additionalQualifications}}
+            Additional Qualifications:<textarea
+                ng-model="qualificationsCtrl.user.additionalQualifications"
                 cols="50" rows="10" name="textbox"></textarea>
-        </div>
-        <br>
+        </div><br>
 
-        <div>Event Experience:<textarea ng-model="qualificationsCtrl.user.qualifications.eventExperience"
+        <div>{{qualificationsCtrl.labels.eventExperience}}
+            Event Experience:<textarea ng-model="qualificationsCtrl.user.eventExperience"
                                         cols="50"
                                         rows="10" name="textbox"></textarea>
-        </div>
-        <br>
-        <br>
+        </div><br><br>
 </form>
         <button type="submit" form="qualifications">Save</button>
