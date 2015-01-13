@@ -178,7 +178,7 @@ public class SecurityController extends Controller{
 
         	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname, registerForm.email, registerForm.nationality);
         	volunteer.setUserLogin(user);
-        	verificationSend(volunteer);
+        	//verificationSend(volunteer);
 
         	try {
         		volunteer.save();
