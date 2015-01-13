@@ -1,0 +1,26 @@
+form{
+    /* TODO: temporary, substitute when styling received */
+    max-width: 275px;
+}
+input[type="checkbox"].form-control {
+    /* TODO: temporary, substitute when styling received */
+    width: auto;
+    display: inline;
+    height: auto
+}
+
+form input, form select {
+    border: thin solid;
+}
+form input.ng-invalid, form select.ng-invalid {
+    border-color: #FF0000;
+}
+input.ng-valid, select.ng-valid {
+    border-color: #009F00;
+}
+.validation-message {
+    color: #FF0000;
+}
+button[disabled] {
+    color: #808080;
+}
