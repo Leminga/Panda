@@ -96,7 +96,7 @@ public class SecurityController extends Controller{
         // Find the user in the database. Return null if the
         // user was not found or could not be verified.
         UserLogin user = UserLogin.findByNameAndPassword(loginForm.email, CryptIt.cleartextToHash(loginForm.password));
-        
+
         
         if (user == null ) {
         	if (LOGGER.isInfoEnabled()) {
@@ -106,12 +106,12 @@ public class SecurityController extends Controller{
         } 
         
         //if User has not confirmed the confirmation mail
-    /*    else if(!user.isMailConfirmation()){
+       else if(!user.isMailConfirmation()){
         	if (LOGGER.isInfoEnabled()) {
-        		LOGGER.info("Unauthorized login attempt for user " + loginForm.email + " using password: " + loginForm.password+" Confirmation Email not confirmed");
+        		LOGGER.info("Unauthorized login attempt for user " + loginForm.email + " using password: " + loginForm.password+" Confirmation Email not confirmed"+user.isMailConfirmation());
         	}  	
-            return Results.unauthorized();
-        }*/
+            return Results.unauthorized("Please confirm your e-Mail address");
+        }
 
         //User not null and mail confirmed
         else{
@@ -203,8 +203,8 @@ public class SecurityController extends Controller{
 	  
        String authToken = volunteer.getUserLogin().createToken();
        
-       String prename = volunteer.getPrename();
-       String surname =	volunteer.getSurname();
+       String prename 		= 	volunteer.getPrename();
+       String surname		=	volunteer.getSurname();
        String emailAddress	= 	volunteer.getUserLogin().getUsername();
        
        try {
@@ -233,17 +233,24 @@ public class SecurityController extends Controller{
        } 
 
        else{
+    	   
+    	// Zeit checken - creationTime zu  jetzt
        	user.updateLastLogin();
        	user.setMailConfirmation(true);
+       	LOGGER.debug(""+user.isMailConfirmation());
         ObjectNode loginJson = Json.newObject();
+        
         loginJson.put(AUTH_TOKEN, authToken);
         response().setCookie(AUTH_TOKEN, authToken);
         // Add the user information to the result.
- 
+  
         if (LOGGER.isDebugEnabled()) {
         	LOGGER.debug("Verification attempt. User " + user.getUsername() + " logged in successfully.");
         }
-        return Results.redirect("/#/overview");
+        
+        
+        //return Results.ok(loginJson);
+        return Results.redirect("/");
     }
  
    }
