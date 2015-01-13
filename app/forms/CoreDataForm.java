@@ -54,5 +54,7 @@ public class CoreDataForm extends RegisterForm {
 	public String em_relation;
 	@Constraints.Required
 	public String em_surname;
+	
+	public String profilePicture;
 
 }
