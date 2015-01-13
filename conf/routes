@@ -22,4 +22,6 @@ GET		/assets/*file				controllers.Assets.at(path="/public", file)
 # Dummy-Routes
 #GET 	/getUserTest                controllers.DummyController.userDataTest()
 GET    	/getUser                    controllers.DummyController.newDummyJson()
-#GET	/getJson					controllers.DummyController.newDummyJson()
+#GET	/savePic					controllers.DummyController.saveDummyPicture()
+GET		/dummyPictureGet			controllers.DummyController.getDummyPicture()	
+POST	/dummyPictureSend			controllers.DummyController.saveDummyPicture()
