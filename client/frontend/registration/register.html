@@ -28,10 +28,10 @@
                                ng-model="registerCtrl.user.surname" required=""
                                class="form-control">
             <span class="validation-message" ng-show="form.surname.$error.required && form.surname.$dirty">
-                This field is required
+                This surname is required
             </span>
             <span class="validation-message" ng-show="!form.surname.$error.required && form.surname.$invalid && form.surname.$dirty">
-                The prename is invalid<span ng-show="form.surname.$error.pattern"> (Use characters, whitespaces and hyphens only)</span>
+                The surname is invalid<span ng-show="form.surname.$error.pattern"> (Use characters, whitespaces and hyphens only)</span>
             </span>
                     </div>
                 </div>
@@ -326,7 +326,7 @@
                                placeholder="dd/mm/yyyy"
                                class="form-control"
                                datepicker-popup="{{registerCtrl.dateOfBirthPicker.format}}"
-                               ng-model="registerCtrl.user.dateOfBirth"
+                               ng-model="registerCtrl.user.dateOfBirthHumanized"
                                is-open="registerCtrl.dateOfBirthPicker.opened"
                                min-date="registerCtrl.dateOfBirthPicker.minDate"
                                max-date="registerCtrl.dateOfBirthPicker.maxDate"
