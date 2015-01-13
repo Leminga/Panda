@@ -13091,6 +13091,7 @@ angular.module('Panda')
 
             DataService.get().then(function (response) {
                     self.tmp_picture = "";
+                    self.profilePicture = response.data.picture;
                     self.user = response.data.user;
                     self.labels = response.data.labels;
                     self.description = response.data.description;
