@@ -6,6 +6,10 @@ angular.module('Panda')
 
         // Sends the request to the controller for a password recovery
         self.sendForgottenPasswordRequest = function () {
-            ForgottenPasswordService.forgottenPassword(self.email);
+            ForgottenPasswordService.forgottenPassword(self.email).then(function (response) {
+                alert(response.data);
+            }, function () {
+                alert(response.data);
+            });
         }
     }]);

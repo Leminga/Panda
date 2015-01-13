@@ -12,7 +12,7 @@ angular.module('Panda')
                 RegisterService.register(self.user).then(function (response) {
                         // TODO: React to the controllers messages, don't leave them hardcoded.
                         $window.alert("Registration successful");
-                        $window.setTimeout($location.path("/"),3000);
+                        $location.path("/");
                     }, function (response) {
                         $window.alert("Registration unsuccessful");
                     }

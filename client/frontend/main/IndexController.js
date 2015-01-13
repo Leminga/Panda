@@ -17,6 +17,14 @@ angular.module('Panda')
             });
         };
 
+        self.checkToken = function() {
+            if(config.headers['X-AUTH-TOKEN'].isEqual(null)){
+                return true;
+            }else{
+                return false
+            }
+        }
+
         // Logout function that clears the local and session storage (= Cookies) from the user and
 // then he is being rerouted to the login page
 

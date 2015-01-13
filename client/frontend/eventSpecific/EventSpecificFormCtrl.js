@@ -8,9 +8,7 @@ angular.module('Panda')
                 self.user = response.data.user;
                 self.description = response.data.description;
                 self.labels = response.data.labels;
-                self.description = response.data.description;
                 self.values = response.data.values;
-
             });
 
             self.saveData = function (user) {

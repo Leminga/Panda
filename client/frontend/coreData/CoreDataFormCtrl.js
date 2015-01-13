@@ -24,11 +24,16 @@ angular.module('Panda')
                             {"description": "America","value":"1"}
                         ]
                     };
+            });
 
-                }
-            )
-            ;
 
+            DataService.getDummyPicture().then(function (response) {
+                self.picture =  response.data.picture;
+            });
+
+            self.sendDPicture = function () {
+
+            }
 
             self.saveData = function (user) {
                 DataService.save(user);

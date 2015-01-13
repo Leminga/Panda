@@ -9,10 +9,9 @@ angular.module('Panda')
             LoginService.login(self.user).then(
                     function (response) { // success function
                     $window.sessionStorage.setItem("token", response.data.authToken);
-
                     $location.path('/overview')
                 }, function (response) {  // error function
-                    $window.alert("Wrong credentials");
+                    $window.alert(response.data);
                 });
         };
     }]);

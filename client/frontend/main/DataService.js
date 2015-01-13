@@ -18,7 +18,6 @@ angular.module('Panda')
             },
 
             getAll: function() {
-
                 return $http.get("/getAllVolunteers")
             },
 
@@ -28,6 +27,13 @@ angular.module('Panda')
 
             deleteVolunteerAdmin: function(id){
                 return $http.post("/deleteVolunteerAdmin", id)
+            },
+
+            getDummyPicture: function(){
+                return $http.get("/dummyPictureGet")
+            },
+            sendDummyPicture: function(picture) {
+                return $http.post("/dummyPictureSend",picture)
             }
         }
     }]);
