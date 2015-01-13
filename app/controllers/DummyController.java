@@ -1,13 +1,17 @@
 package controllers;
 
+import forms.CoreDataForm;
+import forms.RegisterForm;
+import helper.JSONHelper;
+import models.UserLogin;
 import models.volunteer.Volunteer;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.Result;
 import play.mvc.Results;
@@ -27,7 +31,7 @@ public class DummyController {
 	
 	/** Logger to log VolunteerController events. */
 	private static Logger LOGGER = LoggerFactory
-			.getLogger(VolunteerController.class);
+			.getLogger(DummyController.class);
 	/** The authentication token header for the Play framework. */
 	protected final static String AUTH_TOKEN_HEADER = "X-AUTH-TOKEN";
 	/** The authentication token for the Play framework. */
@@ -41,7 +45,44 @@ public class DummyController {
 	 * @return
 	 * @throws JSONException
 	 */
+	
+	public static Result newDummyJson()	throws JSONException{
+		
+		Volunteer volunteer = new Volunteer ("hans","wurst","hans.wurst@conchita.at","Austria");
+		UserLogin user = new UserLogin ("email@mich.at ","wurst");
+		LOGGER.info("Volunteer dummy added");
 
+		String ausgabe = JSONHelper.objectToJsonAndPlot(volunteer);
+		
+		LOGGER.info("Volunteer dummy added "+ausgabe);
+		return Results.ok(ausgabe);
+		
+	}
+	
+//	public static Result dummyPictureSend(){
+//		
+//		
+//		
+//		
+//		return ok;
+//	}
+	
+	public static void 	dummyPrictureGet()
+	{
+//		Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
+//    	
+//    	// Check the form itself for errors.
+//        if (form.hasErrors()) {
+//            //return Results.badRequest(form.errorsAsJson());
+//        }
+//        
+//        // Get the login information from the login form.
+//        CoreDataForm cdf = form.get();
+//        
+//        
+//        FileHandler.getPicture(cdf, prename, surename, event, fileType)
+		
+	}
 	public static Result dummyData() throws JSONException {
 
 		// Neue Label bezeichnungen in der jeweiligen Sprache - Dummy default ->
