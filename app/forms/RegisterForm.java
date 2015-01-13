@@ -13,4 +13,6 @@ public class RegisterForm extends LoginForm {
 	public String surname;
 	/** The nationality of the user. */
 	public String nationality;
+	/** The vid of the user. */
+    public String vid;
 }
