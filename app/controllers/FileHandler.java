@@ -33,6 +33,7 @@ public class FileHandler {
 	
 	public static boolean savePicture(String vId, String prename, String surename,String event, String base64Code) 
 	{		
+		LOGGER.info("path"+pathBuilder(vId, prename, surename, event)+"Photo"+File.separator+"picture.jpg");
 		String path = pathBuilder(vId, prename, surename, event);
 		
 		directoryBuilder(path);
@@ -50,8 +51,10 @@ public class FileHandler {
 		}
 		else if(FileType.PICTURE == fileType)
 		{		
-		//LOGGER.info(pictureDecode("jpg",pathBuilder(vId, prename, surname, event)+"Photo"+File.separator+"picture.jpg"));		
+		//LOGGER.info(pictureDecode("jpg",pathBuilder(vId, prename, surname, event)+"Photo"+File.separator+"picture.jpg"));
+	    LOGGER.info("path: "+pathBuilder(vId, prename, surename, event)+"Photo"+File.separator+"picture.jpg");
 	    return pictureEncode("jpg",pathBuilder(vId, prename, surename, event)+"Photo"+File.separator+"picture.jpg");
+	   
 		}
 		else if(FileType.PASSPORT == fileType)
 		{
@@ -108,10 +111,18 @@ public class FileHandler {
 	/*
 	 * Build the Directory path.
 	 */
-	 static String pathBuilder(String vId, String prename, String surename,String event) {
+	public static String pathBuilder(String vId, String prename, String surename,String event) {
 		String confPath = Play.application().configuration().getString("directory.path");
 		String path = FileSystemView.getFileSystemView().getRoots()[0].toString();
-		path += File.separator + confPath +File.separator+ event + File.separator + surename + "_"+ prename + "_" + vId + File.separator;
+		if(FileSystemView.getFileSystemView().getRoots()[0].toString()=="/")
+		{
+			path += confPath +File.separator+ event + File.separator + surename + "_"+ prename + "_" + vId + File.separator;
+		}
+		else
+		{
+			path += File.separator + confPath +File.separator+ event + File.separator + surename + "_"+ prename + "_" + vId + File.separator;
+		}
+		
 		
 		return path;
 	}
@@ -211,6 +222,8 @@ public class FileHandler {
 			
 			try
 				{
+				LOGGER.info(bImage.toString());
+				LOGGER.info(f.toString());
 					ImageIO.write(bImage, "jpg", f);
 					ImageIO.write(bThumbnailImage, "jpg", tf);
 				} 
