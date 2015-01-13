@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 
+import forms.CoreDataForm;
 import helper.FileType;
 import helper.JSONHelper;
 import models.volunteer.Volunteer;
@@ -12,9 +13,11 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.Result;
 import play.mvc.Results;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -71,7 +74,21 @@ public class DummyController {
 	
 	public static Result saveDummyPicture(){
 
-        FileHandler.savePicture("1", "hans", "wurst", "ICG", dummyPicture());
+		Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
+    	
+    	// Check the form itself for errors.
+        if (form.hasErrors()) {
+            //return Results.badRequest(form.errorsAsJson());
+        }
+        
+        // Get the login information from the login form.
+        CoreDataForm cdf = form.get();
+        
+        //Deletes the first 20 characters from the BASE String
+		String pic = cdf.profilePicture.trim().substring(20);
+		
+		FileHandler.savePicture(cdf.vid,cdf.prename,cdf.surname, "ICG", pic);
+        //FileHandler.savePicture("1", "hans", "wurst", "ICG", dummyPicture());
         return Results.ok("Picture saved");
 
 	}
