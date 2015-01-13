@@ -7,30 +7,22 @@ import java.io.IOException;
 
 import javax.swing.filechooser.FileSystemView;
 
-import play.Play;
+import com.fasterxml.jackson.databind.JsonNode;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import play.Play;
+import play.libs.Json;
+
+
 
 
 public class JSONHelper {
 
 	public static String objectToJsonAndPlot(Object obj)
 	{
-	
-		Gson gson = new Gson();
-		String json = gson.toJson(obj);
-		String jsonOut = json;
-		
-		JsonParser parser = new JsonParser();
-		gson = new GsonBuilder().setPrettyPrinting().create();
-		
-		JsonElement el = parser.parse(json);
-		json = gson.toJson(el);
-		
-		byte dataToWrite[] = json.getBytes();
+		JsonNode json = Json.toJson(obj);
+		String output = Json.stringify(json);
+			
+		byte dataToWrite[] = output.getBytes();
 		FileOutputStream out;
 		try {
 			out = new FileOutputStream(pathBuilder(obj));
@@ -47,7 +39,7 @@ public class JSONHelper {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return jsonOut;
+		return output;
 	}
 	
 	private static String pathBuilder(Object obj) {
