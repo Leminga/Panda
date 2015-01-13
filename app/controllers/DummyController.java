@@ -2,10 +2,8 @@ package controllers;
 
 import java.io.IOException;
 
-import forms.CoreDataForm;
-import forms.RegisterForm;
+import helper.FileType;
 import helper.JSONHelper;
-import models.UserLogin;
 import models.volunteer.Volunteer;
 
 import org.json.JSONArray;
@@ -14,11 +12,9 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import play.data.Form;
 import play.libs.Json;
 import play.mvc.Result;
 import play.mvc.Results;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -52,49 +48,60 @@ public class DummyController {
 	public static Result newDummyJson()	throws JSONException{
 		
 		Volunteer volunteer = new Volunteer ("hans","wurst","hans.wurst@conchita.at","Austria");
-		UserLogin user = new UserLogin ("email@mich.at ","wurst");
+
 		LOGGER.info("Volunteer dummy added");
 
-		String ausgabe = JSONHelper.objectToJsonAndPlot(volunteer);
-		
-		LOGGER.info("Volunteer dummy added "+ausgabe);
-		return Results.ok(ausgabe);
+		String pic = null;
+		FileHandler.savePicture("5", "Manuel", "Dorfer", "icg", DummyController.dummyPicture());
+	     try {
+	    	 pic = FileHandler.getPicture("5", "Manuel", "Dorfer", "icg",FileType.PICTURE);
+			LOGGER.info(pic);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     
+		ObjectNode json = Json.newObject();
+		json.put("volunteer", JSONHelper.objectToJsonAndPlot(volunteer));
+		json.put("picture", pic);
+
+		return Results.ok(json);
 		
 	}
 	
 	public static Result saveDummyPicture(){
-		
-	Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
-    	
-    	// Check the form itself for errors.
-        if (form.hasErrors()) {
-            //return Results.badRequest(form.errorsAsJson());
-        }
-        
-        // Get the login information from the login form.
-        CoreDataForm cdf = form.get();
 
-        FileHandler.savePicture(cdf.vid, cdf.prename, cdf.surname, "ICG", cdf.profilePicture);
-        //FileHandler.savePicture("1", "test", "hans", "ICG", dummyPicture());
+        FileHandler.savePicture("1", "hans", "wurst", "ICG", dummyPicture());
         return Results.ok("Picture saved");
-		
+
+	}
+	
+	public static String getDummyPicture(Volunteer volunteer) throws IOException
+	{
+    
+        return FileHandler.getPicture(String.valueOf(volunteer.getId()), volunteer.getPrename(), volunteer.getSurname(), "ICG", helper.FileType.PICTURE);
 		
 	}
 	
-	public static Result getDummyPicture() throws IOException
+	public static Result getAdminDummyPicture() throws IOException
 	{
-		Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
-    	
-    	// Check the form itself for errors.
-        if (form.hasErrors()) {
-            //return Results.badRequest(form.errorsAsJson());
-        }
-        
-        // Get the login information from the login form.
-        CoreDataForm cdf = form.get();
-              
-        return Results.ok(FileHandler.getPicture(cdf.vid, cdf.prename, cdf.surname, "ICG", helper.FileType.PICTURE));
+//		Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
+//    	
+//    	// Check the form itself for errors.
+//        if (form.hasErrors()) {
+//            //return Results.badRequest(form.errorsAsJson());
+//        }
+//        
+//        // Get the login information from the login form.
+//        CoreDataForm cdf = form.get();
 		
+		
+        
+        //ObjectNode pictures = Json.newObject();
+        //pictures.put("picture", FileHandler.getPicture(cdf.vid, cdf.prename, cdf.surname, "ICG", helper.FileType.PICTURE));
+        //pictures.put("thumbnail", FileHandler.getPicture(cdf.vid, cdf.prename, cdf.surname, "ICG", helper.FileType.THUMBNAIL));
+        
+        return Results.ok();
 	}
 	public static Result dummyData() throws JSONException {
 
