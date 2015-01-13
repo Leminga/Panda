@@ -5,7 +5,7 @@
 # Home page
 POST	/login						controllers.SecurityController.login()
 POST	/register					controllers.SecurityController.register()
-GET	/verify/:token					controllers.SecurityController.verificationGetter(token: String)
+GET		/verify/:token				controllers.SecurityController.verificationGetter(token: String)
 
 # Routes I would expect ... and many more ...
 # POST		/volunteers				controllers.VolunteerController.createVolunteer()
@@ -20,6 +20,6 @@ GET		/assets/*file				controllers.Assets.at(path="/public", file)
 
 
 # Dummy-Routes
-#GET 	/getUserTest                                    controllers.DummyController.userDataTest()
-GET    	/getUser                                        controllers.DummyController.dummyData()
+#GET 	/getUserTest                controllers.DummyController.userDataTest()
+GET    	/getUser                    controllers.DummyController.newDummyJson()
 #GET	/getJson					controllers.DummyController.newDummyJson()
