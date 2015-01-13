@@ -120,7 +120,8 @@
     <div>{{qualificationsCtrl.labels.it1}}
         IT-Knowledge:
         <select ng-model="qualificationsCtrl.user.it1"
-                ng-options="it1.value as it1.description for it1 in qualificationsCtrl.values.it1">
+                ng-options="it1.value as it1.description for it1 in qualificationsCtrl.values.it1"
+                required="">
         </select>
 
         <!-- Knowledge-Level will be implemented in the future. --
