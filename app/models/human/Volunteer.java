@@ -25,6 +25,7 @@ import models.fixed.HighestEducationLevel;
 import models.fixed.ITMediaSkill;
 import models.fixed.IdentificationType;
 import models.fixed.AreaOfInterest;
+import models.fixed.Gender;
 import models.fixed.Language;
 import models.fixed.LanguageSkill;
 import models.fixed.PreferedLanguage;
@@ -249,7 +250,7 @@ public class Volunteer extends Human {
      * @param surname The surname of the volunteer
      * @param user The login data of the volunteer
      */
-    public Volunteer(String prename, String surname, User user, String email) {
+    public Volunteer(User user, String prename, String surname, Gender gender, List<Country> nationalities, Date birthday, String email) {
         super(prename, surname);
         events = new BeanList<Event>();
         this.user = user;

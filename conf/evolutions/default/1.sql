@@ -125,9 +125,9 @@ create table user (
 
 create table user_language_skill (
   id                        bigint not null,
-  volunteer_id              bigint,
-  language_id               bigint,
-  languageSkill_id          bigint,
+  volunteer_id_id           bigint,
+  language_id_id            bigint,
+  language_skill_id         bigint,
   constraint pk_user_language_skill primary key (id))
 ;
 
@@ -272,12 +272,12 @@ alter table profession add constraint fk_profession_translation_8 foreign key (t
 create index ix_profession_translation_8 on profession (translation_tid);
 alter table sport_skill add constraint fk_sport_skill_translation_9 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
 create index ix_sport_skill_translation_9 on sport_skill (translation_tid);
-alter table user_language_skill add constraint fk_user_language_skill_volunt_10 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_user_language_skill_volunt_10 on user_language_skill (volunteer_id);
-alter table user_language_skill add constraint fk_user_language_skill_langua_11 foreign key (language_id) references language (id) on delete restrict on update restrict;
-create index ix_user_language_skill_langua_11 on user_language_skill (language_id);
-alter table user_language_skill add constraint fk_user_language_skill_langua_12 foreign key (languageSkill_id) references language_skill (id) on delete restrict on update restrict;
-create index ix_user_language_skill_langua_12 on user_language_skill (languageSkill_id);
+alter table user_language_skill add constraint fk_user_language_skill_volunt_10 foreign key (volunteer_id_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_user_language_skill_volunt_10 on user_language_skill (volunteer_id_id);
+alter table user_language_skill add constraint fk_user_language_skill_langua_11 foreign key (language_id_id) references language (id) on delete restrict on update restrict;
+create index ix_user_language_skill_langua_11 on user_language_skill (language_id_id);
+alter table user_language_skill add constraint fk_user_language_skill_langua_12 foreign key (language_skill_id) references language_skill (id) on delete restrict on update restrict;
+create index ix_user_language_skill_langua_12 on user_language_skill (language_skill_id);
 alter table user_login add constraint fk_user_login_volunteer_13 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
 create index ix_user_login_volunteer_13 on user_login (volunteer_id);
 alter table volunteer add constraint fk_volunteer_sex_14 foreign key (sex_id) references gender (id) on delete restrict on update restrict;
