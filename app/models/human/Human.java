@@ -16,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.avaje.ebean.Ebean;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import play.data.validation.Constraints;
@@ -51,29 +53,23 @@ public abstract class Human extends models.Entity {
      */
     @Required
     protected String prename;
-    /**
-     * The sex of the human.
-     */
-    @OneToOne(optional = true)
+
+    @Required
     protected Gender sex;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    protected List<Country> nationality;
+    @Required
+    @ManyToMany
+    protected List<Country> nationalities;
 
-    @Constraints.Required
+    @Required
     protected Date birthday;
 
-    /**
-     * Default constructor.
-     *
-     * @param prename The name of the human.
-     * @param surname The surname of the human.
-     */
-    public Human(String prename, String surname) {
-        this.prename = prename;
-        this.surname = surname;
-    }
-
+//    public Human(String prename, String surname, Gender gender, List<Country> nationalities, Date birthday) {
+//        this.prename = prename;
+//        this.surname = surname;
+//        this.nationalities = nationalities;
+//        this.birthday = birthday;
+//    }
     /**
      * Getter for the database id.
      *
@@ -100,15 +96,15 @@ public abstract class Human extends models.Entity {
     }
 
     public List<Country> getNationality() {
-        return this.nationality;
+        return this.nationalities;
     }
 
     public void addNationality(Country nationality) {
-        this.nationality.add(nationality);
+        this.nationalities.add(nationality);
     }
 
     public void removeNationality(Country nationality) {
-        this.nationality.remove(nationality);
+        this.nationalities.remove(nationality);
     }
 
     /**

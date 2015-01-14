@@ -2,7 +2,6 @@ package models.human;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
@@ -13,9 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.avaje.ebean.common.BeanList;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.ArrayList;
 import java.util.Date;
-import javax.persistence.JoinColumn;
+import java.util.GregorianCalendar;
+import java.util.GregorianCalendar;
+import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import models.UserLanguageSkill;
@@ -27,10 +27,8 @@ import models.fixed.IdentificationType;
 import models.fixed.AreaOfInterest;
 import models.fixed.Gender;
 import models.fixed.Language;
-import models.fixed.LanguageSkill;
 import models.fixed.PreferedLanguage;
 import models.fixed.Profession;
-import models.fixed.SportSkill;
 import play.data.validation.Constraints;
 
 @Entity
@@ -55,68 +53,48 @@ public class Volunteer extends Human {
     @ManyToMany
     protected List<Event> events;
 
-    @OneToOne // Owning side.
+    @OneToOne(cascade = CascadeType.ALL)
     protected User user;
 
-    @Constraints.Required
     protected int socialSecurityNumber;
 
-    @Constraints.Required
-    protected String placeOfResidence;
+    protected String city;
 
-    @Constraints.Required //german postal numbers sometimes start with 0 -> String
     protected String plz;
 
-    @Constraints.Required
-    protected String adress;
+    protected String address;
 
-    @Constraints.Required
     @ManyToOne
     protected Country country;
 
-    @Constraints.Required
     protected long phoneNumber;
 
-    @Constraints.Required
     @ManyToOne
     protected PreferedLanguage preferedLanguage;
 
-    @Constraints.Required
-    protected boolean adressConfirmed;
-
-    @Constraints.Required
     @ManyToOne
     protected IdentificationType identificationType;
 
-    @Constraints.Required
     protected String idNumber;
 
-    @Constraints.Required
-    protected Date idValidUntil;
+    protected GregorianCalendar idValidUntil;
 
-    @Constraints.Required
     protected boolean carDrivingLicense;
 
     @OneToOne
-    @Constraints.Required
     protected EmergencyContact emergencyContact;
 
-    @Constraints.Required
     @ManyToOne
     protected ClothingSize jacketSize;
 
-    @Constraints.Required
     @ManyToOne
     protected ClothingSize trouserSize;
 
-    @Constraints.Required
     @ManyToOne
     protected ShoeSize shoeSize;
 
-    @Constraints.Required
     protected String photo;
 
-    @Constraints.Required
     @ManyToOne
     protected Profession profession;
 
@@ -158,19 +136,15 @@ public class Volunteer extends Human {
 
     protected String translatingLanguages;
 
-    @Constraints.Required
     @ManyToOne
     protected ITMediaSkill msOfficeSkill;
 
-    @Constraints.Required
     @ManyToOne
     protected ITMediaSkill itNetworkSkill;
 
-    @Constraints.Required
     @ManyToOne
     protected ITMediaSkill contentManagementSkill;
 
-    @Constraints.Required
     @ManyToOne
     protected ITMediaSkill graphicSkill;
 
@@ -178,7 +152,6 @@ public class Volunteer extends Human {
 
     protected String eventsParticipated;
 
-    @Constraints.Required
     protected boolean interestedICG2016;
 
     protected boolean interestedSkiing;
@@ -193,23 +166,18 @@ public class Volunteer extends Human {
 
     protected boolean interestedIceHockey;
 
-    @Constraints.Required
     @ManyToOne
     protected AreaOfInterest areaInterest1;
 
-    @Constraints.Required
     @ManyToOne
     protected AreaOfInterest areaInterest2;
 
-    @Constraints.Required
     @ManyToOne
     protected AreaOfInterest areaInterest3;
 
-    @Constraints.Required
-    protected Date availabilityBeginning;
+    protected GregorianCalendar availabilityBeginning;
 
-    @Constraints.Required
-    protected Date availabilityEnd;
+    protected GregorianCalendar availabilityEnd;
 
     protected boolean interestedICG2016PriorToBeginning;
 
@@ -240,17 +208,25 @@ public class Volunteer extends Human {
         return null;
     }
 
-    /**
-     * Default constructor.
-     *
-     * @param prename The name of the volunteer
-     * @param surname The surname of the volunteer
-     * @param user The login data of the volunteer
-     */
-    public Volunteer(User user, String prename, String surname, Gender gender, List<Country> nationalities, Date birthday) {
-        super(prename, surname);
-        events = new BeanList<Event>();
+    //used for registration proccess
+    public Volunteer(User user, String prename, String surname, Gender sex, List<Country> nationalities, Date birthday) {
+        this.prename = prename;
+        this.surname = surname;
+        this.sex = sex;
+        this.nationalities = nationalities;
+        this.birthday = birthday;
         this.user = user;
+    }
+
+    //used to save volunteer information
+    public Volunteer(int socialSecurityNumber, String city, String plz, String address, Country country, long phoneNumber, PreferedLanguage preferedLanguage) {
+        this.socialSecurityNumber = socialSecurityNumber;
+        this.city = city;
+        this.plz = plz;
+        this.address = address;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.preferedLanguage = preferedLanguage;
     }
 
     public List<Event> getEvents() {

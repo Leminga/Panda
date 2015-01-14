@@ -1,6 +1,6 @@
 package controllers;
 
-import models.UserLogin;
+import models.User;
 import play.mvc.Http.Context;
 import play.mvc.Result;
 import play.mvc.Results;
@@ -39,13 +39,13 @@ public class Secured extends Security.Authenticator {
 	 */
     @Override
     public String getUsername(Context ctx) {
-        UserLogin user = null;
+        User user = null;
         String[] authTokenHeaderValues = ctx.request().headers().get(SecurityController.AUTH_TOKEN_HEADER);
         if ((authTokenHeaderValues != null) && (authTokenHeaderValues.length == 1) && (authTokenHeaderValues[0] != null)) {
-            user = UserLogin.findByAuthToken(authTokenHeaderValues[0]);
+            user = User.findByAuthToken(authTokenHeaderValues[0]);
             if (user != null) {
                 ctx.args.put("user", user);
-                return user.getUsername();
+                return user.getUserName();
             }
         }
         // If the user was not authenticated.

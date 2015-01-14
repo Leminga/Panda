@@ -1,6 +1,6 @@
 package models;
 
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import javax.persistence.Id;
@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import play.data.validation.Constraints;
 
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.MinLength;
@@ -54,11 +55,7 @@ public class User extends Entity {
      * The date that user was created, ie. registered, the first time.
      */
     @Required
-    private Date creationTime;
-    /**
-     * States whether the user has been validated or not.
-     */
-    private Boolean validated;
+    private GregorianCalendar creationTime;
     /**
      * The authentication token when the user is logged in.
      */
@@ -66,7 +63,9 @@ public class User extends Entity {
     /**
      * The date the user logged in the last time.
      */
-    private Date lastLogin;
+    private GregorianCalendar lastLogin;
+
+    private boolean mailConfirmed;
     /**
      * OneToOne Relation to Volunteer.
      */
@@ -165,9 +164,8 @@ public class User extends Entity {
     public User(String username, String password) {
         this.username = username.toLowerCase().trim();
         this.password = password;
-        this.creationTime = new Date();
-        this.creationTime = new Date();
-        this.validated = false;
+        this.creationTime = new GregorianCalendar();
+        this.mailConfirmed = false;
     }
 
     public String getUserName() {
@@ -196,27 +194,19 @@ public class User extends Entity {
         this.authToken = authToken;
     }
 
-    public Date getLastLogin() {
+    public GregorianCalendar getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Date lastLogin) {
+    public void setLastLogin(GregorianCalendar lastLogin) {
         this.lastLogin = lastLogin;
-    }
-
-    public boolean isValidated() {
-        return validated;
-    }
-
-    public void setValidated(boolean v) {
-        this.validated = v;
     }
 
     /**
      * Sets the last login date to the current date.
      */
     public void updateLastLogin() {
-        this.lastLogin = new Date();
+        this.lastLogin = new GregorianCalendar();
         this.save();
     }
 
@@ -256,8 +246,8 @@ public class User extends Entity {
      * @return <b>boolean</b>True if confirmed, false otherwise.
      */
     public boolean confirm() {
-        if (!this.validated) {
-            this.validated = true;
+        if (!this.mailConfirmed) {
+            this.mailConfirmed = true;
             this.save();
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Account validated and confirmed.");
@@ -265,7 +255,7 @@ public class User extends Entity {
             return true;
         } else {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Account hasl already been validated and confirmed.");
+                LOGGER.debug("Account has already been validated and confirmed.");
             }
             return false;
         }
@@ -291,6 +281,20 @@ public class User extends Entity {
                 LOGGER.error("Unable to write to the database. \n" + e.getMessage());
             }
         }
+    }
+
+    /**
+     * @return the mailConfirmed
+     */
+    public boolean isMailConfirmed() {
+        return mailConfirmed;
+    }
+
+    /**
+     * @param mailConfirmed the mailConfirmed to set
+     */
+    public void setMailConfirmed(boolean mailConfirmed) {
+        this.mailConfirmed = mailConfirmed;
     }
 
 }
