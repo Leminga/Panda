@@ -14,6 +14,9 @@ GET		/volunteers				controllers.VolunteerController.getVolunteers()
 # PUT		/volunteers/:id                         controllers.VolunteerController.updateVolunteer(id: Long)
 # DELETE	/volunteers/:id                         controllers.VolunteerController.deleteVolunteer(id: Long)
 
+# Forms
+GET             /registrationForm                       controllers.FormsController.getRegistrationForm()
+
 # Map static resources from the /public folder to the /assets URL path
 GET		/					controllers.Assets.at(path="/public", file="index.html")
 GET		/assets/*file				controllers.Assets.at(path="/public", file)
