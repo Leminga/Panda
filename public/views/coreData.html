@@ -252,10 +252,9 @@
 </form>
 
 <form id="form_picture" name="form_personal" ng-submit="coreDataCtrl.sendDummyPicture()">
-    <input type="file" ng-model="coreDataCtrl.picture" id="fileInput1" name="pic" accept="image/*"
+    <input type="file" ng-model="coreDataCtrl.test.picture" id="fileInput1" name="pic" accept="image/*"
            app-filereader><br>
-    <img width="50px" ng-src="{{coreDataCtrl.picture}}"/>
-    <img width="100px" ng-src="data:image/jpg;base64,{{coreDataCtrl.profilePicture}}">
-
+    <img width="50px" ng-src="{{coreDataCtrl.test.picture}}"/>
+    <img width="100px" ng-src="data:image/jpg;base64,{{coreDataCtrl.test.profilePicture}}">
 </form>
 <button form="form_picture" type="submit">Save picture</button>

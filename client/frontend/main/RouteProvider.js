@@ -8,6 +8,8 @@ angular.module('Panda')
                 templateUrl: 'assets/views/login.html',
                 controller: 'LoginFormCtrl as loginCtrl'
             })
+
+            // User Routes
             .when('/forgottenPassword', {
                 templateUrl: 'assets/views/forgottenPassword.html',
                 controller: 'ForgottenPasswordCtrl as forgottenPassword'
@@ -32,10 +34,29 @@ angular.module('Panda')
                 templateUrl: 'assets/views/qualifications.html',
                 controller: 'QualificationsFormCtrl as qualificationsCtrl'
             })
+
+
+            //Admin Routes
             .when('/adminOverview', {
                 templateUrl: 'assets/views/adminOverview.html',
                 controller: 'AdminOverviewCtrl as adminCtrl'
             })
+
+            .when('/adminCoreData', {
+                templateUrl: 'assets/views/coreData.html',
+                controller: 'CoreDataFormCtrl as coreDataCtrl'
+            })
+
+            .when('/adminQualifications', {
+                templateUrl: 'assets/views/qualifications.html',
+                controller: 'QualificationsFormCtrl as qualificationsCtrl'
+            })
+
+            .when('/adminEventSpecific', {
+                templateUrl: 'assets/views/eventSpecific.html',
+                controller: 'EventSpecificFormCtrl as eventSpecificCtrl'
+            })
+
 
 
             // If none of the above routes fit to the link that has been inserted, the user is being automatically

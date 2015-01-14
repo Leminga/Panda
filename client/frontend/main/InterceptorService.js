@@ -7,6 +7,7 @@ angular.module('Panda')
                 console.log('Request made with ', config);
                 // At every request, the Token is being added to the Header for authentication purposes
                 config.headers['X-AUTH-TOKEN'] = $window.sessionStorage.getItem("token");
+                config.headers['PERMISSIONLEVEL'] = $window.sessionStorage.getItem("permission");
                 return config;
                 // If an error, or not allowed, or my custom condition
                 // return $q.reject('Not allowed');
