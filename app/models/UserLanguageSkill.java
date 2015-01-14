@@ -1,5 +1,6 @@
-package models.human;
+package models;
 
+import models.human.*;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,11 +18,13 @@ import org.slf4j.LoggerFactory;
 
 import com.avaje.ebean.Ebean;
 import javax.persistence.Entity;
+import models.fixed.Language;
+import models.fixed.LanguageSkill;
 
 import play.data.validation.Constraints.Required;
 
 @Entity
-public class EmergencyContact extends models.Entity {
+public class UserLanguageSkill extends models.Entity {
 
     @Transient
     private static final long serialVersionUID = 1L;
@@ -34,7 +37,7 @@ public class EmergencyContact extends models.Entity {
     /**
      * Logger to log SecurityController events.
      */
-    private static Logger LOGGER = LoggerFactory.getLogger(EmergencyContact.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(UserLanguageSkill.class);
 
     @Id
     @Required
@@ -42,16 +45,13 @@ public class EmergencyContact extends models.Entity {
     private long id;
 
     @Required
-    protected String surname;
+    protected Volunteer volunteerId;
 
     @Required
-    protected String prename;
+    protected Language languageId;
 
     @Required
-    protected String phoneNumber;
-
-    @Required
-    protected String email;
+    protected LanguageSkill languageSkill;
 
     /**
      * Default constructor.
@@ -59,9 +59,7 @@ public class EmergencyContact extends models.Entity {
      * @param prename The name of the human.
      * @param surname The surname of the human.
      */
-    public EmergencyContact(String prename, String surname) {
-        this.prename = prename;
-        this.surname = surname;
+    public UserLanguageSkill(String prename, String surname) {
     }
 
     /**
@@ -73,17 +71,6 @@ public class EmergencyContact extends models.Entity {
         return this.id;
     }
 
-    public String getSurname() {
-        return this.surname;
-    }
-
-    public String getPrename() {
-        return this.prename;
-    }
-
-    /**
-     * Saves the current emergencycontact object to the database.
-     */
     @Override
     public void save() throws OptimisticLockException {
         // Make sure the related objects are stored in the database already.
@@ -91,7 +78,7 @@ public class EmergencyContact extends models.Entity {
         try {
             Ebean.save(this);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug(this.getClassName() + " " + this.surname + " stored/updated in database.");
+                LOGGER.debug(this.getClassName() + " " + this.id + " stored/updated in database.");
             }
         } catch (OptimisticLockException e) {
             if (LOGGER.isDebugEnabled()) {

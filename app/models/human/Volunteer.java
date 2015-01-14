@@ -13,16 +13,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.avaje.ebean.common.BeanList;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import models.UserLanguageSkill;
 import models.fixed.ClothingSize;
-import models.fixed.Month;
 import models.fixed.Country;
+import models.fixed.HighestEducationLevel;
 import models.fixed.ITMediaSkill;
 import models.fixed.IdentificationType;
-import models.fixed.Interest;
+import models.fixed.AreaOfInterest;
+import models.fixed.Language;
 import models.fixed.LanguageSkill;
+import models.fixed.PreferedLanguage;
 import models.fixed.Profession;
 import models.fixed.SportSkill;
 import play.data.validation.Constraints;
@@ -48,28 +53,13 @@ public class Volunteer extends Human {
      */
     @ManyToMany
     protected List<Event> events;
-    /**
-     * The user login data.
-     */
+
     @OneToOne // Owning side.
     @JoinColumn(name = "username", referencedColumnName = "username")
     protected User user;
 
     @Constraints.Required
-    protected int birthdayDate;
-
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "birthdayMonth_id", referencedColumnName = "id")
-    protected Month birthdayMonth;
-
-    @Constraints.Required
-    protected int birthdayYear;
-
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "countryOfBirth_id", referencedColumnName = "id")
-    protected Country countryOfBirth;
+    protected String mail;
 
     @Constraints.Required
     protected int socialSecurityNumber;
@@ -92,7 +82,9 @@ public class Volunteer extends Human {
     protected long phoneNumber;
 
     @Constraints.Required
-    protected String mail;
+    @ManyToOne
+    @JoinColumn(name = "preferedLanguage_id", referencedColumnName = "id")
+    protected PreferedLanguage preferedLanguage;
 
     @Constraints.Required
     protected boolean adressConfirmed;
@@ -106,35 +98,10 @@ public class Volunteer extends Human {
     protected String idNumber;
 
     @Constraints.Required
-    protected int dateOfIssue;
-
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "monthOfIssue_id", referencedColumnName = "id")
-    protected Month monthOfIssue;
-
-    @Constraints.Required
-    protected int yearOfIssue;
-
-    @Constraints.Required
-    protected String issuingAuthority;
-
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "validUntilMonth_id", referencedColumnName = "id")
-    protected Month validUntilMonth;
-
-    @Constraints.Required
-    protected int validUntilYear;
+    protected Date idValidUntil;
 
     @Constraints.Required
     protected boolean carDrivingLicense;
-
-    @Constraints.Required
-    protected String otherDrivingLicense;
-
-    @Constraints.Required
-    protected String comment;
 
     @OneToOne
     @Constraints.Required
@@ -157,9 +124,16 @@ public class Volunteer extends Human {
     protected ShoeSize shoeSize;
 
     @Constraints.Required
+    protected String photo;
+
+    @Constraints.Required
     @ManyToOne
     @JoinColumn(name = "profession_id", referencedColumnName = "id")
     protected Profession profession;
+
+    @ManyToOne
+    @JoinColumn(name = "highestEducationLevel_id", referencedColumnName = "id")
+    protected HighestEducationLevel highestEducationLevel;
 
     protected String university;
 
@@ -167,33 +141,38 @@ public class Volunteer extends Human {
 
     protected String professionalCareer;
 
-    @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "germanSkill_id", referencedColumnName = "id")
-    protected LanguageSkill germanSkill;
+    @JoinColumn(name = "motherTongue_id", referencedColumnName = "id")
+    protected Language motherTongue;
 
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "englishSkill_id", referencedColumnName = "id")
-    protected LanguageSkill englishSkill;
+    @OneToMany
+    @JoinColumn(name = "userlanguageskill_id", referencedColumnName = "id")
+    private List<UserLanguageSkill> additionalLanguages;
 
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "italianSkill_id", referencedColumnName = "id")
-    protected LanguageSkill italianSkill;
-
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "frenchSkill_id", referencedColumnName = "id")
-    protected LanguageSkill frenchSkill;
-
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "spanishSkill_id", referencedColumnName = "id")
-    protected LanguageSkill spanishSkill;
-
-    protected String furtherLangues;
-
+//    @Constraints.Required
+//    @ManyToOne
+//    @JoinColumn(name = "germanSkill_id", referencedColumnName = "id")
+//    protected LanguageSkill germanSkill;
+//
+//    @Constraints.Required
+//    @ManyToOne
+//    @JoinColumn(name = "englishSkill_id", referencedColumnName = "id")
+//    protected LanguageSkill englishSkill;
+//
+//    @Constraints.Required
+//    @ManyToOne
+//    @JoinColumn(name = "italianSkill_id", referencedColumnName = "id")
+//    protected LanguageSkill italianSkill;
+//
+//    @Constraints.Required
+//    @ManyToOne
+//    @JoinColumn(name = "frenchSkill_id", referencedColumnName = "id")
+//    protected LanguageSkill frenchSkill;
+//
+//    @Constraints.Required
+//    @ManyToOne
+//    @JoinColumn(name = "spanishSkill_id", referencedColumnName = "id")
+//    protected LanguageSkill spanishSkill;
     protected String interpretingLanguages;
 
     protected String translatingLanguages;
@@ -225,55 +204,32 @@ public class Volunteer extends Human {
     @Constraints.Required
     protected boolean interestedICG2016;
 
-    @Constraints.Required
-    protected boolean interestedICG2016PriorToBeginning;
+    protected boolean interestedSkiing;
 
-    protected String ICG2016Comment;
+    protected boolean interestedSnowboarding;
 
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "skiingSkill_id", referencedColumnName = "id")
-    protected SportSkill skiingSkill;
+    protected boolean interestedCrossCountrySkiing;
 
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "snowboardSkill_id", referencedColumnName = "id")
-    protected SportSkill snowboardSkill;
+    protected boolean interestedBiathlon;
 
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "crossCountrySkill_id", referencedColumnName = "id")
-    protected SportSkill crossCountrySkill;
+    protected boolean interestedIceSkating;
 
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "biathlonSkill_id", referencedColumnName = "id")
-    protected SportSkill biathlonSkill;
-
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "iceSkatingSkill_id", referencedColumnName = "id")
-    protected SportSkill iceskatingSkill;
-
-    @Constraints.Required
-    @ManyToOne
-    @JoinColumn(name = "iceHockeySkill_id", referencedColumnName = "id")
-    protected SportSkill iceHockeySkill;
+    protected boolean interestedIceHockey;
 
     @Constraints.Required
     @ManyToOne
     @JoinColumn(name = "interest1_id", referencedColumnName = "id")
-    protected Interest interest1;
+    protected AreaOfInterest areaInterest1;
 
     @Constraints.Required
     @ManyToOne
     @JoinColumn(name = "interest2_id", referencedColumnName = "id")
-    protected Interest interest2;
+    protected AreaOfInterest areaInterest2;
 
     @Constraints.Required
     @ManyToOne
     @JoinColumn(name = "interest3_id", referencedColumnName = "id")
-    protected Interest interest3;
+    protected AreaOfInterest areaInterest3;
 
     @Constraints.Required
     protected Date availabilityBeginning;
@@ -281,14 +237,15 @@ public class Volunteer extends Human {
     @Constraints.Required
     protected Date availabilityEnd;
 
-    @Constraints.Required
-    protected String availabilityComment;
+    protected boolean interestedICG2016PriorToBeginning;
 
-    /**
-     *
-     * @param username
-     * @return
-     */
+    protected String icg2016Comment;
+
+    String languageSkillsProfessional;
+
+    String trainingSkillsProfessional;
+    
+
     public static Volunteer findByUsername(String username) {
 //        Volunteer v = new Volunteer(username, username, null);
 //

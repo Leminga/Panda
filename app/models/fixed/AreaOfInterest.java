@@ -19,14 +19,14 @@ import com.avaje.ebean.Ebean;
 import play.data.validation.Constraints.Required;
 
 @Entity
-public class Interest extends models.Entity {
+public class AreaOfInterest extends models.Entity {
 	/** The serialization version identifier. */
 	@Transient
 	private static final long serialVersionUID = 1L;
 	/** A finder to query the database. */
-	private static Finder<Long, Interest> FIND = new Finder<Long, Interest>(Long.class, Interest.class);
+	private static Finder<Long, AreaOfInterest> FIND = new Finder<Long, AreaOfInterest>(Long.class, AreaOfInterest.class);
 	/** Logger to log SecurityController events. */
-	private static Logger LOGGER = LoggerFactory.getLogger(Interest.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(AreaOfInterest.class);
 	
 	/** The database id. */
 	@Id
@@ -35,37 +35,21 @@ public class Interest extends models.Entity {
 	private long id;
 	/** The interest string. */
 	private String interest;
-	/** The translation. */
-	@OneToOne // Owning side.
-	private Translation translation;
 	
-	/**
-	 * Generate the default interests to
-	 * populate the database initially.
-	 */
 	public static void generateDefault() {
-		Translation trans_male = new Translation("männlich", "male");
-		Translation trans_female = new Translation("weiblich", "female");
-		trans_male.save();
-		trans_female.save();
-		
-		Interest male = new Interest("male");
-		male.setTranslation(trans_male);
-		Interest female = new Interest("female");
-		female.setTranslation(trans_female);
-		
-		male.save();
-		female.save();
+            AreaOfInterest a1 = new AreaOfInterest("Accommodation");
+            
+            a1.save();
 	}
 	
 	/**
 	 * Query the database for all interest objects.
 	 * 
-	 * @return <b>List of Interest</b>All interest objects stored in the database.
+	 * @return <b>List of AreaOfInterest</b>All interest objects stored in the database.
 	 */
-	public static List<Interest> findInterests() {
+	public static List<AreaOfInterest> findInterests() {
 		try  {
-			List<Interest> interests = FIND.all();
+			List<AreaOfInterest> interests = FIND.all();
 			if (LOGGER.isDebugEnabled() && (interests == null || interests.isEmpty())) {
 		    	LOGGER.debug("No interest was found in the database.");
 	    	}
@@ -80,11 +64,11 @@ public class Interest extends models.Entity {
 	 * Finds a interest object by its name.
 	 * 
 	 * @param interestName The interest name, ie. "male" or "female".
-	 * @return <b>Interest</b> The interest object.
+	 * @return <b>AreaOfInterest</b> The interest object.
 	 */
-	public static Interest findInterestByName(String interestName) {
+	public static AreaOfInterest findInterestByName(String interestName) {
 		try  {
-			Interest interest = FIND.where().eq("interest", interestName.toLowerCase()).findUnique();
+			AreaOfInterest interest = FIND.where().eq("interest", interestName.toLowerCase()).findUnique();
 			if (LOGGER.isDebugEnabled() && interest == null) {
 		    	LOGGER.debug("No interest was found in the database.");
 	    	}
@@ -101,7 +85,7 @@ public class Interest extends models.Entity {
 	 * 
 	 * @param interest The interest.
 	 */
-	public Interest(String interest) {
+	public AreaOfInterest(String interest) {
 		this.interest = interest.toLowerCase();
 	}
 	
@@ -115,30 +99,12 @@ public class Interest extends models.Entity {
 	}
 	
 	/**
-	 * Getter for the Interest.
+	 * Getter for the AreaOfInterest.
 	 * 
-	 * @return <b>Interest</b> The interest.
+	 * @return <b>AreaOfInterest</b> The interest.
 	 */
 	public String getInterest() {
 		return this.interest;
-	}
-	
-	/**
-	 * Getter for the Translation.
-	 * 
-	 * @return <b>Translation</b> The translataion.
-	 */
-	public Translation getTranslation() {
-		return this.translation;
-	}
-	
-	/**
-	 * Setter for the Translation.
-	 * 
-	 * @param translation The translation.
-	 */
-	public void setTranslation(Translation translation) {
-		this.translation = translation;
 	}
 	
 	/**
@@ -149,13 +115,9 @@ public class Interest extends models.Entity {
 	@Override
 	public void save() throws OptimisticLockException {
 		
-		// Make sure the translation is stored already.
-		if (this.translation != null)
-			this.translation.save();
-		
 		// Check if interest is already in database.
 		// Make sure a interest is stored only once.
-		Interest interest = Interest.findInterestByName(this.interest);
+		AreaOfInterest interest = AreaOfInterest.findInterestByName(this.interest);
 		if (interest != null) {
 			this.id = interest.getId();
 			return;

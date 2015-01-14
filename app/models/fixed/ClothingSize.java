@@ -47,12 +47,14 @@ public class ClothingSize extends models.Entity {
      * Generate the default sizes to populate the database initially.
      */
     public static void generateDefault() {
+        ClothingSize xs = new ClothingSize("XS");
         ClothingSize s = new ClothingSize("S");
         ClothingSize m = new ClothingSize("M");
         ClothingSize l = new ClothingSize("L");
         ClothingSize xl = new ClothingSize("XL");
         ClothingSize xxl = new ClothingSize("XXL");
 
+        xs.save();
         s.save();
         m.save();
         l.save();

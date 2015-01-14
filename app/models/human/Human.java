@@ -15,6 +15,10 @@ import models.fixed.Country;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.avaje.ebean.Ebean;
+import java.util.Date;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import play.data.validation.Constraints;
 import play.data.validation.Constraints.Required;
 
 @MappedSuperclass
@@ -57,6 +61,9 @@ public abstract class Human extends models.Entity {
      */
     @ManyToMany(cascade = CascadeType.ALL)
     protected List<Country> nationality;
+
+    @Constraints.Required
+    protected Date birthday;
 
     /**
      * Default constructor.

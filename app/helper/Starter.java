@@ -6,9 +6,8 @@ import models.fixed.ClothingSize;
 import models.fixed.Gender;
 import models.fixed.ITMediaSkill;
 import models.fixed.IdentificationType;
-import models.fixed.Interest;
+import models.fixed.AreaOfInterest;
 import models.fixed.LanguageSkill;
-import models.fixed.Month;
 import models.fixed.Profession;
 import models.fixed.ShoeSize;
 import models.fixed.SportSkill;
@@ -29,9 +28,8 @@ public class Starter {
         ClothingSize.generateDefault();
         ITMediaSkill.generateDefault();
         IdentificationType.generateDefault();
-        Interest.generateDefault();
+        AreaOfInterest.generateDefault();
         LanguageSkill.generateDefault();
-        Month.generateDefault();
         Profession.generateDefault();
         SportSkill.generateDefault();
 
