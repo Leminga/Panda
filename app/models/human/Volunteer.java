@@ -139,27 +139,22 @@ public class Volunteer extends Human {
 
 //    @Constraints.Required
 //    @ManyToOne
-//    @JoinColumn(name = "germanSkill_id", referencedColumnName = "id")
 //    protected LanguageSkill germanSkill;
 //
 //    @Constraints.Required
 //    @ManyToOne
-//    @JoinColumn(name = "englishSkill_id", referencedColumnName = "id")
 //    protected LanguageSkill englishSkill;
 //
 //    @Constraints.Required
 //    @ManyToOne
-//    @JoinColumn(name = "italianSkill_id", referencedColumnName = "id")
 //    protected LanguageSkill italianSkill;
 //
 //    @Constraints.Required
 //    @ManyToOne
-//    @JoinColumn(name = "frenchSkill_id", referencedColumnName = "id")
 //    protected LanguageSkill frenchSkill;
 //
 //    @Constraints.Required
 //    @ManyToOne
-//    @JoinColumn(name = "spanishSkill_id", referencedColumnName = "id")
 //    protected LanguageSkill spanishSkill;
     protected String interpretingLanguages;
 
@@ -225,7 +220,6 @@ public class Volunteer extends Human {
     String languageSkillsProfessional;
 
     String trainingSkillsProfessional;
-    
 
     public static Volunteer findByUsername(String username) {
 //        Volunteer v = new Volunteer(username, username, null);

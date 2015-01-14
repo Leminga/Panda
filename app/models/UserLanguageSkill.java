@@ -18,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import com.avaje.ebean.Ebean;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import models.fixed.Language;
 import models.fixed.LanguageSkill;
@@ -48,17 +47,14 @@ public class UserLanguageSkill extends models.Entity {
 
     @Required
     @ManyToOne
-    @JoinColumn(name = "volunteer_id", referencedColumnName = "id")
     protected Volunteer volunteerId;
 
     @Required
     @ManyToOne
-    @JoinColumn(name = "language_id", referencedColumnName = "id")
     protected Language languageId;
 
     @Required
     @ManyToOne
-    @JoinColumn(name = "languageSkill_id", referencedColumnName = "id")
     protected LanguageSkill languageSkill;
 
     /**
