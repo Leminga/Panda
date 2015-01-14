@@ -10,11 +10,8 @@ import models.User;
 import models.fixed.ShoeSize;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.avaje.ebean.common.BeanList;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.GregorianCalendar;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -29,7 +26,6 @@ import models.fixed.Gender;
 import models.fixed.Language;
 import models.fixed.PreferedLanguage;
 import models.fixed.Profession;
-import play.data.validation.Constraints;
 
 @Entity
 public class Volunteer extends Human {
@@ -77,7 +73,7 @@ public class Volunteer extends Human {
 
     protected String idNumber;
 
-    protected GregorianCalendar idValidUntil;
+    protected Date idValidUntil;
 
     protected boolean carDrivingLicense;
 
@@ -175,9 +171,9 @@ public class Volunteer extends Human {
     @ManyToOne
     protected AreaOfInterest areaInterest3;
 
-    protected GregorianCalendar availabilityBeginning;
+    protected Date availabilityBeginning;
 
-    protected GregorianCalendar availabilityEnd;
+    protected Date availabilityEnd;
 
     protected boolean interestedICG2016PriorToBeginning;
 
@@ -209,11 +205,11 @@ public class Volunteer extends Human {
     }
 
     //used for registration proccess
-    public Volunteer(User user, String prename, String surname, Gender sex, List<Country> nationalities, Date birthday) {
+    public Volunteer(User user, String prename, String surname, Gender sex, Country nationality, Date birthday) {
         this.prename = prename;
         this.surname = surname;
         this.sex = sex;
-        this.nationalities = nationalities;
+        this.nationality = nationality;
         this.birthday = birthday;
         this.user = user;
     }

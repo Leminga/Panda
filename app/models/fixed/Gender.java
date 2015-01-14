@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.avaje.ebean.Ebean;
+import models.human.Volunteer;
 
 import play.data.validation.Constraints.Required;
 

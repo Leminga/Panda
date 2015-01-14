@@ -1,7 +1,8 @@
 package helper;
 
+import com.avaje.ebean.Ebean;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.List;
 import models.Event;
 import models.User;
 import models.fixed.ClothingSize;
@@ -9,7 +10,6 @@ import models.fixed.Gender;
 import models.fixed.ITMediaSkill;
 import models.fixed.IdentificationType;
 import models.fixed.AreaOfInterest;
-import models.fixed.Country;
 import models.fixed.LanguageSkill;
 import models.fixed.Profession;
 import models.fixed.ShoeSize;
@@ -41,7 +41,6 @@ public class Starter {
 
         // Create some dummy data for testing.
         Starter.createUsers();
-        Starter.createVolunteers();
     }
 
     // JUST FOR INITIALIZATION
@@ -56,45 +55,8 @@ public class Starter {
      */
     private static void createUsers() {
         Event event = Event.findOrCreateEvent("icg2016");
-
         User user = new User("christian@gruber.at", "passwort");
-        Volunteer vol = new Volunteer(user, "Christian", "Gruber", Gender.findGenderByName("male"), null, new Date(System.currentTimeMillis()));
+        Volunteer vol = new Volunteer(user, "Christian", "Gruber", Ebean.find(Gender.class, 1), null, new Date(System.currentTimeMillis()));
         vol.save();
-        
-        
-//        // Create a user and a volunteer.
-//        User user_male = User.findByName("markus@male.at");
-//        if (user_male == null) {
-//            user_male = new User("markus@male.at", "password");
-//            user_male.save();
-//
-//            Volunteer male = new Volunteer("Markus", "Male", user_male);
-//            male.setGender(new Gender("male"));
-//            male.addEvent(event);
-//            male.save();
-//        }
-//        // Create a user and a volunteer.
-//        User user_female = User.findByName("friederike@female.at");
-//        if (user_female == null) {
-//            user_female = new User("friederike@female.at", "password");
-//            user_female.save();
-//
-////            Volunteer female = new Volunteer("Friederike", "Female", user_female);
-////            female.setGender(new Gender("female"));
-////            female.addEvent(event);
-////            female.save();
-//        }
-    }
-
-    /**
-     * Create a dummy volunteer and put him into the database.
-     */
-    private static void createVolunteers() {
-
-//        event = Event.findOrCreateEvent("icg2016");
-//        System.out.println("TEST:" + event.getVolunteers()); // Fails for some reason.
-        // TESTING get a user
-        User user = User.findByName("markus@male.at");
-        System.out.println("TEST: " + user);
     }
 }

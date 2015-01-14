@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.avaje.ebean.Ebean;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -55,11 +55,12 @@ public abstract class Human extends models.Entity {
     protected String prename;
 
     @Required
+    @ManyToOne
     protected Gender sex;
 
     @Required
-    @ManyToMany
-    protected List<Country> nationalities;
+    @ManyToOne
+    protected Country nationality;
 
     @Required
     protected Date birthday;
@@ -93,18 +94,6 @@ public abstract class Human extends models.Entity {
 
     public void setGender(Gender sex) {
         this.sex = sex;
-    }
-
-    public List<Country> getNationality() {
-        return this.nationalities;
-    }
-
-    public void addNationality(Country nationality) {
-        this.nationalities.add(nationality);
-    }
-
-    public void removeNationality(Country nationality) {
-        this.nationalities.remove(nationality);
     }
 
     /**
