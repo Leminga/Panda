@@ -1,0 +1,33 @@
+<form><h1>Admin Overview</h1></form>
+<div id="exportable">
+    <table>
+        <thead>
+        <tr>
+            <th>{{adminCtrl.labels.profilePicture}}</th>
+            <th>{{adminCtrl.labels.prename}}</th>
+            <th>{{adminCtrl.labels.surname}}</th>
+            <th>{{adminCtrl.labels.emailAddress}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="volunteer in adminCtrl.volunteers ">
+                <td><img ng-src="{{volunteer.profilePicture}}"></td>
+                <td>{{volunteer.prename}}</td>
+                <td>{{volunteer.surname}}</td>
+                <td>{{volunteer.emailAddress}}</td>
+                <td>
+                    <button ng-click="adminCtrl.adminEditVolunteer(volunteer.ID)">Edit Volunteer</button>
+                </td>
+                <td>
+                    <button ng-click="adminCtrl.adminDeleteVolunteer(volunteer.ID)">Delete Volunteer</button>
+                </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<button ng-click="adminCtrl.exportDocument()">Export Volunteerdata</button>
+
+
+
+
+

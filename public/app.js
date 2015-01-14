@@ -13047,7 +13047,7 @@ angular.module('Panda')
         self.adminEditVolunteer = "";
         self.adminDeleteVolunteer = "";
 
-        $window.sessionStorage.setItem("permission", "admin");
+        PermissionService.setPermission("admin");
 
         var load = function () {
             DataService.get().then(function (response) {
@@ -13632,14 +13632,15 @@ angular.module('Panda')
         $httpProvider.defaults.cache = true;
     }]);
 angular.module('Panda')
-    .service('PermissionService', ['$rootScope',function ($rootScope) {
+    .service('PermissionService', ['$window',function ($window) {
+
         return {
             setPermission: function (permission) {
-                $rootScope.GLOBALPERMISSION = permission;
+                $window.sessionStorage.setItem("permission", permission);
             },
 
             getPermission: function(){
-                return $rootScope.GLOBALPERMISSION;
+                return $window.sessionStorage.getItem('permission');
             }
         }
     }]);
@@ -13742,7 +13743,7 @@ angular.module('Panda').directive("compareTo", compareTo);
 angular.module('Panda')
     .controller('OverviewFormCtrl', ['$window', '$location','DataService','PermissionService', function ($window, $location, DataService, PermissionService) {
         var self = this;
-        self.permission = $window.sessionStorage.getItem('permission')
+        self.permission = PermissionService.getPermission();
 
         DataService.get().then(function (response) {
             self.labels = response.data.labels;

@@ -43,7 +43,7 @@ module.exports = function (grunt) {
             },
             stylesheets: {
                 files: [
-                    {expand: true, flatten: true, src: ['client/**/*.css'], dest: 'public/stylesheets/'}
+                    {expand: true, flatten: true, src: ['client/**/*.css','client/stylesheets/*.map'], dest: 'public/stylesheets/'}
                 ]
             },
             images: {
