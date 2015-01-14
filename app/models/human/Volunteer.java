@@ -55,7 +55,6 @@ public class Volunteer extends Human {
     protected List<Event> events;
 
     @OneToOne // Owning side.
-    @JoinColumn(name = "username", referencedColumnName = "username")
     protected User user;
 
     @Constraints.Required
@@ -75,7 +74,6 @@ public class Volunteer extends Human {
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "country_id", referencedColumnName = "id")
     protected Country country;
 
     @Constraints.Required
@@ -83,7 +81,6 @@ public class Volunteer extends Human {
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "preferedLanguage_id", referencedColumnName = "id")
     protected PreferedLanguage preferedLanguage;
 
     @Constraints.Required
@@ -91,7 +88,6 @@ public class Volunteer extends Human {
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "identificationType_id", referencedColumnName = "id")
     protected IdentificationType identificationType;
 
     @Constraints.Required
@@ -105,22 +101,18 @@ public class Volunteer extends Human {
 
     @OneToOne
     @Constraints.Required
-    @JoinColumn(name = "emergencyContact_id", referencedColumnName = "id")
     protected EmergencyContact emergencyContact;
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "jacketSize_id", referencedColumnName = "id")
     protected ClothingSize jacketSize;
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "trouserSize_id", referencedColumnName = "id")
     protected ClothingSize trouserSize;
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "shoeSize_id", referencedColumnName = "id")
     protected ShoeSize shoeSize;
 
     @Constraints.Required
@@ -128,11 +120,9 @@ public class Volunteer extends Human {
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "profession_id", referencedColumnName = "id")
     protected Profession profession;
 
     @ManyToOne
-    @JoinColumn(name = "highestEducationLevel_id", referencedColumnName = "id")
     protected HighestEducationLevel highestEducationLevel;
 
     protected String university;
@@ -142,11 +132,9 @@ public class Volunteer extends Human {
     protected String professionalCareer;
 
     @ManyToOne
-    @JoinColumn(name = "motherTongue_id", referencedColumnName = "id")
     protected Language motherTongue;
 
     @OneToMany
-    @JoinColumn(name = "userlanguageskill_id", referencedColumnName = "id")
     private List<UserLanguageSkill> additionalLanguages;
 
 //    @Constraints.Required
@@ -179,22 +167,18 @@ public class Volunteer extends Human {
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "msOfficeSkill_id", referencedColumnName = "id")
     protected ITMediaSkill msOfficeSkill;
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "itNetworkSkill_id", referencedColumnName = "id")
     protected ITMediaSkill itNetworkSkill;
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "contentManagementSkill_id", referencedColumnName = "id")
     protected ITMediaSkill contentManagementSkill;
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "graphicSkill_id", referencedColumnName = "id")
     protected ITMediaSkill graphicSkill;
 
     protected String furtherQualifications;
@@ -218,17 +202,14 @@ public class Volunteer extends Human {
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "interest1_id", referencedColumnName = "id")
     protected AreaOfInterest areaInterest1;
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "interest2_id", referencedColumnName = "id")
     protected AreaOfInterest areaInterest2;
 
     @Constraints.Required
     @ManyToOne
-    @JoinColumn(name = "interest3_id", referencedColumnName = "id")
     protected AreaOfInterest areaInterest3;
 
     @Constraints.Required

@@ -56,9 +56,7 @@ public abstract class Human extends models.Entity {
      */
     @OneToOne(optional = true)
     protected Gender sex;
-    /**
-     * The (multiple) nationalities of the person.
-     */
+
     @ManyToMany(cascade = CascadeType.ALL)
     protected List<Country> nationality;
 

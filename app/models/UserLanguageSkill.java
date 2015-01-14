@@ -57,6 +57,8 @@ public class UserLanguageSkill extends models.Entity {
     protected Language languageId;
 
     @Required
+    @ManyToOne
+    @JoinColumn(name = "languageSkill_id", referencedColumnName = "id")
     protected LanguageSkill languageSkill;
 
     /**
