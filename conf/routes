@@ -3,14 +3,14 @@
 # ~~~~
 
 # Home page
-POST	/login						controllers.SecurityController.login()
-POST	/register					controllers.SecurityController.register()
+POST            /login					controllers.SecurityController.login()
+POST            /register				controllers.SecurityController.register()
 GET		/verify/:token				controllers.SecurityController.verificationGetter(token: String)
 
 # Routes I would expect ... and many more ...
+GET		/volunteers                             controllers.VolunteerController.getVolunteer(id: Long)
+GET		/volunteers				controllers.VolunteerController.getVolunteers()
 # POST		/volunteers				controllers.VolunteerController.createVolunteer()
-# GET		/volunteers				controllers.VolunteerController.getVolunteers()
-# GET		/volunteers/:id                         controllers.VolunteerController.getVolunteer(id: Long)
 # PUT		/volunteers/:id                         controllers.VolunteerController.updateVolunteer(id: Long)
 # DELETE	/volunteers/:id                         controllers.VolunteerController.deleteVolunteer(id: Long)
 

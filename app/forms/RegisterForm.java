@@ -1,5 +1,8 @@
 package forms;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * Maps the register form fields to a
  * register object.
@@ -14,5 +17,9 @@ public class RegisterForm extends LoginForm {
 	/** The nationality of the user. */
 	public String nationality;
 	/** The vid of the user. */
-    public String vid;
+        public String vid;
+        
+        public int gender;
+        
+        public Date birthdate;
 }

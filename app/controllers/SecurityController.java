@@ -1,5 +1,6 @@
 package controllers;
 
+import com.avaje.ebean.Ebean;
 import forms.LoginForm;
 import forms.RegisterForm;
 import models.human.Volunteer;
@@ -17,6 +18,8 @@ import play.mvc.Results;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import helper.CryptIt;
 import models.User;
+import models.fixed.Country;
+import models.fixed.Gender;
 
 /**
  * The security controller allows for a secure login to the system. To this end,
@@ -170,11 +173,13 @@ public class SecurityController extends Controller {
             user = new User(registerForm.email, CryptIt.cleartextToHash(registerForm.password));
 
             //create new volunteer
-            //verificationSend(volunteer);
+            Volunteer v = new Volunteer(user, registerForm.prename, registerForm.surname, Ebean.find(Gender.class, registerForm.gender ), Ebean.find(Country.class, registerForm.nationality), registerForm.birthdate);
+            v.save();
+                //verificationSend(volunteer);
             return ok();
         } else {
             LOGGER.info("User already exists in database.");
-            return Results.ok("user exist already");
+            return Results.badRequest("user exist already");
         }
     }
 
