@@ -4,7 +4,7 @@ angular.module('Panda')
         self.adminEditVolunteer = "";
         self.adminDeleteVolunteer = "";
 
-        $window.sessionStorage.setItem("permission", "admin");
+        PermissionService.setPermission("admin");
 
         var load = function () {
             DataService.get().then(function (response) {

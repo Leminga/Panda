@@ -1,0 +1,27 @@
+<div class="body">
+    <div class="grad"></div>
+
+    <div class="header">
+        <div>
+            Login
+        </div>
+    </div>
+
+    <form name="form" ng-submit="loginCtrl.sendLogin()" method="post">
+        <div class="login">
+            E-Mail:<br>
+            <input type="text" name="name" ng-model="loginCtrl.user.email" required=""/><br>
+            Password:<br>
+            <input type="password" name="password" ng-model="loginCtrl.user.password" required=""><br>
+            <br>
+            <button ng-disabled="form.$invalid" type="submit">Login</button>
+        </div>
+    </form>
+
+    <div id="click">
+        Click <a href="#/forgottenPassword">here</a> if you have forgotten your credentials.
+    </div>
+    <div id="register">
+        <a href="#/register">Register</a>
+    </div>
+</div>

@@ -2,7 +2,7 @@
 angular.module('Panda')
     .controller('OverviewFormCtrl', ['$window', '$location','DataService','PermissionService', function ($window, $location, DataService, PermissionService) {
         var self = this;
-        self.permission = $window.sessionStorage.getItem('permission')
+        self.permission = PermissionService.getPermission();
 
         DataService.get().then(function (response) {
             self.labels = response.data.labels;

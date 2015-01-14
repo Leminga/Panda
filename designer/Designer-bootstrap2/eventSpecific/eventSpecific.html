@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Innsbruck 2016 > Event Specific</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,700,900' rel='stylesheet' type='text/css'>
+   
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+   
+    <link href="../bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    
+    <link href="../bootstrap/css/bootstrap-select.css" rel="stylesheet">
+    
+    <link href="../bootstrap/css/custom.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+    body {
+        /*padding-top: 200px;*/
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    
+    <div class="logo">
+    
+    <img src="../bootstrap/imgs/logo.png">
+    
+    </div>
+    <!--logo-->
+    
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    
+        <div class="container-fluid">
+         
+         	<div class="col-lg-6 text-left"></div>
+         
+         	<div class="col-lg-6 text-right">
+         
+        		 <div class="col-lg-4 text-right">
+         		 </div>
+         
+       		     <div class="col-lg-8">
+        			 <h1 class="page-title">registrationform</h1> 
+        		 </div>
+         
+            </div> 
+            
+        </div>
+        <!-- /.container fluid-->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+        
+            <div class="col-lg-3 text-left">
+            
+            <form class="side-menu-wrapper">
+           			 <ul class="side-menu">
+           			 	<li><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>  <a href="#/overView">Overview</a></li>
+						<li><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>  <a href="#/coreData">Coredata</a></li>
+						<li><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>  <a href="#/qualifications">Qualifications</a></li>
+						<li class="active"><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>  <a href="#/eventSpecific">Event-specific</a></li>
+   					</ul>
+   
+   					<form ng-submit="overviewCtrl.logout()">
+        				<button class="logout" type="submit">Logout</button>
+    				</form>
+   
+			</form>
+            
+            </div>
+        
+        	<div class="col-lg-6 text-left">
+        	
+               <div class="header event">
+    				<h1>Event Specific</h1>
+			   </div>
+
+			   <div>
+			       
+    				 <form id="eventspecific" name="eventspecific" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user.specific)">
+        
+        				<div class="event">
+        				
+        				 <!--WORKING AREA-->
+        				
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                						Preferred Working Area:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									
+									<select class="eventspec current-work" data-width="100%" ng-model="eventSpecificCtrl.user.specific.preferredWorkingArea">
+                						  <option value='' disabled selected style='display:none;'>Open here</option>
+                    					  <option value="none"></option>
+                    					  <option value="driver">Driver</option>
+                    					  <option value="security">Security</option>
+       								</select>
+       								
+							   </div>
+							   
+							   
+							   <!--AVABILITY FROM-->
+								
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                						Avability: From:
+            						</div>
+
+								</div>
+								
+					 			<div class='col-lg-6 col-md-6 nopadding'>
+           							 <input id="avability-from" placeholder="dd/mm/yyyy" type='text' class="form-control" ng-model="eventSpecificCtrl.user.specific.fromAvailability" name="date of birth"  data-date-format="DD/MM/YYYY"/>
+        						</div>
+        						
+        						
+        						<!--AVABILITY UNTIL-->
+								
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                						Until:
+            						</div>
+
+								</div>
+								
+					 			<div class='col-lg-6 col-md-6 nopadding'>
+           							 <input id="avability-until" placeholder="dd/mm/yyyy" type='text' class="form-control" ng-model="eventSpecificCtrl.user.specific.untilAvailability" name="date of birth"  data-date-format="DD/MM/YYYY"/>
+        						</div>
+							   
+							   
+							   <!--beforehand-->
+								
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin">
+                						 Are you interested in assisting beforehand?
+            						</div>
+
+								</div>
+								
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+        					
+        							<label class="radio-inline">
+  										 <input ng-model="eventSpecificCtrl.user.specific.assistance" type="radio" name="assistance" value="yes"
+                   checked>Yes<br>
+									</label>
+
+									<label class="radio-inline">
+  										 <input ng-model="eventSpecificCtrl.user.specific.assistance" type="radio" name="assistance" value="no">No<br>
+									</label>		
+        					
+								</div>
+								
+								
+								<!--Volunteer Comment-->
+								
+								<div class="col-lg-12 col-md-12 text-left nopadding">
+            
+            						<div class="extra-margin">
+                						Volunteer Comment:
+            						</div>
+
+								</div>
+								
+								<div class="col-lg-12 col-md-12 text-left nopadding">
+        					
+        							 <textarea class="volunteertextarea" ng-model="eventSpecificCtrl.user.specific.volunteerComment" cols="50" rows="10" name="textbox"></textarea>	
+        					
+								</div>
+							   
+							   <!--Volunteer Agreement-->
+								
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin">
+                						 Volunteer Agreement:
+            						</div>
+
+								</div>
+								
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+        					
+        							<label class="radio-inline">
+  										 <input type="radio" ng-model="eventSpecificCtrl.user.specific.agreement" name="agreement" value="yes" checked>
+            							 Yes, I agree<br>
+									</label>
+
+									<label class="radio-inline">
+  										 <input type="radio" ng-model="eventSpecificCtrl.user.specific.agreement" name="agreement" value="no">
+            							  No, I do not agree
+									</label>		
+        					
+								</div>
+        				
+        				
+        				
+        				 <!--SPORT-->
+        				
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                						Select the form of sport:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									
+									<select class="eventspec current-work" data-width="100%" ng-model="eventSpecificCtrl.user.specific.sport">
+                						    <option value='' disabled selected style='display:none;'>Open here</option>
+                							<option value="alpine skiing boys">Alpine Skiing Boys</option>
+                							<option value="alpine skiing girls">Alpine Skiing Girls</option>
+                							<option value="biathlon boys">Biathlon Boys</option>
+                							<option value="biathlon girls">Biathlon Girls</option>
+                							<option value="cross-country skiing boys">Cross-Country Skiing Boys</option>
+                							<option value="cross-country skiing girls">Cross-Country Skiing Girls</option>
+                							<option value="figure skating boys">Figure Skating Boys</option>
+                							<option value="figure skating girls">Figure Skating Girls</option>
+                							<option value="freestyle boys">Freestyle Boys</option>
+                							<option value="freestyle girls">Freestyle Girls</option>
+                							<option value="ice hockey boys ">Ice Hockey Boys</option>
+                							<option value="ice speed skating boys">Ice Speed Skating Boys</option>
+                							<option value="ice speed skating girls">Ice Speed Skating Girls</option>
+                							<option value="snowboarding boys">Snowboarding Boys</option>
+                							<option value="snowboarding girls">Snowboarding Girls</option>
+       								</select>
+       								
+							   </div>
+							   
+							   <div class="col-lg-12 col-md-12 text-left nopadding">
+								
+								 	<div>
+            							<button class="coresave" form="eventspecific" type="submit">Save</button>
+       		 						 </div>
+       		 					 
+       		 					 </div>
+        				
+        				
+
+    						</form>
+    						 
+    						 
+    						<div class="col-lg-12 col-md-12 text-left nopadding">
+								
+								 	<div class="extra-margin">
+            								 <button class="openhide" ng-click="pictures = !pictures">Pictures</button>
+       		 						 </div>
+       		 					 
+       		 					 </div> 
+    						 
+        <form id="pictures" ng-submit="eventSpecificCtrl.saveData(eventSpecificCtrl.user.pictures)">
+        
+            <div ng-show="pictures">
+                <!-- TBD: Upload for pictures - ng-model doesn't work here. -->
+                
+                 <div class="col-lg-6 col-md-6 text-left nopadding">
+                 	<div class="extra-margin">
+                 		Upload your picture:
+                 	</div>
+                 </div>
+                 <div class="col-lg-6 col-md-6 text-left nopadding">
+                    <input class="extra-margin" type="file" ng-model="eventSpecificCtrl.user.pictures.profilePicture" name="pic" accept="image/*">
+                 </div>
+
+           		 <div class="col-lg-6 col-md-6 text-left nopadding">
+           		 	<div class="extra-margin">
+           		 		Upload a copy of your passport:
+           		 	</div>
+           		 </div>
+           
+           
+           		<div class="col-lg-6 col-md-6 text-left nopadding">
+                	<input class="extra-margin" type="file" ng-model="eventSpecificCtrl.user.pictures.passportPicture" name="passport" accept="image/*">
+            	</div>
+
+				<div class="col-lg-12 col-md-12 text-left nopadding">
+            		
+            		<div class="extra-margin">
+            			<button class="coresave" form="pictures" type="submit">Save</button>
+       		 		</div>
+       		 		
+       		 	</div>
+        
+        	</div>
+        
+    	</form>
+    						 
+
+    					</div> <!--event-->
+    				
+    				</form>
+
+			   </div>
+            
+           </div>
+        
+        	<div class="col-lg-3 text-left">
+            </div>
+        
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="../bootstrap/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bootstrap/js/bootstrap-select.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../bootstrap/js/moment.js"></script>
+    <script src="../bootstrap/js/bootstrap-datetimepicker.js"></script>
+    
+     <script>
+     
+	 $('.eventspec').selectpicker();
+	 
+	 //Enable mobile scrolling
+	 
+	 //if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+     //$('.select-event').selectpicker('mobile');
+     //$('.select-superuser').selectpicker('mobile');
+	 //}
+ 
+    </script>
+    
+    <script>
+    (function ($) {
+				$('#avability-from').datetimepicker({
+					pickTime: false,
+					 minDate: '5/1/2016',             
+    				 maxDate: '17/1/2016',
+    				 defaultDate:'5/1/2016'
+				});
+				$('#avability-until').datetimepicker({
+					pickTime: false,
+					minDate: '5/1/2016',             
+    				 maxDate: '17/1/2016',
+    				 defaultDate:'17/1/2016'
+				});
+	$('.current-work').selectpicker();
+	 //Enable mobile scrolling
+	 
+	 //if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+     //$('.select-event').selectpicker('mobile');
+     //$('.select-superuser').selectpicker('mobile');
+	 //}
+			})(jQuery);
+			
+    	
+    </script>
+    
+    
+
+</body>
+
+</html>

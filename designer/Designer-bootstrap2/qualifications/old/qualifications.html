@@ -1,0 +1,230 @@
+<h1>QUALIFICATIONS</h1><button ng-click="career = !career">Career</button><br>
+
+<form id="career" ng-submit="qualificationsCtrl.saveData(qualificationsCtrl.user.career)" ng-show="career">
+    <div>Current work:
+        <select ng-model="qualificationsCtrl.user.career.currentWork">
+            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value="pupil">Pupil</option>
+            <option value="undergratuate">Undergraduate</option>
+            <option value="apprentice">Apprentice</option>
+            <option value="employee">Employee</option>
+            <option value="freelance">Freelance</option>
+            <option value="retiree">Retiree</option>
+        </select>
+    </div><br>
+
+    <div>
+        Faculty:<input ng-model="qualificationsCtrl.user.career.faculty" type="text">
+    </div><br>
+
+    <div>
+        Education Institute:<input ng-model="qualificationsCtrl.user.career.educationInstitute" type="text">
+    </div><br>
+
+    <div>
+        Career:<textarea ng-model="qualificationsCtrl.user.career.career" cols="50" rows="10" name="textbox"></textarea>
+    </div><br>
+        <button form="career" type="submit">Save</button>
+
+</form>
+
+        <button ng-click="knowledge = !knowledge">Knowledge</button><br>
+
+<form id="qualifications" ng-submit="qualificationsCtrl.saveData(qualificationsCtrl.user.qualifications)" ng-show="knowledge">
+    <div>Mother Tongue:
+        <select ng-model="qualificationsCtrl.user.qualifications.motherTongue">
+            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value="english">English</option>
+            <option value="french">French</option>
+            <option value="german">German</option>
+            <option value="italian">Italian</option>
+            <option value="other">Other</option>
+        </select>
+    </div><br>
+
+
+
+
+
+    <div>1st Additional Language:
+        <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages1">
+            <option value='' disabled selected style='display:none;'>Open here</option>
+            <option value="english">English</option>
+            <option value="french">French</option>
+            <option value="german">German</option>
+            <option value="italian">Italian</option>
+            <option value="other">Other</option>
+        </select>
+
+        <div ng-if="qualificationsCtrl.languageCheck(qualificationsCtrl.user.qualifications.additionalLanguages1)">
+            <div>
+                Translation Knowledge:
+                <select ng-model="qualificationsCtrl.user.qualifications.translationKnowledge1">
+                    <option value='' disabled selected style='display:none;'>Open here</option>
+                    <option value="basic">Basic</option>
+                    <option value="good">Good</option>
+                    <option value="great">Great</option>
+                </select>
+            </div><br>
+
+            <div>
+                Interpreting Knowledge:
+                <select ng-model="qualificationsCtrl.user.qualifications.interpretingKnowledge1">
+                    <option value='' disabled selected style='display:none;'>Open here</option>
+                    <option value="basic">Basic</option>
+                    <option value="good">Good</option>
+                    <option value="great">Great</option>
+                </select>
+            </div><br>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div ng-show="qualificationsCtrl.user.qualifications.additionalLanguages1">
+        <div>2nd Additional Language:
+            <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages2">
+                <option value='' disabled selected style='display:none;'>Open here</option>
+                <option value="english">English</option>
+                <option value="french">French</option>
+                <option value="german">German</option>
+                <option value="italian">Italian</option>
+                <option value="other">Other</option>
+            </select>
+
+            <div ng-if="qualificationsCtrl.languageCheck(qualificationsCtrl.user.qualifications.additionalLanguages2)">
+                <div>
+                    Translation Knowledge:
+                    <select ng-model="qualificationsCtrl.user.qualifications.translationKnowledge2">
+                        <option value='' disabled selected style='display:none;'>Open here</option>
+                        <option value="basic">Basic</option>
+                        <option value="good">Good</option>
+                        <option value="great">Great</option>
+                    </select>
+                </div><br>
+
+                <div>
+                    Interpreting Knowledge:
+                    <select ng-model="qualificationsCtrl.user.qualifications.interpretingKnowledge2">
+                        <option value='' disabled selected style='display:none;'>Open here</option>
+                        <option value="basic">Basic</option>
+                        <option value="good">Good</option>
+                        <option value="great">Great</option>
+                    </select>
+                </div><br>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div ng-show="qualificationsCtrl.user.qualifications.additionalLanguages2">
+        <div>3rd Additional Language:
+            <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages3">
+                <option value='' disabled selected style='display:none;'>Open here</option>
+                <option value="english">English</option>
+                <option value="french">French</option>
+                <option value="german">German</option>
+                <option value="italian">Italian</option>
+                <option value="other">Other</option>
+            </select>
+
+            <div ng-if="qualificationsCtrl.languageCheck(qualificationsCtrl.user.qualifications.additionalLanguages3)">
+                <div>
+                    Translation Knowledge:
+                    <select ng-model="qualificationsCtrl.user.qualifications.translationKnowledge3">
+                        <option value='' disabled selected style='display:none;'>Open here</option>
+                        <option value="basic">Basic</option>
+                        <option value="good">Good</option>
+                        <option value="great">Great</option>
+                    </select>
+                </div><br>
+
+                <div>
+                    Interpreting Knowledge:
+                    <select ng-model="qualificationsCtrl.user.qualifications.interpretingKnowledge3">
+                        <option value='' disabled selected style='display:none;'>Open here</option>
+                        <option value="basic">Basic</option>
+                        <option value="good">Good</option>
+                        <option value="great">Great</option>
+                    </select>
+                </div><br>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div ng-show="qualificationsCtrl.user.qualifications.additionalLanguages3">
+        <div>4th Additional Language:
+            <select ng-model="qualificationsCtrl.user.qualifications.additionalLanguages4">
+                <option value='' disabled selected style='display:none;'>Open here</option>
+                <option value="english">English</option>
+                <option value="french">French</option>
+                <option value="german">German</option>
+                <option value="italian">Italian</option>
+                <option value="other">Other</option>
+            </select>
+
+            <div ng-if="qualificationsCtrl.languageCheck(qualificationsCtrl.user.qualifications.additionalLanguages4)">
+                <div>
+                    Translation Knowledge:
+                    <select ng-model="qualificationsCtrl.user.qualifications.translationKnowledge4">
+                        <option value='' disabled selected style='display:none;'>Open here</option>
+                        <option value="basic">Basic</option>
+                        <option value="good">Good</option>
+                        <option value="great">Great</option>
+                    </select>
+                </div><br>
+
+                <div>
+                    Interpreting Knowledge:
+                    <select ng-model="qualificationsCtrl.user.qualifications.interpretingKnowledge4">
+                        <option value='' disabled selected style='display:none;'>Open here</option>
+                        <option value="basic">Basic</option>
+                        <option value="good">Good</option>
+                        <option value="great">Great</option>
+                    </select>
+                </div><br>
+
+            </div>
+
+            <div>
+                Only 4 languages can be chosen!
+            </div>
+        </div>
+    </div><br>
+
+
+
+    <div>
+        IT-Knowledge:
+            <select ng-model="qualificationsCtrl.user.qualifications.ITKnowledge">
+                <option value='' disabled selected style='display:none;'>Open here</option>
+                <option value="none">None</option>
+                <option value="basic">Basic</option>
+                <option value="advanced">Advanced</option>
+                <option value="expert">Expert</option>
+        </select>
+    </div><br>
+
+    <div>
+        Additional Qualifications:<textarea ng-model="qualificationsCtrl.user.qualifications.additionalQualifications" cols="50" rows="10" name="textbox"></textarea>
+    </div><br>
+
+    <div>
+        Event Experiences:<input ng-model="qualificationsCtrl.user.qualifications.eventExperiences" type="text">
+    </div><br>
+        <button type="submit" form="qualifications" >Save</button>
+</form>
+
+

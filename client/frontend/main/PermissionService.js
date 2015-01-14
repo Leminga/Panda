@@ -1,12 +1,13 @@
 angular.module('Panda')
-    .service('PermissionService', ['$rootScope',function ($rootScope) {
+    .service('PermissionService', ['$window',function ($window) {
+
         return {
             setPermission: function (permission) {
-                $rootScope.GLOBALPERMISSION = permission;
+                $window.sessionStorage.setItem("permission", permission);
             },
 
             getPermission: function(){
-                return $rootScope.GLOBALPERMISSION;
+                return $window.sessionStorage.getItem('permission');
             }
         }
     }]);

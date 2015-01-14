@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Innsbruck 2016 > Qualifications</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,700,900' rel='stylesheet' type='text/css'>
+    <link href="../bootstrap/css/bootstrap-select.css" rel="stylesheet">
+    <link href="../bootstrap/css/custom.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+    body {
+        /*padding-top: 200px;*/
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    
+    <div class="logo">
+    
+    <img src="../bootstrap/imgs/logo.png">
+    
+    </div>
+    <!--logo-->
+    
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    
+        <div class="container-fluid">
+         
+         	<div class="col-lg-6 text-left"></div>
+         
+         	<div class="col-lg-6 text-right">
+         
+        		 <div class="col-lg-4 text-right">
+        		 </div>
+         
+       		     <div class="col-lg-8">
+         
+        			 <h1 class="page-title">registrationform</h1> 
+         
+        		 </div>
+         
+         
+            </div> 
+            
+        </div>
+        <!-- /.container fluid-->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+        
+            <div class="col-lg-3 text-left">
+            
+           	 	<form class="side-menu-wrapper">
+           			 <ul class="side-menu">
+           			    <li><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>  <a href="#/overView">Overview</a></li>
+						<li><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>  <a href="#/coreData">Coredata</a></li>
+						<li class="active"><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>  <a href="#/qualifications">Qualifications</a></li>
+						<li><span class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></span>  <a href="#/eventSpecific">Event-specific</a></li>
+   					</ul>
+   
+   					<form ng-submit="overviewCtrl.logout()">
+        				<button class="logout" type="submit">Logout</button>
+    				</form>
+   
+				</form>
+
+       		 </div>
+        
+        	 <div class="col-lg-6 text-left">
+        	
+               <div class="header qualifications">
+    				<h1>Qualifications</h1>
+			   </div>
+
+  			  
+				<div class="col-lg-12 col-md-12 text-left nopadding">
+            
+            		<h4 class="career-title">
+    					Career
+            		</h4>
+
+				</div>
+
+			   <div>
+			    
+    				<form id="career" class="quals" ng-submit="qualificationsCtrl.saveData(qualificationsCtrl.user.career)" ng-show="career">
+        
+        				<div class="career">
+        				
+        				<!--CURRENT WORK-->
+        				
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                						Current work:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.career.currentWork">
+									 
+            							<option value='' disabled selected style='display:none;'>Open here</option>
+            							<option value="pupil">Pupil</option>
+           							    <option value="undergratuate">Undergraduate</option>
+            							<option value="apprentice">Apprentice</option>
+            							<option value="employee">Employee</option>
+            							<option value="freelance">Freelance</option>
+            							<option value="retiree">Retiree</option>
+           								 
+       								</select>
+       								
+							   </div>
+								
+								
+							<!--FACULTY-->
+								
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin">
+                						 Faculty:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+									<input ng-model="qualificationsCtrl.user.career.faculty" type="text">
+								</div>
+								
+								<!--EDUCATION INSTITUTE-->
+						
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin">
+                						 Education Institute:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+									<input ng-model="qualificationsCtrl.user.career.educationInstitute" type="text">
+								</div>
+								
+								<!--CAREER-->
+						
+								<div class="col-lg-12 text-left nopadding">
+						
+									 <label class="career">Career:</label>
+									 <textarea class="careertextarea" ng-model="qualificationsCtrl.user.career.career" cols="50" rows="10" name="textbox"></textarea>
+						 			 <button class="career" form="career" type="submit">Save</button>
+						 			 
+						 			 </form>
+								</div><!--col-lg-12-->
+            			
+            					
+            					<!-- KNOWLEGE -->
+            					<div class="col-lg-12 text-left nopadding">
+            				
+            						<h4 class="career-title extra-margin">
+    									Knowlege
+            						</h4>
+        						
+        						</div>
+        						
+        						
+        						<!--MOTHER TONGUE-->
+        						<form id="qualifications" ng-submit="qualificationsCtrl.saveData(qualificationsCtrl.user.qualifications)" ng-show="knowledge">
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                						Mother tongue:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.motherTongue">
+									 
+            							 <option value='' disabled selected style='display:none;'>Open here</option>
+           								 <option value="english">English</option>
+            							 <option value="french">French</option>
+            							 <option value="german">German</option>
+            							 <option value="italian">Italian</option>
+           								 <option value="other">Other</option>
+           								 
+       								</select>
+       								
+							   </div>
+        						
+        						<!--1st Additional Language:-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					1st Additional Language:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.additionalLanguages1">
+									 
+            							<option value='' disabled selected style='display:none;'>Open here</option>
+            							<option value="english">English</option>
+            							<option value="french">French</option>
+            							<option value="german">German</option>
+            							<option value="italian">Italian</option>
+           								<option value="other">Other</option>
+           								 
+       								</select>
+       								
+							   </div>
+							   
+							   <!--Translation Knowledge-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					Translation Knowledge:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.translationKnowledge1">
+									 
+            							 <option value='' disabled selected style='display:none;'>Open here</option>
+                    					 <option value="basic">Basic</option>
+                    					 <option value="good">Good</option>
+                    					 <option value="great">Great</option>
+           								 
+       								</select>
+       								
+							   </div>
+        						
+        						 <!--Interpreting Knowledge-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					  Interpreting Knowledge:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.interpretingKnowledge1">
+									 
+            							 <option value='' disabled selected style='display:none;'>Open here</option>
+                    					 <option value="basic">Basic</option>
+                    					 <option value="good">Good</option>
+                    					 <option value="great">Great</option>
+           								 
+       								</select>
+       								
+							   </div>
+							   
+							   
+							   
+							   
+							   
+							    <!--2nd Additional Language-->
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					2nd Additional Language:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.additionalLanguages2">
+									 
+            							<option value='' disabled selected style='display:none;'>Open here</option>
+            							<option value="english">English</option>
+            							<option value="french">French</option>
+            							<option value="german">German</option>
+            							<option value="italian">Italian</option>
+           								<option value="other">Other</option>
+           								 
+       								</select>
+       								
+							   </div>
+							   
+							   <!--Translation Knowledge-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					Translation Knowledge:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.translationKnowledge2">
+									 
+            							 <option value='' disabled selected style='display:none;'>Open here</option>
+                    					 <option value="basic">Basic</option>
+                    					 <option value="good">Good</option>
+                    					 <option value="great">Great</option>
+           								 
+       								</select>
+       								
+							   </div>
+        						
+        						 <!--Interpreting Knowledge-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					  Interpreting Knowledge:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.interpretingKnowledge2">
+									 
+            							 <option value='' disabled selected style='display:none;'>Open here</option>
+                    					 <option value="basic">Basic</option>
+                    					 <option value="good">Good</option>
+                    					 <option value="great">Great</option>
+           								 
+       								</select>
+       								
+							   </div>
+        						
+        						
+        						
+        						
+        						
+        					
+        						<!--3rd Additional Language-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					3rd Additional Language:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.additionalLanguages3">
+									 
+            							<option value='' disabled selected style='display:none;'>Open here</option>
+            							<option value="english">English</option>
+            							<option value="french">French</option>
+            							<option value="german">German</option>
+            							<option value="italian">Italian</option>
+           								<option value="other">Other</option>
+           								 
+       								</select>
+       								
+							   </div>
+							   
+							   <!--Translation Knowledge-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					Translation Knowledge:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.translationKnowledge3">
+									 
+            							 <option value='' disabled selected style='display:none;'>Open here</option>
+                    					 <option value="basic">Basic</option>
+                    					 <option value="good">Good</option>
+                    					 <option value="great">Great</option>
+           								 
+       								</select>
+       								
+							   </div>
+        						
+        						 <!--Interpreting Knowledge-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					  Interpreting Knowledge:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.interpretingKnowledge3">
+									 
+            							 <option value='' disabled selected style='display:none;'>Open here</option>
+                    					 <option value="basic">Basic</option>
+                    					 <option value="good">Good</option>
+                    					 <option value="great">Great</option>
+           								 
+       								</select>
+       								
+							   </div>
+							   
+							   
+							   
+							   
+							   
+							   
+							   
+							   <!--4th Additional Language-->
+							   
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					4th Additional Language:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.additionalLanguages4">
+									 
+            							<option value='' disabled selected style='display:none;'>Open here</option>
+            							<option value="english">English</option>
+            							<option value="french">French</option>
+            							<option value="german">German</option>
+            							<option value="italian">Italian</option>
+           								<option value="other">Other</option>
+           								 
+       								</select>
+       								
+							   </div>
+							   
+							   <!--Translation Knowledge-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					Translation Knowledge:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.translationKnowledge4">
+									 
+            							 <option value='' disabled selected style='display:none;'>Open here</option>
+                    					 <option value="basic">Basic</option>
+                    					 <option value="good">Good</option>
+                    					 <option value="great">Great</option>
+           								 
+       								</select>
+       								
+							   </div>
+        						
+        						 <!--Interpreting Knowledge-->
+        						
+        						<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					  Interpreting Knowledge:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.interpretingKnowledge4">
+									 
+            							 <option value='' disabled selected style='display:none;'>Open here</option>
+                    					 <option value="basic">Basic</option>
+                    					 <option value="good">Good</option>
+                    					 <option value="great">Great</option>
+           								 
+       								</select>
+       								
+							   </div>
+							   
+							   
+							   <div class="col-lg-12 col-md-12 text-left nopadding">
+            
+            						<div class="extra-margin2 bold">
+                						Only 4 languages can be chosen!
+            						</div>
+
+								</div>
+								
+								
+								
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin2">
+                					  IT Knowledge:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+
+									<select class="current-work" title="Open here" data-width="100%" ng-model="qualificationsCtrl.user.qualifications.ITKnowledge">
+									 
+            							   <option value='' disabled selected style='display:none;'>Open here</option>
+                						   <option value="none">None</option>
+                   						   <option value="basic">Basic</option>
+                						   <option value="advanced">Advanced</option>
+                						   <option value="expert">Expert</option>
+           								 
+       								</select>
+       								
+							   </div>
+							   
+							   
+							   <div class="col-lg-12 text-left nopadding">
+						
+									 <label class="career">Additional Qualifications:</label>
+									 <textarea class="additionaltextarea" ng-model="qualificationsCtrl.user.qualifications.additionalQualifications" cols="50" rows="10" name="textbox"></textarea>
+				
+								</div><!--col-lg-12-->
+								
+								
+								<!--EXPERIENCE-->
+								
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+            
+            						<div class="extra-margin">
+                						 Event Experiences:
+            						</div>
+
+								</div>
+
+
+								<div class="col-lg-6 col-md-6 text-left nopadding">
+									<input ng-model="qualificationsCtrl.user.qualifications.eventExperiences" type="text">
+								</div>
+								
+								
+								 <div class="col-lg-12 text-left nopadding">
+								 
+								 <div class="extram-agrin">
+								 	<button class="languages" type="submit" form="qualifications" >Save</button>
+        						 </div>
+        						 
+        						 </div>
+        						 
+        						 
+        				</div> <!--qualifications-->
+    				
+    				</form>
+
+			   </div>
+            
+           </div><!--col-lg-3-->
+        
+           <div class="col-lg-3 text-left">
+           </div>
+        
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="../bootstrap/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bootstrap/js/bootstrap-select.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+  
+    <script>
+     $('.current-work').selectpicker();
+	 $('.select-superuser').selectpicker();
+	 
+	 //Enable mobile scrolling
+	 
+	 //if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+     //$('.select-event').selectpicker('mobile');
+     //$('.select-superuser').selectpicker('mobile');
+	 //}
+ 
+    </script>
+    
+
+</body>
+
+</html>
