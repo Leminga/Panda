@@ -3,327 +3,14 @@
 
 # --- !Ups
 
-create table additional_coach (
+create table clothing_size (
   id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_additional_coach primary key (id))
+  size                      varchar(255),
+  constraint pk_clothing_size primary key (id))
 ;
 
-create table additional_packet (
-  packet_booked             boolean,
-  packet_paid               boolean)
-;
-
-create table address (
+create table country (
   id                        bigint not null,
-  connection_type_tid       bigint,
-  connectionTypeTid         bigint,
-  volunteer_id              bigint,
-  street                    varchar(255),
-  housenumber               varchar(255),
-  zip                       varchar(255),
-  city                      varchar(255),
-  constraint uq_address_connection_type_tid unique (connection_type_tid),
-  constraint pk_address primary key (id))
-;
-
-create table arrival (
-  arrival_date              timestamp,
-  arrival_place_tid         bigint,
-  arrivalPlaceTid           bigint,
-  arrival_flight_number     varchar(255),
-  arrival_comment           varchar(255),
-  constraint uq_arrival_arrival_place_tid unique (arrival_place_tid))
-;
-
-create table athlete (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_athlete primary key (id))
-;
-
-create table attachments (
-  photo                     varbinary(255),
-  copy_passport             varbinary(255),
-  waiver                    varbinary(255))
-;
-
-create table availability (
-  availability_start        timestamp,
-  availability_end          timestamp,
-  interest_in_assisting_before_event boolean)
-;
-
-create table city_guest (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_city_guest primary key (id))
-;
-
-create table city_rep_guest (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_city_rep_guest primary key (id))
-;
-
-create table city_representative (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_city_representative primary key (id))
-;
-
-create table coach (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_coach primary key (id))
-;
-
-create table contact (
-  id                        bigint not null,
-  connection_type_tid       bigint,
-  connectionTypeTid         bigint,
-  volunteer_id              bigint,
-  constraint uq_contact_connection_type_tid unique (connection_type_tid),
-  constraint pk_contact primary key (id))
-;
-
-create table contractor (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_contractor primary key (id))
-;
-
-create table current_job (
-  current_jobid             bigint not null,
-  currentJobTid             bigint,
-  constraint pk_current_job primary key (current_jobid))
-;
-
-create table degree (
-  id                        bigint not null,
-  degree_tid                bigint,
-  degreeTid                 bigint,
-  constraint uq_degree_degree_tid unique (degree_tid),
-  constraint pk_degree primary key (id))
-;
-
-create table departure (
-  departure_date            timestamp,
-  departure_place_tid       bigint,
-  departurePlaceTid         bigint,
-  departure_flight_number   varchar(255),
-  departure_comment         varchar(255),
-  constraint uq_departure_departure_place_tid unique (departure_place_tid))
-;
-
-create table education_institute (
-  id                        bigint not null,
-  education_institute_tid   bigint,
-  educationInstituteTid     bigint,
-  constraint uq_education_institute_education unique (education_institute_tid),
-  constraint pk_education_institute primary key (id))
-;
-
-create table educationlevel (
-  id                        bigint not null,
-  educationlevel_tid        bigint,
-  educationlevelTid         bigint,
-  constraint uq_educationlevel_educationlevel unique (educationlevel_tid),
-  constraint pk_educationlevel primary key (id))
-;
-
-create table email (
-  id                        bigint not null,
-  subject                   varchar(255),
-  content                   varchar(255),
-  attachement               varbinary(255),
-  email_tid                 bigint,
-  constraint pk_email primary key (id))
-;
-
-create table email_address (
-  email_address             varchar(255))
-;
-
-create table emergency_contact (
-  emergency_surname         varchar(255),
-  emergency_name            varchar(255),
-  volunteer_id              bigint)
-;
-
-create table emergency_relation (
-  id                        bigint not null,
-  emergency_relation_tid    bigint,
-  emergencyRelationTid      bigint,
-  constraint uq_emergency_relation_emergency_ unique (emergency_relation_tid),
-  constraint pk_emergency_relation primary key (id))
-;
-
-create table event (
-  event_id                  bigint not null,
-  eventname                 varchar(255),
-  event_start               timestamp,
-  event_end                 timestamp,
-  eventDiscriptionTid       bigint,
-  volunteer_open            boolean,
-  dlo_open                  boolean,
-  icg_member_open           boolean,
-  clo_open                  boolean,
-  loc_open                  boolean,
-  media_open                boolean,
-  constraint pk_event primary key (event_id))
-;
-
-create table event_comment (
-  id                        bigint not null,
-  comment                   varchar(255),
-  constraint pk_event_comment primary key (id))
-;
-
-create table faculty (
-  id                        bigint not null,
-  faculty_tid               bigint,
-  facultyTid                bigint,
-  constraint uq_faculty_faculty_tid unique (faculty_tid),
-  constraint pk_faculty primary key (id))
-;
-
-create table head_of_delegation (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_head_of_delegation primary key (id))
-;
-
-create table icgguest (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_icgguest primary key (id))
-;
-
-create table icgmember (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_icgmember primary key (id))
-;
-
-create table icgmember_guest (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_icgmember_guest primary key (id))
-;
-
-create table identification (
-  identification_number     varchar(255),
-  identification_type       integer,
-  expiry_date               timestamp,
-  volunteer_id              bigint,
-  constraint ck_identification_identification_type check (identification_type in (0,1)))
-;
-
-create table identification_type (
-  test                      varchar(255))
-;
-
-create table interview (
-  id                        bigint not null,
-  interview_date            timestamp,
-  volunteer_id              bigint,
-  interviewer_id            bigint,
-  interview_comment         varchar(255),
-  volunteerId               bigint,
-  constraint uq_interview_volunteer_id unique (volunteer_id),
-  constraint pk_interview primary key (id))
-;
-
-create table it_knowledge (
-  id                        bigint not null,
-  volunteer_id              bigint,
-  itKnowledgeTid            bigint,
-  constraint pk_it_knowledge primary key (id))
-;
-
-create table jacket_sizes (
-  jacket_id                 bigint not null,
-  jacket_size               varchar(255),
-  constraint pk_jacket_sizes primary key (jacket_id))
-;
-
-create table locliaison_officer (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_locliaison_officer primary key (id))
-;
-
-create table locmember (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_locmember primary key (id))
-;
-
-create table language (
-  id                        bigint not null,
-  volunteer_id              bigint,
-  languageTid               bigint,
-  constraint pk_language primary key (id))
-;
-
-create table languages_translation (
-  id                        bigint not null,
-  language_translation_tid  bigint,
-  constraint pk_languages_translation primary key (id))
-;
-
-create table login_receiver (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  email                     varchar(255),
-  group_t                   integer,
-  constraint ck_login_receiver_group_t check (group_t in (0,1,2,3,4,5)),
-  constraint pk_login_receiver primary key (id))
-;
-
-create table login_time (
-  login                     timestamp)
-;
-
-create table media (
-  id                        bigint not null,
-  surname                   varchar(255),
-  prename                   varchar(255),
-  date_of_birth             timestamp,
-  constraint pk_media primary key (id))
-;
-
-create table nationality (
-  country_id                integer not null,
   iso2                      varchar(255),
   short_name                varchar(255),
   long_name                 varchar(255),
@@ -332,100 +19,85 @@ create table nationality (
   un_member                 varchar(255),
   calling_code              varchar(255),
   cctld                     varchar(255),
-  constraint pk_nationality primary key (country_id))
+  constraint pk_country primary key (id))
 ;
 
-create table organization (
+create table emergency_contact (
   id                        bigint not null,
-  organization_type         varchar(255),
-  organization_name         varchar(255),
-  organization_size         integer,
-  visible_for               boolean,
-  constraint pk_organization primary key (id))
+  surname                   varchar(255),
+  prename                   varchar(255),
+  phone_number              bigint,
+  email                     varchar(255),
+  constraint pk_emergency_contact primary key (id))
 ;
 
-create table permission (
+create table event (
+  eventname                 varchar(255) not null,
+  event_start               timestamp,
+  event_end                 timestamp,
+  constraint pk_event primary key (eventname))
+;
+
+create table gender (
   id                        bigint not null,
-  constraint pk_permission primary key (id))
+  gender                    varchar(255),
+  translation_tid           bigint,
+  constraint pk_gender primary key (id))
 ;
 
-create table phone (
+create table itmedia_skill (
   id                        bigint not null,
-  connection_type_tid       bigint,
-  connectionTypeTid         bigint,
-  volunteer_id              bigint,
-  phone_number              integer,
-  phone_type                integer,
-  constraint ck_phone_phone_type check (phone_type in (0,1,2)),
-  constraint uq_phone_connection_type_tid unique (connection_type_tid),
-  constraint pk_phone primary key (id))
+  it_media_skill            varchar(255),
+  translation_tid           bigint,
+  constraint pk_itmedia_skill primary key (id))
 ;
 
-create table preferred_communication_language (
+create table identification_type (
   id                        bigint not null,
-  preferred_language_tid    bigint,
-  preferredLanguageTid      bigint,
-  constraint uq_preferred_communication_langu unique (preferred_language_tid),
-  constraint pk_preferred_communication_langu primary key (id))
+  type                      varchar(255),
+  translation_tid           bigint,
+  constraint pk_identification_type primary key (id))
 ;
 
-create table preferred_working_area (
+create table interest (
   id                        bigint not null,
-  preferredAreaTid          bigint,
-  constraint pk_preferred_working_area primary key (id))
+  interest                  varchar(255),
+  translation_tid           bigint,
+  constraint pk_interest primary key (id))
 ;
 
-create table role (
+create table language_skill (
   id                        bigint not null,
-  role_tid                  bigint,
-  roleTid                   bigint,
-  visible_for               boolean,
-  vid                       bigint,
-  constraint uq_role_role_tid unique (role_tid),
-  constraint uq_role_vid unique (vid),
-  constraint pk_role primary key (id))
+  language_skill            varchar(255),
+  translation_tid           bigint,
+  constraint pk_language_skill primary key (id))
 ;
 
-create table sex (
+create table month (
   id                        bigint not null,
-  sexTid                    bigint,
-  constraint pk_sex primary key (id))
+  month                     varchar(255),
+  translation_tid           bigint,
+  constraint pk_month primary key (id))
 ;
 
-create table shoe_sizes (
-  shoe_id                   bigint not null,
-  shoe_size                 integer,
-  constraint pk_shoe_sizes primary key (shoe_id))
-;
-
-create table sport (
+create table profession (
   id                        bigint not null,
-  sport_tid                 bigint,
-  sportTid                  bigint,
-  constraint uq_sport_sport_tid unique (sport_tid),
-  constraint pk_sport primary key (id))
+  profession                varchar(255),
+  translation_tid           bigint,
+  constraint pk_profession primary key (id))
 ;
 
-create table sport_interest (
+create table shoe_size (
   id                        bigint not null,
-  sport_interest_tid        bigint,
-  sportInterestTid          bigint,
-  constraint uq_sport_interest_sport_interest unique (sport_interest_tid),
-  constraint pk_sport_interest primary key (id))
+  shoe_size                 float,
+  constraint pk_shoe_size primary key (id))
 ;
 
-create table text_boxes (
+create table sport_skill (
   id                        bigint not null,
-  career                    varchar(255),
-  other_qualification       varchar(255),
-  constraint pk_text_boxes primary key (id))
-;
-
-create table training (
-  training_name             varchar(255) not null,
-  trainingdate              timestamp,
-  trainingquota             varchar(255),
-  constraint pk_training primary key (training_name))
+  sport_skill               varchar(255),
+  translation_tid           bigint,
+  constraint pk_sport_skill primary key (id))
 ;
 
 create table translation (
@@ -435,10 +107,14 @@ create table translation (
   constraint pk_translation primary key (tid))
 ;
 
-create table trousers_sizes (
-  trousers_id               bigint not null,
-  trousers_size             varchar(255),
-  constraint pk_trousers_sizes primary key (trousers_id))
+create table user (
+  username                  varchar(255) not null,
+  password                  varchar(255),
+  creation_time             timestamp,
+  validated                 boolean,
+  auth_token                varchar(255),
+  last_login                timestamp,
+  constraint pk_user primary key (username))
 ;
 
 create table user_login (
@@ -458,813 +134,281 @@ create table volunteer (
   id                        bigint not null,
   surname                   varchar(255),
   prename                   varchar(255),
-  date_of_birth             timestamp,
-  SexId                     bigint,
-  JacketId                  bigint,
-  TrousersId                bigint,
-  ShoeId                    bigint,
-  CurrentJobid              bigint,
-  PreferredWorkingAreaId    bigint,
-  TextBoxesId               bigint,
-  social_security_number    varchar(255),
-  volunteer_agreement       varbinary(255),
+  sex_id                    bigint,
+  username                  varchar(255),
+  birthday_date             integer,
+  birthdayMonth_id          bigint,
+  birthday_year             integer,
+  countryOfBirth_id         bigint,
+  social_security_number    integer,
+  place_of_residence        varchar(255),
+  plz                       varchar(255),
+  adress                    varchar(255),
+  country_id                bigint,
+  phone_number              bigint,
+  mail                      varchar(255),
+  adress_confirmed          boolean,
+  identificationType_id     bigint,
+  id_number                 varchar(255),
+  date_of_issue             integer,
+  monthOfIssue_id           bigint,
+  year_of_issue             integer,
+  issuing_authority         varchar(255),
+  validUntilMonth_id        bigint,
+  valid_until_year          integer,
+  car_driving_license       boolean,
+  other_driving_license     varchar(255),
+  comment                   varchar(255),
+  emergencyContact_id       bigint,
+  jacketSize_id             bigint,
+  trouserSize_id            bigint,
+  shoeSize_id               bigint,
+  profession_id             bigint,
+  university                varchar(255),
+  field_of_profession       varchar(255),
+  professional_career       varchar(255),
+  germanSkill_id            bigint,
+  englishSkill_id           bigint,
+  italianSkill_id           bigint,
+  frenchSkill_id            bigint,
+  spanishSkill_id           bigint,
+  further_langues           varchar(255),
+  interpreting_languages    varchar(255),
+  translating_languages     varchar(255),
+  msOfficeSkill_id          bigint,
+  itNetworkSkill_id         bigint,
+  contentManagementSkill_id bigint,
+  graphicSkill_id           bigint,
+  further_qualifications    varchar(255),
+  events_participated       varchar(255),
+  interested_icg2016        boolean,
+  interested_icg2016prior_to_beginning boolean,
+  icg2016comment            varchar(255),
+  skiingSkill_id            bigint,
+  snowboardSkill_id         bigint,
+  crossCountrySkill_id      bigint,
+  biathlonSkill_id          bigint,
+  iceSkatingSkill_id        bigint,
+  iceHockeySkill_id         bigint,
+  interest1_id              bigint,
+  interest2_id              bigint,
+  interest3_id              bigint,
+  availability_beginning    timestamp,
+  availability_end          timestamp,
+  availability_comment      varchar(255),
   constraint pk_volunteer primary key (id))
 ;
 
 
-create table additional_coach_nationality (
-  additional_coach_id            bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_additional_coach_nationality primary key (additional_coach_id, nationality_country_id))
-;
-
-create table additional_coach_degree (
-  additional_coach_id            bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_additional_coach_degree primary key (additional_coach_id, degree_id))
-;
-
-create table athlete_nationality (
-  athlete_id                     bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_athlete_nationality primary key (athlete_id, nationality_country_id))
-;
-
-create table athlete_degree (
-  athlete_id                     bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_athlete_degree primary key (athlete_id, degree_id))
-;
-
-create table city_guest_nationality (
-  city_guest_id                  bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_city_guest_nationality primary key (city_guest_id, nationality_country_id))
-;
-
-create table city_guest_degree (
-  city_guest_id                  bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_city_guest_degree primary key (city_guest_id, degree_id))
-;
-
-create table city_rep_guest_nationality (
-  city_rep_guest_id              bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_city_rep_guest_nationality primary key (city_rep_guest_id, nationality_country_id))
-;
-
-create table city_rep_guest_degree (
-  city_rep_guest_id              bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_city_rep_guest_degree primary key (city_rep_guest_id, degree_id))
-;
-
-create table city_representative_nationality (
-  city_representative_id         bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_city_representative_nationality primary key (city_representative_id, nationality_country_id))
-;
-
-create table city_representative_degree (
-  city_representative_id         bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_city_representative_degree primary key (city_representative_id, degree_id))
-;
-
-create table coach_nationality (
-  coach_id                       bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_coach_nationality primary key (coach_id, nationality_country_id))
-;
-
-create table coach_degree (
-  coach_id                       bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_coach_degree primary key (coach_id, degree_id))
-;
-
-create table contractor_nationality (
-  contractor_id                  bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_contractor_nationality primary key (contractor_id, nationality_country_id))
-;
-
-create table contractor_degree (
-  contractor_id                  bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_contractor_degree primary key (contractor_id, degree_id))
-;
-
-create table head_of_delegation_nationality (
-  head_of_delegation_id          bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_head_of_delegation_nationality primary key (head_of_delegation_id, nationality_country_id))
-;
-
-create table head_of_delegation_degree (
-  head_of_delegation_id          bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_head_of_delegation_degree primary key (head_of_delegation_id, degree_id))
-;
-
-create table icgguest_nationality (
-  icgguest_id                    bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_icgguest_nationality primary key (icgguest_id, nationality_country_id))
-;
-
-create table icgguest_degree (
-  icgguest_id                    bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_icgguest_degree primary key (icgguest_id, degree_id))
-;
-
-create table icgmember_nationality (
-  icgmember_id                   bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_icgmember_nationality primary key (icgmember_id, nationality_country_id))
-;
-
-create table icgmember_degree (
-  icgmember_id                   bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_icgmember_degree primary key (icgmember_id, degree_id))
-;
-
-create table icgmember_guest_nationality (
-  icgmember_guest_id             bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_icgmember_guest_nationality primary key (icgmember_guest_id, nationality_country_id))
-;
-
-create table icgmember_guest_degree (
-  icgmember_guest_id             bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_icgmember_guest_degree primary key (icgmember_guest_id, degree_id))
-;
-
-create table locliaison_officer_nationality (
-  locliaison_officer_id          bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_locliaison_officer_nationality primary key (locliaison_officer_id, nationality_country_id))
-;
-
-create table locliaison_officer_degree (
-  locliaison_officer_id          bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_locliaison_officer_degree primary key (locliaison_officer_id, degree_id))
-;
-
-create table locmember_nationality (
-  locmember_id                   bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_locmember_nationality primary key (locmember_id, nationality_country_id))
-;
-
-create table locmember_degree (
-  locmember_id                   bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_locmember_degree primary key (locmember_id, degree_id))
-;
-
-create table login_receiver_nationality (
-  login_receiver_id              bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_login_receiver_nationality primary key (login_receiver_id, nationality_country_id))
-;
-
-create table login_receiver_degree (
-  login_receiver_id              bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_login_receiver_degree primary key (login_receiver_id, degree_id))
-;
-
-create table media_nationality (
-  media_id                       bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_media_nationality primary key (media_id, nationality_country_id))
-;
-
-create table media_degree (
-  media_id                       bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_media_degree primary key (media_id, degree_id))
-;
-
-create table volunteer_nationality (
+create table volunteer_country (
   volunteer_id                   bigint not null,
-  nationality_country_id         integer not null,
-  constraint pk_volunteer_nationality primary key (volunteer_id, nationality_country_id))
-;
-
-create table volunteer_degree (
-  volunteer_id                   bigint not null,
-  degree_id                      bigint not null,
-  constraint pk_volunteer_degree primary key (volunteer_id, degree_id))
-;
-
-create table volunteer_training (
-  volunteer_id                   bigint not null,
-  training_training_name         varchar(255) not null,
-  constraint pk_volunteer_training primary key (volunteer_id, training_training_name))
+  country_id                     bigint not null,
+  constraint pk_volunteer_country primary key (volunteer_id, country_id))
 ;
 
 create table volunteer_event (
   volunteer_id                   bigint not null,
-  event_event_id                 bigint not null,
-  constraint pk_volunteer_event primary key (volunteer_id, event_event_id))
+  event_eventname                varchar(255) not null,
+  constraint pk_volunteer_event primary key (volunteer_id, event_eventname))
 ;
-create sequence additional_coach_seq;
+create sequence clothing_size_seq;
 
-create sequence address_seq;
+create sequence country_seq;
 
-create sequence athlete_seq;
-
-create sequence city_guest_seq;
-
-create sequence city_rep_guest_seq;
-
-create sequence city_representative_seq;
-
-create sequence coach_seq;
-
-create sequence contact_seq;
-
-create sequence contractor_seq;
-
-create sequence current_job_seq;
-
-create sequence degree_seq;
-
-create sequence education_institute_seq;
-
-create sequence educationlevel_seq;
-
-create sequence email_seq;
-
-create sequence emergency_relation_seq;
+create sequence emergency_contact_seq;
 
 create sequence event_seq;
 
-create sequence event_comment_seq;
+create sequence gender_seq;
 
-create sequence faculty_seq;
+create sequence itmedia_skill_seq;
 
-create sequence head_of_delegation_seq;
+create sequence identification_type_seq;
 
-create sequence icgguest_seq;
+create sequence interest_seq;
 
-create sequence icgmember_seq;
+create sequence language_skill_seq;
 
-create sequence icgmember_guest_seq;
+create sequence month_seq;
 
-create sequence interview_seq;
+create sequence profession_seq;
 
-create sequence it_knowledge_seq;
+create sequence shoe_size_seq;
 
-create sequence jacket_sizes_seq;
-
-create sequence locliaison_officer_seq;
-
-create sequence locmember_seq;
-
-create sequence language_seq;
-
-create sequence languages_translation_seq;
-
-create sequence login_receiver_seq;
-
-create sequence media_seq;
-
-create sequence nationality_seq;
-
-create sequence organization_seq;
-
-create sequence permission_seq;
-
-create sequence phone_seq;
-
-create sequence preferred_communication_language_seq;
-
-create sequence preferred_working_area_seq;
-
-create sequence role_seq;
-
-create sequence sex_seq;
-
-create sequence shoe_sizes_seq;
-
-create sequence sport_seq;
-
-create sequence sport_interest_seq;
-
-create sequence text_boxes_seq;
-
-create sequence training_seq;
+create sequence sport_skill_seq;
 
 create sequence translation_seq;
 
-create sequence trousers_sizes_seq;
+create sequence user_seq;
 
 create sequence user_login_seq;
 
 create sequence volunteer_seq;
 
-alter table address add constraint fk_address_translation_1 foreign key (connectionTypeTid) references translation (tid) on delete restrict on update restrict;
-create index ix_address_translation_1 on address (connectionTypeTid);
-alter table address add constraint fk_address_volunteer_2 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_address_volunteer_2 on address (volunteer_id);
-alter table arrival add constraint fk_arrival_translation_3 foreign key (arrivalPlaceTid) references translation (tid) on delete restrict on update restrict;
-create index ix_arrival_translation_3 on arrival (arrivalPlaceTid);
-alter table contact add constraint fk_contact_translation_4 foreign key (connectionTypeTid) references translation (tid) on delete restrict on update restrict;
-create index ix_contact_translation_4 on contact (connectionTypeTid);
-alter table contact add constraint fk_contact_volunteer_5 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_contact_volunteer_5 on contact (volunteer_id);
-alter table current_job add constraint fk_current_job_translation_6 foreign key (currentJobTid) references translation (tid) on delete restrict on update restrict;
-create index ix_current_job_translation_6 on current_job (currentJobTid);
-alter table degree add constraint fk_degree_translation_7 foreign key (degreeTid) references translation (tid) on delete restrict on update restrict;
-create index ix_degree_translation_7 on degree (degreeTid);
-alter table departure add constraint fk_departure_translation_8 foreign key (departurePlaceTid) references translation (tid) on delete restrict on update restrict;
-create index ix_departure_translation_8 on departure (departurePlaceTid);
-alter table education_institute add constraint fk_education_institute_transla_9 foreign key (educationInstituteTid) references translation (tid) on delete restrict on update restrict;
-create index ix_education_institute_transla_9 on education_institute (educationInstituteTid);
-alter table educationlevel add constraint fk_educationlevel_translation_10 foreign key (educationlevelTid) references translation (tid) on delete restrict on update restrict;
-create index ix_educationlevel_translation_10 on educationlevel (educationlevelTid);
-alter table emergency_contact add constraint fk_emergency_contact_voluntee_11 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_emergency_contact_voluntee_11 on emergency_contact (volunteer_id);
-alter table emergency_relation add constraint fk_emergency_relation_transla_12 foreign key (emergencyRelationTid) references translation (tid) on delete restrict on update restrict;
-create index ix_emergency_relation_transla_12 on emergency_relation (emergencyRelationTid);
-alter table event add constraint fk_event_translation_13 foreign key (eventDiscriptionTid) references translation (tid) on delete restrict on update restrict;
-create index ix_event_translation_13 on event (eventDiscriptionTid);
-alter table faculty add constraint fk_faculty_translation_14 foreign key (facultyTid) references translation (tid) on delete restrict on update restrict;
-create index ix_faculty_translation_14 on faculty (facultyTid);
-alter table identification add constraint fk_identification_volunteer_15 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_identification_volunteer_15 on identification (volunteer_id);
-alter table interview add constraint fk_interview_volunteer_16 foreign key (volunteerId) references volunteer (id) on delete restrict on update restrict;
-create index ix_interview_volunteer_16 on interview (volunteerId);
-alter table it_knowledge add constraint fk_it_knowledge_volunteer_17 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_it_knowledge_volunteer_17 on it_knowledge (volunteer_id);
-alter table it_knowledge add constraint fk_it_knowledge_translation_18 foreign key (itKnowledgeTid) references translation (tid) on delete restrict on update restrict;
-create index ix_it_knowledge_translation_18 on it_knowledge (itKnowledgeTid);
-alter table language add constraint fk_language_volunteer_19 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_language_volunteer_19 on language (volunteer_id);
-alter table language add constraint fk_language_translation_20 foreign key (languageTid) references translation (tid) on delete restrict on update restrict;
-create index ix_language_translation_20 on language (languageTid);
-alter table phone add constraint fk_phone_translation_21 foreign key (connectionTypeTid) references translation (tid) on delete restrict on update restrict;
-create index ix_phone_translation_21 on phone (connectionTypeTid);
-alter table phone add constraint fk_phone_volunteer_22 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_phone_volunteer_22 on phone (volunteer_id);
-alter table preferred_communication_language add constraint fk_preferred_communication_la_23 foreign key (preferredLanguageTid) references translation (tid) on delete restrict on update restrict;
-create index ix_preferred_communication_la_23 on preferred_communication_language (preferredLanguageTid);
-alter table preferred_working_area add constraint fk_preferred_working_area_tra_24 foreign key (preferredAreaTid) references translation (tid) on delete restrict on update restrict;
-create index ix_preferred_working_area_tra_24 on preferred_working_area (preferredAreaTid);
-alter table role add constraint fk_role_translation_25 foreign key (roleTid) references translation (tid) on delete restrict on update restrict;
-create index ix_role_translation_25 on role (roleTid);
-alter table role add constraint fk_role_volunteer_26 foreign key (Vid) references volunteer (id) on delete restrict on update restrict;
-create index ix_role_volunteer_26 on role (Vid);
-alter table sex add constraint fk_sex_translation_27 foreign key (sexTid) references translation (tid) on delete restrict on update restrict;
-create index ix_sex_translation_27 on sex (sexTid);
-alter table sport add constraint fk_sport_translation_28 foreign key (sportTid) references translation (tid) on delete restrict on update restrict;
-create index ix_sport_translation_28 on sport (sportTid);
-alter table sport_interest add constraint fk_sport_interest_translation_29 foreign key (sportInterestTid) references translation (tid) on delete restrict on update restrict;
-create index ix_sport_interest_translation_29 on sport_interest (sportInterestTid);
-alter table user_login add constraint fk_user_login_volunteer_30 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_user_login_volunteer_30 on user_login (volunteer_id);
-alter table volunteer add constraint fk_volunteer_sex_31 foreign key (SexId) references sex (id) on delete restrict on update restrict;
-create index ix_volunteer_sex_31 on volunteer (SexId);
-alter table volunteer add constraint fk_volunteer_jacketId_32 foreign key (JacketId) references jacket_sizes (jacket_id) on delete restrict on update restrict;
-create index ix_volunteer_jacketId_32 on volunteer (JacketId);
-alter table volunteer add constraint fk_volunteer_trousersId_33 foreign key (TrousersId) references trousers_sizes (trousers_id) on delete restrict on update restrict;
-create index ix_volunteer_trousersId_33 on volunteer (TrousersId);
-alter table volunteer add constraint fk_volunteer_shoeId_34 foreign key (ShoeId) references shoe_sizes (shoe_id) on delete restrict on update restrict;
-create index ix_volunteer_shoeId_34 on volunteer (ShoeId);
-alter table volunteer add constraint fk_volunteer_currentJobid_35 foreign key (CurrentJobid) references current_job (current_jobid) on delete restrict on update restrict;
-create index ix_volunteer_currentJobid_35 on volunteer (CurrentJobid);
-alter table volunteer add constraint fk_volunteer_preferredWorking_36 foreign key (PreferredWorkingAreaId) references preferred_working_area (id) on delete restrict on update restrict;
-create index ix_volunteer_preferredWorking_36 on volunteer (PreferredWorkingAreaId);
-alter table volunteer add constraint fk_volunteer_textBoxesId_37 foreign key (TextBoxesId) references text_boxes (id) on delete restrict on update restrict;
-create index ix_volunteer_textBoxesId_37 on volunteer (TextBoxesId);
-
-
-
-alter table additional_coach_nationality add constraint fk_additional_coach_nationali_01 foreign key (additional_coach_id) references additional_coach (id) on delete restrict on update restrict;
-
-alter table additional_coach_nationality add constraint fk_additional_coach_nationali_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table additional_coach_degree add constraint fk_additional_coach_degree_ad_01 foreign key (additional_coach_id) references additional_coach (id) on delete restrict on update restrict;
-
-alter table additional_coach_degree add constraint fk_additional_coach_degree_de_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table athlete_nationality add constraint fk_athlete_nationality_athlet_01 foreign key (athlete_id) references athlete (id) on delete restrict on update restrict;
-
-alter table athlete_nationality add constraint fk_athlete_nationality_nation_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table athlete_degree add constraint fk_athlete_degree_athlete_01 foreign key (athlete_id) references athlete (id) on delete restrict on update restrict;
-
-alter table athlete_degree add constraint fk_athlete_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table city_guest_nationality add constraint fk_city_guest_nationality_cit_01 foreign key (city_guest_id) references city_guest (id) on delete restrict on update restrict;
-
-alter table city_guest_nationality add constraint fk_city_guest_nationality_nat_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table city_guest_degree add constraint fk_city_guest_degree_city_gue_01 foreign key (city_guest_id) references city_guest (id) on delete restrict on update restrict;
-
-alter table city_guest_degree add constraint fk_city_guest_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table city_rep_guest_nationality add constraint fk_city_rep_guest_nationality_01 foreign key (city_rep_guest_id) references city_rep_guest (id) on delete restrict on update restrict;
-
-alter table city_rep_guest_nationality add constraint fk_city_rep_guest_nationality_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table city_rep_guest_degree add constraint fk_city_rep_guest_degree_city_01 foreign key (city_rep_guest_id) references city_rep_guest (id) on delete restrict on update restrict;
-
-alter table city_rep_guest_degree add constraint fk_city_rep_guest_degree_degr_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table city_representative_nationality add constraint fk_city_representative_nation_01 foreign key (city_representative_id) references city_representative (id) on delete restrict on update restrict;
-
-alter table city_representative_nationality add constraint fk_city_representative_nation_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table city_representative_degree add constraint fk_city_representative_degree_01 foreign key (city_representative_id) references city_representative (id) on delete restrict on update restrict;
-
-alter table city_representative_degree add constraint fk_city_representative_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table coach_nationality add constraint fk_coach_nationality_coach_01 foreign key (coach_id) references coach (id) on delete restrict on update restrict;
-
-alter table coach_nationality add constraint fk_coach_nationality_national_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table coach_degree add constraint fk_coach_degree_coach_01 foreign key (coach_id) references coach (id) on delete restrict on update restrict;
-
-alter table coach_degree add constraint fk_coach_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table contractor_nationality add constraint fk_contractor_nationality_con_01 foreign key (contractor_id) references contractor (id) on delete restrict on update restrict;
-
-alter table contractor_nationality add constraint fk_contractor_nationality_nat_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table contractor_degree add constraint fk_contractor_degree_contract_01 foreign key (contractor_id) references contractor (id) on delete restrict on update restrict;
-
-alter table contractor_degree add constraint fk_contractor_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table head_of_delegation_nationality add constraint fk_head_of_delegation_nationa_01 foreign key (head_of_delegation_id) references head_of_delegation (id) on delete restrict on update restrict;
-
-alter table head_of_delegation_nationality add constraint fk_head_of_delegation_nationa_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table head_of_delegation_degree add constraint fk_head_of_delegation_degree__01 foreign key (head_of_delegation_id) references head_of_delegation (id) on delete restrict on update restrict;
-
-alter table head_of_delegation_degree add constraint fk_head_of_delegation_degree__02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table icgguest_nationality add constraint fk_icgguest_nationality_icggu_01 foreign key (icgguest_id) references icgguest (id) on delete restrict on update restrict;
-
-alter table icgguest_nationality add constraint fk_icgguest_nationality_natio_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table icgguest_degree add constraint fk_icgguest_degree_icgguest_01 foreign key (icgguest_id) references icgguest (id) on delete restrict on update restrict;
-
-alter table icgguest_degree add constraint fk_icgguest_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table icgmember_nationality add constraint fk_icgmember_nationality_icgm_01 foreign key (icgmember_id) references icgmember (id) on delete restrict on update restrict;
-
-alter table icgmember_nationality add constraint fk_icgmember_nationality_nati_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table icgmember_degree add constraint fk_icgmember_degree_icgmember_01 foreign key (icgmember_id) references icgmember (id) on delete restrict on update restrict;
-
-alter table icgmember_degree add constraint fk_icgmember_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table icgmember_guest_nationality add constraint fk_icgmember_guest_nationalit_01 foreign key (icgmember_guest_id) references icgmember_guest (id) on delete restrict on update restrict;
-
-alter table icgmember_guest_nationality add constraint fk_icgmember_guest_nationalit_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table icgmember_guest_degree add constraint fk_icgmember_guest_degree_icg_01 foreign key (icgmember_guest_id) references icgmember_guest (id) on delete restrict on update restrict;
-
-alter table icgmember_guest_degree add constraint fk_icgmember_guest_degree_deg_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table locliaison_officer_nationality add constraint fk_locliaison_officer_nationa_01 foreign key (locliaison_officer_id) references locliaison_officer (id) on delete restrict on update restrict;
-
-alter table locliaison_officer_nationality add constraint fk_locliaison_officer_nationa_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table locliaison_officer_degree add constraint fk_locliaison_officer_degree__01 foreign key (locliaison_officer_id) references locliaison_officer (id) on delete restrict on update restrict;
-
-alter table locliaison_officer_degree add constraint fk_locliaison_officer_degree__02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table locmember_nationality add constraint fk_locmember_nationality_locm_01 foreign key (locmember_id) references locmember (id) on delete restrict on update restrict;
-
-alter table locmember_nationality add constraint fk_locmember_nationality_nati_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table locmember_degree add constraint fk_locmember_degree_locmember_01 foreign key (locmember_id) references locmember (id) on delete restrict on update restrict;
-
-alter table locmember_degree add constraint fk_locmember_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table login_receiver_nationality add constraint fk_login_receiver_nationality_01 foreign key (login_receiver_id) references login_receiver (id) on delete restrict on update restrict;
-
-alter table login_receiver_nationality add constraint fk_login_receiver_nationality_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table login_receiver_degree add constraint fk_login_receiver_degree_logi_01 foreign key (login_receiver_id) references login_receiver (id) on delete restrict on update restrict;
-
-alter table login_receiver_degree add constraint fk_login_receiver_degree_degr_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table media_nationality add constraint fk_media_nationality_media_01 foreign key (media_id) references media (id) on delete restrict on update restrict;
-
-alter table media_nationality add constraint fk_media_nationality_national_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table media_degree add constraint fk_media_degree_media_01 foreign key (media_id) references media (id) on delete restrict on update restrict;
-
-alter table media_degree add constraint fk_media_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table volunteer_nationality add constraint fk_volunteer_nationality_volu_01 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-
-alter table volunteer_nationality add constraint fk_volunteer_nationality_nati_02 foreign key (nationality_country_id) references nationality (country_id) on delete restrict on update restrict;
-
-alter table volunteer_degree add constraint fk_volunteer_degree_volunteer_01 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-
-alter table volunteer_degree add constraint fk_volunteer_degree_degree_02 foreign key (degree_id) references degree (id) on delete restrict on update restrict;
-
-alter table volunteer_training add constraint fk_volunteer_training_volunte_01 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-
-alter table volunteer_training add constraint fk_volunteer_training_trainin_02 foreign key (training_training_name) references training (training_name) on delete restrict on update restrict;
+alter table gender add constraint fk_gender_translation_1 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_gender_translation_1 on gender (translation_tid);
+alter table itmedia_skill add constraint fk_itmedia_skill_translation_2 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_itmedia_skill_translation_2 on itmedia_skill (translation_tid);
+alter table identification_type add constraint fk_identification_type_transla_3 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_identification_type_transla_3 on identification_type (translation_tid);
+alter table interest add constraint fk_interest_translation_4 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_interest_translation_4 on interest (translation_tid);
+alter table language_skill add constraint fk_language_skill_translation_5 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_language_skill_translation_5 on language_skill (translation_tid);
+alter table month add constraint fk_month_translation_6 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_month_translation_6 on month (translation_tid);
+alter table profession add constraint fk_profession_translation_7 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_profession_translation_7 on profession (translation_tid);
+alter table sport_skill add constraint fk_sport_skill_translation_8 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_sport_skill_translation_8 on sport_skill (translation_tid);
+alter table user_login add constraint fk_user_login_volunteer_9 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_user_login_volunteer_9 on user_login (volunteer_id);
+alter table volunteer add constraint fk_volunteer_sex_10 foreign key (sex_id) references gender (id) on delete restrict on update restrict;
+create index ix_volunteer_sex_10 on volunteer (sex_id);
+alter table volunteer add constraint fk_volunteer_user_11 foreign key (username) references user (username) on delete restrict on update restrict;
+create index ix_volunteer_user_11 on volunteer (username);
+alter table volunteer add constraint fk_volunteer_birthdayMonth_12 foreign key (birthdayMonth_id) references month (id) on delete restrict on update restrict;
+create index ix_volunteer_birthdayMonth_12 on volunteer (birthdayMonth_id);
+alter table volunteer add constraint fk_volunteer_countryOfBirth_13 foreign key (countryOfBirth_id) references country (id) on delete restrict on update restrict;
+create index ix_volunteer_countryOfBirth_13 on volunteer (countryOfBirth_id);
+alter table volunteer add constraint fk_volunteer_country_14 foreign key (country_id) references country (id) on delete restrict on update restrict;
+create index ix_volunteer_country_14 on volunteer (country_id);
+alter table volunteer add constraint fk_volunteer_identificationTy_15 foreign key (identificationType_id) references identification_type (id) on delete restrict on update restrict;
+create index ix_volunteer_identificationTy_15 on volunteer (identificationType_id);
+alter table volunteer add constraint fk_volunteer_monthOfIssue_16 foreign key (monthOfIssue_id) references month (id) on delete restrict on update restrict;
+create index ix_volunteer_monthOfIssue_16 on volunteer (monthOfIssue_id);
+alter table volunteer add constraint fk_volunteer_validUntilMonth_17 foreign key (validUntilMonth_id) references month (id) on delete restrict on update restrict;
+create index ix_volunteer_validUntilMonth_17 on volunteer (validUntilMonth_id);
+alter table volunteer add constraint fk_volunteer_emergencyContact_18 foreign key (emergencyContact_id) references emergency_contact (id) on delete restrict on update restrict;
+create index ix_volunteer_emergencyContact_18 on volunteer (emergencyContact_id);
+alter table volunteer add constraint fk_volunteer_jacketSize_19 foreign key (jacketSize_id) references clothing_size (id) on delete restrict on update restrict;
+create index ix_volunteer_jacketSize_19 on volunteer (jacketSize_id);
+alter table volunteer add constraint fk_volunteer_trouserSize_20 foreign key (trouserSize_id) references clothing_size (id) on delete restrict on update restrict;
+create index ix_volunteer_trouserSize_20 on volunteer (trouserSize_id);
+alter table volunteer add constraint fk_volunteer_shoeSize_21 foreign key (shoeSize_id) references shoe_size (id) on delete restrict on update restrict;
+create index ix_volunteer_shoeSize_21 on volunteer (shoeSize_id);
+alter table volunteer add constraint fk_volunteer_profession_22 foreign key (profession_id) references profession (id) on delete restrict on update restrict;
+create index ix_volunteer_profession_22 on volunteer (profession_id);
+alter table volunteer add constraint fk_volunteer_germanSkill_23 foreign key (germanSkill_id) references language_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_germanSkill_23 on volunteer (germanSkill_id);
+alter table volunteer add constraint fk_volunteer_englishSkill_24 foreign key (englishSkill_id) references language_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_englishSkill_24 on volunteer (englishSkill_id);
+alter table volunteer add constraint fk_volunteer_italianSkill_25 foreign key (italianSkill_id) references language_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_italianSkill_25 on volunteer (italianSkill_id);
+alter table volunteer add constraint fk_volunteer_frenchSkill_26 foreign key (frenchSkill_id) references language_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_frenchSkill_26 on volunteer (frenchSkill_id);
+alter table volunteer add constraint fk_volunteer_spanishSkill_27 foreign key (spanishSkill_id) references language_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_spanishSkill_27 on volunteer (spanishSkill_id);
+alter table volunteer add constraint fk_volunteer_msOfficeSkill_28 foreign key (msOfficeSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_msOfficeSkill_28 on volunteer (msOfficeSkill_id);
+alter table volunteer add constraint fk_volunteer_itNetworkSkill_29 foreign key (itNetworkSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_itNetworkSkill_29 on volunteer (itNetworkSkill_id);
+alter table volunteer add constraint fk_volunteer_contentManagemen_30 foreign key (contentManagementSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_contentManagemen_30 on volunteer (contentManagementSkill_id);
+alter table volunteer add constraint fk_volunteer_graphicSkill_31 foreign key (graphicSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_graphicSkill_31 on volunteer (graphicSkill_id);
+alter table volunteer add constraint fk_volunteer_skiingSkill_32 foreign key (skiingSkill_id) references sport_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_skiingSkill_32 on volunteer (skiingSkill_id);
+alter table volunteer add constraint fk_volunteer_snowboardSkill_33 foreign key (snowboardSkill_id) references sport_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_snowboardSkill_33 on volunteer (snowboardSkill_id);
+alter table volunteer add constraint fk_volunteer_crossCountrySkil_34 foreign key (crossCountrySkill_id) references sport_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_crossCountrySkil_34 on volunteer (crossCountrySkill_id);
+alter table volunteer add constraint fk_volunteer_biathlonSkill_35 foreign key (biathlonSkill_id) references sport_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_biathlonSkill_35 on volunteer (biathlonSkill_id);
+alter table volunteer add constraint fk_volunteer_iceskatingSkill_36 foreign key (iceSkatingSkill_id) references sport_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_iceskatingSkill_36 on volunteer (iceSkatingSkill_id);
+alter table volunteer add constraint fk_volunteer_iceHockeySkill_37 foreign key (iceHockeySkill_id) references sport_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_iceHockeySkill_37 on volunteer (iceHockeySkill_id);
+alter table volunteer add constraint fk_volunteer_interest1_38 foreign key (interest1_id) references interest (id) on delete restrict on update restrict;
+create index ix_volunteer_interest1_38 on volunteer (interest1_id);
+alter table volunteer add constraint fk_volunteer_interest2_39 foreign key (interest2_id) references interest (id) on delete restrict on update restrict;
+create index ix_volunteer_interest2_39 on volunteer (interest2_id);
+alter table volunteer add constraint fk_volunteer_interest3_40 foreign key (interest3_id) references interest (id) on delete restrict on update restrict;
+create index ix_volunteer_interest3_40 on volunteer (interest3_id);
+
+
+
+alter table volunteer_country add constraint fk_volunteer_country_voluntee_01 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+
+alter table volunteer_country add constraint fk_volunteer_country_country_02 foreign key (country_id) references country (id) on delete restrict on update restrict;
 
 alter table volunteer_event add constraint fk_volunteer_event_volunteer_01 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
 
-alter table volunteer_event add constraint fk_volunteer_event_event_02 foreign key (event_event_id) references event (event_id) on delete restrict on update restrict;
+alter table volunteer_event add constraint fk_volunteer_event_event_02 foreign key (event_eventname) references event (eventname) on delete restrict on update restrict;
 
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists additional_coach;
+drop table if exists clothing_size;
 
-drop table if exists additional_coach_nationality;
-
-drop table if exists additional_coach_degree;
-
-drop table if exists additional_packet;
-
-drop table if exists address;
-
-drop table if exists arrival;
-
-drop table if exists athlete;
-
-drop table if exists athlete_nationality;
-
-drop table if exists athlete_degree;
-
-drop table if exists attachments;
-
-drop table if exists availability;
-
-drop table if exists city_guest;
-
-drop table if exists city_guest_nationality;
-
-drop table if exists city_guest_degree;
-
-drop table if exists city_rep_guest;
-
-drop table if exists city_rep_guest_nationality;
-
-drop table if exists city_rep_guest_degree;
-
-drop table if exists city_representative;
-
-drop table if exists city_representative_nationality;
-
-drop table if exists city_representative_degree;
-
-drop table if exists coach;
-
-drop table if exists coach_nationality;
-
-drop table if exists coach_degree;
-
-drop table if exists contact;
-
-drop table if exists contractor;
-
-drop table if exists contractor_nationality;
-
-drop table if exists contractor_degree;
-
-drop table if exists current_job;
-
-drop table if exists degree;
-
-drop table if exists departure;
-
-drop table if exists education_institute;
-
-drop table if exists educationlevel;
-
-drop table if exists email;
-
-drop table if exists email_address;
+drop table if exists country;
 
 drop table if exists emergency_contact;
 
-drop table if exists emergency_relation;
-
 drop table if exists event;
 
-drop table if exists event_comment;
+drop table if exists volunteer_event;
 
-drop table if exists faculty;
+drop table if exists gender;
 
-drop table if exists head_of_delegation;
-
-drop table if exists head_of_delegation_nationality;
-
-drop table if exists head_of_delegation_degree;
-
-drop table if exists icgguest;
-
-drop table if exists icgguest_nationality;
-
-drop table if exists icgguest_degree;
-
-drop table if exists icgmember;
-
-drop table if exists icgmember_nationality;
-
-drop table if exists icgmember_degree;
-
-drop table if exists icgmember_guest;
-
-drop table if exists icgmember_guest_nationality;
-
-drop table if exists icgmember_guest_degree;
-
-drop table if exists identification;
+drop table if exists itmedia_skill;
 
 drop table if exists identification_type;
 
-drop table if exists interview;
+drop table if exists interest;
 
-drop table if exists it_knowledge;
+drop table if exists language_skill;
 
-drop table if exists jacket_sizes;
+drop table if exists month;
 
-drop table if exists locliaison_officer;
+drop table if exists profession;
 
-drop table if exists locliaison_officer_nationality;
+drop table if exists shoe_size;
 
-drop table if exists locliaison_officer_degree;
-
-drop table if exists locmember;
-
-drop table if exists locmember_nationality;
-
-drop table if exists locmember_degree;
-
-drop table if exists language;
-
-drop table if exists languages_translation;
-
-drop table if exists login_receiver;
-
-drop table if exists login_receiver_nationality;
-
-drop table if exists login_receiver_degree;
-
-drop table if exists login_time;
-
-drop table if exists media;
-
-drop table if exists media_nationality;
-
-drop table if exists media_degree;
-
-drop table if exists nationality;
-
-drop table if exists organization;
-
-drop table if exists permission;
-
-drop table if exists phone;
-
-drop table if exists preferred_communication_language;
-
-drop table if exists preferred_working_area;
-
-drop table if exists role;
-
-drop table if exists sex;
-
-drop table if exists shoe_sizes;
-
-drop table if exists sport;
-
-drop table if exists sport_interest;
-
-drop table if exists text_boxes;
-
-drop table if exists training;
+drop table if exists sport_skill;
 
 drop table if exists translation;
 
-drop table if exists trousers_sizes;
+drop table if exists user;
 
 drop table if exists user_login;
 
 drop table if exists volunteer;
 
-drop table if exists volunteer_nationality;
-
-drop table if exists volunteer_degree;
-
-drop table if exists volunteer_training;
-
-drop table if exists volunteer_event;
+drop table if exists volunteer_country;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
-drop sequence if exists additional_coach_seq;
+drop sequence if exists clothing_size_seq;
 
-drop sequence if exists address_seq;
+drop sequence if exists country_seq;
 
-drop sequence if exists athlete_seq;
-
-drop sequence if exists city_guest_seq;
-
-drop sequence if exists city_rep_guest_seq;
-
-drop sequence if exists city_representative_seq;
-
-drop sequence if exists coach_seq;
-
-drop sequence if exists contact_seq;
-
-drop sequence if exists contractor_seq;
-
-drop sequence if exists current_job_seq;
-
-drop sequence if exists degree_seq;
-
-drop sequence if exists education_institute_seq;
-
-drop sequence if exists educationlevel_seq;
-
-drop sequence if exists email_seq;
-
-drop sequence if exists emergency_relation_seq;
+drop sequence if exists emergency_contact_seq;
 
 drop sequence if exists event_seq;
 
-drop sequence if exists event_comment_seq;
+drop sequence if exists gender_seq;
 
-drop sequence if exists faculty_seq;
+drop sequence if exists itmedia_skill_seq;
 
-drop sequence if exists head_of_delegation_seq;
+drop sequence if exists identification_type_seq;
 
-drop sequence if exists icgguest_seq;
+drop sequence if exists interest_seq;
 
-drop sequence if exists icgmember_seq;
+drop sequence if exists language_skill_seq;
 
-drop sequence if exists icgmember_guest_seq;
+drop sequence if exists month_seq;
 
-drop sequence if exists interview_seq;
+drop sequence if exists profession_seq;
 
-drop sequence if exists it_knowledge_seq;
+drop sequence if exists shoe_size_seq;
 
-drop sequence if exists jacket_sizes_seq;
-
-drop sequence if exists locliaison_officer_seq;
-
-drop sequence if exists locmember_seq;
-
-drop sequence if exists language_seq;
-
-drop sequence if exists languages_translation_seq;
-
-drop sequence if exists login_receiver_seq;
-
-drop sequence if exists media_seq;
-
-drop sequence if exists nationality_seq;
-
-drop sequence if exists organization_seq;
-
-drop sequence if exists permission_seq;
-
-drop sequence if exists phone_seq;
-
-drop sequence if exists preferred_communication_language_seq;
-
-drop sequence if exists preferred_working_area_seq;
-
-drop sequence if exists role_seq;
-
-drop sequence if exists sex_seq;
-
-drop sequence if exists shoe_sizes_seq;
-
-drop sequence if exists sport_seq;
-
-drop sequence if exists sport_interest_seq;
-
-drop sequence if exists text_boxes_seq;
-
-drop sequence if exists training_seq;
+drop sequence if exists sport_skill_seq;
 
 drop sequence if exists translation_seq;
 
-drop sequence if exists trousers_sizes_seq;
+drop sequence if exists user_seq;
 
 drop sequence if exists user_login_seq;
 

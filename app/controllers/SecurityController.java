@@ -3,8 +3,7 @@ package controllers;
 import forms.LoginForm;
 import forms.RegisterForm;
 import models.UserLogin;
-import models.volunteer.Volunteer;
-
+import models.human.Volunteer;
 import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -175,22 +174,9 @@ public class SecurityController extends Controller{
         	LOGGER.info("New user to register: " + registerForm.email);
         	user = new UserLogin(registerForm.email, CryptIt.cleartextToHash(registerForm.password));
         	
-
-        	Volunteer volunteer = new Volunteer(registerForm.prename, registerForm.surname, registerForm.email, registerForm.nationality);
-        	volunteer.setUserLogin(user);
+                //create new volunteer
         	//verificationSend(volunteer);
-
-        	try {
-        		volunteer.save();
-        		user.save();
-        		return Results.ok(volunteer.toJson());
-        	} catch (Exception e) {
-        		// Make sure to clean up the database if something went wrong.
-        		volunteer.delete();
-        		user.delete();
-        		return Results.ok("user registration failed");
-        	}
-        	
+                return ok();
         } else {
         	LOGGER.info("User already exists in database.");
         	return Results.ok("user exist already");
@@ -201,22 +187,22 @@ public class SecurityController extends Controller{
     // send a verification token to registered users
    public static void verificationSend(Volunteer volunteer){
 	  
-       String authToken = volunteer.getUserLogin().createToken();
-       
-       String prename 		= 	volunteer.getPrename();
-       String surname		=	volunteer.getSurname();
-       String emailAddress	= 	volunteer.getUserLogin().getUsername();
-       
-       try {
-		mailer.Mail.confirmationMail(prename, surname, emailAddress, authToken);
-		LOGGER.info("Confirmation Mail to User "+emailAddress+" sended");
-		
-	} catch (EmailException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-		LOGGER.debug("Confirmation for User "+emailAddress+" not successfully: "+e);
-	}
- 
+//       String authToken = volunteer.getUserLogin().createToken();
+//       
+//       String prename 		= 	volunteer.getPrename();
+//       String surname		=	volunteer.getSurname();
+//       String emailAddress	= 	volunteer.getUserLogin().getUsername();
+//       
+//       try {
+//		mailer.Mail.confirmationMail(prename, surname, emailAddress, authToken);
+//		LOGGER.info("Confirmation Mail to User "+emailAddress+" sended");
+//		
+//	} catch (EmailException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//		LOGGER.debug("Confirmation for User "+emailAddress+" not successfully: "+e);
+//	}
+// 
    }
    
    //checks if the sended verification token is already saved in DB - then redirects

@@ -10,9 +10,9 @@ GET		/verify/:token				controllers.SecurityController.verificationGetter(token: 
 # Routes I would expect ... and many more ...
 # POST		/volunteers				controllers.VolunteerController.createVolunteer()
 # GET		/volunteers				controllers.VolunteerController.getVolunteers()
-# GET		/volunteers/:id			controllers.VolunteerController.getVolunteer(id: Long)
-# PUT		/volunteers/:id			controllers.VolunteerController.updateVolunteer(id: Long)
-# DELETE	/volunteers/:id			controllers.VolunteerController.deleteVolunteer(id: Long)
+# GET		/volunteers/:id                         controllers.VolunteerController.getVolunteer(id: Long)
+# PUT		/volunteers/:id                         controllers.VolunteerController.updateVolunteer(id: Long)
+# DELETE	/volunteers/:id                         controllers.VolunteerController.deleteVolunteer(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET		/					controllers.Assets.at(path="/public", file="index.html")
@@ -21,7 +21,5 @@ GET		/assets/*file				controllers.Assets.at(path="/public", file)
 
 # Dummy-Routes
 #GET 	/getUserTest                controllers.DummyController.userDataTest()
-GET    	/getUser                    controllers.DummyController.newDummyJson()
 #GET	/savePic					controllers.DummyController.saveDummyPicture()
 #GET		/dummyPictureGet			controllers.DummyController.getDummyPicture()
-POST	/dummyPictureSend			controllers.DummyController.saveDummyPicture()

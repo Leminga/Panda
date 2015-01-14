@@ -1,7 +1,5 @@
 package helper;
 
-import models.SetupDatabase;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,10 +11,10 @@ public class Global extends GlobalSettings {
 	
 	@Override
 	public void onStart(Application app) {
+		// Deploy Activiti services.
+		//ServicesTimer.deployProcess();
 		// TESTING : Fills database with some default values.
-		//Starter.start();
-		//DummyData.start();
-		SetupDatabase.setup();
+		Starter.start();
 		
 		if (LOGGER.isInfoEnabled()) {
 			LOGGER.info("Application has started");

@@ -290,23 +290,24 @@ public class Volunteer extends Human {
      * @return
      */
     public static Volunteer findByUsername(String username) {
-        Volunteer v = new Volunteer(username, username, null);
-
-        if (username == null) {
-            return null;
-        }
-
-        // Search the database for the user.
-        try {
-            Volunteer volunteer = FIND.where().eq("user_username", username).findUnique();
-            if (LOGGER.isDebugEnabled() && volunteer == null) {
-                LOGGER.debug("No user was found in the database for the token " + username);
-            }
-            return volunteer;
-        } catch (Exception e) {
-            LOGGER.error("Unable to query the database.\n" + e.getMessage());
-            return null;
-        }
+//        Volunteer v = new Volunteer(username, username, null);
+//
+//        if (username == null) {
+//            return null;
+//        }
+//
+//        // Search the database for the user.
+//        try {
+//            Volunteer volunteer = FIND.where().eq("user_username", username).findUnique();
+//            if (LOGGER.isDebugEnabled() && volunteer == null) {
+//                LOGGER.debug("No user was found in the database for the token " + username);
+//            }
+//            return volunteer;
+//        } catch (Exception e) {
+//            LOGGER.error("Unable to query the database.\n" + e.getMessage());
+//            return null;
+//        }
+        return null;
     }
 
     /**
@@ -316,7 +317,7 @@ public class Volunteer extends Human {
      * @param surname The surname of the volunteer
      * @param user The login data of the volunteer
      */
-    public Volunteer(String prename, String surname, User user) {
+    public Volunteer(String prename, String surname, User user, String email) {
         super(prename, surname);
         events = new BeanList<Event>();
         this.user = user;

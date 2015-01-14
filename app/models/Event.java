@@ -1,161 +1,201 @@
 package models;
 
-import javax.persistence.Id;
-
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.JoinColumn;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.OptimisticLockException;
 
+import models.human.Volunteer;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.common.BeanList;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import play.data.validation.Constraints.Required;
-import play.db.ebean.Model;
-import play.libs.Json;
 
-/*
- * Klasse für die verschiedenen Veranstaltungen
- */
-@Entity
-public class Event extends Model{
-	
+@javax.persistence.Entity
+public class Event extends Entity {
 	/** The serialization version identifier. */
 	private static final long serialVersionUID = 1L;
+	/** A finder to query the database. */
+	private static Finder<Long, Event> FIND = new Finder<Long, Event>(Long.class, Event.class);
+	/** Logger to log SecurityController events. */
+	private static Logger LOGGER = LoggerFactory.getLogger(Event.class);
 	
-	//ManyToMany relation to Volunteer
+	/** The unique event name. */
 	@Id
 	@Required
-	@GeneratedValue
-	private long eventId;
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy="event")
-	private String eventname;
-//	@Required
-	private Date eventStart;
-//	@Required
-	private Date eventEnd;
-//	@Required
-//	@Column(unique=true)
-//	private long eventDiscriptionTid;
+	protected String eventname;
+	/** A list of all volunteers of the event. */
+	@ManyToMany(mappedBy = "events")
+	protected List<Volunteer> volunteers;
+	/** The start date of the event. */
+	protected Date eventStart;
+	/** The end date of the event. */
+	protected Date eventEnd;
 	
-	//OneToOneRelation to Translation
-	@Required
-	@OneToOne
-	@JoinColumn(name = "eventDiscriptionTid")
-	private Translation translation;
-	
-//	@Required
-	private boolean volunteerOpen;
-//	@Required
-	private boolean dloOpen;
-//	@Required
-	private boolean icgMemberOpen;
-//	@Required
-	private boolean cloOpen;
-//	@Required
-	private boolean locOpen;
-//	@Required
-	private boolean mediaOpen;
-	
-	
-	/*
-	 * Konstruktor der Klasse
+	/**
+	 * Query the database for all event objects.
+	 * 
+	 * @return <b>List of Event</b>All event objects stored in the database.
 	 */
-	public Event(String eventname) {
-		
-		this.setEventname(eventname);
-	}
-
-	public void Inotify(){
-		
-	}
-	/*
-	 * Getter und Setter 
-	 */
-	public String getEventname() {
-		return eventname;
-	}
-	public void setEventname(String eventname) {
-		this.eventname = eventname;
-	}
-	public Date getEventStart() {
-		return eventStart;
-	}
-	public void setEventStart(Date eventStart) {
-		this.eventStart = eventStart;
-	}
-	public Date getEventEnd() {
-		return eventEnd;
-	}
-	public void setEventEnd(Date eventEnd) {
-		this.eventEnd = eventEnd;
-	}
-
-	public boolean isVolunteerOpen() {
-		return volunteerOpen;
-	}
-
-	public void setVolunteerOpen(boolean volunteerOpen) {
-		this.volunteerOpen = volunteerOpen;
-	}
-
-	public boolean isDloOpen() {
-		return dloOpen;
-	}
-
-	public void setDloOpen(boolean dloOpen) {
-		this.dloOpen = dloOpen;
-	}
-
-	public boolean isIcgMemberOpen() {
-		return icgMemberOpen;
-	}
-
-	public void setIcgMemberOpen(boolean icgMemberOpen) {
-		this.icgMemberOpen = icgMemberOpen;
-	}
-
-	public boolean isCloOpen() {
-		return cloOpen;
-	}
-
-	public void setCloOpen(boolean cloOpen) {
-		this.cloOpen = cloOpen;
-	}
-
-	public boolean isLocOpen() {
-		return locOpen;
-	}
-
-	public void setLocOpen(boolean locOpen) {
-		this.locOpen = locOpen;
-	}
-
-	public boolean isMediaOpen() {
-		return mediaOpen;
-	}
-
-	public void setMediaOpen(boolean mediaOpen) {
-		this.mediaOpen = mediaOpen;
-	}
-	@JsonIgnore
-	public String getClassName() {
-		return this.getClass().getSimpleName().toLowerCase();
+	public static List<Event> findEvents() {
+		try  {
+			List<Event> events = FIND.all();
+			if (LOGGER.isDebugEnabled() && (events == null || events.isEmpty())) {
+		    	LOGGER.debug("No events was found in the database.");
+	    	}
+	        return events;
+		} catch (Exception e) {
+	    	LOGGER.error("Unable to query the database for events.\n" + e.getMessage());
+	        return null;
+	    }
 	}
 	
 	/**
-	 * Converts the current volunteer object to e JSON node.
+	 * Finds an event object by its name.
 	 * 
-	 * @return <b>JsonNode</b> A JSON node that contains this volunteer object.
+	 * @param eventName The name of the event
+	 * @return <b>Event</b> The event object.
 	 */
-	public JsonNode toJson() {
-		ObjectNode result = Json.newObject();
-		result.put(this.getClassName(), Json.toJson(this));
-		return result;	
+	public static Event findEvent(String eventName) {
+		try  {
+			Event event = FIND.where().eq("eventname", eventName.toLowerCase()).findUnique();
+			if (LOGGER.isDebugEnabled() && event == null) {
+		    	LOGGER.debug("No event was found in the database.");
+	    	}
+	        return event;
+		} catch (Exception e) {
+			e.printStackTrace();
+	    	LOGGER.error("Unable to query the database for event with name " + eventName.toLowerCase() + "\n" + e.getMessage());
+	        return null;
+	    }
 	}
+	
+	/**
+	 * Finds an event object by its name. If no event
+	 * of that name is in the database already, it
+	 * will be created.
+	 * 
+	 * @param eventName The name of the event
+	 * @return <b>Event</b> The event object.
+	 */
+	public static Event findOrCreateEvent(String eventName) {
+		try  {
+			Event event = FIND.where().eq("eventname", eventName.toLowerCase()).findUnique();
+			if (event == null) {
+				event = new Event(eventName);
+				event.save();
+				if (LOGGER.isDebugEnabled()) {
+			    	LOGGER.debug("No event was found in the database. Created a new one.");
+		    	}
+				return event;
+			} else {
+				if (LOGGER.isDebugEnabled()) {
+			    	LOGGER.debug("Found event in the database.");
+		    	}
+				return event;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+	    	LOGGER.error("Unable to query the database for event with name " + eventName.toLowerCase() + "\n" + e.getMessage());
+	        return null;
+	    }
+	}
+	
+	/**
+	 * Default constructor.
+	 * 
+	 * @param eventname The name of the event.
+	 */
+	public Event(String eventname) {
+		this.eventname = eventname;
+		this.volunteers = new BeanList<Volunteer>();
+	}
+	
+	/**
+	 * Getter for the unique name of the event.
+	 * 
+	 * @return <b>String</b> The name of the event.
+	 */
+	public String getEventName() {
+		return this.eventname;
+	}
+	
+	public Date getStartDate() {
+		return this.eventStart;
+	}
+	
+	public void setStartDate(Date startDate) {
+		this.eventStart = startDate;
+	}
+	
+	public Date getEndDate() {
+		return this.eventEnd;
+	}
+	
+	public void setEndDate(Date endDate) {
+		this.eventEnd = endDate;
+	}
+	
+	/**
+	 * Getter for all volunteers of the event.
+	 * 
+	 * @return <b>List of Volunteer</b> All volunteers of the event.
+	 */
+	@JsonIgnore
+	public List<Volunteer> getVolunteers() {
+		return this.volunteers;
+	}
+	
+	public void addVolunteer(Volunteer volunteer) {
+		if (!this.volunteers.contains(volunteer))
+			this.volunteers.add(volunteer);
+	}
+	
+	public void removeVolunteer(Volunteer volunteer) {
+		this.volunteers.remove(volunteer);
+	}
+	
+	/**
+	 * Saves the current event object to the database.
+	 */
+	@Override
+	public void save() throws OptimisticLockException {
+		
+		// Check if gender is already in database.
+		Event event = Event.findEvent(this.eventname);
+
+		try {
+			if (event != null) {
+				// Update the old event, ie. update all its fields.
+				this.saveManyToManyAssociations("volunteers");
+				
+				Ebean.update(event);
+				if (LOGGER.isDebugEnabled()) {
+					LOGGER.debug("Event "+ this.eventname + " updated in database.");
+				}
+			} else {
+				Ebean.save(this);
+				if (LOGGER.isDebugEnabled()) {
+					LOGGER.debug("Event "+ this.eventname + " stored in database.");
+				}
+			}
+		} catch (OptimisticLockException e) {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.error("Unable to write to the database.");
+			}
+			throw new OptimisticLockException();
+		} catch (Exception e) {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.error("Unable to write to the database.\n" + e.getMessage());
+			}
+		}
+	}
+
 }
