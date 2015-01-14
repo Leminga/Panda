@@ -41,6 +41,7 @@ public class User extends Entity {
     @Id
     @Required
     private String username;
+
     /**
      * The password, ie. the passwords md5 hash, of the user.
      */

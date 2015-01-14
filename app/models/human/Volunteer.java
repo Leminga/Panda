@@ -59,9 +59,6 @@ public class Volunteer extends Human {
     protected User user;
 
     @Constraints.Required
-    protected String mail;
-
-    @Constraints.Required
     protected int socialSecurityNumber;
 
     @Constraints.Required
@@ -250,7 +247,7 @@ public class Volunteer extends Human {
      * @param surname The surname of the volunteer
      * @param user The login data of the volunteer
      */
-    public Volunteer(User user, String prename, String surname, Gender gender, List<Country> nationalities, Date birthday, String email) {
+    public Volunteer(User user, String prename, String surname, Gender gender, List<Country> nationalities, Date birthday) {
         super(prename, surname);
         events = new BeanList<Event>();
         this.user = user;
