@@ -3,6 +3,12 @@
 
 # --- !Ups
 
+create table area_of_interest (
+  id                        bigint not null,
+  interest                  varchar(255),
+  constraint pk_area_of_interest primary key (id))
+;
+
 create table clothing_size (
   id                        bigint not null,
   size                      varchar(255),
@@ -11,14 +17,7 @@ create table clothing_size (
 
 create table country (
   id                        bigint not null,
-  iso2                      varchar(255),
-  short_name                varchar(255),
-  long_name                 varchar(255),
   iso3                      varchar(255),
-  numcode                   varchar(255),
-  un_member                 varchar(255),
-  calling_code              varchar(255),
-  cctld                     varchar(255),
   constraint pk_country primary key (id))
 ;
 
@@ -26,7 +25,7 @@ create table emergency_contact (
   id                        bigint not null,
   surname                   varchar(255),
   prename                   varchar(255),
-  phone_number              bigint,
+  phone_number              varchar(255),
   email                     varchar(255),
   constraint pk_emergency_contact primary key (id))
 ;
@@ -45,6 +44,13 @@ create table gender (
   constraint pk_gender primary key (id))
 ;
 
+create table highest_education_level (
+  id                        bigint not null,
+  highest_education_level   varchar(255),
+  translation_tid           bigint,
+  constraint pk_highest_education_level primary key (id))
+;
+
 create table itmedia_skill (
   id                        bigint not null,
   it_media_skill            varchar(255),
@@ -59,11 +65,11 @@ create table identification_type (
   constraint pk_identification_type primary key (id))
 ;
 
-create table interest (
+create table language (
   id                        bigint not null,
-  interest                  varchar(255),
+  language                  varchar(255),
   translation_tid           bigint,
-  constraint pk_interest primary key (id))
+  constraint pk_language primary key (id))
 ;
 
 create table language_skill (
@@ -73,11 +79,11 @@ create table language_skill (
   constraint pk_language_skill primary key (id))
 ;
 
-create table month (
+create table prefered_language (
   id                        bigint not null,
-  month                     varchar(255),
+  prefered_language         varchar(255),
   translation_tid           bigint,
-  constraint pk_month primary key (id))
+  constraint pk_prefered_language primary key (id))
 ;
 
 create table profession (
@@ -117,6 +123,13 @@ create table user (
   constraint pk_user primary key (username))
 ;
 
+create table user_language_skill (
+  id                        bigint not null,
+  volunteer_id              bigint,
+  language_id               bigint,
+  constraint pk_user_language_skill primary key (id))
+;
+
 create table user_login (
   username                  varchar(255) not null,
   password                  varchar(255),
@@ -135,44 +148,32 @@ create table volunteer (
   surname                   varchar(255),
   prename                   varchar(255),
   sex_id                    bigint,
+  birthday                  timestamp,
   username                  varchar(255),
-  birthday_date             integer,
-  birthdayMonth_id          bigint,
-  birthday_year             integer,
-  countryOfBirth_id         bigint,
+  mail                      varchar(255),
   social_security_number    integer,
   place_of_residence        varchar(255),
   plz                       varchar(255),
   adress                    varchar(255),
   country_id                bigint,
   phone_number              bigint,
-  mail                      varchar(255),
+  preferedLanguage_id       bigint,
   adress_confirmed          boolean,
   identificationType_id     bigint,
   id_number                 varchar(255),
-  date_of_issue             integer,
-  monthOfIssue_id           bigint,
-  year_of_issue             integer,
-  issuing_authority         varchar(255),
-  validUntilMonth_id        bigint,
-  valid_until_year          integer,
+  id_valid_until            timestamp,
   car_driving_license       boolean,
-  other_driving_license     varchar(255),
-  comment                   varchar(255),
   emergencyContact_id       bigint,
   jacketSize_id             bigint,
   trouserSize_id            bigint,
   shoeSize_id               bigint,
+  photo                     varchar(255),
   profession_id             bigint,
+  highestEducationLevel_id  bigint,
   university                varchar(255),
   field_of_profession       varchar(255),
   professional_career       varchar(255),
-  germanSkill_id            bigint,
-  englishSkill_id           bigint,
-  italianSkill_id           bigint,
-  frenchSkill_id            bigint,
-  spanishSkill_id           bigint,
-  further_langues           varchar(255),
+  motherTongue_id           bigint,
   interpreting_languages    varchar(255),
   translating_languages     varchar(255),
   msOfficeSkill_id          bigint,
@@ -182,20 +183,21 @@ create table volunteer (
   further_qualifications    varchar(255),
   events_participated       varchar(255),
   interested_icg2016        boolean,
-  interested_icg2016prior_to_beginning boolean,
-  icg2016comment            varchar(255),
-  skiingSkill_id            bigint,
-  snowboardSkill_id         bigint,
-  crossCountrySkill_id      bigint,
-  biathlonSkill_id          bigint,
-  iceSkatingSkill_id        bigint,
-  iceHockeySkill_id         bigint,
+  interested_skiing         boolean,
+  interested_snowboarding   boolean,
+  interested_cross_country_skiing boolean,
+  interested_biathlon       boolean,
+  interested_ice_skating    boolean,
+  interested_ice_hockey     boolean,
   interest1_id              bigint,
   interest2_id              bigint,
   interest3_id              bigint,
   availability_beginning    timestamp,
   availability_end          timestamp,
-  availability_comment      varchar(255),
+  interested_icg2016prior_to_beginning boolean,
+  icg2016comment            varchar(255),
+  language_skills_professional varchar(255),
+  training_skills_professional varchar(255),
   constraint pk_volunteer primary key (id))
 ;
 
@@ -211,6 +213,8 @@ create table volunteer_event (
   event_eventname                varchar(255) not null,
   constraint pk_volunteer_event primary key (volunteer_id, event_eventname))
 ;
+create sequence area_of_interest_seq;
+
 create sequence clothing_size_seq;
 
 create sequence country_seq;
@@ -221,15 +225,17 @@ create sequence event_seq;
 
 create sequence gender_seq;
 
+create sequence highest_education_level_seq;
+
 create sequence itmedia_skill_seq;
 
 create sequence identification_type_seq;
 
-create sequence interest_seq;
+create sequence language_seq;
 
 create sequence language_skill_seq;
 
-create sequence month_seq;
+create sequence prefered_language_seq;
 
 create sequence profession_seq;
 
@@ -241,44 +247,46 @@ create sequence translation_seq;
 
 create sequence user_seq;
 
+create sequence user_language_skill_seq;
+
 create sequence user_login_seq;
 
 create sequence volunteer_seq;
 
 alter table gender add constraint fk_gender_translation_1 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
 create index ix_gender_translation_1 on gender (translation_tid);
-alter table itmedia_skill add constraint fk_itmedia_skill_translation_2 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
-create index ix_itmedia_skill_translation_2 on itmedia_skill (translation_tid);
-alter table identification_type add constraint fk_identification_type_transla_3 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
-create index ix_identification_type_transla_3 on identification_type (translation_tid);
-alter table interest add constraint fk_interest_translation_4 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
-create index ix_interest_translation_4 on interest (translation_tid);
-alter table language_skill add constraint fk_language_skill_translation_5 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
-create index ix_language_skill_translation_5 on language_skill (translation_tid);
-alter table month add constraint fk_month_translation_6 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
-create index ix_month_translation_6 on month (translation_tid);
-alter table profession add constraint fk_profession_translation_7 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
-create index ix_profession_translation_7 on profession (translation_tid);
-alter table sport_skill add constraint fk_sport_skill_translation_8 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
-create index ix_sport_skill_translation_8 on sport_skill (translation_tid);
-alter table user_login add constraint fk_user_login_volunteer_9 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
-create index ix_user_login_volunteer_9 on user_login (volunteer_id);
-alter table volunteer add constraint fk_volunteer_sex_10 foreign key (sex_id) references gender (id) on delete restrict on update restrict;
-create index ix_volunteer_sex_10 on volunteer (sex_id);
-alter table volunteer add constraint fk_volunteer_user_11 foreign key (username) references user (username) on delete restrict on update restrict;
-create index ix_volunteer_user_11 on volunteer (username);
-alter table volunteer add constraint fk_volunteer_birthdayMonth_12 foreign key (birthdayMonth_id) references month (id) on delete restrict on update restrict;
-create index ix_volunteer_birthdayMonth_12 on volunteer (birthdayMonth_id);
-alter table volunteer add constraint fk_volunteer_countryOfBirth_13 foreign key (countryOfBirth_id) references country (id) on delete restrict on update restrict;
-create index ix_volunteer_countryOfBirth_13 on volunteer (countryOfBirth_id);
-alter table volunteer add constraint fk_volunteer_country_14 foreign key (country_id) references country (id) on delete restrict on update restrict;
-create index ix_volunteer_country_14 on volunteer (country_id);
-alter table volunteer add constraint fk_volunteer_identificationTy_15 foreign key (identificationType_id) references identification_type (id) on delete restrict on update restrict;
-create index ix_volunteer_identificationTy_15 on volunteer (identificationType_id);
-alter table volunteer add constraint fk_volunteer_monthOfIssue_16 foreign key (monthOfIssue_id) references month (id) on delete restrict on update restrict;
-create index ix_volunteer_monthOfIssue_16 on volunteer (monthOfIssue_id);
-alter table volunteer add constraint fk_volunteer_validUntilMonth_17 foreign key (validUntilMonth_id) references month (id) on delete restrict on update restrict;
-create index ix_volunteer_validUntilMonth_17 on volunteer (validUntilMonth_id);
+alter table highest_education_level add constraint fk_highest_education_level_tra_2 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_highest_education_level_tra_2 on highest_education_level (translation_tid);
+alter table itmedia_skill add constraint fk_itmedia_skill_translation_3 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_itmedia_skill_translation_3 on itmedia_skill (translation_tid);
+alter table identification_type add constraint fk_identification_type_transla_4 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_identification_type_transla_4 on identification_type (translation_tid);
+alter table language add constraint fk_language_translation_5 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_language_translation_5 on language (translation_tid);
+alter table language_skill add constraint fk_language_skill_translation_6 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_language_skill_translation_6 on language_skill (translation_tid);
+alter table prefered_language add constraint fk_prefered_language_translati_7 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_prefered_language_translati_7 on prefered_language (translation_tid);
+alter table profession add constraint fk_profession_translation_8 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_profession_translation_8 on profession (translation_tid);
+alter table sport_skill add constraint fk_sport_skill_translation_9 foreign key (translation_tid) references translation (tid) on delete restrict on update restrict;
+create index ix_sport_skill_translation_9 on sport_skill (translation_tid);
+alter table user_language_skill add constraint fk_user_language_skill_volunt_10 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_user_language_skill_volunt_10 on user_language_skill (volunteer_id);
+alter table user_language_skill add constraint fk_user_language_skill_langua_11 foreign key (language_id) references language (id) on delete restrict on update restrict;
+create index ix_user_language_skill_langua_11 on user_language_skill (language_id);
+alter table user_login add constraint fk_user_login_volunteer_12 foreign key (volunteer_id) references volunteer (id) on delete restrict on update restrict;
+create index ix_user_login_volunteer_12 on user_login (volunteer_id);
+alter table volunteer add constraint fk_volunteer_sex_13 foreign key (sex_id) references gender (id) on delete restrict on update restrict;
+create index ix_volunteer_sex_13 on volunteer (sex_id);
+alter table volunteer add constraint fk_volunteer_user_14 foreign key (username) references user (username) on delete restrict on update restrict;
+create index ix_volunteer_user_14 on volunteer (username);
+alter table volunteer add constraint fk_volunteer_country_15 foreign key (country_id) references country (id) on delete restrict on update restrict;
+create index ix_volunteer_country_15 on volunteer (country_id);
+alter table volunteer add constraint fk_volunteer_preferedLanguage_16 foreign key (preferedLanguage_id) references prefered_language (id) on delete restrict on update restrict;
+create index ix_volunteer_preferedLanguage_16 on volunteer (preferedLanguage_id);
+alter table volunteer add constraint fk_volunteer_identificationTy_17 foreign key (identificationType_id) references identification_type (id) on delete restrict on update restrict;
+create index ix_volunteer_identificationTy_17 on volunteer (identificationType_id);
 alter table volunteer add constraint fk_volunteer_emergencyContact_18 foreign key (emergencyContact_id) references emergency_contact (id) on delete restrict on update restrict;
 create index ix_volunteer_emergencyContact_18 on volunteer (emergencyContact_id);
 alter table volunteer add constraint fk_volunteer_jacketSize_19 foreign key (jacketSize_id) references clothing_size (id) on delete restrict on update restrict;
@@ -289,42 +297,24 @@ alter table volunteer add constraint fk_volunteer_shoeSize_21 foreign key (shoeS
 create index ix_volunteer_shoeSize_21 on volunteer (shoeSize_id);
 alter table volunteer add constraint fk_volunteer_profession_22 foreign key (profession_id) references profession (id) on delete restrict on update restrict;
 create index ix_volunteer_profession_22 on volunteer (profession_id);
-alter table volunteer add constraint fk_volunteer_germanSkill_23 foreign key (germanSkill_id) references language_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_germanSkill_23 on volunteer (germanSkill_id);
-alter table volunteer add constraint fk_volunteer_englishSkill_24 foreign key (englishSkill_id) references language_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_englishSkill_24 on volunteer (englishSkill_id);
-alter table volunteer add constraint fk_volunteer_italianSkill_25 foreign key (italianSkill_id) references language_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_italianSkill_25 on volunteer (italianSkill_id);
-alter table volunteer add constraint fk_volunteer_frenchSkill_26 foreign key (frenchSkill_id) references language_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_frenchSkill_26 on volunteer (frenchSkill_id);
-alter table volunteer add constraint fk_volunteer_spanishSkill_27 foreign key (spanishSkill_id) references language_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_spanishSkill_27 on volunteer (spanishSkill_id);
-alter table volunteer add constraint fk_volunteer_msOfficeSkill_28 foreign key (msOfficeSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_msOfficeSkill_28 on volunteer (msOfficeSkill_id);
-alter table volunteer add constraint fk_volunteer_itNetworkSkill_29 foreign key (itNetworkSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_itNetworkSkill_29 on volunteer (itNetworkSkill_id);
-alter table volunteer add constraint fk_volunteer_contentManagemen_30 foreign key (contentManagementSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_contentManagemen_30 on volunteer (contentManagementSkill_id);
-alter table volunteer add constraint fk_volunteer_graphicSkill_31 foreign key (graphicSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_graphicSkill_31 on volunteer (graphicSkill_id);
-alter table volunteer add constraint fk_volunteer_skiingSkill_32 foreign key (skiingSkill_id) references sport_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_skiingSkill_32 on volunteer (skiingSkill_id);
-alter table volunteer add constraint fk_volunteer_snowboardSkill_33 foreign key (snowboardSkill_id) references sport_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_snowboardSkill_33 on volunteer (snowboardSkill_id);
-alter table volunteer add constraint fk_volunteer_crossCountrySkil_34 foreign key (crossCountrySkill_id) references sport_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_crossCountrySkil_34 on volunteer (crossCountrySkill_id);
-alter table volunteer add constraint fk_volunteer_biathlonSkill_35 foreign key (biathlonSkill_id) references sport_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_biathlonSkill_35 on volunteer (biathlonSkill_id);
-alter table volunteer add constraint fk_volunteer_iceskatingSkill_36 foreign key (iceSkatingSkill_id) references sport_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_iceskatingSkill_36 on volunteer (iceSkatingSkill_id);
-alter table volunteer add constraint fk_volunteer_iceHockeySkill_37 foreign key (iceHockeySkill_id) references sport_skill (id) on delete restrict on update restrict;
-create index ix_volunteer_iceHockeySkill_37 on volunteer (iceHockeySkill_id);
-alter table volunteer add constraint fk_volunteer_interest1_38 foreign key (interest1_id) references interest (id) on delete restrict on update restrict;
-create index ix_volunteer_interest1_38 on volunteer (interest1_id);
-alter table volunteer add constraint fk_volunteer_interest2_39 foreign key (interest2_id) references interest (id) on delete restrict on update restrict;
-create index ix_volunteer_interest2_39 on volunteer (interest2_id);
-alter table volunteer add constraint fk_volunteer_interest3_40 foreign key (interest3_id) references interest (id) on delete restrict on update restrict;
-create index ix_volunteer_interest3_40 on volunteer (interest3_id);
+alter table volunteer add constraint fk_volunteer_highestEducation_23 foreign key (highestEducationLevel_id) references highest_education_level (id) on delete restrict on update restrict;
+create index ix_volunteer_highestEducation_23 on volunteer (highestEducationLevel_id);
+alter table volunteer add constraint fk_volunteer_motherTongue_24 foreign key (motherTongue_id) references language (id) on delete restrict on update restrict;
+create index ix_volunteer_motherTongue_24 on volunteer (motherTongue_id);
+alter table volunteer add constraint fk_volunteer_msOfficeSkill_25 foreign key (msOfficeSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_msOfficeSkill_25 on volunteer (msOfficeSkill_id);
+alter table volunteer add constraint fk_volunteer_itNetworkSkill_26 foreign key (itNetworkSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_itNetworkSkill_26 on volunteer (itNetworkSkill_id);
+alter table volunteer add constraint fk_volunteer_contentManagemen_27 foreign key (contentManagementSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_contentManagemen_27 on volunteer (contentManagementSkill_id);
+alter table volunteer add constraint fk_volunteer_graphicSkill_28 foreign key (graphicSkill_id) references itmedia_skill (id) on delete restrict on update restrict;
+create index ix_volunteer_graphicSkill_28 on volunteer (graphicSkill_id);
+alter table volunteer add constraint fk_volunteer_areaInterest1_29 foreign key (interest1_id) references area_of_interest (id) on delete restrict on update restrict;
+create index ix_volunteer_areaInterest1_29 on volunteer (interest1_id);
+alter table volunteer add constraint fk_volunteer_areaInterest2_30 foreign key (interest2_id) references area_of_interest (id) on delete restrict on update restrict;
+create index ix_volunteer_areaInterest2_30 on volunteer (interest2_id);
+alter table volunteer add constraint fk_volunteer_areaInterest3_31 foreign key (interest3_id) references area_of_interest (id) on delete restrict on update restrict;
+create index ix_volunteer_areaInterest3_31 on volunteer (interest3_id);
 
 
 
@@ -340,6 +330,8 @@ alter table volunteer_event add constraint fk_volunteer_event_event_02 foreign k
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
+drop table if exists area_of_interest;
+
 drop table if exists clothing_size;
 
 drop table if exists country;
@@ -352,15 +344,17 @@ drop table if exists volunteer_event;
 
 drop table if exists gender;
 
+drop table if exists highest_education_level;
+
 drop table if exists itmedia_skill;
 
 drop table if exists identification_type;
 
-drop table if exists interest;
+drop table if exists language;
 
 drop table if exists language_skill;
 
-drop table if exists month;
+drop table if exists prefered_language;
 
 drop table if exists profession;
 
@@ -372,6 +366,8 @@ drop table if exists translation;
 
 drop table if exists user;
 
+drop table if exists user_language_skill;
+
 drop table if exists user_login;
 
 drop table if exists volunteer;
@@ -379,6 +375,8 @@ drop table if exists volunteer;
 drop table if exists volunteer_country;
 
 SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists area_of_interest_seq;
 
 drop sequence if exists clothing_size_seq;
 
@@ -390,15 +388,17 @@ drop sequence if exists event_seq;
 
 drop sequence if exists gender_seq;
 
+drop sequence if exists highest_education_level_seq;
+
 drop sequence if exists itmedia_skill_seq;
 
 drop sequence if exists identification_type_seq;
 
-drop sequence if exists interest_seq;
+drop sequence if exists language_seq;
 
 drop sequence if exists language_skill_seq;
 
-drop sequence if exists month_seq;
+drop sequence if exists prefered_language_seq;
 
 drop sequence if exists profession_seq;
 
@@ -409,6 +409,8 @@ drop sequence if exists sport_skill_seq;
 drop sequence if exists translation_seq;
 
 drop sequence if exists user_seq;
+
+drop sequence if exists user_language_skill_seq;
 
 drop sequence if exists user_login_seq;
 

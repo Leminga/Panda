@@ -46,20 +46,17 @@ public class Language extends models.Entity {
     @GeneratedValue
     private long id;
     /**
-     * The motherTongue string.
+     * The language string.
      */
-    private String motherTongue;
+    private String language;
     /**
      * The translation.
      */
     @OneToOne // Owning side.
     private Translation translation;
 
-    @ManyToMany(mappedBy = "additionalLanguages", cascade = CascadeType.ALL)
-    private List<Volunteer> volunteers;
-
     /**
-     * Generate the default motherTongues to populate the database initially.
+     * Generate the default languages to populate the database initially.
      */
     public static void generateDefault() {
 //		Translation trans_male = new Translation("männlich", "male");
@@ -77,40 +74,40 @@ public class Language extends models.Entity {
     }
 
     /**
-     * Query the database for all motherTongue objects.
+     * Query the database for all language objects.
      *
-     * @return <b>List of Language</b>All motherTongue objects stored in the
+     * @return <b>List of Language</b>All language objects stored in the
      * database.
      */
-    public static List<Language> findMotherTongues() {
+    public static List<Language> findLanguages() {
         try {
-            List<Language> motherTongues = FIND.all();
-            if (LOGGER.isDebugEnabled() && (motherTongues == null || motherTongues.isEmpty())) {
-                LOGGER.debug("No motherTongue was found in the database.");
+            List<Language> languages = FIND.all();
+            if (LOGGER.isDebugEnabled() && (languages == null || languages.isEmpty())) {
+                LOGGER.debug("No language was found in the database.");
             }
-            return motherTongues;
+            return languages;
         } catch (Exception e) {
-            LOGGER.error("Unable to query the database for motherTongues." + e.getMessage());
+            LOGGER.error("Unable to query the database for languages." + e.getMessage());
             return null;
         }
     }
 
     /**
-     * Finds a motherTongue object by its name.
+     * Finds a language object by its name.
      *
-     * @param motherTongueName The motherTongue name, ie. "male" or "female".
-     * @return <b>Language</b> The motherTongue object.
+     * @param languageName The language name, ie. "male" or "female".
+     * @return <b>Language</b> The language object.
      */
-    public static Language findMotherTongueByName(String motherTongueName) {
+    public static Language findLanguageByName(String languageName) {
         try {
-            Language motherTongue = FIND.where().eq("motherTongue", motherTongueName.toLowerCase()).findUnique();
-            if (LOGGER.isDebugEnabled() && motherTongue == null) {
-                LOGGER.debug("No motherTongue was found in the database.");
+            Language language = FIND.where().eq("language", languageName.toLowerCase()).findUnique();
+            if (LOGGER.isDebugEnabled() && language == null) {
+                LOGGER.debug("No language was found in the database.");
             }
-            return motherTongue;
+            return language;
         } catch (Exception e) {
             e.printStackTrace();
-            LOGGER.error("Unable to query the database for motherTongue with name " + motherTongueName.toLowerCase() + "\n" + e.getMessage());
+            LOGGER.error("Unable to query the database for language with name " + languageName.toLowerCase() + "\n" + e.getMessage());
             return null;
         }
     }
@@ -118,16 +115,16 @@ public class Language extends models.Entity {
     /**
      * Default constructor.
      *
-     * @param motherTongue The motherTongue.
+     * @param language The language.
      */
-    public Language(String motherTongue) {
-        this.motherTongue = motherTongue.toLowerCase();
+    public Language(String language) {
+        this.language = language.toLowerCase();
     }
 
     /**
      * Getter for the database id.
      *
-     * @return <b>long</b> The database id of the motherTongue.
+     * @return <b>long</b> The database id of the language.
      */
     public long getId() {
         return this.id;
@@ -136,10 +133,10 @@ public class Language extends models.Entity {
     /**
      * Getter for the Language.
      *
-     * @return <b>Language</b> The motherTongue.
+     * @return <b>Language</b> The language.
      */
-    public String getMotherTongue() {
-        return this.motherTongue;
+    public String getLanguage() {
+        return this.language;
     }
 
     /**
@@ -161,8 +158,8 @@ public class Language extends models.Entity {
     }
 
     /**
-     * Saves the current motherTongue object to the database. The method also
-     * assures, that a motherTongue is stored only once.
+     * Saves the current language object to the database. The method also
+     * assures, that a language is stored only once.
      */
     @Override
     public void save() throws OptimisticLockException {
@@ -172,18 +169,18 @@ public class Language extends models.Entity {
             this.translation.save();
         }
 
-        // Check if motherTongue is already in database.
-        // Make sure a motherTongue is stored only once.
-        Language motherTongue = Language.findMotherTongueByName(this.motherTongue);
-        if (motherTongue != null) {
-            this.id = motherTongue.getId();
+        // Check if language is already in database.
+        // Make sure a language is stored only once.
+        Language language = Language.findLanguageByName(this.language);
+        if (language != null) {
+            this.id = language.getId();
             return;
         }
 
         try {
             Ebean.save(this);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("MotherTongue " + this.motherTongue + " stored/updated in database.");
+                LOGGER.debug("Language " + this.language + " stored/updated in database.");
             }
         } catch (OptimisticLockException e) {
             if (LOGGER.isDebugEnabled()) {
