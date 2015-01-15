@@ -140,7 +140,7 @@ public class Language extends models.Entity {
     	Language l75 = new Language("Georgian");
     	Language l76 = new Language("German");
     	Language l77 = new Language("Gonja");
-    	Language l78 = new Language("Gourmanché");
+    	Language l78 = new Language("Gourmanch");
     	Language l79 = new Language("Greek");
     	Language l80 = new Language("Guarani");
     	Language l81 = new Language("Gujarati");
