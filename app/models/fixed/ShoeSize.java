@@ -46,12 +46,41 @@ public class ShoeSize extends models.Entity {
      * Generate the default shoeSizes to populate the database initially.
      */
     public static void generateDefault() {
-        ShoeSize shoeSize_30 = new ShoeSize(30);
-        shoeSize_30.save();
-        ShoeSize shoeSize_31 = new ShoeSize(31);
-        shoeSize_31.save();
-        ShoeSize shoeSize_32 = new ShoeSize(32);
-        shoeSize_32.save();
+    	
+        ShoeSize shoeSize_35 = new ShoeSize(35);
+        ShoeSize shoeSize_36 = new ShoeSize(36);
+        ShoeSize shoeSize_37 = new ShoeSize(37);
+        ShoeSize shoeSize_38 = new ShoeSize(38);
+        ShoeSize shoeSize_39 = new ShoeSize(39);
+        ShoeSize shoeSize_40 = new ShoeSize(40);
+        ShoeSize shoeSize_41 = new ShoeSize(41);
+        ShoeSize shoeSize_42 = new ShoeSize(42);
+        ShoeSize shoeSize_43 = new ShoeSize(43);
+        ShoeSize shoeSize_44 = new ShoeSize(44);
+        ShoeSize shoeSize_45 = new ShoeSize(45);
+        ShoeSize shoeSize_46 = new ShoeSize(46);
+        ShoeSize shoeSize_47 = new ShoeSize(47);
+        ShoeSize shoeSize_48 = new ShoeSize(48);
+        ShoeSize shoeSize_49 = new ShoeSize(49);
+        ShoeSize shoeSize_50 = new ShoeSize(50);
+        
+        shoeSize_35.save();
+        shoeSize_36.save();
+        shoeSize_37.save();
+        shoeSize_38.save();
+        shoeSize_39.save();
+        shoeSize_40.save();
+        shoeSize_41.save();
+        shoeSize_42.save();
+        shoeSize_43.save();
+        shoeSize_44.save();
+        shoeSize_45.save();
+        shoeSize_46.save();
+        shoeSize_47.save();
+        shoeSize_48.save();
+        shoeSize_49.save();
+        shoeSize_50.save();
+        
     }
 
     /**

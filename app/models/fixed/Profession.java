@@ -56,34 +56,44 @@ public class Profession extends models.Entity {
      * Generate the default professions to populate the database initially.
      */
     public static void generateDefault() {
-        Translation trans_na = new Translation("N/A", "N/A");
-        Translation trans_apprenticeship = new Translation("Apprenticeship", "In Ausbildung");
-        Translation trans_worker = new Translation("Worker", "Arbeiter/in");
-        Translation trans_selfemployed = new Translation("Self-employed", "Selbstständig");
-        Translation trans_retired = new Translation("Retired", "Pensioniert");
+        Translation trans_student = new Translation("SchuelerIn / StudentIN", "Pupil / Student");
+        Translation trans_employed = new Translation("ArbeiterIN / Angestellte/r", "Employed");
+        Translation trans_selfemployed = new Translation("Selbststaendig", "Self-employed");
+        Translation trans_house = new Translation("Hausfrau/mann", "Housewife / Househusband");
+        Translation trans_retired = new Translation("PensionistIN", "Retired");
+        Translation trans_seeking = new Translation("Arbeitssuchend","Seeking work");
+        Translation trans_other = new Translation("Sonstige","Other");
 
-        trans_na.save();
-        trans_apprenticeship.save();
-        trans_worker.save();
+        trans_student.save();
+        trans_employed.save();
         trans_selfemployed.save();
+        trans_house.save();
         trans_retired.save();
+        trans_seeking.save();
+        trans_other.save();
 
-        Profession na = new Profession("N/A");
-        na.setTranslation(trans_na);
-        Profession apprenticeship = new Profession("Apprenticeship");
-        apprenticeship.setTranslation(trans_apprenticeship);
-        Profession worker = new Profession("Worker");
-        worker.setTranslation(trans_worker);
+        Profession student = new Profession("Pupil / Student");
+        student.setTranslation(trans_student);
+        Profession employed = new Profession("Employed");
+        employed.setTranslation(trans_employed);
         Profession selfemployed = new Profession("Self-employed");
         selfemployed.setTranslation(trans_selfemployed);
+        Profession house = new Profession("Housewife / Househusband");
+        house.setTranslation(trans_house);
         Profession retired = new Profession("Retired");
         retired.setTranslation(trans_retired);
+        Profession seeking = new Profession("Seeking work");
+        seeking.setTranslation(trans_seeking);
+        Profession other = new Profession("Other");
+        retired.setTranslation(trans_other);
 
-        na.save();
-        apprenticeship.save();
-        worker.save();
+        student.save();
+        employed.save();
         selfemployed.save();
+        house.save();
         retired.save();
+        seeking.save();
+        other.save();
     }
 
     /**

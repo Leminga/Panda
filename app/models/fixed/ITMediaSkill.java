@@ -44,7 +44,31 @@ public class ITMediaSkill extends models.Entity {
 	 * populate the database initially.
 	 */
 	public static void generateDefault() {
-		//TODO
+		
+		Translation trans_it1 = new Translation("MS Office","MS Office");
+		Translation trans_it2 = new Translation("IT Netzwerke","IT Networks");
+		Translation trans_it3 = new Translation("Daten-/Contentmanagement","Data-/Contentmanagement");
+		Translation trans_it4 = new Translation("Grafik-/Bildbearbeitung","graphic design, layouting");
+		
+		trans_it1.save();
+		trans_it2.save();
+		trans_it3.save();
+		trans_it4.save();
+		
+		ITMediaSkill it1 = new ITMediaSkill("MS Office");
+		it1.setTranslation(trans_it1);
+		ITMediaSkill it2 = new ITMediaSkill("IT Networks");
+		it2.setTranslation(trans_it2);
+		ITMediaSkill it3 = new ITMediaSkill("Data-/Contentmanagement");
+		it3.setTranslation(trans_it3);
+		ITMediaSkill it4 = new ITMediaSkill("graphic design, layouting");
+		it4.setTranslation(trans_it4);
+		
+		it1.save();
+		it2.save();
+		it3.save();
+		it4.save();
+		
 	}
 	
 	/**

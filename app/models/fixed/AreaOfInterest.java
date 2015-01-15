@@ -38,8 +38,43 @@ public class AreaOfInterest extends models.Entity {
 	
 	public static void generateDefault() {
             AreaOfInterest a1 = new AreaOfInterest("Accommodation");
+            AreaOfInterest a2 = new AreaOfInterest("Accreditation");
+            AreaOfInterest a3 = new AreaOfInterest("Administration & Project Management");
+            AreaOfInterest a4 = new AreaOfInterest("Ceremonies");
+            AreaOfInterest a5 = new AreaOfInterest("Communications");
+            AreaOfInterest a6 = new AreaOfInterest("Delegation Services");
+            AreaOfInterest a7 = new AreaOfInterest("Event Services");
+            AreaOfInterest a8 = new AreaOfInterest("Food & Beverage Services");
+            AreaOfInterest a9 = new AreaOfInterest("Logistics");
+            AreaOfInterest a10 = new AreaOfInterest("Marketing");
+            AreaOfInterest a11 = new AreaOfInterest("Tiroler-Schulsport Winterspiele");
+            AreaOfInterest a12 = new AreaOfInterest("Spiel- und Unterhaltungs");
+            AreaOfInterest a13 = new AreaOfInterest("Sport");
+            AreaOfInterest a14 = new AreaOfInterest("Technology");
+            AreaOfInterest a15 = new AreaOfInterest("Transport");
+            AreaOfInterest a16 = new AreaOfInterest("Venue Management");
+            AreaOfInterest a17 = new AreaOfInterest("VIP Services & Protocol");
+            AreaOfInterest a18 = new AreaOfInterest("Volunteer Management");
             
             a1.save();
+            a2.save();
+            a3.save();
+            a4.save();
+            a5.save();
+            a6.save();
+            a7.save();
+            a8.save();
+            a9.save();
+            a10.save();
+            a11.save();
+            a12.save();
+            a13.save();
+            a14.save();
+            a15.save();
+            a16.save();
+            a17.save();
+            a18.save();
+            
 	}
 	
 	/**

@@ -57,7 +57,7 @@ public class IdentificationType extends models.Entity {
      */
     public static void generateDefault() {
         Translation trans_passport = new Translation("Reisepass", "Passport");
-        Translation trans_idcard = new Translation("ID Card", "ID Karte");
+        Translation trans_idcard = new Translation("Personalausweis", "ID Card");
         trans_passport.save();
         trans_idcard.save();
 

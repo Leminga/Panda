@@ -44,18 +44,20 @@ public class PreferedLanguage extends models.Entity {
 	 * populate the database initially.
 	 */
 	public static void generateDefault() {
-//		Translation trans_male = new Translation("männlich", "male");
-//		Translation trans_female = new Translation("weiblich", "female");
-//		trans_male.save();
-//		trans_female.save();
-//		
-//		PreferedLanguage male = new PreferedLanguage("male");
-//		male.setTranslation(trans_male);
-//		PreferedLanguage female = new PreferedLanguage("female");
-//		female.setTranslation(trans_female);
-//		
-//		male.save();
-//		female.save();
+		
+		Translation trans_german = new Translation("Deutsch", "German");
+		Translation trans_english = new Translation("Englisch", "English");
+		trans_german.save();
+		trans_english.save();
+		
+		PreferedLanguage german = new PreferedLanguage("German");
+		german.setTranslation(trans_german);
+		PreferedLanguage english = new PreferedLanguage("English");
+		english.setTranslation(trans_english);
+		
+		german.save();
+		english.save();
+		
 	}
 	
 	/**

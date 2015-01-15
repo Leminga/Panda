@@ -44,7 +44,26 @@ public class LanguageSkill extends models.Entity {
 	 * populate the database initially.
 	 */
 	public static void generateDefault() {
-		//TODO
+		
+		Translation trans_basic = new Translation("Basiskenntnisse","Basic knowledge");
+		Translation trans_good = new Translation("Gute Kenntnisse","Good speaking skills");
+		Translation trans_great = new Translation("Sehr gute Kenntnisse in Wort & Schrift","Great knowledge spoken & written");
+		
+		trans_basic.save();
+		trans_good.save();
+		trans_great.save();
+		
+		LanguageSkill basic = new LanguageSkill("Basis knowledge");
+		basic.setTranslation(trans_basic);
+		LanguageSkill good = new LanguageSkill("Good speaking skills");
+		good.setTranslation(trans_good);
+		LanguageSkill great = new LanguageSkill("Great knowledge spoken & written");
+		great.setTranslation(trans_great);
+		
+		basic.save();
+		good.save();
+		great.save();
+		
 	}
 	
 	/**
