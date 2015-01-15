@@ -21,8 +21,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "cryptojs" % "3.1.2",
   "org.imgscalr" % "imgscalr-lib" % "4.2",
   "org.apache.directory.studio" % "org.apache.commons.io" % "2.4",
-   "org.json" % "org.json" % "chargebee-1.0",
-   "com.google.code.gson" % "gson" % "2.3.1"
+   "org.json" % "org.json" % "chargebee-1.0"
 )
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
