@@ -2,7 +2,6 @@ package helper;
 
 import com.avaje.ebean.Ebean;
 import java.util.Date;
-import java.util.List;
 import models.Event;
 import models.User;
 import models.fixed.ClothingSize;
@@ -58,5 +57,6 @@ public class Starter {
         User user = new User("christian@gruber.at", "passwort");
         Volunteer vol = new Volunteer(user, "Christian", "Gruber", Ebean.find(Gender.class, 1), null, new Date(System.currentTimeMillis()));
         vol.save();
+        Volunteer.findByUsername("christian@gruber.at").getPrename();
     }
 }

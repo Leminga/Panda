@@ -1,5 +1,6 @@
 package models.human;
 
+import com.avaje.ebean.Ebean;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -48,64 +49,64 @@ public class Volunteer extends Human {
      */
     @ManyToMany
     protected List<Event> events;
-
+    
     @OneToOne(cascade = CascadeType.ALL)
     protected User user;
-
+    
     protected int socialSecurityNumber;
-
+    
     protected String city;
-
+    
     protected String plz;
-
+    
     protected String address;
-
+    
     @ManyToOne
     protected Country country;
-
+    
     protected long phoneNumber;
-
+    
     @ManyToOne
     protected PreferedLanguage preferedLanguage;
-
+    
     @ManyToOne
     protected IdentificationType identificationType;
-
+    
     protected String idNumber;
-
+    
     protected Date idValidUntil;
-
+    
     protected boolean carDrivingLicense;
-
+    
     @OneToOne
     protected EmergencyContact emergencyContact;
-
+    
     @ManyToOne
     protected ClothingSize jacketSize;
-
+    
     @ManyToOne
     protected ClothingSize trouserSize;
-
+    
     @ManyToOne
     protected ShoeSize shoeSize;
-
+    
     protected String photo;
-
+    
     @ManyToOne
     protected Profession profession;
-
+    
     @ManyToOne
     protected HighestEducationLevel highestEducationLevel;
-
+    
     protected String university;
-
+    
     protected String fieldOfProfession;
-
+    
     protected String professionalCareer;
-
+    
     @ManyToOne
     protected Language motherTongue;
-
+    
     @OneToMany
     private List<UserLanguageSkill> additionalLanguages;
 
@@ -129,79 +130,67 @@ public class Volunteer extends Human {
 //    @ManyToOne
 //    protected LanguageSkill spanishSkill;
     protected String interpretingLanguages;
-
+    
     protected String translatingLanguages;
-
+    
     @ManyToOne
     protected ITMediaSkill msOfficeSkill;
-
+    
     @ManyToOne
     protected ITMediaSkill itNetworkSkill;
-
+    
     @ManyToOne
     protected ITMediaSkill contentManagementSkill;
-
+    
     @ManyToOne
     protected ITMediaSkill graphicSkill;
-
+    
     protected String furtherQualifications;
-
+    
     protected String eventsParticipated;
-
+    
     protected boolean interestedICG2016;
-
+    
     protected boolean interestedSkiing;
-
+    
     protected boolean interestedSnowboarding;
-
+    
     protected boolean interestedCrossCountrySkiing;
-
+    
     protected boolean interestedBiathlon;
-
+    
     protected boolean interestedIceSkating;
-
+    
     protected boolean interestedIceHockey;
-
+    
     @ManyToOne
     protected AreaOfInterest areaInterest1;
-
+    
     @ManyToOne
     protected AreaOfInterest areaInterest2;
-
+    
     @ManyToOne
     protected AreaOfInterest areaInterest3;
-
+    
     protected Date availabilityBeginning;
-
+    
     protected Date availabilityEnd;
-
+    
     protected boolean interestedICG2016PriorToBeginning;
-
+    
     protected String icg2016Comment;
-
+    
     String languageSkillsProfessional;
-
+    
     String trainingSkillsProfessional;
-
+    
     public static Volunteer findByUsername(String username) {
-//        Volunteer v = new Volunteer(username, username, null);
-//
-//        if (username == null) {
-//            return null;
-//        }
-//
-//        // Search the database for the user.
-//        try {
-//            Volunteer volunteer = FIND.where().eq("user_username", username).findUnique();
-//            if (LOGGER.isDebugEnabled() && volunteer == null) {
-//                LOGGER.debug("No user was found in the database for the token " + username);
-//            }
-//            return volunteer;
-//        } catch (Exception e) {
-//            LOGGER.error("Unable to query the database.\n" + e.getMessage());
-//            return null;
-//        }
-        return null;
+        Volunteer v = Ebean.find(Volunteer.class)
+                .where()
+                .eq("user_username", username)
+                .findUnique();
+        LOGGER.debug("found: " + v.getPrename());
+        return v;
     }
 
     //used for registration proccess
@@ -224,32 +213,32 @@ public class Volunteer extends Human {
         this.phoneNumber = phoneNumber;
         this.preferedLanguage = preferedLanguage;
     }
-
+    
     public List<Event> getEvents() {
         return this.events;
     }
-
+    
     public void addEvent(Event event) {
         if (!this.events.contains(event)) {
             this.events.add(event);
             this.saveManyToManyAssociations("events");
         }
     }
-
+    
     public void removeEvent(Event event) {
         if (this.events.contains(event)) {
             this.events.remove(event);
             this.saveManyToManyAssociations("events");
         }
     }
-
+    
     @JsonIgnore
     public User getUser() {
         return this.user;
     }
-
+    
     public void setUser(User user) {
         this.user = user;
     }
-
+    
 }

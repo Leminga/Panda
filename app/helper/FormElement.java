@@ -5,23 +5,15 @@ import play.libs.Json;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FormElement {
 
-    private String name;
     private String label;
     private String value = "";
-    private String fieldType = "Text";
+    private String type = "Text";
     private boolean required;
-    private ArrayList<String> options;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private List<String> options;
 
     public String getLabel() {
         return label;
@@ -32,11 +24,11 @@ public class FormElement {
     }
 
     public String getFieldType() {
-        return fieldType;
+        return type;
     }
 
     public void setFieldType(String fieldType) {
-        this.fieldType = fieldType;
+        this.type = fieldType;
     }
 
     public String getValue() {
@@ -64,24 +56,20 @@ public class FormElement {
             ArrayNode vals = options.putArray("validators");
             vals.add("required");
         }
-        if (hasOptions()) {
-            ArrayNode vals = options.putArray("options");
-        }
         return options;
     }
 
     /**
-     * @return the hasOptions
+     * @return the options
      */
-    public boolean hasOptions() {
-        return hasOptions;
+    public List<String> getOptions() {
+        return options;
     }
 
     /**
-     * @param hasOptions the hasOptions to set
+     * @param options the options to set
      */
-    public void setHasOptions(boolean hasOptions) {
-        this.hasOptions = hasOptions;
+    public void setOptions(List<String> options) {
+        this.options = options;
     }
-
 }

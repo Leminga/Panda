@@ -101,11 +101,6 @@ public abstract class Human extends models.Entity {
      */
     @Override
     public void save() throws OptimisticLockException {
-        // Make sure the related objects are stored in the database already.
-        if (this.sex != null) {
-            this.sex.save();
-        }
-
         try {
             Ebean.save(this);
             if (LOGGER.isDebugEnabled()) {
@@ -113,7 +108,7 @@ public abstract class Human extends models.Entity {
             }
         } catch (OptimisticLockException e) {
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.error("Unable to write to the database.");
+                LOGGER.error("Unable to write to the database." + e.getMessage());
             }
             throw new OptimisticLockException();
         } catch (Exception e) {
@@ -121,7 +116,5 @@ public abstract class Human extends models.Entity {
                 LOGGER.error("Unable to write to the database. \n" + e.getMessage());
             }
         }
-
     }
-
 }

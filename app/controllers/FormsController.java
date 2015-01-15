@@ -6,6 +6,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import helper.FormElement;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -18,9 +19,7 @@ public class FormsController extends Controller
 {
         public static Result getRegistrationForm()
         {
-                ObjectNode result = Json.newObject();
-                ObjectNode schema = result.putObject("schema");
-                ObjectNode data = result.putObject("data");
+                ObjectNode form = Json.newObject();
                 
                 return ok();
                 

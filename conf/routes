@@ -18,8 +18,6 @@ GET		/volunteers				controllers.VolunteerController.getVolunteers()
 GET		/					controllers.Assets.at(path="/public", file="index.html")
 GET		/assets/*file				controllers.Assets.at(path="/public", file)
 
-
-# Dummy-Routes
-#GET 	/getUserTest                controllers.DummyController.userDataTest()
-#GET	/savePic					controllers.DummyController.saveDummyPicture()
-#GET		/dummyPictureGet			controllers.DummyController.getDummyPicture()
+# Catalog Lists
+# GET         /genders            controllers.CatalogController.getGenders()
+# GET         /countries          controllers.CatalogController.getCountries()
