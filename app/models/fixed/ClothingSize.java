@@ -39,9 +39,9 @@ public class ClothingSize extends models.Entity {
     @GeneratedValue
     private long id;
     /**
-     * The size string.
+     * The label string.
      */
-    private String size;
+    private String label;
 
     /**
      * Generate the default sizes to populate the database initially.
@@ -63,9 +63,9 @@ public class ClothingSize extends models.Entity {
     }
 
     /**
-     * Query the database for all size objects.
+     * Query the database for all label objects.
      *
-     * @return <b>List of Size</b>All size objects stored in the database.
+     * @return <b>List of Size</b>All label objects stored in the database.
      */
     public static List<ClothingSize> findSizes() {
         try {
@@ -81,10 +81,10 @@ public class ClothingSize extends models.Entity {
     }
 
     /**
-     * Finds a size object by its name.
+     * Finds a label object by its name.
      *
-     * @param sizeName The size name, ie. "male" or "female".
-     * @return <b>Size</b> The size object.
+     * @param sizeName The label name, ie. "male" or "female".
+     * @return <b>Size</b> The label object.
      */
     public static ClothingSize findSizeByName(String sizeName) {
         try {
@@ -103,16 +103,16 @@ public class ClothingSize extends models.Entity {
     /**
      * Default constructor.
      *
-     * @param size The size.
+     * @param size The label.
      */
     public ClothingSize(String size) {
-        this.size = size.toLowerCase();
+        this.label = size.toLowerCase();
     }
 
     /**
      * Getter for the database id.
      *
-     * @return <b>long</b> The database id of the size.
+     * @return <b>long</b> The database id of the label.
      */
     public long getId() {
         return this.id;
@@ -121,21 +121,21 @@ public class ClothingSize extends models.Entity {
     /**
      * Getter for the Size.
      *
-     * @return <b>Size</b> The size.
+     * @return <b>Size</b> The label.
      */
-    public String getSize() {
-        return this.size;
+    public String getLabel() {
+        return this.label;
     }
 
     /**
-     * Saves the current size object to the database. The method also assures,
-     * that a size is stored only once.
+     * Saves the current label object to the database. The method also assures,
+ that a label is stored only once.
      */
     @Override
     public void save() throws OptimisticLockException {
-        // Check if size is already in database.
-        // Make sure a size is stored only once.
-        ClothingSize size = ClothingSize.findSizeByName(this.size);
+        // Check if label is already in database.
+        // Make sure a label is stored only once.
+        ClothingSize size = ClothingSize.findSizeByName(this.label);
         if (size != null) {
             this.id = size.getId();
             return;
@@ -144,7 +144,7 @@ public class ClothingSize extends models.Entity {
         try {
             Ebean.save(this);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Size " + this.size + " stored/updated in database.");
+                LOGGER.debug("Size " + this.label + " stored/updated in database.");
             }
         } catch (OptimisticLockException e) {
             if (LOGGER.isDebugEnabled()) {

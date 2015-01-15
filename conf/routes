@@ -21,3 +21,5 @@ GET		/assets/*file				controllers.Assets.at(path="/public", file)
 # Catalog Lists
 # GET         /genders            controllers.CatalogController.getGenders()
 # GET         /countries          controllers.CatalogController.getCountries()
+
+GET             /registerForm      controllers.FormsController.getRegistrationForm()

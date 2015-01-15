@@ -5,13 +5,13 @@
 
 create table area_of_interest (
   id                        bigint not null,
-  interest                  varchar(255),
+  label                     varchar(255),
   constraint pk_area_of_interest primary key (id))
 ;
 
 create table clothing_size (
   id                        bigint not null,
-  size                      varchar(255),
+  label                     varchar(255),
   constraint pk_clothing_size primary key (id))
 ;
 
@@ -39,7 +39,7 @@ create table event (
 
 create table gender (
   id                        bigint not null,
-  gender                    varchar(255),
+  label                     varchar(255),
   translation_tid           bigint,
   constraint pk_gender primary key (id))
 ;

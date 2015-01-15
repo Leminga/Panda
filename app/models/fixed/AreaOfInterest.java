@@ -33,8 +33,8 @@ public class AreaOfInterest extends models.Entity {
 	@Required
 	@GeneratedValue
 	private long id;
-	/** The interest string. */
-	private String interest;
+	/** The label string. */
+	private String label;
 	
 	public static void generateDefault() {
             AreaOfInterest a1 = new AreaOfInterest("Accommodation");
@@ -43,9 +43,9 @@ public class AreaOfInterest extends models.Entity {
 	}
 	
 	/**
-	 * Query the database for all interest objects.
+	 * Query the database for all label objects.
 	 * 
-	 * @return <b>List of AreaOfInterest</b>All interest objects stored in the database.
+	 * @return <b>List of AreaOfInterest</b>All label objects stored in the database.
 	 */
 	public static List<AreaOfInterest> findInterests() {
 		try  {
@@ -61,10 +61,10 @@ public class AreaOfInterest extends models.Entity {
 	}
 	
 	/**
-	 * Finds a interest object by its name.
+	 * Finds a label object by its name.
 	 * 
-	 * @param interestName The interest name, ie. "male" or "female".
-	 * @return <b>AreaOfInterest</b> The interest object.
+	 * @param interestName The label name, ie. "male" or "female".
+	 * @return <b>AreaOfInterest</b> The label object.
 	 */
 	public static AreaOfInterest findInterestByName(String interestName) {
 		try  {
@@ -83,16 +83,16 @@ public class AreaOfInterest extends models.Entity {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param interest The interest.
+	 * @param interest The label.
 	 */
 	public AreaOfInterest(String interest) {
-		this.interest = interest.toLowerCase();
+		this.label = interest.toLowerCase();
 	}
 	
 	/**
 	 * Getter for the database id.
 	 * 
-	 * @return <b>long</b> The database id of the interest.
+	 * @return <b>long</b> The database id of the label.
 	 */
 	public long getId() {
 		return this.id;
@@ -101,23 +101,23 @@ public class AreaOfInterest extends models.Entity {
 	/**
 	 * Getter for the AreaOfInterest.
 	 * 
-	 * @return <b>AreaOfInterest</b> The interest.
+	 * @return <b>AreaOfInterest</b> The label.
 	 */
-	public String getInterest() {
-		return this.interest;
+	public String getLabel() {
+		return this.label;
 	}
 	
 	/**
-	 * Saves the current interest object to the database.
-	 * The method also assures, that a interest is stored
-	 * only once.
+	 * Saves the current label object to the database.
+	 * The method also assures, that a label is stored
+ only once.
 	 */
 	@Override
 	public void save() throws OptimisticLockException {
 		
-		// Check if interest is already in database.
-		// Make sure a interest is stored only once.
-		AreaOfInterest interest = AreaOfInterest.findInterestByName(this.interest);
+		// Check if label is already in database.
+		// Make sure a label is stored only once.
+		AreaOfInterest interest = AreaOfInterest.findInterestByName(this.label);
 		if (interest != null) {
 			this.id = interest.getId();
 			return;
@@ -126,7 +126,7 @@ public class AreaOfInterest extends models.Entity {
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Interest "+ this.interest + " stored/updated in database.");
+				LOGGER.debug("Interest "+ this.label + " stored/updated in database.");
 			}
 		} catch (OptimisticLockException e) {
 			if (LOGGER.isDebugEnabled()) {

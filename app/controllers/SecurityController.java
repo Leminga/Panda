@@ -4,7 +4,6 @@ import com.avaje.ebean.Ebean;
 import forms.LoginForm;
 import forms.RegisterForm;
 import models.human.Volunteer;
-import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
