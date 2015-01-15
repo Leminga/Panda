@@ -33,8 +33,8 @@ public class PreferedLanguage extends models.Entity {
 	@Required
 	@GeneratedValue
 	private long id;
-	/** The preferedLanguage string. */
-	private String preferedLanguage;
+	/** The label string. */
+	private String label;
 	/** The translation. */
 	@OneToOne // Owning side.
 	private Translation translation;
@@ -61,9 +61,9 @@ public class PreferedLanguage extends models.Entity {
 	}
 	
 	/**
-	 * Query the database for all preferedLanguage objects.
+	 * Query the database for all label objects.
 	 * 
-	 * @return <b>List of PreferedLanguage</b>All preferedLanguage objects stored in the database.
+	 * @return <b>List of PreferedLanguage</b>All label objects stored in the database.
 	 */
 	public static List<PreferedLanguage> findPreferedLanguages() {
 		try  {
@@ -79,10 +79,10 @@ public class PreferedLanguage extends models.Entity {
 	}
 	
 	/**
-	 * Finds a preferedLanguage object by its name.
+	 * Finds a label object by its name.
 	 * 
-	 * @param preferedLanguageName The preferedLanguage name, ie. "male" or "female".
-	 * @return <b>PreferedLanguage</b> The preferedLanguage object.
+	 * @param preferedLanguageName The label name, ie. "male" or "female".
+	 * @return <b>PreferedLanguage</b> The label object.
 	 */
 	public static PreferedLanguage findPreferedLanguageByName(String preferedLanguageName) {
 		try  {
@@ -101,16 +101,16 @@ public class PreferedLanguage extends models.Entity {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param preferedLanguage The preferedLanguage.
+	 * @param preferedLanguage The label.
 	 */
 	public PreferedLanguage(String preferedLanguage) {
-		this.preferedLanguage = preferedLanguage.toLowerCase();
+		this.label = preferedLanguage.toLowerCase();
 	}
 	
 	/**
 	 * Getter for the database id.
 	 * 
-	 * @return <b>long</b> The database id of the preferedLanguage.
+	 * @return <b>long</b> The database id of the label.
 	 */
 	public long getId() {
 		return this.id;
@@ -119,10 +119,10 @@ public class PreferedLanguage extends models.Entity {
 	/**
 	 * Getter for the PreferedLanguage.
 	 * 
-	 * @return <b>PreferedLanguage</b> The preferedLanguage.
+	 * @return <b>PreferedLanguage</b> The label.
 	 */
-	public String getPreferedLanguage() {
-		return this.preferedLanguage;
+	public String getLabel() {
+		return this.label;
 	}
 	
 	/**
@@ -144,9 +144,9 @@ public class PreferedLanguage extends models.Entity {
 	}
 	
 	/**
-	 * Saves the current preferedLanguage object to the database.
-	 * The method also assures, that a preferedLanguage is stored
-	 * only once.
+	 * Saves the current label object to the database.
+	 * The method also assures, that a label is stored
+ only once.
 	 */
 	@Override
 	public void save() throws OptimisticLockException {
@@ -155,9 +155,9 @@ public class PreferedLanguage extends models.Entity {
 		if (this.translation != null)
 			this.translation.save();
 		
-		// Check if preferedLanguage is already in database.
-		// Make sure a preferedLanguage is stored only once.
-		PreferedLanguage preferedLanguage = PreferedLanguage.findPreferedLanguageByName(this.preferedLanguage);
+		// Check if label is already in database.
+		// Make sure a label is stored only once.
+		PreferedLanguage preferedLanguage = PreferedLanguage.findPreferedLanguageByName(this.label);
 		if (preferedLanguage != null) {
 			this.id = preferedLanguage.getId();
 			return;
@@ -166,7 +166,7 @@ public class PreferedLanguage extends models.Entity {
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("PreferedLanguage "+ this.preferedLanguage + " stored/updated in database.");
+				LOGGER.debug("PreferedLanguage "+ this.label + " stored/updated in database.");
 			}
 		} catch (OptimisticLockException e) {
 			if (LOGGER.isDebugEnabled()) {

@@ -33,8 +33,8 @@ public class HighestEducationLevel extends models.Entity {
 	@Required
 	@GeneratedValue
 	private long id;
-	/** The highestEducationLevel string. */
-	private String highestEducationLevel;
+	/** The label string. */
+	private String label;
 	/** The translation. */
 	@OneToOne // Owning side.
 	private Translation translation;
@@ -60,9 +60,9 @@ public class HighestEducationLevel extends models.Entity {
 	}
 	
 	/**
-	 * Query the database for all highestEducationLevel objects.
+	 * Query the database for all label objects.
 	 * 
-	 * @return <b>List of HighestEducationLevel</b>All highestEducationLevel objects stored in the database.
+	 * @return <b>List of HighestEducationLevel</b>All label objects stored in the database.
 	 */
 	public static List<HighestEducationLevel> findHighestEducationLevels() {
 		try  {
@@ -78,10 +78,10 @@ public class HighestEducationLevel extends models.Entity {
 	}
 	
 	/**
-	 * Finds a highestEducationLevel object by its name.
+	 * Finds a label object by its name.
 	 * 
-	 * @param highestEducationLevelName The highestEducationLevel name, ie. "male" or "female".
-	 * @return <b>HighestEducationLevel</b> The highestEducationLevel object.
+	 * @param highestEducationLevelName The label name, ie. "male" or "female".
+	 * @return <b>HighestEducationLevel</b> The label object.
 	 */
 	public static HighestEducationLevel findHighestEducationLevelByName(String highestEducationLevelName) {
 		try  {
@@ -100,16 +100,16 @@ public class HighestEducationLevel extends models.Entity {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param highestEducationLevel The highestEducationLevel.
+	 * @param highestEducationLevel The label.
 	 */
 	public HighestEducationLevel(String highestEducationLevel) {
-		this.highestEducationLevel = highestEducationLevel.toLowerCase();
+		this.label = highestEducationLevel.toLowerCase();
 	}
 	
 	/**
 	 * Getter for the database id.
 	 * 
-	 * @return <b>long</b> The database id of the highestEducationLevel.
+	 * @return <b>long</b> The database id of the label.
 	 */
 	public long getId() {
 		return this.id;
@@ -118,10 +118,10 @@ public class HighestEducationLevel extends models.Entity {
 	/**
 	 * Getter for the HighestEducationLevel.
 	 * 
-	 * @return <b>HighestEducationLevel</b> The highestEducationLevel.
+	 * @return <b>HighestEducationLevel</b> The label.
 	 */
-	public String getHighestEducationLevel() {
-		return this.highestEducationLevel;
+	public String getLabel() {
+		return this.label;
 	}
 	
 	/**
@@ -143,9 +143,9 @@ public class HighestEducationLevel extends models.Entity {
 	}
 	
 	/**
-	 * Saves the current highestEducationLevel object to the database.
-	 * The method also assures, that a highestEducationLevel is stored
-	 * only once.
+	 * Saves the current label object to the database.
+	 * The method also assures, that a label is stored
+ only once.
 	 */
 	@Override
 	public void save() throws OptimisticLockException {
@@ -154,9 +154,9 @@ public class HighestEducationLevel extends models.Entity {
 		if (this.translation != null)
 			this.translation.save();
 		
-		// Check if highestEducationLevel is already in database.
-		// Make sure a highestEducationLevel is stored only once.
-		HighestEducationLevel highestEducationLevel = HighestEducationLevel.findHighestEducationLevelByName(this.highestEducationLevel);
+		// Check if label is already in database.
+		// Make sure a label is stored only once.
+		HighestEducationLevel highestEducationLevel = HighestEducationLevel.findHighestEducationLevelByName(this.label);
 		if (highestEducationLevel != null) {
 			this.id = highestEducationLevel.getId();
 			return;
@@ -165,7 +165,7 @@ public class HighestEducationLevel extends models.Entity {
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("HighestEducationLevel "+ this.highestEducationLevel + " stored/updated in database.");
+				LOGGER.debug("HighestEducationLevel "+ this.label + " stored/updated in database.");
 			}
 		} catch (OptimisticLockException e) {
 			if (LOGGER.isDebugEnabled()) {

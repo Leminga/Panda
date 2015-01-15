@@ -33,8 +33,8 @@ public class Gender extends models.Entity {
 	@Required
 	@GeneratedValue
 	private long id;
-	/** The gender string. */
-	private String gender;
+	/** The label string. */
+	private String label;
 	/** The translation. */
 	@OneToOne // Owning side.
 	private Translation translation;
@@ -59,9 +59,9 @@ public class Gender extends models.Entity {
 	}
 	
 	/**
-	 * Query the database for all gender objects.
+	 * Query the database for all label objects.
 	 * 
-	 * @return <b>List of Gender</b>All gender objects stored in the database.
+	 * @return <b>List of Gender</b>All label objects stored in the database.
 	 */
 	public static List<Gender> findGenders() {
 		try  {
@@ -77,10 +77,10 @@ public class Gender extends models.Entity {
 	}
 	
 	/**
-	 * Finds a gender object by its name.
+	 * Finds a label object by its name.
 	 * 
-	 * @param genderName The gender name, ie. "male" or "female".
-	 * @return <b>Gender</b> The gender object.
+	 * @param genderName The label name, ie. "male" or "female".
+	 * @return <b>Gender</b> The label object.
 	 */
 	public static Gender findGenderByName(String genderName) {
 		try  {
@@ -99,16 +99,16 @@ public class Gender extends models.Entity {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param gender The gender.
+	 * @param gender The label.
 	 */
 	public Gender(String gender) {
-		this.gender = gender.toLowerCase();
+		this.label = gender.toLowerCase();
 	}
 	
 	/**
 	 * Getter for the database id.
 	 * 
-	 * @return <b>long</b> The database id of the gender.
+	 * @return <b>long</b> The database id of the label.
 	 */
 	public long getId() {
 		return this.id;
@@ -117,10 +117,10 @@ public class Gender extends models.Entity {
 	/**
 	 * Getter for the Gender.
 	 * 
-	 * @return <b>Gender</b> The gender.
+	 * @return <b>Gender</b> The label.
 	 */
-	public String getGender() {
-		return this.gender;
+	public String getLabel() {
+		return this.label;
 	}
 	
 	/**
@@ -142,9 +142,9 @@ public class Gender extends models.Entity {
 	}
 	
 	/**
-	 * Saves the current gender object to the database.
-	 * The method also assures, that a gender is stored
-	 * only once.
+	 * Saves the current label object to the database.
+	 * The method also assures, that a label is stored
+ only once.
 	 */
 	@Override
 	public void save() throws OptimisticLockException {
@@ -153,9 +153,9 @@ public class Gender extends models.Entity {
 		if (this.translation != null)
 			this.translation.save();
 		
-		// Check if gender is already in database.
-		// Make sure a gender is stored only once.
-		Gender gender = Gender.findGenderByName(this.gender);
+		// Check if label is already in database.
+		// Make sure a label is stored only once.
+		Gender gender = Gender.findGenderByName(this.label);
 		if (gender != null) {
 			this.id = gender.getId();
 			return;
@@ -164,7 +164,7 @@ public class Gender extends models.Entity {
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Gender "+ this.gender + " stored/updated in database.");
+				LOGGER.debug("Gender "+ this.label + " stored/updated in database.");
 			}
 		} catch (OptimisticLockException e) {
 			if (LOGGER.isDebugEnabled()) {

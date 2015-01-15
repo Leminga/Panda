@@ -43,9 +43,9 @@ public class Profession extends models.Entity {
     @GeneratedValue
     private long id;
     /**
-     * The profession string.
+     * The label string.
      */
-    private String profession;
+    private String label;
     /**
      * The translation.
      */
@@ -97,10 +97,10 @@ public class Profession extends models.Entity {
     }
 
     /**
-     * Query the database for all profession objects.
+     * Query the database for all label objects.
      *
-     * @return <b>List of Profession</b>All profession objects stored in the
-     * database.
+     * @return <b>List of Profession</b>All label objects stored in the
+ database.
      */
     public static List<Profession> findProfessions() {
         try {
@@ -116,9 +116,9 @@ public class Profession extends models.Entity {
     }
 
     /**
-     * Finds a profession object by its name.
+     * Finds a label object by its name.
      *
-     * @return <b>Profession</b> The profession object.
+     * @return <b>Profession</b> The label object.
      */
     public static Profession findProfessionByName(String professionName) {
         try {
@@ -137,16 +137,16 @@ public class Profession extends models.Entity {
     /**
      * Default constructor.
      *
-     * @param profession The profession.
+     * @param profession The label.
      */
     public Profession(String profession) {
-        this.profession = profession.toLowerCase();
+        this.label = profession.toLowerCase();
     }
 
     /**
      * Getter for the database id.
      *
-     * @return <b>long</b> The database id of the profession.
+     * @return <b>long</b> The database id of the label.
      */
     public long getId() {
         return this.id;
@@ -155,10 +155,10 @@ public class Profession extends models.Entity {
     /**
      * Getter for the Profession.
      *
-     * @return <b>Profession</b> The profession.
+     * @return <b>Profession</b> The label.
      */
-    public String getProfession() {
-        return this.profession;
+    public String getLabel() {
+        return this.label;
     }
 
     /**
@@ -180,8 +180,8 @@ public class Profession extends models.Entity {
     }
 
     /**
-     * Saves the current profession object to the database. The method also
-     * assures, that a profession is stored only once.
+     * Saves the current label object to the database. The method also
+ assures, that a label is stored only once.
      */
     @Override
     public void save() throws OptimisticLockException {
@@ -191,9 +191,9 @@ public class Profession extends models.Entity {
             this.translation.save();
         }
 
-        // Check if profession is already in database.
-        // Make sure a profession is stored only once.
-        Profession profession = Profession.findProfessionByName(this.profession);
+        // Check if label is already in database.
+        // Make sure a label is stored only once.
+        Profession profession = Profession.findProfessionByName(this.label);
         if (profession != null) {
             this.id = profession.getId();
             return;
@@ -202,7 +202,7 @@ public class Profession extends models.Entity {
         try {
             Ebean.save(this);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Profession " + this.profession + " stored/updated in database.");
+                LOGGER.debug("Profession " + this.label + " stored/updated in database.");
             }
         } catch (OptimisticLockException e) {
             if (LOGGER.isDebugEnabled()) {

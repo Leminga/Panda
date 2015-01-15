@@ -25,7 +25,7 @@ import models.fixed.LanguageSkill;
 import play.data.validation.Constraints.Required;
 
 @Entity
-public class UserLanguageSkill extends models.Entity {
+public class VolunteerLanguageSkill extends models.Entity {
 
     @Transient
     private static final long serialVersionUID = 1L;
@@ -38,7 +38,7 @@ public class UserLanguageSkill extends models.Entity {
     /**
      * Logger to log SecurityController events.
      */
-    private static Logger LOGGER = LoggerFactory.getLogger(UserLanguageSkill.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(VolunteerLanguageSkill.class);
 
     @Id
     @Required
@@ -63,7 +63,7 @@ public class UserLanguageSkill extends models.Entity {
      * @param prename The name of the human.
      * @param surname The surname of the human.
      */
-    public UserLanguageSkill(String prename, String surname) {
+    public VolunteerLanguageSkill(String prename, String surname) {
     }
 
     /**

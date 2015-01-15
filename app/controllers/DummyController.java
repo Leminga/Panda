@@ -3,7 +3,7 @@ package controllers;
 import com.avaje.ebean.Ebean;
 import java.io.IOException;
 
-import forms.CoreDataForm;
+import forms.VolunteerForm;
 import helper.FileType;
 import helper.JSONHelper;
 
@@ -77,35 +77,35 @@ public class DummyController {
 
     }
 
-    public static Result saveDummyPicture() {
+//    public static Result saveDummyPicture() {
+//
+////        Form<VolunteerForm> form = Form.form(VolunteerForm.class).bindFromRequest();
+////
+////        // Check the form itself for errors.
+////        if (form.hasErrors()) {
+////            //return Results.badRequest(form.errorsAsJson());
+////        }
+////
+////        // Get the login information from the login form.
+////        VolunteerForm cdf = form.get();
+////
+////        //Deletes the first 20 characters from the BASE String
+////        String pic = cdf.profilePicture.trim().substring(20);
+////
+//////        FileHandler.savePicture(cdf.vid, cdf.prename, cdf.surname, "ICG", pic);
+////        //FileHandler.savePicture("1", "hans", "wurst", "ICG", dummyPicture());
+////        return Results.ok("Picture saved");
+//
+//    }
 
-        Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
-
-        // Check the form itself for errors.
-        if (form.hasErrors()) {
-            //return Results.badRequest(form.errorsAsJson());
-        }
-
-        // Get the login information from the login form.
-        CoreDataForm cdf = form.get();
-
-        //Deletes the first 20 characters from the BASE String
-        String pic = cdf.profilePicture.trim().substring(20);
-
-        FileHandler.savePicture(cdf.vid, cdf.prename, cdf.surname, "ICG", pic);
-        //FileHandler.savePicture("1", "hans", "wurst", "ICG", dummyPicture());
-        return Results.ok("Picture saved");
-
-    }
-
-    public static String getDummyPicture(Volunteer volunteer) throws IOException {
-
-        return FileHandler.getPicture(String.valueOf(volunteer.getId()), volunteer.getPrename(), volunteer.getSurname(), "ICG", helper.FileType.PICTURE);
-
-    }
+//    public static String getDummyPicture(Volunteer volunteer) throws IOException {
+//
+////        return FileHandler.getPicture(String.valueOf(volunteer.getId()), volunteer.getPrename(), volunteer.getSurname(), "ICG", helper.FileType.PICTURE);
+//
+//    }
 
     public static Result getAdminDummyPicture() throws IOException {
-//		Form<CoreDataForm> form = Form.form(CoreDataForm.class).bindFromRequest();
+//		Form<CoreDataForm> form = Form.form(VolunteerForm.class).bindFromRequest();
 //    	
 //    	// Check the form itself for errors.
 //        if (form.hasErrors()) {
@@ -113,7 +113,7 @@ public class DummyController {
 //        }
 //        
 //        // Get the login information from the login form.
-//        CoreDataForm cdf = form.get();
+//        VolunteerForm cdf = form.get();
 
         //ObjectNode pictures = Json.newObject();
         //pictures.put("picture", FileHandler.getPicture(cdf.vid, cdf.prename, cdf.surname, "ICG", helper.FileType.PICTURE));

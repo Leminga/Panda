@@ -23,7 +23,7 @@ import models.fixed.Gender;
 /**
  * The security controller allows for a secure login to the system. To this end,
  * it offers login and logout methods that verifies users based on their
- * username/email address and password. It creates an authentication token
+ * username/mail address and password. It creates an authentication token
  * whenever the login was successful, ie. the user was already registered and
  * provided the correct password. The token is destroyed when the user logs out,
  * or after some idle timeout.
@@ -53,17 +53,6 @@ public class SecurityController extends Controller {
     protected static final String AUTH_TOKEN = "authToken";
 
     /**
-     * This should somehow present the login screen. However, I copied that
-     * piece of code from the Application.java ... and I have not really an
-     * understanding of what it does ...
-     */
-    public static Result index() {
-        //Ok(Json.toJson(names)).as(JSON)
-        //return Results.ok(index.render(".ady"));
-        return ok("test");
-    }
-
-    /**
      * Identifies a user based on ... ? TODO: What does Http.Context.current
      * .... actually do?
      *
@@ -75,7 +64,7 @@ public class SecurityController extends Controller {
     }
 
     /**
-     * The login method reads all the relevant information, ie. the user email
+     * The login method reads all the relevant information, ie. the user mail
      * address and the password from the login form. It then tries to verify the
      * user in the database based in the user credentials. If the user is
      * verified successfully, the method returns an authentication token.
@@ -97,17 +86,17 @@ public class SecurityController extends Controller {
 
         // Find the user in the database. Return null if the
         // user was not found or could not be verified.
-        User user = User.findByNameAndPassword(loginForm.email, CryptIt.cleartextToHash(loginForm.password));
+        User user = User.findByNameAndPassword(loginForm.mail, CryptIt.cleartextToHash(loginForm.password));
 
         if (user == null) {
             if (LOGGER.isInfoEnabled()) {
-                LOGGER.info("Unauthorized login attempt for user " + loginForm.email + " using password: " + loginForm.password);
+                LOGGER.info("Unauthorized login attempt for user " + loginForm.mail + " using password: " + loginForm.password);
             }
             return Results.unauthorized();
         } //if User has not confirmed the confirmation mail
         else if (!user.isMailConfirmed()) {
             if (LOGGER.isInfoEnabled()) {
-                LOGGER.info("Unauthorized login attempt for user " + loginForm.email + " using password: " + loginForm.password + " Confirmation Email not confirmed " + user.isMailConfirmed());
+                LOGGER.info("Unauthorized login attempt for user " + loginForm.mail + " using password: " + loginForm.password + " Confirmation Email not confirmed " + user.isMailConfirmed());
             }
             return Results.unauthorized("Please confirm your e-Mail address");
         } //User not null and mail confirmed
@@ -155,26 +144,18 @@ public class SecurityController extends Controller {
         // The register form.
         Form<RegisterForm> form = Form.form(RegisterForm.class).bindFromRequest();
 
-        // Check the form itself for errors.
-        if (form.hasErrors()) {
-            return Results.badRequest(form.errorsAsJson());
-        }
-
         // Get the login information from the login form.
         RegisterForm registerForm = form.get();
 
         // Find the user in the database. Return null if the
         // user was not found.
-        User user = User.findByName(registerForm.email);
+        User user = User.findByName(registerForm.getMail());
 
         if (user == null) {
-            LOGGER.info("New user to register: " + registerForm.email);
-            user = new User(registerForm.email, CryptIt.cleartextToHash(registerForm.password));
-
-            //create new volunteer
-            Volunteer v = new Volunteer(user, registerForm.prename, registerForm.surname, Ebean.find(Gender.class, registerForm.gender ), Ebean.find(Country.class, registerForm.nationality), registerForm.birthdate);
+            user = new User(registerForm.getPassword(), CryptIt.cleartextToHash(registerForm.getPassword()));
+            Volunteer v = new Volunteer(user, registerForm.getPrename(), registerForm.getPrename(), Ebean.find(Gender.class, registerForm.getGender()), Ebean.find(Country.class, registerForm.getNationality()), registerForm.getBirthdate());
             v.save();
-                //verificationSend(volunteer);
+            //verificationSend(volunteer);
             return ok();
         } else {
             LOGGER.info("User already exists in database.");
@@ -189,16 +170,16 @@ public class SecurityController extends Controller {
 //       
 //       String prename 		= 	volunteer.getPrename();
 //       String surname		=	volunteer.getSurname();
-//       String emailAddress	= 	volunteer.getUserLogin().getUsername();
+//       String mailAddress	= 	volunteer.getUserLogin().getUsername();
 //       
 //       try {
-//		mailer.Mail.confirmationMail(prename, surname, emailAddress, authToken);
-//		LOGGER.info("Confirmation Mail to User "+emailAddress+" sended");
+//		mailer.Mail.confirmationMail(prename, surname, mailAddress, authToken);
+//		LOGGER.info("Confirmation Mail to User "+mailAddress+" sended");
 //		
 //	} catch (EmailException e) {
 //		// TODO Auto-generated catch block
 //		e.printStackTrace();
-//		LOGGER.debug("Confirmation for User "+emailAddress+" not successfully: "+e);
+//		LOGGER.debug("Confirmation for User "+mailAddress+" not successfully: "+e);
 //	}
 // 
     }
@@ -252,7 +233,7 @@ public class SecurityController extends Controller {
 
         // Find the user in the database. Return null if the
         // user was not found.
-        User user = User.findByName(loginForm.email);
+        User user = User.findByName(loginForm.mail);
 
         //Code for reseting the PW
         return Results.ok();

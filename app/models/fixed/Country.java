@@ -26,13 +26,13 @@ public class Country extends models.Entity {
     long id;
 
     @Required
-    String iso3;
+    String label;
 
     /**
      * Constructor for Nationality
      */
     public Country(String iso3) {
-        this.iso3 = iso3;
+        this.label = iso3;
     }
 
     /**

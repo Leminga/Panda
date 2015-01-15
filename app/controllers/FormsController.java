@@ -56,11 +56,28 @@ public class FormsController extends Controller {
     }
 
     public static Result getRegistrationForm() {
-        JSONArray elements = new JSONArray();
-        elements.put(generateFieldFromProperty("prename"));
-        elements.put(generateFieldFromProperty("surname"));
-        elements.put(generateFieldFromProperty("gender"));
-        return ok(Json.toJson(elements));
+        ObjectNode obj = Json.newObject();
+        obj.put("prename", generateFieldFromProperty("prename"));
+        obj.put("surname", generateFieldFromProperty("surname"));
+        obj.put("gender", generateFieldFromProperty("gender"));
+        obj.put("birthday", generateFieldFromProperty("birthday"));
+        obj.put("nationality", generateFieldFromProperty("nationality"));
+        obj.put("mail", generateFieldFromProperty("mail"));
+        obj.put("password", generateFieldFromProperty("password"));
+        return ok(obj);
+    }
+
+    public static Result getLoginForm() {
+        ObjectNode obj = Json.newObject();
+        obj.put("mail", generateFieldFromProperty("mail"));
+        obj.put("password", generateFieldFromProperty("password"));
+        return ok(obj);
+    }
+
+    public static Result getVolunteerForm() {
+        ObjectNode obj = Json.newObject();
+
+        return ok(obj);
     }
 
     private static JsonNode generateFieldFromProperty(String fieldName) {

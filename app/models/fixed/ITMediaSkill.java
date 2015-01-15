@@ -33,8 +33,8 @@ public class ITMediaSkill extends models.Entity {
 	@Required
 	@GeneratedValue
 	private long id;
-	/** The itMediaSkill string. */
-	private String itMediaSkill;
+	/** The label string. */
+	private String label;
 	/** The translation. */
 	@OneToOne // Owning side.
 	private Translation translation;
@@ -72,9 +72,9 @@ public class ITMediaSkill extends models.Entity {
 	}
 	
 	/**
-	 * Query the database for all itMediaSkill objects.
+	 * Query the database for all label objects.
 	 * 
-	 * @return <b>List of ITMediaSkill</b>All itMediaSkill objects stored in the database.
+	 * @return <b>List of ITMediaSkill</b>All label objects stored in the database.
 	 */
 	public static List<ITMediaSkill> findITMediaSkills() {
 		try  {
@@ -90,10 +90,10 @@ public class ITMediaSkill extends models.Entity {
 	}
 	
 	/**
-	 * Finds a itMediaSkill object by its name.
+	 * Finds a label object by its name.
 	 * 
-	 * @param itMediaSkillName The itMediaSkill name, ie. "male" or "female".
-	 * @return <b>ITMediaSkill</b> The itMediaSkill object.
+	 * @param itMediaSkillName The label name, ie. "male" or "female".
+	 * @return <b>ITMediaSkill</b> The label object.
 	 */
 	public static ITMediaSkill findITMediaSkillByName(String itMediaSkillName) {
 		try  {
@@ -112,16 +112,16 @@ public class ITMediaSkill extends models.Entity {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param itMediaSkill The itMediaSkill.
+	 * @param itMediaSkill The label.
 	 */
 	public ITMediaSkill(String itMediaSkill) {
-		this.itMediaSkill = itMediaSkill.toLowerCase();
+		this.label = itMediaSkill.toLowerCase();
 	}
 	
 	/**
 	 * Getter for the database id.
 	 * 
-	 * @return <b>long</b> The database id of the itMediaSkill.
+	 * @return <b>long</b> The database id of the label.
 	 */
 	public long getId() {
 		return this.id;
@@ -130,10 +130,10 @@ public class ITMediaSkill extends models.Entity {
 	/**
 	 * Getter for the ITMediaSkill.
 	 * 
-	 * @return <b>ITMediaSkill</b> The itMediaSkill.
+	 * @return <b>ITMediaSkill</b> The label.
 	 */
 	public String getITMediaSkill() {
-		return this.itMediaSkill;
+		return this.label;
 	}
 	
 	/**
@@ -155,9 +155,9 @@ public class ITMediaSkill extends models.Entity {
 	}
 	
 	/**
-	 * Saves the current itMediaSkill object to the database.
-	 * The method also assures, that a itMediaSkill is stored
-	 * only once.
+	 * Saves the current label object to the database.
+	 * The method also assures, that a label is stored
+ only once.
 	 */
 	@Override
 	public void save() throws OptimisticLockException {
@@ -166,9 +166,9 @@ public class ITMediaSkill extends models.Entity {
 		if (this.translation != null)
 			this.translation.save();
 		
-		// Check if itMediaSkill is already in database.
-		// Make sure a itMediaSkill is stored only once.
-		ITMediaSkill itMediaSkill = ITMediaSkill.findITMediaSkillByName(this.itMediaSkill);
+		// Check if label is already in database.
+		// Make sure a label is stored only once.
+		ITMediaSkill itMediaSkill = ITMediaSkill.findITMediaSkillByName(this.label);
 		if (itMediaSkill != null) {
 			this.id = itMediaSkill.getId();
 			return;
@@ -177,7 +177,7 @@ public class ITMediaSkill extends models.Entity {
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("ITMediaSkill "+ this.itMediaSkill + " stored/updated in database.");
+				LOGGER.debug("ITMediaSkill "+ this.label + " stored/updated in database.");
 			}
 		} catch (OptimisticLockException e) {
 			if (LOGGER.isDebugEnabled()) {

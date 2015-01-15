@@ -32,8 +32,8 @@ public class Event extends Entity {
 	@Required
 	protected String eventname;
 	/** A list of all volunteers of the event. */
-	@ManyToMany(mappedBy = "events")
-	protected List<Volunteer> volunteers;
+//	@ManyToMany(mappedBy = "events")
+//	protected List<Volunteer> volunteers;
 	/** The start date of the event. */
 	protected Date eventStart;
 	/** The end date of the event. */
@@ -85,38 +85,38 @@ public class Event extends Entity {
 	 * @param eventName The name of the event
 	 * @return <b>Event</b> The event object.
 	 */
-	public static Event findOrCreateEvent(String eventName) {
-		try  {
-			Event event = FIND.where().eq("eventname", eventName.toLowerCase()).findUnique();
-			if (event == null) {
-				event = new Event(eventName);
-				event.save();
-				if (LOGGER.isDebugEnabled()) {
-			    	LOGGER.debug("No event was found in the database. Created a new one.");
-		    	}
-				return event;
-			} else {
-				if (LOGGER.isDebugEnabled()) {
-			    	LOGGER.debug("Found event in the database.");
-		    	}
-				return event;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-	    	LOGGER.error("Unable to query the database for event with name " + eventName.toLowerCase() + "\n" + e.getMessage());
-	        return null;
-	    }
-	}
+//	public static Event findOrCreateEvent(String eventName) {
+//		try  {
+//			Event event = FIND.where().eq("eventname", eventName.toLowerCase()).findUnique();
+//			if (event == null) {
+//				event = new Event(eventName);
+//				event.save();
+//				if (LOGGER.isDebugEnabled()) {
+//			    	LOGGER.debug("No event was found in the database. Created a new one.");
+//		    	}
+//				return event;
+//			} else {
+//				if (LOGGER.isDebugEnabled()) {
+//			    	LOGGER.debug("Found event in the database.");
+//		    	}
+//				return event;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//	    	LOGGER.error("Unable to query the database for event with name " + eventName.toLowerCase() + "\n" + e.getMessage());
+//	        return null;
+//	    }
+//	}
 	
 	/**
 	 * Default constructor.
 	 * 
 	 * @param eventname The name of the event.
 	 */
-	public Event(String eventname) {
-		this.eventname = eventname;
-		this.volunteers = new BeanList<Volunteer>();
-	}
+//	public Event(String eventname) {
+//		this.eventname = eventname;
+//		this.volunteers = new BeanList<Volunteer>();
+//	}
 	
 	/**
 	 * Getter for the unique name of the event.
@@ -147,20 +147,20 @@ public class Event extends Entity {
 	 * Getter for all volunteers of the event.
 	 * 
 	 * @return <b>List of Volunteer</b> All volunteers of the event.
-	 */
-	@JsonIgnore
-	public List<Volunteer> getVolunteers() {
-		return this.volunteers;
-	}
-	
-	public void addVolunteer(Volunteer volunteer) {
-		if (!this.volunteers.contains(volunteer))
-			this.volunteers.add(volunteer);
-	}
-	
-	public void removeVolunteer(Volunteer volunteer) {
-		this.volunteers.remove(volunteer);
-	}
+//	 */
+//	@JsonIgnore
+//	public List<Volunteer> getVolunteers() {
+//		return this.volunteers;
+//	}
+//	
+//	public void addVolunteer(Volunteer volunteer) {
+//		if (!this.volunteers.contains(volunteer))
+//			this.volunteers.add(volunteer);
+//	}
+//	
+//	public void removeVolunteer(Volunteer volunteer) {
+//		this.volunteers.remove(volunteer);
+//	}
 	
 	/**
 	 * Saves the current event object to the database.

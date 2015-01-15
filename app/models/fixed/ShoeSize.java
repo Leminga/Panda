@@ -3,10 +3,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.Transient;
-import models.Translation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.avaje.ebean.Ebean;
@@ -38,9 +36,9 @@ public class ShoeSize extends models.Entity {
     @GeneratedValue
     private long id;
     /**
-     * The shoeSize string.
+     * The label string.
      */
-    private float shoeSize;
+    private float label;
 
     /**
      * Generate the default shoeSizes to populate the database initially.
@@ -84,9 +82,9 @@ public class ShoeSize extends models.Entity {
     }
 
     /**
-     * Query the database for all shoeSize objects.
+     * Query the database for all label objects.
      *
-     * @return <b>List of Size</b>All shoeSize objects stored in the database.
+     * @return <b>List of Size</b>All label objects stored in the database.
      */
     public static List<ShoeSize> findSizes() {
         try {
@@ -102,10 +100,10 @@ public class ShoeSize extends models.Entity {
     }
 
     /**
-     * Finds a shoeSize object by its name.
+     * Finds a label object by its name.
      *
-     * @param shoeSizeName The shoeSize name, ie. "male" or "female".
-     * @return <b>Size</b> The shoeSize object.
+     * @param shoeSizeName The label name, ie. "male" or "female".
+     * @return <b>Size</b> The label object.
      */
     public static ShoeSize findSizeByName(float shoeSizeNumber) {
         try {
@@ -124,16 +122,16 @@ public class ShoeSize extends models.Entity {
     /**
      * Default constructor.
      *
-     * @param shoeSize The shoeSize.
+     * @param shoeSize The label.
      */
     public ShoeSize(int shoeSize) {
-        this.shoeSize = shoeSize;
+        this.label = shoeSize;
     }
 
     /**
      * Getter for the database id.
      *
-     * @return <b>long</b> The database id of the shoeSize.
+     * @return <b>long</b> The database id of the label.
      */
     public long getId() {
         return this.id;
@@ -142,21 +140,21 @@ public class ShoeSize extends models.Entity {
     /**
      * Getter for the Size.
      *
-     * @return <b>Size</b> The shoeSize.
+     * @return <b>Size</b> The label.
      */
     public float getSize() {
-        return this.shoeSize;
+        return this.label;
     }
 
     /**
-     * Saves the current shoeSize object to the database. The method also
-     * assures, that a shoeSize is stored only once.
+     * Saves the current label object to the database. The method also
+ assures, that a label is stored only once.
      */
     @Override
     public void save() throws OptimisticLockException {
-        // Check if shoeSize is already in database.
-        // Make sure a shoeSize is stored only once.
-        ShoeSize shoeSize = ShoeSize.findSizeByName(this.shoeSize);
+        // Check if label is already in database.
+        // Make sure a label is stored only once.
+        ShoeSize shoeSize = ShoeSize.findSizeByName(this.label);
         if (shoeSize != null) {
             this.id = shoeSize.getId();
             return;
@@ -165,7 +163,7 @@ public class ShoeSize extends models.Entity {
         try {
             Ebean.save(this);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Size " + this.shoeSize + " stored/updated in database.");
+                LOGGER.debug("Size " + this.label + " stored/updated in database.");
             }
         } catch (OptimisticLockException e) {
             if (LOGGER.isDebugEnabled()) {

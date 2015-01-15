@@ -44,8 +44,8 @@ public class Starter {
 
     // JUST FOR INITIALIZATION
     private static void createEvents() {
-        Event icg2016 = new Event("icg2016");
-        icg2016.save();
+//        Event icg2016 = new Event("icg2016");
+//        icg2016.save();
     }
 
     // JUST FOR TESTING
@@ -53,10 +53,10 @@ public class Starter {
      * Create some dummy users and put them into the database
      */
     private static void createUsers() {
-        Event event = Event.findOrCreateEvent("icg2016");
+//        Event event = Event.findOrCreateEvent("icg2016");
         User user = new User("christian@gruber.at", "passwort");
         Volunteer vol = new Volunteer(user, "Christian", "Gruber", Ebean.find(Gender.class, 1), null, new Date(System.currentTimeMillis()));
         vol.save();
-        Volunteer.findByUsername("christian@gruber.at").getPrename();
+//        Volunteer.findByUsername("christian@gruber.at").getPrename();
     }
 }

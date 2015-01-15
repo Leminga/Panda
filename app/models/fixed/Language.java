@@ -20,6 +20,7 @@ import javax.persistence.ManyToMany;
 import models.human.Volunteer;
 
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 @Entity
 public class Language extends models.Entity {
@@ -32,7 +33,7 @@ public class Language extends models.Entity {
     /**
      * A finder to query the database.
      */
-    private static Finder<Long, Language> FIND = new Finder<Long, Language>(Long.class, Language.class);
+    private static Model.Finder<Long, Language> FIND = new Model.Finder<Long, Language>(Long.class, Language.class);
     /**
      * Logger to log SecurityController events.
      */
@@ -59,124 +60,122 @@ public class Language extends models.Entity {
      * Generate the default languages to populate the database initially.
      */
     public static void generateDefault() {
-    	
-    	Language l1 = new Language("Afar");
-    	Language l2 = new Language("Afrikaans");
-    	Language l3 = new Language("Aja-Gbe");
-    	Language l4 = new Language("Akan");
-    	Language l5 = new Language("Albanian");
-    	Language l6 = new Language("Amharic");
-    	Language l7 = new Language("Anii");
-    	Language l8 = new Language("Arabic");
-    	Language l9 = new Language("Armenian");
-    	Language l10 = new Language("Aymara");
-    	Language l11 = new Language("Azerbaijani");
-    	Language l12 = new Language("Balanta");
-    	Language l13 = new Language("Bambara");
-    	Language l14 = new Language("Bariba");
-    	Language l15 = new Language("Afar");
-    	Language l16 = new Language("Afrikaans");
-    	Language l17 = new Language("Aja-Gbe");
-    	Language l18 = new Language("Akan");
-    	Language l19 = new Language("Albanian");
-    	Language l20 = new Language("Amharic");
-    	Language l21 = new Language("Anii");
-    	Language l22 = new Language("Arabic");
-    	Language l23 = new Language("Armenian");
-    	Language l24 = new Language("Aymara");
-    	Language l25 = new Language("Azerbaijani");
-    	Language l26 = new Language("Balanta");
-    	Language l27 = new Language("Bambara");
-    	Language l28 = new Language("Bariba");
-    	Language l29 = new Language("Bassari");
-    	Language l30 = new Language("Bedik");
-    	
-    	Language l31 = new Language("Belarusian");
-    	Language l32 = new Language("Bengali");
-    	Language l33 = new Language("Berber");
-    	Language l34 = new Language("Biali");
-    	Language l35 = new Language("Bislama");
-    	Language l36 = new Language("Boko");
-    	Language l37 = new Language("Bomu");
-    	Language l38 = new Language("Bosnian");
-    	Language l39 = new Language("Bozo");
-    	Language l40 = new Language("Buduma");
-    	Language l41 = new Language("Bulgarian");
-    	Language l42 = new Language("Burmese");
-    	Language l43 = new Language("Cantonese");
-    	Language l44 = new Language("Catalan");
-    	Language l45 = new Language("Chinese, Mandarin");
-    	Language l46 = new Language("Chichewa");
-    	Language l47 = new Language("Chirbawe");
-    	Language l48 = new Language("Chokwe");
-    	Language l49 = new Language("Croatian");
-    	Language l50 = new Language("Czech");
-    	
-    	Language l51 = new Language("Dagaare");
-    	Language l52 = new Language("Dagbani");
-    	Language l53 = new Language("Dangme");
-    	Language l54 = new Language("Danish");
-    	Language l55 = new Language("Dari");
-    	Language l56 = new Language("Dendi");
-    	Language l57 = new Language("Dhivehi");
-    	Language l58 = new Language("Dioula");
-    	Language l59 = new Language("Dogon");
-    	Language l60 = new Language("Dutch");
-    	Language l61 = new Language("Dzongkha");
-    	Language l62 = new Language("English");
-    	Language l63 = new Language("Estonian");
-    	Language l64 = new Language("Ewe-Gbe");
-    	Language l65 = new Language("Fijian");
-    	Language l66 = new Language("Filipino");
-    	Language l67 = new Language("Finnish");
-    	Language l68 = new Language("Fon-Gbe");
-    	Language l69 = new Language("Foodo");
-    	Language l70 = new Language("French");
-    	
-    	Language l71 = new Language("Fula");
-    	Language l72 = new Language("Ga");
-    	Language l73 = new Language("Gbe");
-    	Language l74 = new Language("Gen-Gbe");
-    	Language l75 = new Language("Georgian");
-    	Language l76 = new Language("German");
-    	Language l77 = new Language("Gonja");
-    	Language l78 = new Language("Gourmanch");
-    	Language l79 = new Language("Greek");
-    	Language l80 = new Language("Guarani");
-    	Language l81 = new Language("Gujarati");
-    	Language l82 = new Language("Haitian Creole");
-    	Language l83 = new Language("Hassaniya");
-    	Language l84 = new Language("Hausa");
-    	Language l85 = new Language("Hebrew");
-    	Language l86 = new Language("Hindi");
-    	Language l87 = new Language("Hiri Motu");
-    	Language l88 = new Language("Hungarian");
-    	Language l89 = new Language("Igbo");
-    	Language l90 = new Language("Icelandic");
-    	
-    	Language l91 = new Language("Indonesian");
-    	Language l92 = new Language("Irish");
-    	Language l93 = new Language("Italian");
-    	Language l94 = new Language("Japanese");
-    	Language l95 = new Language("Jola");
-    	Language l96 = new Language("Kabye");
-    	Language l97 = new Language("Kalanga");
-    	Language l98 = new Language("Kanuri");
-    	Language l99 = new Language("Kasem");
-    	Language l100 = new Language("Buduma");
-    	Language l101 = new Language("Bulgarian");
-    	Language l102 = new Language("Burmese");
-    	Language l103 = new Language("Cantonese");
-    	Language l104 = new Language("Catalan");
-    	Language l105 = new Language("Chinese, Mandarin");
-    	Language l106 = new Language("Chichewa");
-    	Language l107 = new Language("Chirbawe");
-    	Language l108 = new Language("Chokwe");
-    	Language l109 = new Language("Croatian");
-    	Language l110 = new Language("Czech");
-    	
-    	
-    	
+
+        Language l1 = new Language("Afar");
+        Language l2 = new Language("Afrikaans");
+        Language l3 = new Language("Aja-Gbe");
+        Language l4 = new Language("Akan");
+        Language l5 = new Language("Albanian");
+        Language l6 = new Language("Amharic");
+        Language l7 = new Language("Anii");
+        Language l8 = new Language("Arabic");
+        Language l9 = new Language("Armenian");
+        Language l10 = new Language("Aymara");
+        Language l11 = new Language("Azerbaijani");
+        Language l12 = new Language("Balanta");
+        Language l13 = new Language("Bambara");
+        Language l14 = new Language("Bariba");
+        Language l15 = new Language("Afar");
+        Language l16 = new Language("Afrikaans");
+        Language l17 = new Language("Aja-Gbe");
+        Language l18 = new Language("Akan");
+        Language l19 = new Language("Albanian");
+        Language l20 = new Language("Amharic");
+        Language l21 = new Language("Anii");
+        Language l22 = new Language("Arabic");
+        Language l23 = new Language("Armenian");
+        Language l24 = new Language("Aymara");
+        Language l25 = new Language("Azerbaijani");
+        Language l26 = new Language("Balanta");
+        Language l27 = new Language("Bambara");
+        Language l28 = new Language("Bariba");
+        Language l29 = new Language("Bassari");
+        Language l30 = new Language("Bedik");
+
+        Language l31 = new Language("Belarusian");
+        Language l32 = new Language("Bengali");
+        Language l33 = new Language("Berber");
+        Language l34 = new Language("Biali");
+        Language l35 = new Language("Bislama");
+        Language l36 = new Language("Boko");
+        Language l37 = new Language("Bomu");
+        Language l38 = new Language("Bosnian");
+        Language l39 = new Language("Bozo");
+        Language l40 = new Language("Buduma");
+        Language l41 = new Language("Bulgarian");
+        Language l42 = new Language("Burmese");
+        Language l43 = new Language("Cantonese");
+        Language l44 = new Language("Catalan");
+        Language l45 = new Language("Chinese, Mandarin");
+        Language l46 = new Language("Chichewa");
+        Language l47 = new Language("Chirbawe");
+        Language l48 = new Language("Chokwe");
+        Language l49 = new Language("Croatian");
+        Language l50 = new Language("Czech");
+
+        Language l51 = new Language("Dagaare");
+        Language l52 = new Language("Dagbani");
+        Language l53 = new Language("Dangme");
+        Language l54 = new Language("Danish");
+        Language l55 = new Language("Dari");
+        Language l56 = new Language("Dendi");
+        Language l57 = new Language("Dhivehi");
+        Language l58 = new Language("Dioula");
+        Language l59 = new Language("Dogon");
+        Language l60 = new Language("Dutch");
+        Language l61 = new Language("Dzongkha");
+        Language l62 = new Language("English");
+        Language l63 = new Language("Estonian");
+        Language l64 = new Language("Ewe-Gbe");
+        Language l65 = new Language("Fijian");
+        Language l66 = new Language("Filipino");
+        Language l67 = new Language("Finnish");
+        Language l68 = new Language("Fon-Gbe");
+        Language l69 = new Language("Foodo");
+        Language l70 = new Language("French");
+
+        Language l71 = new Language("Fula");
+        Language l72 = new Language("Ga");
+        Language l73 = new Language("Gbe");
+        Language l74 = new Language("Gen-Gbe");
+        Language l75 = new Language("Georgian");
+        Language l76 = new Language("German");
+        Language l77 = new Language("Gonja");
+        Language l78 = new Language("Gourmanch");
+        Language l79 = new Language("Greek");
+        Language l80 = new Language("Guarani");
+        Language l81 = new Language("Gujarati");
+        Language l82 = new Language("Haitian Creole");
+        Language l83 = new Language("Hassaniya");
+        Language l84 = new Language("Hausa");
+        Language l85 = new Language("Hebrew");
+        Language l86 = new Language("Hindi");
+        Language l87 = new Language("Hiri Motu");
+        Language l88 = new Language("Hungarian");
+        Language l89 = new Language("Igbo");
+        Language l90 = new Language("Icelandic");
+
+        Language l91 = new Language("Indonesian");
+        Language l92 = new Language("Irish");
+        Language l93 = new Language("Italian");
+        Language l94 = new Language("Japanese");
+        Language l95 = new Language("Jola");
+        Language l96 = new Language("Kabye");
+        Language l97 = new Language("Kalanga");
+        Language l98 = new Language("Kanuri");
+        Language l99 = new Language("Kasem");
+        Language l100 = new Language("Buduma");
+        Language l101 = new Language("Bulgarian");
+        Language l102 = new Language("Burmese");
+        Language l103 = new Language("Cantonese");
+        Language l104 = new Language("Catalan");
+        Language l105 = new Language("Chinese, Mandarin");
+        Language l106 = new Language("Chichewa");
+        Language l107 = new Language("Chirbawe");
+        Language l108 = new Language("Chokwe");
+        Language l109 = new Language("Croatian");
+        Language l110 = new Language("Czech");
+
 //		trans_male.save();
 //		trans_female.save();
 //		

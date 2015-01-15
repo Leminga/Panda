@@ -1,21 +1,12 @@
 package models;
-
-import java.util.GregorianCalendar;
 import java.util.UUID;
-
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.OptimisticLockException;
-
-import models.human.Volunteer;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.avaje.ebean.Ebean;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import play.data.validation.Constraints;
-
+import java.util.Date;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.MinLength;
 import play.data.validation.Constraints.Required;
@@ -23,54 +14,28 @@ import play.data.validation.Constraints.Required;
 @javax.persistence.Entity
 public class User extends Entity {
 
-    /**
-     * The serialization version identifier.
-     */
     private static final long serialVersionUID = 1L;
-    /**
-     * A finder to query the database.
-     */
     private static Finder<Long, User> FIND = new Finder<Long, User>(Long.class, User.class);
-    /**
-     * Logger to log SecurityController events.
-     */
     private static Logger LOGGER = LoggerFactory.getLogger(User.class);
 
-    /**
-     * The unique username, ie. the email address, of the user.
-     */
     @Id
     @Required
     private String username;
 
-    /**
-     * The password, ie. the passwords md5 hash, of the user.
-     */
     @Required
     @MinLength(6)
     @MaxLength(256)
     @JsonIgnore
     private String password;
-    /**
-     * The date that user was created, ie. registered, the first time.
-     */
+
     @Required
-    private GregorianCalendar creationTime;
-    /**
-     * The authentication token when the user is logged in.
-     */
+    private Date creationTime;
+
     private String authToken;
-    /**
-     * The date the user logged in the last time.
-     */
-    private GregorianCalendar lastLogin;
+
+    private Date lastLogin;
 
     private boolean mailConfirmed;
-    /**
-     * OneToOne Relation to Volunteer.
-     */
-    @OneToOne(optional = true, mappedBy = "user")
-    private Volunteer volunteer;
 
     /**
      * Queries the database to find a user that is uniquely identified by its
@@ -164,7 +129,7 @@ public class User extends Entity {
     public User(String username, String password) {
         this.username = username.toLowerCase().trim();
         this.password = password;
-        this.creationTime = new GregorianCalendar();
+        this.creationTime = new Date(System.currentTimeMillis());
         this.mailConfirmed = false;
     }
 
@@ -181,10 +146,6 @@ public class User extends Entity {
         this.password = password;
     }
 
-    public Volunteer getVolunteer() {
-        return this.volunteer;
-    }
-
     @JsonIgnore
     public String getAuthToken() {
         return authToken;
@@ -194,19 +155,11 @@ public class User extends Entity {
         this.authToken = authToken;
     }
 
-    public GregorianCalendar getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(GregorianCalendar lastLogin) {
-        this.lastLogin = lastLogin;
-    }
-
     /**
      * Sets the last login date to the current date.
      */
     public void updateLastLogin() {
-        this.lastLogin = new GregorianCalendar();
+        this.lastLogin = new Date(System.currentTimeMillis());
         this.save();
     }
 
@@ -296,5 +249,4 @@ public class User extends Entity {
     public void setMailConfirmed(boolean mailConfirmed) {
         this.mailConfirmed = mailConfirmed;
     }
-
 }

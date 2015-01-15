@@ -33,8 +33,8 @@ public class LanguageSkill extends models.Entity {
 	@Required
 	@GeneratedValue
 	private long id;
-	/** The languageSkill string. */
-	private String languageSkill;
+	/** The label string. */
+	private String label;
 	/** The translation. */
 	@OneToOne // Owning side.
 	private Translation translation;
@@ -67,9 +67,9 @@ public class LanguageSkill extends models.Entity {
 	}
 	
 	/**
-	 * Query the database for all languageSkill objects.
+	 * Query the database for all label objects.
 	 * 
-	 * @return <b>List of LanguageSkill</b>All languageSkill objects stored in the database.
+	 * @return <b>List of LanguageSkill</b>All label objects stored in the database.
 	 */
 	public static List<LanguageSkill> findLanguageSkills() {
 		try  {
@@ -85,10 +85,10 @@ public class LanguageSkill extends models.Entity {
 	}
 	
 	/**
-	 * Finds a languageSkill object by its name.
+	 * Finds a label object by its name.
 	 * 
-	 * @param languageSkillName The languageSkill name, ie. "male" or "female".
-	 * @return <b>LanguageSkill</b> The languageSkill object.
+	 * @param languageSkillName The label name, ie. "male" or "female".
+	 * @return <b>LanguageSkill</b> The label object.
 	 */
 	public static LanguageSkill findLanguageSkillByName(String languageSkillName) {
 		try  {
@@ -107,16 +107,16 @@ public class LanguageSkill extends models.Entity {
 	/**
 	 * Default constructor.
 	 * 
-	 * @param languageSkill The languageSkill.
+	 * @param languageSkill The label.
 	 */
 	public LanguageSkill(String languageSkill) {
-		this.languageSkill = languageSkill.toLowerCase();
+		this.label = languageSkill.toLowerCase();
 	}
 	
 	/**
 	 * Getter for the database id.
 	 * 
-	 * @return <b>long</b> The database id of the languageSkill.
+	 * @return <b>long</b> The database id of the label.
 	 */
 	public long getId() {
 		return this.id;
@@ -125,10 +125,10 @@ public class LanguageSkill extends models.Entity {
 	/**
 	 * Getter for the LanguageSkill.
 	 * 
-	 * @return <b>LanguageSkill</b> The languageSkill.
+	 * @return <b>LanguageSkill</b> The label.
 	 */
-	public String getLanguageSkill() {
-		return this.languageSkill;
+	public String getLabel() {
+		return this.label;
 	}
 	
 	/**
@@ -150,9 +150,9 @@ public class LanguageSkill extends models.Entity {
 	}
 	
 	/**
-	 * Saves the current languageSkill object to the database.
-	 * The method also assures, that a languageSkill is stored
-	 * only once.
+	 * Saves the current label object to the database.
+	 * The method also assures, that a label is stored
+ only once.
 	 */
 	@Override
 	public void save() throws OptimisticLockException {
@@ -161,9 +161,9 @@ public class LanguageSkill extends models.Entity {
 		if (this.translation != null)
 			this.translation.save();
 		
-		// Check if languageSkill is already in database.
-		// Make sure a languageSkill is stored only once.
-		LanguageSkill languageSkill = LanguageSkill.findLanguageSkillByName(this.languageSkill);
+		// Check if label is already in database.
+		// Make sure a label is stored only once.
+		LanguageSkill languageSkill = LanguageSkill.findLanguageSkillByName(this.label);
 		if (languageSkill != null) {
 			this.id = languageSkill.getId();
 			return;
@@ -172,7 +172,7 @@ public class LanguageSkill extends models.Entity {
 		try {
 			Ebean.save(this);
 			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("LanguageSkill "+ this.languageSkill + " stored/updated in database.");
+				LOGGER.debug("LanguageSkill "+ this.label + " stored/updated in database.");
 			}
 		} catch (OptimisticLockException e) {
 			if (LOGGER.isDebugEnabled()) {
