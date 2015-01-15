@@ -19,6 +19,7 @@ import helper.CryptIt;
 import models.User;
 import models.fixed.Country;
 import models.fixed.Gender;
+import org.apache.commons.mail.EmailException;
 
 /**
  * The security controller allows for a secure login to the system. To this end,
@@ -166,29 +167,26 @@ public class SecurityController extends Controller {
     // send a verification token to registered users
     public static void verificationSend(Volunteer volunteer) {
 
-//       String authToken = volunteer.getUserLogin().createToken();
-//       
-//       String prename 		= 	volunteer.getPrename();
-//       String surname		=	volunteer.getSurname();
-//       String mailAddress	= 	volunteer.getUserLogin().getUsername();
-//       
-//       try {
-//		mailer.Mail.confirmationMail(prename, surname, mailAddress, authToken);
-//		LOGGER.info("Confirmation Mail to User "+mailAddress+" sended");
-//		
-//	} catch (EmailException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//		LOGGER.debug("Confirmation for User "+mailAddress+" not successfully: "+e);
-//	}
-// 
+        String authToken = volunteer.getUser().createToken();
+
+        String prename = volunteer.getPrename();
+        String surname = volunteer.getSurname();
+        String mailAddress = volunteer.getUser().getUserName();
+
+        try {
+            mailer.Mail.confirmationMail(prename, surname, mailAddress, authToken);
+            LOGGER.info("Confirmation Mail to User " + mailAddress + " sended");
+
+        } catch (EmailException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            LOGGER.debug("Confirmation for User " + mailAddress + " not successfully: " + e);
+        }
     }
 
     //checks if the sended verification token is already saved in DB - then redirects
     public static Result verificationGetter(String authToken) {
-
         User user = User.findByAuthToken(authToken);
-
         if (user == null) {
             if (LOGGER.isInfoEnabled()) {
                 LOGGER.info("Verification not successful");
@@ -196,7 +194,6 @@ public class SecurityController extends Controller {
             //return Results.unauthorized();   
             return Results.redirect("/");
         } else {
-
             // Zeit checken - creationTime zu  jetzt
             user.updateLastLogin();
             user.setMailConfirmed(true);
@@ -214,12 +211,10 @@ public class SecurityController extends Controller {
             //return Results.ok(loginJson);
             return Results.redirect("/");
         }
-
     }
 
     //Method to reset the password - send a mail to confirm
     public static Result resetPassword() {
-
         // The register form.
         Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
 

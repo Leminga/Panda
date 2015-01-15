@@ -64,6 +64,8 @@ public class FormsController extends Controller {
         obj.put("nationality", generateFieldFromProperty("nationality"));
         obj.put("mail", generateFieldFromProperty("mail"));
         obj.put("password", generateFieldFromProperty("password"));
+        obj.put("repeatpassword", generateFieldFromProperty("repeatpassword"));
+        obj.put("narrowbox", generateFieldFromProperty("narrowbox"));
         return ok(obj);
     }
 
@@ -76,7 +78,7 @@ public class FormsController extends Controller {
 
     public static Result getVolunteerForm() {
         ObjectNode obj = Json.newObject();
-
+        obj.put("socialsecuritynumber", generateFieldFromProperty("prename"));
         return ok(obj);
     }
 
@@ -107,7 +109,7 @@ public class FormsController extends Controller {
         messages.put("invalid", props.getProperty(fieldName + "_validationmessages_invalid"));
         messages.put("required", props.getProperty(fieldName + "_validationmessages_required"));
         messages.put("pattern", props.getProperty(fieldName + "_validationmessages_pattern"));
-        formElememt.put("validationmessages", messages);
+        formElememt.put("validationMessages", messages);
 
         return Json.toJson(formElememt);
     }

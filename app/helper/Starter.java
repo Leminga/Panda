@@ -26,14 +26,14 @@ public class Starter {
     public static void start() {
         // Initialize some default values needed in the database.
         Gender.generateDefault();
-        ShoeSize.generateDefault();
-        ClothingSize.generateDefault();
-        ITMediaSkill.generateDefault();
-        IdentificationType.generateDefault();
-        AreaOfInterest.generateDefault();
-        LanguageSkill.generateDefault();
-        Profession.generateDefault();
-        SportSkill.generateDefault();
+//        ShoeSize.generateDefault();
+//        ClothingSize.generateDefault();
+//        ITMediaSkill.generateDefault();
+//        IdentificationType.generateDefault();
+//        AreaOfInterest.generateDefault();
+//        LanguageSkill.generateDefault();
+//        Profession.generateDefault();
+//        SportSkill.generateDefault();
 
         // Initialize the default event, ie. ICG2016
         Starter.createEvents();

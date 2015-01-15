@@ -47,9 +47,9 @@ public class Language extends models.Entity {
     @GeneratedValue
     private long id;
     /**
-     * The language string.
+     * The label string.
      */
-    private String language;
+    private String label;
     /**
      * The translation.
      */
@@ -189,10 +189,10 @@ public class Language extends models.Entity {
     }
 
     /**
-     * Query the database for all language objects.
+     * Query the database for all label objects.
      *
-     * @return <b>List of Language</b>All language objects stored in the
-     * database.
+     * @return <b>List of Language</b>All label objects stored in the
+ database.
      */
     public static List<Language> findLanguages() {
         try {
@@ -208,10 +208,10 @@ public class Language extends models.Entity {
     }
 
     /**
-     * Finds a language object by its name.
+     * Finds a label object by its name.
      *
-     * @param languageName The language name, ie. "male" or "female".
-     * @return <b>Language</b> The language object.
+     * @param languageName The label name, ie. "male" or "female".
+     * @return <b>Language</b> The label object.
      */
     public static Language findLanguageByName(String languageName) {
         try {
@@ -230,16 +230,16 @@ public class Language extends models.Entity {
     /**
      * Default constructor.
      *
-     * @param language The language.
+     * @param language The label.
      */
     public Language(String language) {
-        this.language = language.toLowerCase();
+        this.label = language.toLowerCase();
     }
 
     /**
      * Getter for the database id.
      *
-     * @return <b>long</b> The database id of the language.
+     * @return <b>long</b> The database id of the label.
      */
     public long getId() {
         return this.id;
@@ -248,10 +248,10 @@ public class Language extends models.Entity {
     /**
      * Getter for the Language.
      *
-     * @return <b>Language</b> The language.
+     * @return <b>Language</b> The label.
      */
-    public String getLanguage() {
-        return this.language;
+    public String getLabel() {
+        return this.label;
     }
 
     /**
@@ -273,8 +273,8 @@ public class Language extends models.Entity {
     }
 
     /**
-     * Saves the current language object to the database. The method also
-     * assures, that a language is stored only once.
+     * Saves the current label object to the database. The method also
+ assures, that a label is stored only once.
      */
     @Override
     public void save() throws OptimisticLockException {
@@ -284,9 +284,9 @@ public class Language extends models.Entity {
             this.translation.save();
         }
 
-        // Check if language is already in database.
-        // Make sure a language is stored only once.
-        Language language = Language.findLanguageByName(this.language);
+        // Check if label is already in database.
+        // Make sure a label is stored only once.
+        Language language = Language.findLanguageByName(this.label);
         if (language != null) {
             this.id = language.getId();
             return;
@@ -295,7 +295,7 @@ public class Language extends models.Entity {
         try {
             Ebean.save(this);
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Language " + this.language + " stored/updated in database.");
+                LOGGER.debug("Language " + this.label + " stored/updated in database.");
             }
         } catch (OptimisticLockException e) {
             if (LOGGER.isDebugEnabled()) {

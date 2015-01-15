@@ -4,6 +4,7 @@ import com.avaje.ebean.Ebean;
 import forms.VolunteerForm;
 import forms.RegisterForm;
 import helper.CryptIt;
+import java.util.List;
 import models.User;
 import models.fixed.Country;
 import models.fixed.Gender;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Results;
@@ -30,9 +32,6 @@ import play.mvc.Security;
  * Übergabe an den FileHandler sollen die Metadaten des Base64 herausgenommen
  * werden - nur String code. - Befüllen der "labels" im Frontend
  * sprachenabhängig mit IDs und den Strings
- *
- *
- *
  */
 public class VolunteerController extends Controller {
 
@@ -88,5 +87,15 @@ public class VolunteerController extends Controller {
 //            return Results.badRequest("user exist already");
 //        }
         return ok();
+    }
+
+    public static Result getVolunteers() {
+        List<Volunteer> list = Ebean.find(Volunteer.class).findList();
+        return ok(Json.toJson(list));
+    }
+
+    public static Result getVolunteer(long id) {
+        Volunteer v = Ebean.find(Volunteer.class, id);
+        return ok(Json.toJson(v));
     }
 }

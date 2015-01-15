@@ -67,7 +67,7 @@ create table identification_type (
 
 create table language (
   id                        bigint not null,
-  language                  varchar(255),
+  label                     varchar(255),
   translation_tid           bigint,
   constraint pk_language primary key (id))
 ;
