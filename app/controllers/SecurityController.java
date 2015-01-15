@@ -16,6 +16,7 @@ import play.mvc.Results;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import helper.CryptIt;
+import java.math.BigDecimal;
 import models.User;
 import models.fixed.Country;
 import models.fixed.Gender;
@@ -167,21 +168,21 @@ public class SecurityController extends Controller {
     // send a verification token to registered users
     public static void verificationSend(Volunteer volunteer) {
 
-        String authToken = volunteer.getUser().createToken();
-
-        String prename = volunteer.getPrename();
-        String surname = volunteer.getSurname();
-        String mailAddress = volunteer.getUser().getUserName();
-
-        try {
-            mailer.Mail.confirmationMail(prename, surname, mailAddress, authToken);
-            LOGGER.info("Confirmation Mail to User " + mailAddress + " sended");
-
-        } catch (EmailException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            LOGGER.debug("Confirmation for User " + mailAddress + " not successfully: " + e);
-        }
+//        String authToken = volunteer.getUser().createToken();
+//
+//        String prename = volunteer.getPrename();
+//        String surname = volunteer.getSurname();
+//        String mailAddress = volunteer.getUser().getUserName();
+//
+//        try {
+//            mailer.Mail.confirmationMail(prename, surname, mailAddress, authToken);
+//            LOGGER.info("Confirmation Mail to User " + mailAddress + " sended");
+//
+//        } catch (EmailException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//            LOGGER.debug("Confirmation for User " + mailAddress + " not successfully: " + e);
+//        }
     }
 
     //checks if the sended verification token is already saved in DB - then redirects
@@ -214,7 +215,7 @@ public class SecurityController extends Controller {
     }
 
     //Method to reset the password - send a mail to confirm
-    public static Result resetPassword() {
+    public static Result sendResetToken() {
         // The register form.
         Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
 
@@ -231,7 +232,69 @@ public class SecurityController extends Controller {
         User user = User.findByName(loginForm.mail);
 
         //Code for reseting the PW
-        return Results.ok();
+
+        String authToken = user.createToken();
+        Volunteer volunteer = Volunteer.findByUsername(user.getUserName());
+
+        try {
+            mailer.Mail.resetMail(volunteer.getPrename(), volunteer.getSurname(), user.getUserName(), authToken);
+            LOGGER.info("Passwort Token für " + user.getUserName() + " sended");
+        } catch (EmailException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            LOGGER.debug("ResetToken for User " + user.getUserName() + " not successfully sended: " + e);
+        }
+
+        return Results.ok("Reset confirmation mail sended");
     }
 
+    public static Result getUserPasswordReset(String authToken) {
+
+        User user = User.findByAuthToken(authToken);
+        ObjectNode resetJson = Json.newObject();
+        resetJson.put("user", helper.JSONHelper.objectToJsonAndPlot(user));
+
+        return Results.ok(resetJson);
+
+    }
+
+    public static Result resetPassword() {
+
+        // New Form -- e.g. ResetForm
+        Form<LoginForm> form = Form.form(LoginForm.class).bindFromRequest();
+
+        // Check the form itself for errors.
+        if (form.hasErrors()) {
+            return Results.badRequest(form.errorsAsJson());
+        }
+
+        // Get the login information from the login form.
+        LoginForm loginForm = form.get();
+
+        User user = User.findByName(loginForm.mail);
+
+        if (user == null) {
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Verification failed");
+            }
+            //return Results.unauthorized();   
+            return Results.badRequest("User not found!");
+
+        } else {
+
+            user.setPassword(loginForm.password);
+
+            // neuer Token wird erstellt - damit Mail ungülutig wird sobald Passwort geändert
+            user.createToken();
+            user.save();
+
+            LOGGER.info("Password for User " + user.getUserName() + "reseted");
+
+            ObjectNode tokenJson = Json.newObject();
+            tokenJson.put("user", helper.JSONHelper.objectToJsonAndPlot(user));
+
+            return Results.ok(tokenJson);
+
+        }
+    }
 }
