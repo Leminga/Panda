@@ -54,4 +54,27 @@ public class Mail {
 			Logger.debug("confirmationMail caught exception: "+e);
 		}
 	};
+        
+        	// Sendet nach der Passwort Zurücksetzung eine Bestätigungsmail - wenn bestätigt kann man ein neues PW eingeben
+	public static void resetMail(String prename, String surname,String mailaddress, String token) throws EmailException
+	{
+		Email email = setMailSettings();
+		
+		//Text später mulitlingual
+		email.setSubject("Passwort Reset YOG 2016");
+		String link = "localhost:9000/reset";
+		
+		String text = "Servus "+prename+" "+surname+","+System.lineSeparator()+"du kannst dein Passwort zurücksetzen!"+System.lineSeparator()+
+		"bitte folgenden Link bestätigen: "+System.lineSeparator()+link+"/"+token;
+		
+		try {
+			email.setMsg(text);
+			email.addTo(mailaddress);
+			email.send();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Logger.debug("confirmationMail caught exception: "+e);
+		}
+	}
 }
