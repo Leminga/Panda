@@ -1,5 +1,5 @@
 angular.module('Panda')
-    .controller('IndexController', ['DataService', '$window','$location', function (DataService, $window, $location) {
+    .controller('IndexController', ['DataService', '$window','$location','$rootScope', function (DataService, $window, $location,$rootScope) {
         var self = this;
 
         self.changeLanguage = function () {
@@ -34,4 +34,8 @@ angular.module('Panda')
             localStorage.clear();
             $location.path("/");
         };
+
+            $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+                $rootScope.title = current.$$route.title;
+            });
     }]);

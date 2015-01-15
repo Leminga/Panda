@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.js"></script>
     <script src="//cdn.rawgit.com/eligrey/Blob.js/master/Blob.js"></script>
     <script src="/assets/app.js"></script>
+
+
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/validation.css">
     <link rel="stylesheet" type="text/css" href="/assets/stylesheets/ng-img-crop.css">
@@ -21,12 +25,32 @@
 
 <body>
 
-<div ng-controller="IndexController as indexCtrl">
-    <button ng-click="indexCtrl.changeLanguage()" ng-if="indexCtrl.language == 'D'" ng-model='indexCtrl.language'>Change to English</button>
-    <button ng-click="indexCtrl.changeLanguage()" ng-if="indexCtrl.language == 'E' || indexCtrl.language == undefined " ng-model='indexCtrl.language'>Zu Deutsch wechseln</button>
-    <button ng-click="indexCtrl.logout()" ng-if="indexCtrl.checkToken()">Logout</button>
+<!-- Navigation -->
+<div class="logo">
+    <img src="assets/images/logo.png">
 </div>
+<!--logo-->
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container-fluid">
+        <div class="col-lg-6 text-left"></div>
+        <div class="col-lg-6 text-right">
+            <div class="col-lg-4 text-right">
+            </div>
+            <div class="col-lg-8">
+                <div ng-controller="IndexController as indexCtrl">
+                    <button ng-click="indexCtrl.changeLanguage()" ng-if="indexCtrl.language == 'D'" ng-model='indexCtrl.language'>Change to English</button>
+                    <button ng-click="indexCtrl.changeLanguage()" ng-if="indexCtrl.language == 'E' || indexCtrl.language == undefined " ng-model='indexCtrl.language'>Zu Deutsch wechseln</button>
+                    <button ng-click="indexCtrl.logout()">Logout</button>
+                </div>
+                <!--ng-if="indexCtrl.checkToken() -->
+                <h1 ng-bind="title" class="page-title"></h1>
+            </div>
+        </div>
+    </div>
+    <!-- /.container fluid-->
+</nav>
 <!-- The ng-view is needed to allow the usage of ngRoute with the anchors/hash-bangs -->
 <div ng-view=""></div>
+
 </body>
 </html>

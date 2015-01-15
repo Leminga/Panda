@@ -13543,7 +13543,7 @@ angular.module('Panda')
     })//appFilereader
 ;
 angular.module('Panda')
-    .controller('IndexController', ['DataService', '$window','$location', function (DataService, $window, $location) {
+    .controller('IndexController', ['DataService', '$window','$location','$rootScope', function (DataService, $window, $location,$rootScope) {
         var self = this;
 
         self.changeLanguage = function () {
@@ -13578,6 +13578,10 @@ angular.module('Panda')
             localStorage.clear();
             $location.path("/");
         };
+
+            $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
+                $rootScope.title = current.$$route.title;
+            });
     }]);
 
 // The InterceptorService reacts to any of the mentioned http-methods (request, requestError..)
@@ -13655,32 +13659,39 @@ angular.module('Panda')
         $routeProvider
             // This is the root route, which connects to the login.html
             .when('/', {
+                title: "Login",
                 templateUrl: 'assets/views/login.html',
                 controller: 'LoginFormCtrl as loginCtrl'
             })
 
             // User Routes
             .when('/forgottenPassword', {
+                title: "Forgotten Password",
                 templateUrl: 'assets/views/forgottenPassword.html',
                 controller: 'ForgottenPasswordCtrl as forgottenPassword'
             })
             .when('/register', {
+                title: "Register",
                 templateUrl: 'assets/views/register.html',
                 controller: 'RegisterFormCtrl as registerCtrl'
             })
             .when('/overview', {
+                title: "Overview",
                 templateUrl: 'assets/views/overview.html',
                 controller: 'OverviewFormCtrl as overviewCtrl'
             })
             .when('/coreData', {
+                title: 'Core Data',
                 templateUrl: 'assets/views/coreData.html',
                 controller: 'CoreDataFormCtrl as coreDataCtrl'
             })
             .when('/eventSpecific', {
+                title: "Event-Specific",
                 templateUrl: 'assets/views/eventSpecific.html',
                 controller: 'EventSpecificFormCtrl as eventSpecificCtrl'
             })
             .when('/qualifications', {
+                title: "Qualifications",
                 templateUrl: 'assets/views/qualifications.html',
                 controller: 'QualificationsFormCtrl as qualificationsCtrl'
             })
@@ -13688,21 +13699,26 @@ angular.module('Panda')
 
             //Admin Routes
             .when('/adminOverview', {
+                title: 'Admin Core Data',
                 templateUrl: 'assets/views/adminOverview.html',
                 controller: 'AdminOverviewCtrl as adminCtrl'
             })
 
             .when('/adminCoreData', {
+                title: 'Admin Core Data',
                 templateUrl: 'assets/views/coreData.html',
                 controller: 'CoreDataFormCtrl as coreDataCtrl'
+
             })
 
             .when('/adminQualifications', {
+                title: 'Admin Qualifications',
                 templateUrl: 'assets/views/qualifications.html',
                 controller: 'QualificationsFormCtrl as qualificationsCtrl'
             })
 
             .when('/adminEventSpecific', {
+                title: 'Admin Event-Specific',
                 templateUrl: 'assets/views/eventSpecific.html',
                 controller: 'EventSpecificFormCtrl as eventSpecificCtrl'
             })
